@@ -4,5 +4,5 @@ The LoA Evaluation Tool, consists of a sequence of operations, which begins with
 
 ### LoA Evalutation Tool Architecture
 
-### LoA Evalutation Tool Developer environment
+### Developer environment
 
