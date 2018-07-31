@@ -9,7 +9,7 @@ The LoA Evaluation Tool, consists of a sequence of operations, which begins with
 ### Developer environment
 
 This procedure assumes that you have [Apache Tomcat](https://tomcat.apache.org/download-80.cgi) (version >= **8**), 
-[JDK](http://www.oracle.com/technetwork/java/javase/downloads)(version >= **8**) and [PostegreSQL](https://www.postgresql.org/download/) (version >= **9.5**) installed in your environment.
+[JDK](http://www.oracle.com/technetwork/java/javase/downloads)(version >= **8**) and [MySQL](https://www.mysql.com/it/downloads/) (version >= **5.5**) or [PostegreSQL](https://www.postgresql.org/download/) (version >= **9.5**) installed in your environment.
 
 #### Related components
 
