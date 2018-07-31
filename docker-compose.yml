@@ -1,0 +1,35 @@
+version: "2"
+    
+volumes:
+  vol-mysql:
+
+services:
+
+  mysql:
+    image: mysql/mysql-server:5.7.21
+    ports:
+      - "3306:3306"
+    volumes:
+      - vol-mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=idm
+
+  fiware-idm:
+    image: fiware/idm:v5.4.0
+    ports:
+      - "8000:8000"
+      - "5000:5000"
+    environment:
+      - DATABASE_HOST=mysql
+  mongo:
+    image: mongo:3.2
+    command: --nojournal
+    ports: 
+      - "27017:27017"
+  orion:
+    image: fiware/orion
+    links:
+      - mongo
+    ports:
+      - "1026:1026"
+    command: -dbhost mongo
