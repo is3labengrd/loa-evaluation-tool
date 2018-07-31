@@ -36,7 +36,7 @@ This procedure assumes that you have installed [Docker](https://docs.docker.com/
 
 #### Database Schema
 
-Lo schema del data base del Tool può essere installato tramite questo [Script SQL](https://github.com/is3labengrd/loa-evaluation-tool/blob/master/loa_evaluation_tool_script.sql). 
+The tool database schema can be installed via this [Script SQL](https://github.com/is3labengrd/loa-evaluation-tool/blob/master/loa_evaluation_tool_script.sql). 
 
 • Install data base schema:
 
@@ -44,3 +44,5 @@ Lo schema del data base del Tool può essere installato tramite questo [Script S
 	**B.** Open shell linux command
 	**C.** Execute this command line: psql -U loa_evaluation_tool -h 127.0.0.1 -d loa_evaluation_tool -a -f loa_evaluation_tool_script.sql
 	**D.** Verifiy if the schema was correctly imported.
+
+Finally, for update the model it is possible to work directly on the diagram [EER](https://github.com/is3labengrd/loa-evaluation-tool/blob/master/ACE%20Web%20Tool%20Data%20Model.mwb). For this purpose it is necessary to have installed a tool that allows it on your environment: e.g. [MySQl Workbench](https://dev.mysql.com/downloads/workbench/)
