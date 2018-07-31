@@ -8,7 +8,8 @@ The LoA Evaluation Tool, consists of a sequence of operations, which begins with
 
 ### Developer environment
 
-This procedure assumes that you have [Apache Tomcat](https://tomcat.apache.org/download-80.cgi) (version >= **8**) and [JDK](http://www.oracle.com/technetwork/java/javase/downloads)(version >= **8**) installed in your environment.
+This procedure assumes that you have [Apache Tomcat](https://tomcat.apache.org/download-80.cgi) (version >= **8**), 
+[JDK](http://www.oracle.com/technetwork/java/javase/downloads)(version >= **8**) and [PostegreSQL] (https://www.postgresql.org/download/) (version >= **9.5**) installed in your environment.
 
 #### Related components
 
@@ -34,6 +35,15 @@ This procedure assumes that you have installed [Docker](https://docs.docker.com/
 
 
 #### Database Schema
+
+Lo schema del data base del Tool può essere installato tramite questo [Script SQL] (https://github.com/is3labengrd/loa-evaluation-tool/blob/master/loa_evaluation_tool_script.sql). 
+
+• Install data base schema:
+
+	**A.** Copy the SQL file to a file system directory (make sure the user has full rights to run the file)
+	**B.** Open shell linux command
+	**C.** Execute this command line: psql -U loa_evaluation_tool -h 127.0.0.1 -d loa_evaluation_tool -a -f loa_evaluation_tool_script.sql
+ **D.** Verifiy if the schema was correctly imported.
 
 
 
