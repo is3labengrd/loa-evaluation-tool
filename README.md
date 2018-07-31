@@ -20,9 +20,9 @@ This procedure assumes that you have installed [Docker](https://docs.docker.com/
 
 • Install and execute docker compose file:
 
- **A.** Copy the file to a file system directory (make sure the user has full rights to run the file) <br/>
- **B.** Go under the directory and run the following command: # docker-compose up & <br/>
- **C.** Wait for the services to start. 
+	**A.** Copy the file to a file system directory (make sure the user has full rights to run the file)
+ 	**B.** Go under the directory and run the following command: # docker-compose up &
+ 	**C.** Wait for the services to start. 
  
 | Service       | Value                                         | 
 | ------------- |:---------------------------------------------:| 
@@ -43,4 +43,4 @@ Lo schema del data base del Tool può essere installato tramite questo [Script S
 	**A.** Copy the SQL file to a file system directory (make sure the user has full rights to run the file)
 	**B.** Open shell linux command
 	**C.** Execute this command line: psql -U loa_evaluation_tool -h 127.0.0.1 -d loa_evaluation_tool -a -f loa_evaluation_tool_script.sql
- **D.** Verifiy if the schema was correctly imported.
+	**D.** Verifiy if the schema was correctly imported.
