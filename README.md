@@ -19,7 +19,7 @@ The Tool communicates through the REST protocol with a series of external compon
 • FIWARE KeyRock IDM for user authentication to the GUI and permission management
 • FIWARE Orion Context Broker for the propagation of the information managed by the Semantic Asset Registry as an NGSI Entities
 
-[Tool Arch](LoAEvalutationTool-Arch.jpg)
+![Tool Technolgy Architecture](/loa-evaluation-tool/blob/master/LoAEvalutationTool-Arch.jpg?raw=true "Tool Technolgy Architecture")
 
 ### Developer environment
 
