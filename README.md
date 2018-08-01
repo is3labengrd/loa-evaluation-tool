@@ -6,6 +6,21 @@ The LoA Evaluation Tool, consists of a sequence of operations, which begins with
 
 ### LoA Evalutation Tool Architecture
 
+The figure that follows, shows the technological architecture of the Tool composed of Open Source software components. The Core (LoA Evalutation Tool) provides in sequence (from left to right) the following technologies:
+
+• Tomcat container
+• Angular (Frontend)
+• Spring Boot (Backend Framework)
+• Hibernate and the MySQl data base for the data part
+
+The Tool communicates through the REST protocol with a series of external components (some deployed inside the same Tomcat container: e.g. SAR GUI and Service):
+
+• SAR Service (Semantic Asset Registry for the propagation of some information managed in the Tool, such as the data related to the Scenarios calculations, or the list of Processes)
+• FIWARE KeyRock IDM for user authentication to the GUI and permission management
+• FIWARE Orion Context Broker for the propagation of the information managed by the Semantic Asset Registry as an NGSI Entities
+
+[Tool Arch](LoAEvalutationTool-Arch.jpg)
+
 ### Developer environment
 
 This procedure assumes that you have [Apache Tomcat](https://tomcat.apache.org/download-80.cgi) (version >= **8**), 
