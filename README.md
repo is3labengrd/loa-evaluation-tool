@@ -40,6 +40,7 @@ This procedure assumes that you have installed [Docker](https://docs.docker.com/
  
 | Service       | Value                                         | 
 | ------------- |:---------------------------------------------:| 
+| LoATool	         | http://localhost:9090/loa-evaluation-tool 		 	                |
 | CAM		         | http://localhost:8080/CAM 		 	                |
 | CAMService    | http://localhost:8080/CAMService 	            |
 | RDF4J		       | http://localhost:8080/rdf4j-workbench         |
