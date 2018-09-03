@@ -1,18 +1,14 @@
 version: "2"
-    
-volumes:
-  vol-mysql:
 
 services:
 
   mysql:
-    image: mysql/mysql-server:5.7.21
+    image: mysql/mysql-server:5.5
     ports:
       - "3306:3306"
-    volumes:
-      - vol-mysql:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=idm
+      - MYSQL_ROOT_HOST=%
 
   fiware-idm:
     image: fiware/idm:v5.4.0
