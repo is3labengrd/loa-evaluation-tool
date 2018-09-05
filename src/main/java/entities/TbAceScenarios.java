@@ -18,59 +18,59 @@ import javax.persistence.TemporalType;
 @Table(name = "TB_ACE_SCENARIOS", catalog = "loa_evaluation_tool")
 public class TbAceScenarios implements java.io.Serializable {
 
-	private Integer pkTbId;
-	private int fkTbAceProSeq;
-	private Date createDate;
-	private Date udpateDate;
+    private Integer pkTbId;
+    private int fkTbAceProSeq;
+    private Date createDate;
+    private Date udpateDate;
 
-	public TbAceScenarios() {
-	}
+    public TbAceScenarios() {
+    }
 
-	public TbAceScenarios(int fkTbAceProSeq, Date createDate, Date udpateDate) {
-		this.fkTbAceProSeq = fkTbAceProSeq;
-		this.createDate = createDate;
-		this.udpateDate = udpateDate;
-	}
+    public TbAceScenarios(int fkTbAceProSeq, Date createDate, Date udpateDate) {
+        this.fkTbAceProSeq = fkTbAceProSeq;
+        this.createDate = createDate;
+        this.udpateDate = udpateDate;
+    }
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "PK_TB_ID", unique = true, nullable = false)
-	public Integer getPkTbId() {
-		return this.pkTbId;
-	}
+    @Column(name = "PK_TB_ID", unique = true, nullable = false)
+    public Integer getPkTbId() {
+        return this.pkTbId;
+    }
 
-	public void setPkTbId(Integer pkTbId) {
-		this.pkTbId = pkTbId;
-	}
+    public void setPkTbId(Integer pkTbId) {
+        this.pkTbId = pkTbId;
+    }
 
-	@Column(name = "FK_TB_ACE_PRO_SEQ", nullable = false)
-	public int getFkTbAceProSeq() {
-		return this.fkTbAceProSeq;
-	}
+    @Column(name = "FK_TB_ACE_PRO_SEQ", nullable = false)
+    public int getFkTbAceProSeq() {
+        return this.fkTbAceProSeq;
+    }
 
-	public void setFkTbAceProSeq(int fkTbAceProSeq) {
-		this.fkTbAceProSeq = fkTbAceProSeq;
-	}
+    public void setFkTbAceProSeq(int fkTbAceProSeq) {
+        this.fkTbAceProSeq = fkTbAceProSeq;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_DATE", nullable = false, length = 19)
-	public Date getCreateDate() {
-		return this.createDate;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATE_DATE", nullable = false, length = 19)
+    public Date getCreateDate() {
+        return this.createDate;
+    }
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UDPATE_DATE", nullable = false, length = 19)
-	public Date getUdpateDate() {
-		return this.udpateDate;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "UDPATE_DATE", nullable = false, length = 19)
+    public Date getUdpateDate() {
+        return this.udpateDate;
+    }
 
-	public void setUdpateDate(Date udpateDate) {
-		this.udpateDate = udpateDate;
-	}
+    public void setUdpateDate(Date udpateDate) {
+        this.udpateDate = udpateDate;
+    }
 
 }

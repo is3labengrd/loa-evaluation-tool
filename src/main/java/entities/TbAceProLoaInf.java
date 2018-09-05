@@ -18,104 +18,106 @@ import javax.persistence.TemporalType;
 @Table(name = "TB_ACE_PRO_LOA_INF", catalog = "loa_evaluation_tool")
 public class TbAceProLoaInf implements java.io.Serializable {
 
-	private Integer pkTbId;
-	private int fkTbAceProSeq;
-	private int fkTbAcePhyLoa;
-	private int fkTbAceCogLoa;
-	private boolean possibility;
-	private String bestRange;
-	private Date createDate;
-	private Date updateDate;
+    private Integer pkTbId;
+    private int fkTbAceProSeq;
+    private int fkTbAcePhyLoa;
+    private int fkTbAceCogLoa;
+    private boolean possibility;
+    private String bestRange;
+    private Date createDate;
+    private Date updateDate;
 
-	public TbAceProLoaInf() {
-	}
+    public TbAceProLoaInf() {
+    }
 
-	public TbAceProLoaInf(int fkTbAceProSeq, int fkTbAcePhyLoa, int fkTbAceCogLoa, boolean possibility,
-			String bestRange, Date createDate, Date updateDate) {
-		this.fkTbAceProSeq = fkTbAceProSeq;
-		this.fkTbAcePhyLoa = fkTbAcePhyLoa;
-		this.fkTbAceCogLoa = fkTbAceCogLoa;
-		this.possibility = possibility;
-		this.bestRange = bestRange;
-		this.createDate = createDate;
-		this.updateDate = updateDate;
-	}
+    public TbAceProLoaInf(
+        int fkTbAceProSeq, int fkTbAcePhyLoa, int fkTbAceCogLoa, boolean possibility,
+        String bestRange, Date createDate, Date updateDate
+    ) {
+        this.fkTbAceProSeq = fkTbAceProSeq;
+        this.fkTbAcePhyLoa = fkTbAcePhyLoa;
+        this.fkTbAceCogLoa = fkTbAceCogLoa;
+        this.possibility = possibility;
+        this.bestRange = bestRange;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "PK_TB_ID", unique = true, nullable = false)
-	public Integer getPkTbId() {
-		return this.pkTbId;
-	}
+    @Column(name = "PK_TB_ID", unique = true, nullable = false)
+    public Integer getPkTbId() {
+        return this.pkTbId;
+    }
 
-	public void setPkTbId(Integer pkTbId) {
-		this.pkTbId = pkTbId;
-	}
+    public void setPkTbId(Integer pkTbId) {
+        this.pkTbId = pkTbId;
+    }
 
-	@Column(name = "FK_TB_ACE_PRO_SEQ", nullable = false)
-	public int getFkTbAceProSeq() {
-		return this.fkTbAceProSeq;
-	}
+    @Column(name = "FK_TB_ACE_PRO_SEQ", nullable = false)
+    public int getFkTbAceProSeq() {
+        return this.fkTbAceProSeq;
+    }
 
-	public void setFkTbAceProSeq(int fkTbAceProSeq) {
-		this.fkTbAceProSeq = fkTbAceProSeq;
-	}
+    public void setFkTbAceProSeq(int fkTbAceProSeq) {
+        this.fkTbAceProSeq = fkTbAceProSeq;
+    }
 
-	@Column(name = "FK_TB_ACE_PHY_LOA", nullable = false)
-	public int getFkTbAcePhyLoa() {
-		return this.fkTbAcePhyLoa;
-	}
+    @Column(name = "FK_TB_ACE_PHY_LOA", nullable = false)
+    public int getFkTbAcePhyLoa() {
+        return this.fkTbAcePhyLoa;
+    }
 
-	public void setFkTbAcePhyLoa(int fkTbAcePhyLoa) {
-		this.fkTbAcePhyLoa = fkTbAcePhyLoa;
-	}
+    public void setFkTbAcePhyLoa(int fkTbAcePhyLoa) {
+        this.fkTbAcePhyLoa = fkTbAcePhyLoa;
+    }
 
-	@Column(name = "FK_TB_ACE_COG_LOA", nullable = false)
-	public int getFkTbAceCogLoa() {
-		return this.fkTbAceCogLoa;
-	}
+    @Column(name = "FK_TB_ACE_COG_LOA", nullable = false)
+    public int getFkTbAceCogLoa() {
+        return this.fkTbAceCogLoa;
+    }
 
-	public void setFkTbAceCogLoa(int fkTbAceCogLoa) {
-		this.fkTbAceCogLoa = fkTbAceCogLoa;
-	}
+    public void setFkTbAceCogLoa(int fkTbAceCogLoa) {
+        this.fkTbAceCogLoa = fkTbAceCogLoa;
+    }
 
-	@Column(name = "POSSIBILITY", nullable = false)
-	public boolean isPossibility() {
-		return this.possibility;
-	}
+    @Column(name = "POSSIBILITY", nullable = false)
+    public boolean isPossibility() {
+        return this.possibility;
+    }
 
-	public void setPossibility(boolean possibility) {
-		this.possibility = possibility;
-	}
+    public void setPossibility(boolean possibility) {
+        this.possibility = possibility;
+    }
 
-	@Column(name = "BEST_RANGE", nullable = false, length = 45)
-	public String getBestRange() {
-		return this.bestRange;
-	}
+    @Column(name = "BEST_RANGE", nullable = false, length = 45)
+    public String getBestRange() {
+        return this.bestRange;
+    }
 
-	public void setBestRange(String bestRange) {
-		this.bestRange = bestRange;
-	}
+    public void setBestRange(String bestRange) {
+        this.bestRange = bestRange;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_DATE", nullable = false, length = 19)
-	public Date getCreateDate() {
-		return this.createDate;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATE_DATE", nullable = false, length = 19)
+    public Date getCreateDate() {
+        return this.createDate;
+    }
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UPDATE_DATE", nullable = false, length = 19)
-	public Date getUpdateDate() {
-		return this.updateDate;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "UPDATE_DATE", nullable = false, length = 19)
+    public Date getUpdateDate() {
+        return this.updateDate;
+    }
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 
 }
