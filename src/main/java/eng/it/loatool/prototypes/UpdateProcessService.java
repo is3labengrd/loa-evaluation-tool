@@ -16,7 +16,6 @@ public class UpdateProcessService {
         return tbAceProSeq;
     }
 
-    @Autowired
-    private TbAceProSeqRepository tbAceProSeqRepository;
+    @Autowired private TbAceProSeqRepository tbAceProSeqRepository;
 
 }
