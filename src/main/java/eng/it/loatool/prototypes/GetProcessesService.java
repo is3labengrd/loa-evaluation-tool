@@ -14,7 +14,6 @@ public class GetProcessesService {
         return tbAceProSeqRepository.findAll();
     }
 
-    @Autowired
-    private TbAceProSeqRepository tbAceProSeqRepository;
+    @Autowired private TbAceProSeqRepository tbAceProSeqRepository;
 
 }
