@@ -45,28 +45,40 @@ public class WebApi {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/proto/sub-processes")
+    public ResponseEntity<?> getSubProcesses() {
+        return ResponseEntity.ok(getSubProcessesService.getSubProcesses());
+    }
+
     @GetMapping("/proto/sub-processes/{subprocessId}")
-    public ResponseEntity<Void> getSubProcess(@PathVariable("processId") String processId) {
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<?> getSubProcess(@PathVariable("subprocessId") Integer processId) {
+        return ResponseEntity.ok(getSubProcessService.getSubProcess(processId));
     }
 
     @PostMapping("/proto/sub-processes")
     public ResponseEntity<Void> createSubProcess(
-        @PathVariable("processId") String processId, @RequestBody TbAceSubProLev body
+        @RequestBody TbAceSubProLev body
     ) {
-        return ResponseEntity.notFound().build();
+        createSubProcessService.createSubProcess(body);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/proto/sub-processes/{subprocessId}")
     public ResponseEntity<Void> updateSubProcess(
-        @PathVariable("processId") String processId, @RequestBody TbAceSubProLev body
+        @PathVariable("subprocessId") Integer processId,
+        @RequestBody TbAceSubProLev body
     ) {
-        return ResponseEntity.notFound().build();
+        updateSubProcessService.updateSubProcess(processId, body);
+        return ResponseEntity.ok().build();
     }
 
     @Autowired private UpdateProcessService updateProcessService;
     @Autowired private CreateProcessService createProcessService;
     @Autowired private GetProcessesService getProcessesService;
     @Autowired private GetProcessService getProcessService;
+    @Autowired private UpdateSubProcessService updateSubProcessService;
+    @Autowired private CreateSubProcessService createSubProcessService;
+    @Autowired private GetSubProcessesService getSubProcessesService;
+    @Autowired private GetSubProcessService getSubProcessService;
 
 }
