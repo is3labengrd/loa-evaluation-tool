@@ -10,18 +10,11 @@ import eng.it.loatool.process_sequence.ProcessSequence;
 import eng.it.loatool.process_sequence.ProcessSequenceRepository;
 
 @Service
-public class CreateProcessService {
+public class GetProcessSequenceService {
 
     @Transactional
-    public Optional<ProcessSequence> createProcess(ProcessSequence tbAceProSeq) {
-        if (
-            tbAceProSeq.getPkTbId() == null ||
-            !tbAceProSeqRepository.existsById(tbAceProSeq.getPkTbId())
-        ) {
-            tbAceProSeqRepository.save(tbAceProSeq);
-            return Optional.of(tbAceProSeq);
-        }
-        return Optional.empty();
+    public Optional<ProcessSequence> getProcess(Integer processId) {
+        return tbAceProSeqRepository.findById(processId);
     }
 
     @Autowired private ProcessSequenceRepository tbAceProSeqRepository;
