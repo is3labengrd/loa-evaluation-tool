@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import eng.it.loatool.entities.TbAceProSeq;
 import eng.it.loatool.entities.TbAceSubProLev;
+import eng.it.loatool.process_sequence.ProcessSequence;
 
 @Controller
 public class WebApi {
@@ -31,7 +31,7 @@ public class WebApi {
     }
 
     @PostMapping("/proto/processes")
-    public ResponseEntity<Void> createProcess(@RequestBody TbAceProSeq body) {
+    public ResponseEntity<Void> createProcess(@RequestBody ProcessSequence body) {
         createProcessService.createProcess(body);
         return ResponseEntity.ok().build();
     }
@@ -39,7 +39,7 @@ public class WebApi {
     @PutMapping("/proto/processes/{processId}")
     public ResponseEntity<Void> updateProcess(
         @PathVariable("processId") Integer processId,
-        @RequestBody TbAceProSeq body
+        @RequestBody ProcessSequence body
     ) {
         updateProcessService.updateProcess(processId, body);
         return ResponseEntity.ok().build();

@@ -4,18 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import eng.it.loatool.entities.TbAceProSeq;
+import eng.it.loatool.process_sequence.ProcessSequence;
+import eng.it.loatool.process_sequence.ProcessSequenceRepository;
 
 @Service
 public class UpdateProcessService {
 
     @Transactional
-    public TbAceProSeq updateProcess(Integer processId, TbAceProSeq tbAceProSeq) {
+    public ProcessSequence updateProcess(Integer processId, ProcessSequence tbAceProSeq) {
         tbAceProSeq.setPkTbId(processId);
         tbAceProSeqRepository.save(tbAceProSeq);
         return tbAceProSeq;
     }
 
-    @Autowired private TbAceProSeqRepository tbAceProSeqRepository;
+    @Autowired private ProcessSequenceRepository tbAceProSeqRepository;
 
 }

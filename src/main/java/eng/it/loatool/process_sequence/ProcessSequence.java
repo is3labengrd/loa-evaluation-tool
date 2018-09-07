@@ -1,4 +1,4 @@
-package eng.it.loatool.entities;
+package eng.it.loatool.process_sequence;
 // Generated Sep 4, 2018 12:58:34 PM by Hibernate Tools 5.2.10.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "TB_ACE_PRO_SEQ", catalog = "loa_evaluation_tool")
-public class TbAceProSeq implements java.io.Serializable {
+public class ProcessSequence implements java.io.Serializable {
 
     private Integer pkTbId;
     private String name;
@@ -27,10 +27,10 @@ public class TbAceProSeq implements java.io.Serializable {
     private Date createDate;
     private Date updateDate;
 
-    public TbAceProSeq() {
+    public ProcessSequence() {
     }
 
-    public TbAceProSeq(String name, int NLowerLevelSubPro, String varProSeqId, Date createDate, Date updateDate) {
+    public ProcessSequence(String name, int NLowerLevelSubPro, String varProSeqId, Date createDate, Date updateDate) {
         this.name = name;
         this.NLowerLevelSubPro = NLowerLevelSubPro;
         this.varProSeqId = varProSeqId;
