@@ -1,4 +1,4 @@
-package eng.it.loatool.entities;
+package eng.it.loatool.subprocess_level;
 // Generated Sep 4, 2018 12:58:34 PM by Hibernate Tools 5.2.10.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "TB_ACE_SUB_PRO_LEV", catalog = "loa_evaluation_tool")
-public class TbAceSubProLev implements java.io.Serializable {
+public class SubProcessLevel implements java.io.Serializable {
 
     private Integer pkTbId;
     private int fkTbAceProSeq;
@@ -28,10 +28,10 @@ public class TbAceSubProLev implements java.io.Serializable {
     private Date createDate;
     private Date updateDate;
 
-    public TbAceSubProLev() {
+    public SubProcessLevel() {
     }
 
-    public TbAceSubProLev(
+    public SubProcessLevel(
         int fkTbAceProSeq, String name, int proLevel, String varProSeqId, Date createDate, Date updateDate
     ) {
         this.fkTbAceProSeq = fkTbAceProSeq;

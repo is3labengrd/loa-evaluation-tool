@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import eng.it.loatool.entities.TbAceSubProLev;
 import eng.it.loatool.process_sequence.ProcessSequence;
+import eng.it.loatool.subprocess_level.SubProcessLevel;
 
 @Controller
 public class WebApi {
@@ -57,7 +57,7 @@ public class WebApi {
 
     @PostMapping("/proto/sub-processes")
     public ResponseEntity<Void> createSubProcess(
-        @RequestBody TbAceSubProLev body
+        @RequestBody SubProcessLevel body
     ) {
         createSubProcessService.createSubProcess(body);
         return ResponseEntity.ok().build();
@@ -66,7 +66,7 @@ public class WebApi {
     @PutMapping("/proto/sub-processes/{subprocessId}")
     public ResponseEntity<Void> updateSubProcess(
         @PathVariable("subprocessId") Integer processId,
-        @RequestBody TbAceSubProLev body
+        @RequestBody SubProcessLevel body
     ) {
         updateSubProcessService.updateSubProcess(processId, body);
         return ResponseEntity.ok().build();

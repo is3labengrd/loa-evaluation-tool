@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import eng.it.loatool.entities.TbAceSubProLev;
+import eng.it.loatool.subprocess_level.SubProcessLevel;
+import eng.it.loatool.subprocess_level.SubProcessLevelRepository;
 
 @Service
 public class CreateSubProcessService {
 
     @Transactional
-    public Optional<TbAceSubProLev> createSubProcess(TbAceSubProLev tbAceSubProLev) {
+    public Optional<SubProcessLevel> createSubProcess(SubProcessLevel tbAceSubProLev) {
         if (
             tbAceSubProLev.getPkTbId() == null ||
             !tbAceSubProLevRepository.existsById(tbAceSubProLev.getPkTbId())
@@ -23,6 +24,6 @@ public class CreateSubProcessService {
         return Optional.empty();
     }
 
-    @Autowired private TbAceSubProLevRepository tbAceSubProLevRepository;
+    @Autowired private SubProcessLevelRepository tbAceSubProLevRepository;
 
 }

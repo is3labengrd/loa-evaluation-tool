@@ -4,16 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import eng.it.loatool.entities.TbAceSubProLev;
+import eng.it.loatool.subprocess_level.SubProcessLevel;
+import eng.it.loatool.subprocess_level.SubProcessLevelRepository;
 
 @Service
 public class GetSubProcessesService {
 
     @Transactional
-    Iterable<TbAceSubProLev> getSubProcesses() {
+    Iterable<SubProcessLevel> getSubProcesses() {
         return tbAceSubProLevRepository.findAll();
     }
 
-    @Autowired private TbAceSubProLevRepository tbAceSubProLevRepository;
+    @Autowired private SubProcessLevelRepository tbAceSubProLevRepository;
 
 }
