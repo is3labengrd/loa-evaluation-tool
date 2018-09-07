@@ -16,8 +16,8 @@ import eng.it.loatool.entities.TbAceSubProLev;
 public class WebApi {
 
     @GetMapping("/proto/process-list")
-    public ResponseEntity<ProcessList> getProcessList() {
-        return ResponseEntity.ok(ProcessList.getExample());
+    public ResponseEntity<?> getProcessList() {
+        return ResponseEntity.ok(getProcessListService.getProcessList());
     }
 
     @GetMapping("/proto/processes")
@@ -80,5 +80,6 @@ public class WebApi {
     @Autowired private CreateSubProcessService createSubProcessService;
     @Autowired private GetSubProcessesService getSubProcessesService;
     @Autowired private GetSubProcessService getSubProcessService;
+    @Autowired private GetProcessListService getProcessListService;
 
 }
