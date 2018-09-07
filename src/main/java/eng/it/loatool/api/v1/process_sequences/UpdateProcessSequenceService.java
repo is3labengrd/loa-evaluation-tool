@@ -13,7 +13,7 @@ import eng.it.loatool.process_sequence.ProcessSequenceRepository;
 public class UpdateProcessSequenceService {
 
     @Transactional
-    public Optional<ProcessSequence> updateProcess(Integer processId, ProcessSequence tbAceProSeq) {
+    public Optional<ProcessSequence> updateProcessSequence(Integer processId, ProcessSequence tbAceProSeq) {
         tbAceProSeq.setPkTbId(processId);
         if (processId == null || !tbAceProSeqRepository.existsById(processId)) {
             return Optional.empty();

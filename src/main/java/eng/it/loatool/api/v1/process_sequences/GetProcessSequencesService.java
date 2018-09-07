@@ -11,7 +11,7 @@ import eng.it.loatool.process_sequence.ProcessSequenceRepository;
 public class GetProcessSequencesService {
 
     @Transactional
-    Iterable<ProcessSequence> getProcesses() {
+    Iterable<ProcessSequence> getProcessSequences() {
         return tbAceProSeqRepository.findAll();
     }
 

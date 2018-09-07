@@ -13,7 +13,7 @@ import eng.it.loatool.process_sequence.ProcessSequenceRepository;
 public class CreateProcessSequenceService {
 
     @Transactional
-    public Optional<ProcessSequence> createProcess(ProcessSequence tbAceProSeq) {
+    public Optional<ProcessSequence> createProcessSequence(ProcessSequence tbAceProSeq) {
         if (
             tbAceProSeq.getPkTbId() == null ||
             !tbAceProSeqRepository.existsById(tbAceProSeq.getPkTbId())

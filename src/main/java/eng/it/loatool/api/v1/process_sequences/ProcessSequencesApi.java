@@ -18,21 +18,21 @@ public class ProcessSequencesApi {
     @GetMapping("/v1/process-sequences")
     public ResponseEntity<?> getProcesses() {
         return ResponseEntityTransformer.transformOk(
-            getProcessesService.getProcesses()
+            getProcessSequencesService.getProcessSequences()
         );
     }
 
     @GetMapping("/v1/process-sequences/{processId}")
     public ResponseEntity<?> getProcess(@PathVariable("processId") Integer processId) {
         return ResponseEntityTransformer.transform(
-            getProcessService.getProcess(processId)
+            getProcessSequenceService.getProcessSequence(processId)
         );
     }
 
     @PostMapping("/v1/process-sequences")
     public ResponseEntity<?> createProcess(@RequestBody ProcessSequence body) {
         return ResponseEntityTransformer.transform(
-            createProcessService.createProcess(body)
+            createProcessSequenceService.createProcessSequence(body)
         );
     }
 
@@ -42,13 +42,13 @@ public class ProcessSequencesApi {
         @RequestBody ProcessSequence body
     ) {
         return ResponseEntityTransformer.transform(
-            updateProcessService.updateProcess(processId, body)
+            updateProcessSequenceService.updateProcessSequence(processId, body)
         );
     }
 
-    @Autowired private UpdateProcessSequenceService updateProcessService;
-    @Autowired private CreateProcessSequenceService createProcessService;
-    @Autowired private GetProcessSequencesService getProcessesService;
-    @Autowired private GetProcessSequenceService getProcessService;
+    @Autowired private UpdateProcessSequenceService updateProcessSequenceService;
+    @Autowired private CreateProcessSequenceService createProcessSequenceService;
+    @Autowired private GetProcessSequencesService getProcessSequencesService;
+    @Autowired private GetProcessSequenceService getProcessSequenceService;
 
 }

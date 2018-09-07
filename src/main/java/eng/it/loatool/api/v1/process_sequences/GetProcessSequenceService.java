@@ -13,7 +13,7 @@ import eng.it.loatool.process_sequence.ProcessSequenceRepository;
 public class GetProcessSequenceService {
 
     @Transactional
-    public Optional<ProcessSequence> getProcess(Integer processId) {
+    public Optional<ProcessSequence> getProcessSequence(Integer processId) {
         return tbAceProSeqRepository.findById(processId);
     }
 
