@@ -1,4 +1,4 @@
-package eng.it.loatool.prototypes;
+package eng.it.loatool.api.v1.process_sequences;
 
 import java.util.Optional;
 
