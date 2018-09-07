@@ -1,6 +1,4 @@
-package eng.it.loatool.prototypes;
-
-import java.util.Optional;
+package eng.it.loatool.api.v1.subprocess_levels;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,11 +8,11 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
 import eng.it.loatool.subprocess_level.SubProcessLevelRepository;
 
 @Service
-public class GetSubProcessService {
+public class GetSubProcessLevelsService {
 
     @Transactional
-    public Optional<SubProcessLevel> getSubProcess(Integer processId) {
-        return tbAceSubProLevRepository.findById(processId);
+    Iterable<SubProcessLevel> getSubProcessLevels() {
+        return tbAceSubProLevRepository.findAll();
     }
 
     @Autowired private SubProcessLevelRepository tbAceSubProLevRepository;

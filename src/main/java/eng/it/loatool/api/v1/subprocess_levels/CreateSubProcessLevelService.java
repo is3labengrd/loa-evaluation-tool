@@ -1,4 +1,4 @@
-package eng.it.loatool.prototypes;
+package eng.it.loatool.api.v1.subprocess_levels;
 
 import java.util.Optional;
 
@@ -10,10 +10,10 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
 import eng.it.loatool.subprocess_level.SubProcessLevelRepository;
 
 @Service
-public class CreateSubProcessService {
+public class CreateSubProcessLevelService {
 
     @Transactional
-    public Optional<SubProcessLevel> createSubProcess(SubProcessLevel tbAceSubProLev) {
+    public Optional<SubProcessLevel> createSubProcessLevel(SubProcessLevel tbAceSubProLev) {
         if (
             tbAceSubProLev.getPkTbId() == null ||
             !tbAceSubProLevRepository.existsById(tbAceSubProLev.getPkTbId())
