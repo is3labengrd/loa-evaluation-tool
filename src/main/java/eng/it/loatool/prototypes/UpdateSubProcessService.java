@@ -14,10 +14,8 @@ public class UpdateSubProcessService {
 
     @Transactional
     public Optional<SubProcessLevel> updateSubProcess(Integer processId, SubProcessLevel tbAceSubProLev) {
-        if (
-            tbAceSubProLev.getPkTbId() == null ||
-            !tbAceSubProLevRepository.existsById(tbAceSubProLev.getPkTbId())
-        ) {
+        tbAceSubProLev.setPkTbId(processId);
+        if (processId == null || !tbAceSubProLevRepository.existsById(processId)) {
             return Optional.empty();
         }
         tbAceSubProLevRepository.save(tbAceSubProLev);
