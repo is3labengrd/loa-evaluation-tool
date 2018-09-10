@@ -13,7 +13,7 @@ import eng.it.loatool.process_sequence.ProcessSegment;
 import eng.it.util.ResponseEntityTransformer;
 
 @Controller
-public class ProcessSegmentApi {
+public class ProcessSegmentsApi {
 
     @GetMapping("/v1/process-segments")
     public ResponseEntity<?> getProcesses() {
