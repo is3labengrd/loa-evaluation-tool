@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "TB_ACE_PRO_LOA_INF", catalog = "loa_evaluation_tool")
-public class TbAceProLoaInf implements java.io.Serializable {
+public class ProcessLOAInformation implements java.io.Serializable {
 
     private Integer pkTbId;
     private int fkTbAceProSeq;
@@ -27,10 +27,10 @@ public class TbAceProLoaInf implements java.io.Serializable {
     private Date createDate;
     private Date updateDate;
 
-    public TbAceProLoaInf() {
+    public ProcessLOAInformation() {
     }
 
-    public TbAceProLoaInf(
+    public ProcessLOAInformation(
         int fkTbAceProSeq, int fkTbAcePhyLoa, int fkTbAceCogLoa, boolean possibility,
         String bestRange, Date createDate, Date updateDate
     ) {
