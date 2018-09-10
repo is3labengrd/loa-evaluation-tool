@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "TB_ACE_PRO_SEQ", catalog = "loa_evaluation_tool")
-public class ProcessSequence implements java.io.Serializable {
+public class ProcessSegment implements java.io.Serializable {
 
     private Integer pkTbId;
     private String name;
@@ -27,10 +27,10 @@ public class ProcessSequence implements java.io.Serializable {
     private Date createDate;
     private Date updateDate;
 
-    public ProcessSequence() {
+    public ProcessSegment() {
     }
 
-    public ProcessSequence(String name, int NLowerLevelSubPro, String varProSeqId, Date createDate, Date updateDate) {
+    public ProcessSegment(String name, int NLowerLevelSubPro, String varProSeqId, Date createDate, Date updateDate) {
         this.name = name;
         this.NLowerLevelSubPro = NLowerLevelSubPro;
         this.varProSeqId = varProSeqId;

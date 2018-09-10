@@ -4,5 +4,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProcessSequenceRepository extends CrudRepository<ProcessSequence, Integer> {
+public interface ProcessSegmentRepository extends CrudRepository<ProcessSegment, Integer> {
 }

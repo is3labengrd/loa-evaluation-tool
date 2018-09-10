@@ -1,4 +1,4 @@
-package eng.it.loatool.api.v1.process_sequences;
+package eng.it.loatool.api.v1.process_segments;
 
 import java.util.Optional;
 
@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import eng.it.loatool.process_sequence.ProcessSequence;
-import eng.it.loatool.process_sequence.ProcessSequenceRepository;
+import eng.it.loatool.process_sequence.ProcessSegment;
+import eng.it.loatool.process_sequence.ProcessSegmentRepository;
 
 @Service
-public class CreateProcessSequenceService {
+public class CreateProcessSegmentService {
 
     @Transactional
-    public Optional<ProcessSequence> createProcessSequence(ProcessSequence tbAceProSeq) {
+    public Optional<ProcessSegment> createProcessSegment(ProcessSegment tbAceProSeq) {
         if (
             tbAceProSeq.getPkTbId() == null ||
             !tbAceProSeqRepository.existsById(tbAceProSeq.getPkTbId())
@@ -24,6 +24,6 @@ public class CreateProcessSequenceService {
         return Optional.empty();
     }
 
-    @Autowired private ProcessSequenceRepository tbAceProSeqRepository;
+    @Autowired private ProcessSegmentRepository tbAceProSeqRepository;
 
 }

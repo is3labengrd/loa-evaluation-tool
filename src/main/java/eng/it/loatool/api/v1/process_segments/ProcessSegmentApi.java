@@ -1,4 +1,4 @@
-package eng.it.loatool.api.v1.process_sequences;
+package eng.it.loatool.api.v1.process_segments;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,46 +9,46 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import eng.it.loatool.process_sequence.ProcessSequence;
+import eng.it.loatool.process_sequence.ProcessSegment;
 import eng.it.util.ResponseEntityTransformer;
 
 @Controller
-public class ProcessSequencesApi {
+public class ProcessSegmentApi {
 
-    @GetMapping("/v1/process-sequences")
+    @GetMapping("/v1/process-segments")
     public ResponseEntity<?> getProcesses() {
         return ResponseEntityTransformer.transformOk(
-            getProcessSequencesService.getProcessSequences()
+            getProcessSegmentsService.getProcessSegments()
         );
     }
 
-    @GetMapping("/v1/process-sequences/{processId}")
+    @GetMapping("/v1/process-segments/{processId}")
     public ResponseEntity<?> getProcess(@PathVariable("processId") Integer processId) {
         return ResponseEntityTransformer.transform(
-            getProcessSequenceService.getProcessSequence(processId)
+            getProcessSegmentService.getProcessSegment(processId)
         );
     }
 
-    @PostMapping("/v1/process-sequences")
-    public ResponseEntity<?> createProcess(@RequestBody ProcessSequence body) {
+    @PostMapping("/v1/process-segments")
+    public ResponseEntity<?> createProcess(@RequestBody ProcessSegment body) {
         return ResponseEntityTransformer.transform(
-            createProcessSequenceService.createProcessSequence(body)
+            createProcessSegmentService.createProcessSegment(body)
         );
     }
 
-    @PutMapping("/v1/process-sequences/{processId}")
+    @PutMapping("/v1/process-segments/{processId}")
     public ResponseEntity<?> updateProcess(
         @PathVariable("processId") Integer processId,
-        @RequestBody ProcessSequence body
+        @RequestBody ProcessSegment body
     ) {
         return ResponseEntityTransformer.transform(
-            updateProcessSequenceService.updateProcessSequence(processId, body)
+            updateProcessSegmentService.updateProcessSegment(processId, body)
         );
     }
 
-    @Autowired private UpdateProcessSequenceService updateProcessSequenceService;
-    @Autowired private CreateProcessSequenceService createProcessSequenceService;
-    @Autowired private GetProcessSequencesService getProcessSequencesService;
-    @Autowired private GetProcessSequenceService getProcessSequenceService;
+    @Autowired private UpdateProcessSegmentService updateProcessSegmentService;
+    @Autowired private CreateProcessSegmentService createProcessSegmentService;
+    @Autowired private GetProcessSegmentsService getProcessSegmentsService;
+    @Autowired private GetProcessSegmentService getProcessSegmentService;
 
 }
