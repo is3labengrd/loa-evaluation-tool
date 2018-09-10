@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "TB_ACE_LOA_CRI_MAT", catalog = "loa_evaluation_tool")
-public class TbAceLoaCriMat implements java.io.Serializable {
+public class CriteriaMatrix implements java.io.Serializable {
 
     private Integer pkTbId;
     private int dsStable;
@@ -88,10 +88,10 @@ public class TbAceLoaCriMat implements java.io.Serializable {
     private Date updateDate;
     private int fkTbAceSubProLev;
 
-    public TbAceLoaCriMat() {
+    public CriteriaMatrix() {
     }
 
-    public TbAceLoaCriMat(int dsStable, int ecAEleConsumFun, Date createDate, Date updateDate, int fkTbAceSubProLev) {
+    public CriteriaMatrix(int dsStable, int ecAEleConsumFun, Date createDate, Date updateDate, int fkTbAceSubProLev) {
         this.dsStable = dsStable;
         this.ecAEleConsumFun = ecAEleConsumFun;
         this.createDate = createDate;
@@ -99,7 +99,7 @@ public class TbAceLoaCriMat implements java.io.Serializable {
         this.fkTbAceSubProLev = fkTbAceSubProLev;
     }
 
-    public TbAceLoaCriMat(
+    public CriteriaMatrix(
         int dsStable, Integer dsReducedStability, Integer dsHandlyStable, Integer dsUnstable,
         Integer stInsensitive, Integer stHardlySensitive, Integer stSensitive, Integer stVerySensitive,
         Integer grExGripSurface, Integer grIntGripSurface, Integer grMagneticGripper, Integer grFabClosureGripper,
