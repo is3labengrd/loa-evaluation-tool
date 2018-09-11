@@ -13,16 +13,16 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TB_ACE_COG_LOA", catalog = "loa_evaluation_tool")
-public class TbAceCogLoa implements java.io.Serializable {
+public class CognitiveLOA implements java.io.Serializable {
 
     private Integer pkTbId;
     private int code;
     private String loa;
 
-    public TbAceCogLoa() {
+    public CognitiveLOA() {
     }
 
-    public TbAceCogLoa(int code, String loa) {
+    public CognitiveLOA(int code, String loa) {
         this.code = code;
         this.loa = loa;
     }
