@@ -13,16 +13,16 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TB_ACE_PHY_LOA", catalog = "loa_evaluation_tool")
-public class TbAcePhyLoa implements java.io.Serializable {
+public class PhysicalLOA implements java.io.Serializable {
 
     private Integer pkTbId;
     private int code;
     private String loa;
 
-    public TbAcePhyLoa() {
+    public PhysicalLOA() {
     }
 
-    public TbAcePhyLoa(int code, String loa) {
+    public PhysicalLOA(int code, String loa) {
         this.code = code;
         this.loa = loa;
     }
