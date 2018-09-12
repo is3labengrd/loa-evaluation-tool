@@ -2,8 +2,10 @@ package eng.it.loatool.var.request;
 
 
 import eng.it.util.PropertyManager;
-import eng.it.util.SARProperty;
+
 import org.springframework.web.client.RestTemplate;
+
+import java.io.IOException;
 
 public class VARProcessSegment {
 
@@ -16,23 +18,23 @@ public class VARProcessSegment {
 				"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>";
 	};
 		
-	public static String getProcessSegmentList()
-	{
-		final String BASE_URL = PropertyManager.getProperty(SARProperty.BASE_URL);
+	public static String getProcessSegmentList() throws IOException {
+        PropertyManager prop = new PropertyManager();
+        final String BASE_URL = prop.getPropValues("base.url");
 		final String uri = BASE_URL + "/SPARQLQuery";
-	     
+
 	    RestTemplate restTemplate = new RestTemplate();
-	    String request = prefix() + "SELECT *" + 
-	    		"WHERE { ?list a b2mml:ProcessSegment ." + 
+	    String request = prefix() + "SELECT *" +
+	    		"WHERE { ?list a b2mml:ProcessSegment ." +
 	    		"}";
 	    String result = restTemplate.postForObject(uri, request, String.class);
 	     
 	    return result;
 	}
 	
-	public static String getProcessSegmentAttribute(String addressSpace)
-	{
-		final String BASE_URL = PropertyManager.getProperty(SARProperty.BASE_URL);
+	public static String getProcessSegmentAttribute(String addressSpace) throws IOException {
+        PropertyManager prop = new PropertyManager();
+        final String BASE_URL = prop.getPropValues("base.url");
 	    final String uri = BASE_URL + "/SPARQLQuery";
 	     
 	    RestTemplate restTemplate = new RestTemplate();
