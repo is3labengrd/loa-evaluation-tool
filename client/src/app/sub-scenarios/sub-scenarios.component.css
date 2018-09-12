@@ -1,0 +1,28 @@
+#table1 {
+  width: 100%;
+  border: 1px solid;
+  margin-bottom: 25px;
+}
+
+#table1 td {
+  padding: 10px;
+}
+
+.linkovi {
+  margin-bottom: 25px;
+}
+
+fieldset {
+  border: 2px solid;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+fieldset legend {
+  width: auto;
+  margin-left: 20px;
+}
+
+.btn-group {
+  margin-bottom: 25px;
+}

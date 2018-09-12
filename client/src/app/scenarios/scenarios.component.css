@@ -1,0 +1,11 @@
+#table1 {
+  width: 100%;
+  border: 1px solid;
+  margin-bottom: 20px;
+}
+
+caption {
+  caption-side: top;
+  text-align: center;
+  font-size: 30px
+}

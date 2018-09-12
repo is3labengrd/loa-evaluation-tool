@@ -1,0 +1,116 @@
+<div>
+  <h1 class="text-center">Add Resource</h1>
+
+  <form id="addRes" action="">
+   <span class="row">
+      <h4 class="col-3">General Info</h4>
+      <hr class="col-8">
+    </span>
+    <div class="row data">
+      <span class="col-4">
+        <strong >Resource name: </strong>
+        <input type="text" placeholder="Automated Tool Trolley">
+      </span>
+      <span class="col-4">
+        <strong>LoA Physical: </strong>
+        <input type="number">
+      </span>
+      <span class="col-4">
+        <strong>LoA Cognitive: </strong>
+        <input type="number" >
+      </span>
+    </div>
+
+    <span class="row">
+        <h4 class="col-3">Labour Costs</h4>
+        <hr class="col-8">
+      </span>
+    <div class="row data">
+      <span >
+        <strong class="col-4"> Number of operators per machine: </strong>
+        <span  class="col-8"> <input type="number" class="float-right"> </span>
+      </span>
+    </div>
+
+    <span class="row">
+      <h4 class="col-3">Maintenance Costs</h4>
+      <hr class="col-8">
+    </span>
+    <div class="row data">
+      <span class="col-6">
+        <strong>Annual maintenance costs (euro/a): </strong>
+        <input type="text" class="float-right">
+      </span>
+      <span class="col-6">
+        <strong>Annual maintenance costs (%): </strong>
+        <input type="number" class="float-right">
+      </span>
+    </div>
+
+    <span class="row">
+        <h4 class="col-3">Room Costs</h4>
+        <hr class="col-8">
+    </span>
+    <div class="row data">
+        <span class="col-6">
+          <strong>Instalation surface (m<sup>2</sup>): </strong>
+          <input type="text" class="float-right">
+        </span>
+        <span class="col-6">
+          <strong>Cost per m<sup>2</sup> per month (euro/m<sup>2</sup>): </strong>
+          <input type="text" class="float-right">
+        </span>
+      </div>
+
+      <span class="row">
+        <h4 class="col-3">Inputed Deprecation</h4>
+        <hr class="col-8">
+      </span>
+      <div class="row data">
+        <span class="col-6">
+          <strong>Machine purchase values (euro): </strong>
+          <input input="number" class="float-right">
+        </span>
+        <span class="col-6">
+         <strong>Machine sales value (euro): </strong>
+         <input type="number" class="float-right">
+        </span><br><br>
+        <span class="col-6">
+          <strong>Economic useful life (a): </strong>
+          <input type="number" class="float-right">
+        </span>
+      </div>
+
+      <span class="row">
+        <h4 class="col-3">Interest Costs</h4>
+        <hr class="col-8">
+      </span>
+      <div class="row data">
+        <span class="col-4"><strong>Interest rate (%):</strong> </span>
+        <span class="col-8"><input type="text" class="float-left"></span>
+      </div>
+
+      <span class="row">
+          <h4 class="col-3">Energy Costs</h4>
+          <hr class="col-8">
+      </span>
+      <div class="row energy">
+        <span class="col-6"><strong>Annual electricity consumption - functioning (kWh)</strong></span>
+        <span class="col-6"> <input type="text" class="float-right"> </span>
+      </div>
+      <div class="row energy">
+        <span class="col-6"><strong>Annual electricity consumption - stand by (kWh)</strong></span>
+        <span class="col-6"> <input type="text" class="float-right"> </span>
+      </div>
+      <div class="row data energy">
+        <span class="col-6"><strong>Electricity price (euro/kWh)</strong></span>
+        <span class="col-6"> <input type="text" class="float-right"> </span>
+      </div>
+      <hr>
+      <div class="btn-group d-flex justify-content-center" >
+        <button class="btn btn-primary">Close</button>
+        <button class="btn btn-secondary">Cancel</button>
+        <button class="btn btn-secondary">Save</button>
+      </div>
+  </form>
+</div>
