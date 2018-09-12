@@ -6,7 +6,7 @@ public class MainProcess {
 	
 	private String name;
 	private String processSegmentId;
-	private String subProcLowerLevel;
+	private int subProcLowerLevel;
 	private List<SubProcesses> subProcesses;
 	
 	
@@ -28,10 +28,10 @@ public class MainProcess {
 	public void setSubProcesses(List<SubProcesses> subProcesses) {
 		this.subProcesses = subProcesses;
 	}
-	public String getSubProcLowerLevel() {
+	public int getSubProcLowerLevel() {
 		return subProcLowerLevel;
 	}
-	public void setSubProcLowerLevel(String subProcLowerLevel) {
+	public void setSubProcLowerLevel(int subProcLowerLevel) {
 		this.subProcLowerLevel = subProcLowerLevel;
 	}
 	
