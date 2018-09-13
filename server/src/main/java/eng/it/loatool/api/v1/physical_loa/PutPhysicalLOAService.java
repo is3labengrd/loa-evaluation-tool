@@ -15,8 +15,7 @@ public class PutPhysicalLOAService {
     @Transactional
     public Optional<PhysicalLOA> putPhysicalLOA(Integer id, PhysicalLOA physicalLOA) {
         physicalLOA.setPkTbId(id);
-        physicalLOARepository.save(physicalLOA);
-        return Optional.of(physicalLOA);
+        return Optional.of(physicalLOARepository.save(physicalLOA));
     }
 
     @Autowired private PhysicalLOARepository physicalLOARepository;

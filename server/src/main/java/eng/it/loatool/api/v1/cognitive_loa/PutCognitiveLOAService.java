@@ -15,8 +15,7 @@ public class PutCognitiveLOAService {
     @Transactional
     public Optional<CognitiveLOA> putCognitiveLOA(Integer id, CognitiveLOA cognitiveLOA) {
         cognitiveLOA.setPkTbId(id);
-        cognitiveLOARepository.save(cognitiveLOA);
-        return Optional.of(cognitiveLOA);
+        return Optional.of(cognitiveLOARepository.save(cognitiveLOA));
     }
 
     @Autowired private CognitiveLOARepository cognitiveLOARepository;

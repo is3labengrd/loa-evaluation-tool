@@ -18,8 +18,7 @@ public class CreateProcessLOAInformationService {
             processLOAInformation.getPkTbId() == null ||
             !processLOAInformationRepository.existsById(processLOAInformation.getPkTbId())
         ) {
-            processLOAInformationRepository.save(processLOAInformation);
-            return Optional.of(processLOAInformation);
+            return Optional.of(processLOAInformationRepository.save(processLOAInformation));
         }
         return Optional.empty();
     }
