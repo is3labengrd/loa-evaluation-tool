@@ -10,11 +10,14 @@ import eng.it.loatool.physical_loa.PhysicalLOA;
 import eng.it.loatool.physical_loa.PhysicalLOARepository;
 
 @Service
-public class PutPhysicalLOAService {
+public class UpdatePhysicalLOAService {
 
     @Transactional
-    public Optional<PhysicalLOA> putPhysicalLOA(Integer id, PhysicalLOA physicalLOA) {
+    public Optional<PhysicalLOA> updatePhysicalLOA(Integer id, PhysicalLOA physicalLOA) {
         physicalLOA.setPkTbId(id);
+        if (id == null || !physicalLOARepository.existsById(id)) {
+            return Optional.empty();
+        }
         return Optional.of(physicalLOARepository.save(physicalLOA));
     }
 

@@ -10,11 +10,14 @@ import eng.it.loatool.cognitive_loa.CognitiveLOA;
 import eng.it.loatool.cognitive_loa.CognitiveLOARepository;
 
 @Service
-public class PutCognitiveLOAService {
+public class UpdateCognitiveLOAService {
 
     @Transactional
-    public Optional<CognitiveLOA> putCognitiveLOA(Integer id, CognitiveLOA cognitiveLOA) {
+    public Optional<CognitiveLOA> updateCognitiveLOA(Integer id, CognitiveLOA cognitiveLOA) {
         cognitiveLOA.setPkTbId(id);
+        if (id == null || !cognitiveLOARepository.existsById(id)) {
+            return Optional.empty();
+        }
         return Optional.of(cognitiveLOARepository.save(cognitiveLOA));
     }
 
