@@ -6,7 +6,7 @@
     <groupId>eng.it.loatool</groupId>
     <artifactId>eng-loatool</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>eng-loatool</name>
 
@@ -63,6 +63,8 @@
     </dependencies>
 
     <build>
+        <!-- server name -->
+        <finalName>LoAService</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
