@@ -16,8 +16,7 @@ public class UpdateProcessLOAInformationService {
         if (processId == null || !processLOAInformationRepository.existsById(processId)) {
             return Optional.empty();
         }
-        processLOAInformationRepository.save(processLOAInformation);
-        return Optional.of(processLOAInformation);
+        return Optional.of(processLOAInformationRepository.save(processLOAInformation));
     }
 
     @Autowired private ProcessLOAInformationRepository processLOAInformationRepository;

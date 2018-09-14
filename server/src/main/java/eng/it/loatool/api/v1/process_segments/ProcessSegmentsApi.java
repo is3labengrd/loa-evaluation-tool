@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import eng.it.loatool.process_sequence.ProcessSegment;
+import eng.it.loatool.process_segment.ProcessSegment;
 import eng.it.util.ResponseEntityTransformer;
 
 @Controller

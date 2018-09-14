@@ -70,22 +70,53 @@ export class AsIsLOAComponent implements OnInit {
               {
                 x: 6,
                 y: 2,
-                r: 15
+                r: 10
               },
               {
                 x: 4,
                 y: 3,
                 r: 10
+              },
+              {
+                x: 7,
+                y: 7,
+                r: 10
               }
             ],
-            backgroundColor: 'orange',
-            borderColor: 'red',
+            backgroundColor: ['orange', 'red', 'green', 'blue'],
+            borderColor: 'black',
             borderWidth: 1
           }
         ]
       },
       options: {
-
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                suggestedMax: 10
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Cognitive LoA'
+              }
+            }
+          ],
+          xAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                stepSize: 0.5,
+                suggestedMax: 10
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Physical LoA'
+              }
+            }
+          ]
+        },
         title: {
           display: true,
           text: 'Moj chart',

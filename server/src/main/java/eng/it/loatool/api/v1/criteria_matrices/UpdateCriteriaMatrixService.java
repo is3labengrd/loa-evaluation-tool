@@ -18,8 +18,7 @@ public class UpdateCriteriaMatrixService {
         if (criteriaMatrix == null || !criteriaMatrixRepository.existsById(matrixId)) {
             return Optional.empty();
         }
-        criteriaMatrixRepository.save(criteriaMatrix);
-        return Optional.of(criteriaMatrix);
+        return Optional.of(criteriaMatrixRepository.save(criteriaMatrix));
     }
 
     @Autowired private CriteriaMatrixRepository criteriaMatrixRepository;

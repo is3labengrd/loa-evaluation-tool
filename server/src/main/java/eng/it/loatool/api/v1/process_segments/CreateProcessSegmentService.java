@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import eng.it.loatool.process_sequence.ProcessSegment;
-import eng.it.loatool.process_sequence.ProcessSegmentRepository;
+import eng.it.loatool.process_segment.ProcessSegment;
+import eng.it.loatool.process_segment.ProcessSegmentRepository;
 
 @Service
 public class CreateProcessSegmentService {
@@ -18,8 +18,7 @@ public class CreateProcessSegmentService {
             tbAceProSeq.getPkTbId() == null ||
             !tbAceProSeqRepository.existsById(tbAceProSeq.getPkTbId())
         ) {
-            tbAceProSeqRepository.save(tbAceProSeq);
-            return Optional.of(tbAceProSeq);
+            return Optional.of(tbAceProSeqRepository.save(tbAceProSeq));
         }
         return Optional.empty();
     }

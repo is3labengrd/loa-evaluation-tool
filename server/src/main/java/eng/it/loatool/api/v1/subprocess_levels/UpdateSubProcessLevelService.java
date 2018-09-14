@@ -18,8 +18,7 @@ public class UpdateSubProcessLevelService {
         if (processId == null || !tbAceSubProLevRepository.existsById(processId)) {
             return Optional.empty();
         }
-        tbAceSubProLevRepository.save(tbAceSubProLev);
-        return Optional.of(tbAceSubProLev);
+        return Optional.of(tbAceSubProLevRepository.save(tbAceSubProLev));
     }
 
     @Autowired private SubProcessLevelRepository tbAceSubProLevRepository;

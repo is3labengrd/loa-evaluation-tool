@@ -1,4 +1,4 @@
-package eng.it.loatool.process_sequence;
+package eng.it.loatool.process_segment;
 // Generated Sep 4, 2018 12:58:34 PM by Hibernate Tools 5.2.10.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
