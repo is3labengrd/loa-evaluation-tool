@@ -8,7 +8,7 @@ import { Chart } from '../../../node_modules/chart.js/dist/Chart.min.js';
 })
 export class AsIsLOAComponent implements OnInit {
 
-  title = 'scheise';
+  title = 'LoA Graph';
 
   BarChart = [];
   BablChart = [];

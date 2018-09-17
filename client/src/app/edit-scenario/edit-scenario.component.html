@@ -1,3 +1,127 @@
-<p>
-  edit-scenario works!
-</p>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/process-list"> Process list </a></li>
+      <li class="breadcrumb-item"><a routerLink="/main-analysis"> Main analysis Functionalities</a></li>
+      <li class="breadcrumb-item"> <a routerLink="/resource-list"> Scenario Resource Analysis </a> </li>
+      <li class="breadcrumb-item active" aria-current="page"> Edit Scenario </li>
+    </ol>
+  </nav>
+
+  <div class="border">
+    <div class="row " >
+      <span class="col-sm-6 text-center border-right">Main Process: </span>
+      <span class="col-sm-6 text-left">Process 5</span>
+    </div>
+    <div class="row">
+      <span class="col-sm-6 text-center border-right">Level of Subprocesses: </span>
+      <span class="col-sm-6 text-left">3</span>
+    </div>
+  </div>
+  <br>
+
+  <table class="table">
+    <caption style="caption-side: top; text-align: center; font-size: 30px;">Edit Scenario</caption>
+    <thead>
+      <th> Syb process name: </th>
+      <th> Sub process: </th>
+      <th> Optional cost: </th>
+      <th> Physical LoA: </th>
+      <th> Cognitive LoA: </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sub process X:</td>
+        <td>
+          SC1 <input type="radio" name="subProX"> Resource 1 <br>
+          SC2 <input type="radio" name="subProX"> Resource 2 <br>
+          SC3 <input type="radio" name="subProX"> Resource 3 <br>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+          <td>Sub process Y:</td>
+          <td>
+            SC1 <input type="radio" name="subProY"> Resource 1 <br>
+            SC2 <input type="radio" name="subProY"> Resource 2 <br>
+            SC3 <input type="radio" name="subProY"> Resource 3 <br>
+          </td>
+      </tr>
+      <tr>
+          <td>Sub process Z:</td>
+          <td>
+            SC1 <input type="radio" name="subProZ"> Resource 1 <br>
+            SC2 <input type="radio" name="subProZ"> Resource 2 <br>
+            SC3 <input type="radio" name="subProZ"> Resource 3 <br>
+          </td>
+      </tr>
+      <tr>
+          <td>Sub process X1:</td>
+          <td>
+            SC1 <input type="radio" name="subProX1"> Resource 1 <br>
+            SC2 <input type="radio" name="subProX1"> Resource 2 <br>
+            SC3 <input type="radio" name="subProX1"> Resource 3 <br>
+          </td>
+      </tr>
+      <tr>
+          <td>Sub process Y1:</td>
+          <td>
+            SC1 <input type="radio" name="subProY1"> Resource 1 <br>
+            SC2 <input type="radio" name="subProY1"> Resource 2 <br>
+            SC3 <input type="radio" name="subProY1"> Resource 3 <br>
+          </td>
+      </tr>
+      <tr>
+          <td>Sub process Z1:</td>
+          <td>
+            SC1 <input type="radio" name="subProZ"> Resource 1 <br>
+            SC2 <input type="radio" name="subProZ"> Resource 2 <br>
+            SC3 <input type="radio" name="subProZ"> Resource 3 <br>
+          </td>
+      </tr>
+      <tr>
+          <td>Sub process X2:</td>
+          <td>
+            SC1 <input type="radio" name="subProX2"> Resource 1 <br>
+            SC2 <input type="radio" name="subProX2"> Resource 2 <br>
+            SC3 <input type="radio" name="subProX2"> Resource 3 <br>
+          </td>
+      </tr>
+      <tr>
+        <td>Sub process Y2:</td>
+        <td>
+          SC1 <input type="radio" name="subProY2"> Resource 1 <br>
+          SC2 <input type="radio" name="subProY2"> Resource 2 <br>
+          SC3 <input type="radio" name="subProY2"> Resource 3 <br>
+        </td></tr>
+      <tr>
+        <td>Sub process Z2:</td>
+        <td>
+          SC1 <input type="radio" name="subProZ2"> Resource 1 <br>
+          SC2 <input type="radio" name="subProZ2"> Resource 2 <br>
+          SC3 <input type="radio" name="subProZ2"> Resource 3 <br>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td> Total cost: </td>
+        <td> 0 </td>
+        <td> Physical LoA: </td>
+        <td> 0 </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td> Cost per piece: </td>
+        <td> 0 </td>
+        <td> Cognitive LoA: </td>
+        <td> 0 </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="btn-group d-flex justify-content-center border-top" style="padding-top: 15px; margin-bottom: 20px;">
+    <button class="btn btn-primary"> Cancel </button>
+    <button cancel="btn btn-secondary"> Calculate </button>
+    <button cancel="btn btn-secondary"> Save </button>
+  </div>

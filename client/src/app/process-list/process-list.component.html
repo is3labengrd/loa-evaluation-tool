@@ -1,11 +1,7 @@
 <div  class="clearfix" >
-  <span class="col-sm-7"></span>
-  <nav aria-label="breadcrumb" class="float-right col-sm-5">
+  <nav aria-label="breadcrumb" >
     <ol class="breadcrumb">
-      <li class="breadcrumb-item " aria-current="page"><a routerLink="/">Home</a></li>
-      <li class="breadcrumb-item"><a routerLink="/add-process/">Add process</a></li>
-      <li class="breadcrumb-item "><a routerLink="/edit-process/">Edit process </a></li>
-      <li class="breadcrumb-item "><a routerLink="/hta-analysis">HTA analysis </a></li>
+      <li class="breadcrumb-item active" aria-current="page"> Home </li>
     </ol>
   </nav>
 </div>
@@ -28,12 +24,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let proces of procesi">
-          <td>{{ proces.name }}</td>
-          <td>{{ proces.sublevels }}</td>
-          <td>{{ proces.sub1 }}</td>
-          <td>{{ proces.sub2 }}</td>
-          <td>{{ proces.sub3 }}</td>
-          <td>{{ proces.actions }}</td>
+          <td> <a routerLink="/edit-process"> {{ proces.name }} </a> </td>
+          <td> {{ proces.sublevels }} </td>
+          <td> {{ proces.sub1 }} </td>
+          <td> {{ proces.sub2 }} </td>
+          <td> {{ proces.sub3 }} </td>
+          <td> <a routerLink="/{{ proces.route }}"></a> {{ proces.actions }} </td>
         </tr>
       </tbody>
 </table>
@@ -45,7 +41,7 @@
       <option value="">opa</option>
     </select> &nbsp;
     <select name="pageNumber">
-      <option value="">njesra</option>
+      <option value="">cupa</option>
     </select>
   </div>
   <div class="col-md-7 col-sm-12">

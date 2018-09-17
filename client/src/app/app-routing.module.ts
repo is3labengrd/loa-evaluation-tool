@@ -12,6 +12,8 @@ import { AddResourceComponent } from './add-resource/add-resource.component';
 import { EditResourceComponent } from './edit-resource/edit-resource.component';
 import { SubScenariosComponent } from './sub-scenarios/sub-scenarios.component';
 import { ScenariosComponent } from './scenarios/scenarios.component';
+import { AddScenarioComponent } from './add-scenario/add-scenario.component';
+import { EditScenarioComponent } from './edit-scenario/edit-scenario.component';
 
 
 const ROUTES: Routes = [
@@ -26,7 +28,9 @@ const ROUTES: Routes = [
   { path: 'add-resource', component: AddResourceComponent },
   { path: 'edit-resource', component: EditResourceComponent },
   { path: 'sub-scenarios', component: SubScenariosComponent },
-  { path: 'scenarios', component: ScenariosComponent }
+  { path: 'scenarios', component: ScenariosComponent },
+  { path: 'add-scenario', component: AddScenarioComponent },
+  { path: 'edit-scenario', component: EditScenarioComponent }
 ];
 
 @NgModule({

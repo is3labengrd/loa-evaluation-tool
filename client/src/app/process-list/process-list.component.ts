@@ -13,28 +13,32 @@ export class ProcessListComponent implements OnInit {
       sub1: '-',
       sub2: '-',
       sub3: '-',
-      actions: 'add'
+      actions: 'add',
+      route: 'add-process'
     },
     { name: 'proces2',
       sublevels: '2',
       sub1: '-',
       sub2: '-',
       sub3: '-',
-      actions: 'analysis'
+      actions: 'analysis',
+      route: 'add-process'
     },
     { name: 'proces3',
       sublevels: '3',
       sub1: '-',
       sub2: '-',
       sub3: '-',
-      actions: 'add'
+      actions: 'add',
+      route: 'add-process'
     },
     { name: 'proces4',
       sublevels: '2',
       sub1: '-',
       sub2: '-',
       sub3: '-',
-      actions: 'analysis'
+      actions: 'analysis',
+      route: 'add-process'
     }
   ];
 
