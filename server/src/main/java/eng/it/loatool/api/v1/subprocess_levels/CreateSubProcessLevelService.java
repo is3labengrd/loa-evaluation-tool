@@ -18,8 +18,7 @@ public class CreateSubProcessLevelService {
             tbAceSubProLev.getPkTbId() == null ||
             !tbAceSubProLevRepository.existsById(tbAceSubProLev.getPkTbId())
         ) {
-            tbAceSubProLevRepository.save(tbAceSubProLev);
-            return Optional.of(tbAceSubProLev);
+            return Optional.of(tbAceSubProLevRepository.save(tbAceSubProLev));
         }
         return Optional.empty();
     }

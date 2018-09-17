@@ -18,8 +18,7 @@ public class CreateCriteriaMatrixService {
             criteriaMatrix.getPkTbId() == null ||
             !criteriaMatrixRepository.existsById(criteriaMatrix.getPkTbId())
         ) {
-            criteriaMatrixRepository.save(criteriaMatrix);
-            return Optional.of(criteriaMatrix);
+            return Optional.of(criteriaMatrixRepository.save(criteriaMatrix));
         }
         return Optional.empty();
     }
