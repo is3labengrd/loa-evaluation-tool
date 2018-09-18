@@ -1,4 +1,4 @@
-package eng.it.loatool.entities;
+package eng.it.loatool.subscenario;
 
 import static javax.persistence.GenerationType.IDENTITY;
 

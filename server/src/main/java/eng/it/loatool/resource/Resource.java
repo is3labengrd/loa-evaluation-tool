@@ -1,4 +1,4 @@
-package eng.it.loatool.entities;
+package eng.it.loatool.resource;
 
 import java.util.Date;
 
@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import eng.it.loatool.entities.TbAceResId;
 
 @Entity
 @Table(name = "TB_ACE_RES", catalog = "loa_evaluation_tool")

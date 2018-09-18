@@ -1,4 +1,4 @@
-package eng.it.loatool.entities;
+package eng.it.loatool.product_planning;
 
 import static javax.persistence.GenerationType.IDENTITY;
 

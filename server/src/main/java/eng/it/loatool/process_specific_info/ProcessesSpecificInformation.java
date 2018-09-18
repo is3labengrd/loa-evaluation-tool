@@ -1,4 +1,4 @@
-package eng.it.loatool.entities;
+package eng.it.loatool.process_specific_info;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
