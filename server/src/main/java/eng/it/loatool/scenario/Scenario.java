@@ -12,9 +12,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import eng.it.loatool.PkTbPrimaryKeyOwner;
+
 @Entity
 @Table(name = "TB_ACE_SCENARIOS", catalog = "loa_evaluation_tool")
-public class Scenario implements java.io.Serializable {
+public class Scenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
     private Integer pkTbId;
     private int fkTbAceProSeq;
