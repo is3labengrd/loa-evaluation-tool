@@ -25,21 +25,21 @@ public class ProcessSpecificInfoApi {
     }
 
     @GetMapping("/v1/process-specific-info/{id}")
-    public ResponseEntity<?> getProcess(@PathVariable("id") Integer id) {
+    public ResponseEntity<?> getProcessSpecificInfo(@PathVariable("id") Integer id) {
         return ResponseEntityTransformer.transform(
             generalCRUDService.getOne(processSpecificInfoRepository, id)
         );
     }
 
     @PostMapping("/v1/process-specific-info")
-    public ResponseEntity<?> createProcess(@RequestBody ProcessesSpecificInformation body) {
+    public ResponseEntity<?> createProcessSpecificInfo(@RequestBody ProcessesSpecificInformation body) {
         return ResponseEntityTransformer.transform(
             generalCRUDService.create(processSpecificInfoRepository, body)
         );
     }
 
     @PutMapping("/v1/process-specific-info/{id}")
-    public ResponseEntity<?> updateProcess(
+    public ResponseEntity<?> updateProcessSpecificInfo(
         @PathVariable("id") Integer id,
         @RequestBody ProcessesSpecificInformation body
     ) {
