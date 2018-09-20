@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import eng.it.loatool.api.ResponseEntityTransformer;
 import eng.it.loatool.criteria_matrix.CriteriaMatrix;
-import eng.it.util.ResponseEntityTransformer;
 
 @Controller
 public class CriteriaMatricesApi {
