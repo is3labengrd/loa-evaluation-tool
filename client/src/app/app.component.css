@@ -1,0 +1,33 @@
+.heder {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.meni {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+  margin: auto;
+  flex-wrap: wrap;
+
+}
+
+@media (max-width: 768px) {
+  footer {
+    width: 100%;
+
+  }
+}
+
+html, body {
+  height: 100vh;
+}
+
