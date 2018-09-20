@@ -8,30 +8,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 
-/*
-public class PropertyManager {
-
-	private static Properties props;
-
-	static {
-		props = new Properties();
-		try {
-			props.load(PropertyManager.class.getClassLoader().getResourceAsStream("config.properties"));
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static String getProperty(SARProperty propName) {
-		return props.getProperty(propName.toString());
-	}
-
-
-
-}*/
-
-
 public class PropertyManager {
 	String result = "";
 	InputStream inputStream;
@@ -40,7 +16,7 @@ public class PropertyManager {
 
 		try {
 			Properties prop = new Properties();
-			String propFileName = "config.properties";
+			String propFileName = "application.properties";
 
 			inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
 
