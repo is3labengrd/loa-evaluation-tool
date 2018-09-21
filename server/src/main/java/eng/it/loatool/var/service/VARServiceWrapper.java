@@ -166,9 +166,10 @@ public class VARServiceWrapper {
     /**
      * Input (json string) =
      *
-     * "{				\"assetName\": \"+Assetname+\"," +
+     * "{" +
+	 * 					"\"assetName\": \"+Assetname+\"," +
      *                 "\valueString\": 0," +
-     *                 "\unitOfMeasure\": 0," +
+     *                 "\"unitOfMeasure\": 0," +
      *                 "\propertyID\": 0" +
      *                 "}"
      *
