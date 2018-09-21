@@ -10,8 +10,7 @@ import eng.it.loatool.scenario.ScenarioRepository;
 @Service
 public class GetScenariosService {
 
-    @Transactional
-    Iterable<Scenario> getScenarios() {
+    @Transactional public Iterable<Scenario> getScenarios() {
         return scenarioRepository.findAll();
     }
 

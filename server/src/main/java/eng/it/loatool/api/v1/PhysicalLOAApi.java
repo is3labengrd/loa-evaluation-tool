@@ -1,4 +1,4 @@
-package eng.it.loatool.api.v1.physical_loa;
+package eng.it.loatool.api.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.api.ResponseEntityTransformer;
+import eng.it.loatool.api.v1.physical_loa.CreatePhysicalLOAService;
+import eng.it.loatool.api.v1.physical_loa.GetAllPhysicalLOAService;
+import eng.it.loatool.api.v1.physical_loa.GetSinglePhysicalLOAService;
+import eng.it.loatool.api.v1.physical_loa.UpdatePhysicalLOAService;
 import eng.it.loatool.physical_loa.PhysicalLOA;
 
 @Controller

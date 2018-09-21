@@ -10,8 +10,7 @@ import eng.it.loatool.subprocess_level.SubProcessLevelRepository;
 @Service
 public class GetSubProcessLevelsService {
 
-    @Transactional
-    Iterable<SubProcessLevel> getSubProcessLevels() {
+    @Transactional public Iterable<SubProcessLevel> getSubProcessLevels() {
         return tbAceSubProLevRepository.findAll();
     }
 

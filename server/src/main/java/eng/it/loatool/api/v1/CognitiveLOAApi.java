@@ -1,4 +1,4 @@
-package eng.it.loatool.api.v1.cognitive_loa;
+package eng.it.loatool.api.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.api.ResponseEntityTransformer;
+import eng.it.loatool.api.v1.cognitive_loa.CreateCognitiveLOAService;
+import eng.it.loatool.api.v1.cognitive_loa.GetAllCognitiveLOAService;
+import eng.it.loatool.api.v1.cognitive_loa.GetSingleCognitiveLOAService;
+import eng.it.loatool.api.v1.cognitive_loa.UpdateCognitiveLOAService;
 import eng.it.loatool.cognitive_loa.CognitiveLOA;
 
 @Controller
