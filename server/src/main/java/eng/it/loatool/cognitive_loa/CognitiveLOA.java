@@ -16,19 +16,16 @@ public class CognitiveLOA implements java.io.Serializable {
     private int code;
     private String loa;
 
-    public CognitiveLOA() {
-    }
+    public CognitiveLOA() {}
 
     public CognitiveLOA(int code, String loa) {
         this.code = code;
         this.loa = loa;
     }
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @Id @GeneratedValue(strategy = IDENTITY)
 
-    @Column(name = "PK_TB_ID", unique = true, nullable = false)
-    public Integer getPkTbId() {
+    @Column(name = "PK_TB_ID", unique = true, nullable = false) public Integer getPkTbId() {
         return this.pkTbId;
     }
 
@@ -36,8 +33,7 @@ public class CognitiveLOA implements java.io.Serializable {
         this.pkTbId = pkTbId;
     }
 
-    @Column(name = "CODE", nullable = false)
-    public int getCode() {
+    @Column(name = "CODE", nullable = false) public int getCode() {
         return this.code;
     }
 
@@ -45,8 +41,7 @@ public class CognitiveLOA implements java.io.Serializable {
         this.code = code;
     }
 
-    @Column(name = "LOA", nullable = false, length = 500)
-    public String getLoa() {
+    @Column(name = "LOA", nullable = false, length = 500) public String getLoa() {
         return this.loa;
     }
 

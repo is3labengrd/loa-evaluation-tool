@@ -12,9 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
-@Table(name = "TB_ACE_LOA_CRI_MAT", catalog = "loa_evaluation_tool")
-public class CriteriaMatrix implements java.io.Serializable {
+@Entity @Table(name = "TB_ACE_LOA_CRI_MAT", catalog = "loa_evaluation_tool"
+) public class CriteriaMatrix implements java.io.Serializable {
 
     private Integer pkTbId;
     private int dsStable;
@@ -86,8 +85,7 @@ public class CriteriaMatrix implements java.io.Serializable {
     private Date updateDate;
     private int fkTbAceSubProLev;
 
-    public CriteriaMatrix() {
-    }
+    public CriteriaMatrix() {}
 
     public CriteriaMatrix(int dsStable, int ecAEleConsumFun, Date createDate, Date updateDate, int fkTbAceSubProLev) {
         this.dsStable = dsStable;
@@ -97,24 +95,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.fkTbAceSubProLev = fkTbAceSubProLev;
     }
 
-    public CriteriaMatrix(
-        int dsStable, Integer dsReducedStability, Integer dsHandlyStable, Integer dsUnstable,
-        Integer stInsensitive, Integer stHardlySensitive, Integer stSensitive, Integer stVerySensitive,
-        Integer grExGripSurface, Integer grIntGripSurface, Integer grMagneticGripper, Integer grFabClosureGripper,
-        Integer nvNoFurtherVariants, Integer nvOneFurtherVariants, Integer nvTwoFurtherVariants,
-        Integer nvMoreFurtherVariants, Integer spUp, Integer spMore, Integer spStableUnstable,
-        Integer spOnlyUnstable, Integer smRotSymmetrical, Integer smArSymmetry, Integer smMaAsymmetrical,
-        Integer smSeSymmetrical, Integer haNone, Integer haStiJamPossible, Integer haComPenPossibile,
-        Integer haSeeSymmetrical, Integer fjNever, Integer fjOcasionally, Integer fjRarely, Integer fjOften,
-        Integer acVeryGood, Integer acGood, Integer acSatisfactory, Integer acSufficient, Integer orNoAxes,
-        Integer orOneAxis, Integer orTwoAxes, Integer orThreeAxes, Integer jmLinear, Integer jmRotation,
-        Integer jmLinearRotatory, Integer jmPathMovement, Integer jfNone, Integer jfLow, Integer jfMedium,
-        Integer jfHigh, Integer jaJoinBasicComp, Integer jaJoinComp, Integer jaBasicComp, Integer jaMoreComp,
-        Integer ncOneBasicComp, Integer ncTwoBasicComp, Integer ncThreeBasicComp, Integer ncMoreComp,
-        Integer jsSecAllDirection, Integer jsGravityFit, Integer jsGravityRubbing, Integer jsAdditionalSec,
-        Integer soNone, Integer soOne, Integer soTwo, Integer soMore, int ecAEleConsumFun, Date createDate,
-        Date updateDate, int fkTbAceSubProLev
-    ) {
+    public CriteriaMatrix(int dsStable, Integer dsReducedStability, Integer dsHandlyStable, Integer dsUnstable, Integer stInsensitive, Integer stHardlySensitive, Integer stSensitive, Integer stVerySensitive, Integer grExGripSurface, Integer grIntGripSurface, Integer grMagneticGripper, Integer grFabClosureGripper, Integer nvNoFurtherVariants, Integer nvOneFurtherVariants, Integer nvTwoFurtherVariants, Integer nvMoreFurtherVariants, Integer spUp, Integer spMore, Integer spStableUnstable, Integer spOnlyUnstable, Integer smRotSymmetrical, Integer smArSymmetry, Integer smMaAsymmetrical, Integer smSeSymmetrical, Integer haNone, Integer haStiJamPossible, Integer haComPenPossibile, Integer haSeeSymmetrical, Integer fjNever, Integer fjOcasionally, Integer fjRarely, Integer fjOften, Integer acVeryGood, Integer acGood, Integer acSatisfactory, Integer acSufficient, Integer orNoAxes, Integer orOneAxis, Integer orTwoAxes, Integer orThreeAxes, Integer jmLinear, Integer jmRotation, Integer jmLinearRotatory, Integer jmPathMovement, Integer jfNone, Integer jfLow, Integer jfMedium, Integer jfHigh, Integer jaJoinBasicComp, Integer jaJoinComp, Integer jaBasicComp, Integer jaMoreComp, Integer ncOneBasicComp, Integer ncTwoBasicComp, Integer ncThreeBasicComp, Integer ncMoreComp, Integer jsSecAllDirection, Integer jsGravityFit, Integer jsGravityRubbing, Integer jsAdditionalSec, Integer soNone, Integer soOne, Integer soTwo, Integer soMore, int ecAEleConsumFun, Date createDate, Date updateDate, int fkTbAceSubProLev) {
         this.dsStable = dsStable;
         this.dsReducedStability = dsReducedStability;
         this.dsHandlyStable = dsHandlyStable;
@@ -185,11 +166,9 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.fkTbAceSubProLev = fkTbAceSubProLev;
     }
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @Id @GeneratedValue(strategy = IDENTITY)
 
-    @Column(name = "PK_TB_ID", unique = true, nullable = false)
-    public Integer getPkTbId() {
+    @Column(name = "PK_TB_ID", unique = true, nullable = false) public Integer getPkTbId() {
         return this.pkTbId;
     }
 
@@ -197,8 +176,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.pkTbId = pkTbId;
     }
 
-    @Column(name = "DS_STABLE", nullable = false)
-    public int getDsStable() {
+    @Column(name = "DS_STABLE", nullable = false) public int getDsStable() {
         return this.dsStable;
     }
 
@@ -206,8 +184,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.dsStable = dsStable;
     }
 
-    @Column(name = "DS_REDUCED_STABILITY")
-    public Integer getDsReducedStability() {
+    @Column(name = "DS_REDUCED_STABILITY") public Integer getDsReducedStability() {
         return this.dsReducedStability;
     }
 
@@ -215,8 +192,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.dsReducedStability = dsReducedStability;
     }
 
-    @Column(name = "DS_HANDLY_STABLE")
-    public Integer getDsHandlyStable() {
+    @Column(name = "DS_HANDLY_STABLE") public Integer getDsHandlyStable() {
         return this.dsHandlyStable;
     }
 
@@ -224,8 +200,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.dsHandlyStable = dsHandlyStable;
     }
 
-    @Column(name = "DS_UNSTABLE")
-    public Integer getDsUnstable() {
+    @Column(name = "DS_UNSTABLE") public Integer getDsUnstable() {
         return this.dsUnstable;
     }
 
@@ -233,8 +208,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.dsUnstable = dsUnstable;
     }
 
-    @Column(name = "ST_INSENSITIVE")
-    public Integer getStInsensitive() {
+    @Column(name = "ST_INSENSITIVE") public Integer getStInsensitive() {
         return this.stInsensitive;
     }
 
@@ -242,8 +216,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.stInsensitive = stInsensitive;
     }
 
-    @Column(name = "ST_HARDLY_SENSITIVE")
-    public Integer getStHardlySensitive() {
+    @Column(name = "ST_HARDLY_SENSITIVE") public Integer getStHardlySensitive() {
         return this.stHardlySensitive;
     }
 
@@ -251,8 +224,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.stHardlySensitive = stHardlySensitive;
     }
 
-    @Column(name = "ST_SENSITIVE")
-    public Integer getStSensitive() {
+    @Column(name = "ST_SENSITIVE") public Integer getStSensitive() {
         return this.stSensitive;
     }
 
@@ -260,8 +232,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.stSensitive = stSensitive;
     }
 
-    @Column(name = "ST_VERY_SENSITIVE")
-    public Integer getStVerySensitive() {
+    @Column(name = "ST_VERY_SENSITIVE") public Integer getStVerySensitive() {
         return this.stVerySensitive;
     }
 
@@ -269,8 +240,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.stVerySensitive = stVerySensitive;
     }
 
-    @Column(name = "GR_EX_GRIP_SURFACE")
-    public Integer getGrExGripSurface() {
+    @Column(name = "GR_EX_GRIP_SURFACE") public Integer getGrExGripSurface() {
         return this.grExGripSurface;
     }
 
@@ -278,8 +248,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.grExGripSurface = grExGripSurface;
     }
 
-    @Column(name = "GR_INT_GRIP_SURFACE")
-    public Integer getGrIntGripSurface() {
+    @Column(name = "GR_INT_GRIP_SURFACE") public Integer getGrIntGripSurface() {
         return this.grIntGripSurface;
     }
 
@@ -287,8 +256,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.grIntGripSurface = grIntGripSurface;
     }
 
-    @Column(name = "GR_MAGNETIC_GRIPPER")
-    public Integer getGrMagneticGripper() {
+    @Column(name = "GR_MAGNETIC_GRIPPER") public Integer getGrMagneticGripper() {
         return this.grMagneticGripper;
     }
 
@@ -296,8 +264,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.grMagneticGripper = grMagneticGripper;
     }
 
-    @Column(name = "GR_FAB_CLOSURE_GRIPPER")
-    public Integer getGrFabClosureGripper() {
+    @Column(name = "GR_FAB_CLOSURE_GRIPPER") public Integer getGrFabClosureGripper() {
         return this.grFabClosureGripper;
     }
 
@@ -305,8 +272,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.grFabClosureGripper = grFabClosureGripper;
     }
 
-    @Column(name = "NV_NO_FURTHER_VARIANTS")
-    public Integer getNvNoFurtherVariants() {
+    @Column(name = "NV_NO_FURTHER_VARIANTS") public Integer getNvNoFurtherVariants() {
         return this.nvNoFurtherVariants;
     }
 
@@ -314,8 +280,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.nvNoFurtherVariants = nvNoFurtherVariants;
     }
 
-    @Column(name = "NV_ONE_FURTHER_VARIANTS")
-    public Integer getNvOneFurtherVariants() {
+    @Column(name = "NV_ONE_FURTHER_VARIANTS") public Integer getNvOneFurtherVariants() {
         return this.nvOneFurtherVariants;
     }
 
@@ -323,8 +288,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.nvOneFurtherVariants = nvOneFurtherVariants;
     }
 
-    @Column(name = "NV_TWO_FURTHER_VARIANTS")
-    public Integer getNvTwoFurtherVariants() {
+    @Column(name = "NV_TWO_FURTHER_VARIANTS") public Integer getNvTwoFurtherVariants() {
         return this.nvTwoFurtherVariants;
     }
 
@@ -332,8 +296,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.nvTwoFurtherVariants = nvTwoFurtherVariants;
     }
 
-    @Column(name = "NV_MORE_FURTHER_VARIANTS")
-    public Integer getNvMoreFurtherVariants() {
+    @Column(name = "NV_MORE_FURTHER_VARIANTS") public Integer getNvMoreFurtherVariants() {
         return this.nvMoreFurtherVariants;
     }
 
@@ -341,8 +304,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.nvMoreFurtherVariants = nvMoreFurtherVariants;
     }
 
-    @Column(name = "SP_UP")
-    public Integer getSpUp() {
+    @Column(name = "SP_UP") public Integer getSpUp() {
         return this.spUp;
     }
 
@@ -350,8 +312,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.spUp = spUp;
     }
 
-    @Column(name = "SP_MORE")
-    public Integer getSpMore() {
+    @Column(name = "SP_MORE") public Integer getSpMore() {
         return this.spMore;
     }
 
@@ -359,8 +320,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.spMore = spMore;
     }
 
-    @Column(name = "SP_STABLE_UNSTABLE")
-    public Integer getSpStableUnstable() {
+    @Column(name = "SP_STABLE_UNSTABLE") public Integer getSpStableUnstable() {
         return this.spStableUnstable;
     }
 
@@ -368,8 +328,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.spStableUnstable = spStableUnstable;
     }
 
-    @Column(name = "SP_ONLY_UNSTABLE")
-    public Integer getSpOnlyUnstable() {
+    @Column(name = "SP_ONLY_UNSTABLE") public Integer getSpOnlyUnstable() {
         return this.spOnlyUnstable;
     }
 
@@ -377,8 +336,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.spOnlyUnstable = spOnlyUnstable;
     }
 
-    @Column(name = "SM_ROT_SYMMETRICAL")
-    public Integer getSmRotSymmetrical() {
+    @Column(name = "SM_ROT_SYMMETRICAL") public Integer getSmRotSymmetrical() {
         return this.smRotSymmetrical;
     }
 
@@ -386,8 +344,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.smRotSymmetrical = smRotSymmetrical;
     }
 
-    @Column(name = "SM_AR_SYMMETRY")
-    public Integer getSmArSymmetry() {
+    @Column(name = "SM_AR_SYMMETRY") public Integer getSmArSymmetry() {
         return this.smArSymmetry;
     }
 
@@ -395,8 +352,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.smArSymmetry = smArSymmetry;
     }
 
-    @Column(name = "SM_MA_ASYMMETRICAL")
-    public Integer getSmMaAsymmetrical() {
+    @Column(name = "SM_MA_ASYMMETRICAL") public Integer getSmMaAsymmetrical() {
         return this.smMaAsymmetrical;
     }
 
@@ -404,8 +360,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.smMaAsymmetrical = smMaAsymmetrical;
     }
 
-    @Column(name = "SM_SE_SYMMETRICAL")
-    public Integer getSmSeSymmetrical() {
+    @Column(name = "SM_SE_SYMMETRICAL") public Integer getSmSeSymmetrical() {
         return this.smSeSymmetrical;
     }
 
@@ -413,8 +368,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.smSeSymmetrical = smSeSymmetrical;
     }
 
-    @Column(name = "HA_NONE")
-    public Integer getHaNone() {
+    @Column(name = "HA_NONE") public Integer getHaNone() {
         return this.haNone;
     }
 
@@ -422,8 +376,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.haNone = haNone;
     }
 
-    @Column(name = "HA_STI_JAM_POSSIBLE")
-    public Integer getHaStiJamPossible() {
+    @Column(name = "HA_STI_JAM_POSSIBLE") public Integer getHaStiJamPossible() {
         return this.haStiJamPossible;
     }
 
@@ -431,8 +384,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.haStiJamPossible = haStiJamPossible;
     }
 
-    @Column(name = "HA_COM_PEN_POSSIBILE")
-    public Integer getHaComPenPossibile() {
+    @Column(name = "HA_COM_PEN_POSSIBILE") public Integer getHaComPenPossibile() {
         return this.haComPenPossibile;
     }
 
@@ -440,8 +392,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.haComPenPossibile = haComPenPossibile;
     }
 
-    @Column(name = "HA_SEE_SYMMETRICAL")
-    public Integer getHaSeeSymmetrical() {
+    @Column(name = "HA_SEE_SYMMETRICAL") public Integer getHaSeeSymmetrical() {
         return this.haSeeSymmetrical;
     }
 
@@ -449,8 +400,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.haSeeSymmetrical = haSeeSymmetrical;
     }
 
-    @Column(name = "FJ_NEVER")
-    public Integer getFjNever() {
+    @Column(name = "FJ_NEVER") public Integer getFjNever() {
         return this.fjNever;
     }
 
@@ -458,8 +408,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.fjNever = fjNever;
     }
 
-    @Column(name = "FJ_OCASIONALLY")
-    public Integer getFjOcasionally() {
+    @Column(name = "FJ_OCASIONALLY") public Integer getFjOcasionally() {
         return this.fjOcasionally;
     }
 
@@ -467,8 +416,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.fjOcasionally = fjOcasionally;
     }
 
-    @Column(name = "FJ_RARELY")
-    public Integer getFjRarely() {
+    @Column(name = "FJ_RARELY") public Integer getFjRarely() {
         return this.fjRarely;
     }
 
@@ -476,8 +424,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.fjRarely = fjRarely;
     }
 
-    @Column(name = "FJ_OFTEN")
-    public Integer getFjOften() {
+    @Column(name = "FJ_OFTEN") public Integer getFjOften() {
         return this.fjOften;
     }
 
@@ -485,8 +432,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.fjOften = fjOften;
     }
 
-    @Column(name = "AC_VERY_GOOD")
-    public Integer getAcVeryGood() {
+    @Column(name = "AC_VERY_GOOD") public Integer getAcVeryGood() {
         return this.acVeryGood;
     }
 
@@ -494,8 +440,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.acVeryGood = acVeryGood;
     }
 
-    @Column(name = "AC_GOOD")
-    public Integer getAcGood() {
+    @Column(name = "AC_GOOD") public Integer getAcGood() {
         return this.acGood;
     }
 
@@ -503,8 +448,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.acGood = acGood;
     }
 
-    @Column(name = "AC_SATISFACTORY")
-    public Integer getAcSatisfactory() {
+    @Column(name = "AC_SATISFACTORY") public Integer getAcSatisfactory() {
         return this.acSatisfactory;
     }
 
@@ -512,8 +456,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.acSatisfactory = acSatisfactory;
     }
 
-    @Column(name = "AC_SUFFICIENT")
-    public Integer getAcSufficient() {
+    @Column(name = "AC_SUFFICIENT") public Integer getAcSufficient() {
         return this.acSufficient;
     }
 
@@ -521,8 +464,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.acSufficient = acSufficient;
     }
 
-    @Column(name = "OR_NO_AXES")
-    public Integer getOrNoAxes() {
+    @Column(name = "OR_NO_AXES") public Integer getOrNoAxes() {
         return this.orNoAxes;
     }
 
@@ -530,8 +472,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.orNoAxes = orNoAxes;
     }
 
-    @Column(name = "OR_ONE_AXIS")
-    public Integer getOrOneAxis() {
+    @Column(name = "OR_ONE_AXIS") public Integer getOrOneAxis() {
         return this.orOneAxis;
     }
 
@@ -539,8 +480,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.orOneAxis = orOneAxis;
     }
 
-    @Column(name = "OR_TWO_AXES")
-    public Integer getOrTwoAxes() {
+    @Column(name = "OR_TWO_AXES") public Integer getOrTwoAxes() {
         return this.orTwoAxes;
     }
 
@@ -548,8 +488,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.orTwoAxes = orTwoAxes;
     }
 
-    @Column(name = "OR_THREE_AXES")
-    public Integer getOrThreeAxes() {
+    @Column(name = "OR_THREE_AXES") public Integer getOrThreeAxes() {
         return this.orThreeAxes;
     }
 
@@ -557,8 +496,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.orThreeAxes = orThreeAxes;
     }
 
-    @Column(name = "JM_LINEAR")
-    public Integer getJmLinear() {
+    @Column(name = "JM_LINEAR") public Integer getJmLinear() {
         return this.jmLinear;
     }
 
@@ -566,8 +504,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jmLinear = jmLinear;
     }
 
-    @Column(name = "JM_ROTATION")
-    public Integer getJmRotation() {
+    @Column(name = "JM_ROTATION") public Integer getJmRotation() {
         return this.jmRotation;
     }
 
@@ -575,8 +512,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jmRotation = jmRotation;
     }
 
-    @Column(name = "JM_LINEAR_ROTATORY")
-    public Integer getJmLinearRotatory() {
+    @Column(name = "JM_LINEAR_ROTATORY") public Integer getJmLinearRotatory() {
         return this.jmLinearRotatory;
     }
 
@@ -584,8 +520,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jmLinearRotatory = jmLinearRotatory;
     }
 
-    @Column(name = "JM_PATH_MOVEMENT")
-    public Integer getJmPathMovement() {
+    @Column(name = "JM_PATH_MOVEMENT") public Integer getJmPathMovement() {
         return this.jmPathMovement;
     }
 
@@ -593,8 +528,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jmPathMovement = jmPathMovement;
     }
 
-    @Column(name = "JF_NONE")
-    public Integer getJfNone() {
+    @Column(name = "JF_NONE") public Integer getJfNone() {
         return this.jfNone;
     }
 
@@ -602,8 +536,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jfNone = jfNone;
     }
 
-    @Column(name = "JF_LOW")
-    public Integer getJfLow() {
+    @Column(name = "JF_LOW") public Integer getJfLow() {
         return this.jfLow;
     }
 
@@ -611,8 +544,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jfLow = jfLow;
     }
 
-    @Column(name = "JF_MEDIUM")
-    public Integer getJfMedium() {
+    @Column(name = "JF_MEDIUM") public Integer getJfMedium() {
         return this.jfMedium;
     }
 
@@ -620,8 +552,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jfMedium = jfMedium;
     }
 
-    @Column(name = "JF_HIGH")
-    public Integer getJfHigh() {
+    @Column(name = "JF_HIGH") public Integer getJfHigh() {
         return this.jfHigh;
     }
 
@@ -629,8 +560,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jfHigh = jfHigh;
     }
 
-    @Column(name = "JA_JOIN_BASIC_COMP")
-    public Integer getJaJoinBasicComp() {
+    @Column(name = "JA_JOIN_BASIC_COMP") public Integer getJaJoinBasicComp() {
         return this.jaJoinBasicComp;
     }
 
@@ -638,8 +568,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jaJoinBasicComp = jaJoinBasicComp;
     }
 
-    @Column(name = "JA_JOIN_COMP")
-    public Integer getJaJoinComp() {
+    @Column(name = "JA_JOIN_COMP") public Integer getJaJoinComp() {
         return this.jaJoinComp;
     }
 
@@ -647,8 +576,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jaJoinComp = jaJoinComp;
     }
 
-    @Column(name = "JA_BASIC_COMP")
-    public Integer getJaBasicComp() {
+    @Column(name = "JA_BASIC_COMP") public Integer getJaBasicComp() {
         return this.jaBasicComp;
     }
 
@@ -656,8 +584,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jaBasicComp = jaBasicComp;
     }
 
-    @Column(name = "JA_MORE_COMP")
-    public Integer getJaMoreComp() {
+    @Column(name = "JA_MORE_COMP") public Integer getJaMoreComp() {
         return this.jaMoreComp;
     }
 
@@ -665,8 +592,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jaMoreComp = jaMoreComp;
     }
 
-    @Column(name = "NC_ONE_BASIC_COMP")
-    public Integer getNcOneBasicComp() {
+    @Column(name = "NC_ONE_BASIC_COMP") public Integer getNcOneBasicComp() {
         return this.ncOneBasicComp;
     }
 
@@ -674,8 +600,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.ncOneBasicComp = ncOneBasicComp;
     }
 
-    @Column(name = "NC_TWO_BASIC_COMP")
-    public Integer getNcTwoBasicComp() {
+    @Column(name = "NC_TWO_BASIC_COMP") public Integer getNcTwoBasicComp() {
         return this.ncTwoBasicComp;
     }
 
@@ -683,8 +608,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.ncTwoBasicComp = ncTwoBasicComp;
     }
 
-    @Column(name = "NC_THREE_BASIC_COMP")
-    public Integer getNcThreeBasicComp() {
+    @Column(name = "NC_THREE_BASIC_COMP") public Integer getNcThreeBasicComp() {
         return this.ncThreeBasicComp;
     }
 
@@ -692,8 +616,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.ncThreeBasicComp = ncThreeBasicComp;
     }
 
-    @Column(name = "NC_MORE_COMP")
-    public Integer getNcMoreComp() {
+    @Column(name = "NC_MORE_COMP") public Integer getNcMoreComp() {
         return this.ncMoreComp;
     }
 
@@ -701,8 +624,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.ncMoreComp = ncMoreComp;
     }
 
-    @Column(name = "JS_SEC_ALL_DIRECTION")
-    public Integer getJsSecAllDirection() {
+    @Column(name = "JS_SEC_ALL_DIRECTION") public Integer getJsSecAllDirection() {
         return this.jsSecAllDirection;
     }
 
@@ -710,8 +632,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jsSecAllDirection = jsSecAllDirection;
     }
 
-    @Column(name = "JS_GRAVITY_FIT")
-    public Integer getJsGravityFit() {
+    @Column(name = "JS_GRAVITY_FIT") public Integer getJsGravityFit() {
         return this.jsGravityFit;
     }
 
@@ -719,8 +640,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jsGravityFit = jsGravityFit;
     }
 
-    @Column(name = "JS_GRAVITY_RUBBING")
-    public Integer getJsGravityRubbing() {
+    @Column(name = "JS_GRAVITY_RUBBING") public Integer getJsGravityRubbing() {
         return this.jsGravityRubbing;
     }
 
@@ -728,8 +648,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jsGravityRubbing = jsGravityRubbing;
     }
 
-    @Column(name = "JS_ADDITIONAL_SEC")
-    public Integer getJsAdditionalSec() {
+    @Column(name = "JS_ADDITIONAL_SEC") public Integer getJsAdditionalSec() {
         return this.jsAdditionalSec;
     }
 
@@ -737,8 +656,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.jsAdditionalSec = jsAdditionalSec;
     }
 
-    @Column(name = "SO_NONE")
-    public Integer getSoNone() {
+    @Column(name = "SO_NONE") public Integer getSoNone() {
         return this.soNone;
     }
 
@@ -746,8 +664,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.soNone = soNone;
     }
 
-    @Column(name = "SO_ONE")
-    public Integer getSoOne() {
+    @Column(name = "SO_ONE") public Integer getSoOne() {
         return this.soOne;
     }
 
@@ -755,8 +672,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.soOne = soOne;
     }
 
-    @Column(name = "SO_TWO")
-    public Integer getSoTwo() {
+    @Column(name = "SO_TWO") public Integer getSoTwo() {
         return this.soTwo;
     }
 
@@ -764,8 +680,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.soTwo = soTwo;
     }
 
-    @Column(name = "SO_MORE")
-    public Integer getSoMore() {
+    @Column(name = "SO_MORE") public Integer getSoMore() {
         return this.soMore;
     }
 
@@ -773,8 +688,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.soMore = soMore;
     }
 
-    @Column(name = "EC_A_ELE_CONSUM_FUN", nullable = false)
-    public int getEcAEleConsumFun() {
+    @Column(name = "EC_A_ELE_CONSUM_FUN", nullable = false) public int getEcAEleConsumFun() {
         return this.ecAEleConsumFun;
     }
 
@@ -782,9 +696,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.ecAEleConsumFun = ecAEleConsumFun;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "CREATE_DATE", nullable = false, length = 19)
-    public Date getCreateDate() {
+    @Temporal(TemporalType.TIMESTAMP) @Column(name = "CREATE_DATE", nullable = false, length = 19) public Date getCreateDate() {
         return this.createDate;
     }
 
@@ -792,9 +704,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.createDate = createDate;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "UPDATE_DATE", nullable = false, length = 19)
-    public Date getUpdateDate() {
+    @Temporal(TemporalType.TIMESTAMP) @Column(name = "UPDATE_DATE", nullable = false, length = 19) public Date getUpdateDate() {
         return this.updateDate;
     }
 
@@ -802,8 +712,7 @@ public class CriteriaMatrix implements java.io.Serializable {
         this.updateDate = updateDate;
     }
 
-    @Column(name = "FK_TB_ACE_SUB_PRO_LEV", nullable = false)
-    public int getFkTbAceSubProLev() {
+    @Column(name = "FK_TB_ACE_SUB_PRO_LEV", nullable = false) public int getFkTbAceSubProLev() {
         return this.fkTbAceSubProLev;
     }
 
