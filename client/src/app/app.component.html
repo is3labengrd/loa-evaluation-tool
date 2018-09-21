@@ -3,9 +3,27 @@
     <div >
       <a routerLink="/" > <img src="../assets/a4blue.png" alt="Logo"> </a>
     </div>
-    <div >
-      <span>Navbar</span>
-    </div>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" >
+          Menu
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" routerLink="/">Home</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/add-process">Add process</a>
+          <a class="dropdown-item" routerLink="/edit-process">Edit process</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/add-scenario">Add scenario</a>
+          <a class="dropdown-item" routerLink="/edit-scenario">Edit scenario</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/add-resource">Add resource</a>
+          <a class="dropdown-item" routerLink="/edit-resource">Edit resource</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/main-analysis">Main analysis</a>
+          <a class="dropdown-item" routerLink="/hta-analysis">HTA analysis</a>
+          <a class="dropdown-item" routerLink="/as-is-loa">AsIs LoA</a>
+        </div>
+      </div>
   </header>
 
   <router-outlet></router-outlet>
