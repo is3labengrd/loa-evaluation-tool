@@ -22,7 +22,7 @@ export class ProcessListComponent implements OnInit {
       sub2: '-',
       sub3: '-',
       actions: 'analysis',
-      route: 'add-process'
+      route: 'main-analysis'
     },
     { name: 'proces3',
       sublevels: '3',
@@ -38,7 +38,7 @@ export class ProcessListComponent implements OnInit {
       sub2: '-',
       sub3: '-',
       actions: 'analysis',
-      route: 'add-process'
+      route: 'main-analysis'
     }
   ];
 

@@ -168,12 +168,15 @@ public class VARProcessSegmentImpl {
 			main.setSubProcesses(nestedSubProcesses(tree,processes,1));
 
 			int count = 0;
+			int countsub1 = 0;
+
+
 			if(main.getSubProcesses().isEmpty())  {
 				main.setSubProcLowerLevel(count);}else {
 				for (SubProcesses sub1 : main.getSubProcesses()) {
-					count+=1;
+                    countsub1+=1;
 					if(sub1.getSubProcesses().isEmpty()) {
-						main.setSubProcLowerLevel(count);}else {
+						main.setSubProcLowerLevel(countsub1);}else {
 						for (SubProcesses sub2 : sub1.getSubProcesses()) {
 							count+=1;
 							if(sub2.getSubProcesses().isEmpty()) {
