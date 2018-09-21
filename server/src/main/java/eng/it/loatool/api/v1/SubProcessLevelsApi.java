@@ -1,4 +1,4 @@
-package eng.it.loatool.api.v1.subprocess_levels;
+package eng.it.loatool.api.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.api.ResponseEntityTransformer;
+import eng.it.loatool.api.v1.subprocess_levels.CreateSubProcessLevelService;
+import eng.it.loatool.api.v1.subprocess_levels.GetSubProcessLevelService;
+import eng.it.loatool.api.v1.subprocess_levels.GetSubProcessLevelsService;
+import eng.it.loatool.api.v1.subprocess_levels.UpdateSubProcessLevelService;
 import eng.it.loatool.subprocess_level.SubProcessLevel;
 
 @Controller

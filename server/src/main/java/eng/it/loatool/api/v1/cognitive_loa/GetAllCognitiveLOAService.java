@@ -11,7 +11,7 @@ import eng.it.loatool.cognitive_loa.CognitiveLOARepository;
 public class GetAllCognitiveLOAService {
 
     @Transactional
-    Iterable<CognitiveLOA> getAllCognitiveLOA() {
+    public Iterable<CognitiveLOA> getAllCognitiveLOA() {
         return cognitiveLOARepository.findAll();
     }
 

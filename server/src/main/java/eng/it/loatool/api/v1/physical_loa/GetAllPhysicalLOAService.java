@@ -11,7 +11,7 @@ import eng.it.loatool.physical_loa.PhysicalLOARepository;
 public class GetAllPhysicalLOAService {
 
     @Transactional
-    Iterable<PhysicalLOA> getAllPhysicalLOA() {
+    public Iterable<PhysicalLOA> getAllPhysicalLOA() {
         return physicalLOARepository.findAll();
     }
 

@@ -10,8 +10,7 @@ import eng.it.loatool.process_segment.ProcessSegmentRepository;
 @Service
 public class GetProcessSegmentsService {
 
-    @Transactional
-    Iterable<ProcessSegment> getProcessSegments() {
+    @Transactional public Iterable<ProcessSegment> getProcessSegments() {
         return tbAceProSeqRepository.findAll();
     }
 

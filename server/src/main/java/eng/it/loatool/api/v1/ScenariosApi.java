@@ -1,4 +1,4 @@
-package eng.it.loatool.api.v1.scenarios;
+package eng.it.loatool.api.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
+import eng.it.loatool.api.v1.scenarios.CreateScenarioService;
+import eng.it.loatool.api.v1.scenarios.GetScenariosService;
 import eng.it.loatool.scenario.Scenario;
 import eng.it.loatool.scenario.ScenarioRepository;
 
