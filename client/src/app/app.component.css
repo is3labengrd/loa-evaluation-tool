@@ -34,3 +34,7 @@ html, body {
 .dropdown-item:hover  {
   background-color: lightblue;
 }
+
+.dropdown {
+  display: none;
+}
