@@ -1,5 +1,6 @@
 package eng.it.loatool;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public interface PkTbPrimaryKeyOwner extends PrimaryKeyOwner<Integer> {
 
@@ -11,7 +12,7 @@ public interface PkTbPrimaryKeyOwner extends PrimaryKeyOwner<Integer> {
         this.setPkTbId(primaryKey);
     }
 
-    public Integer getPkTbId();
+    @JsonIgnore public Integer getPkTbId();
     public void setPkTbId(Integer pkTbId);
 
 }
