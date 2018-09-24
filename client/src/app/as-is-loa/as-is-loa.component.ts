@@ -95,7 +95,7 @@ export class AsIsLOAComponent implements OnInit {
             {
               ticks: {
                 beginAtZero: true,
-                suggestedMax: 10
+                suggestedMax: 7
               },
               scaleLabel: {
                 display: true,
@@ -108,7 +108,7 @@ export class AsIsLOAComponent implements OnInit {
               ticks: {
                 beginAtZero: true,
                 stepSize: 0.5,
-                suggestedMax: 10
+                suggestedMax: 7
               },
               scaleLabel: {
                 display: true,
