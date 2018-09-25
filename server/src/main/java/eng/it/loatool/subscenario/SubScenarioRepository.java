@@ -1,8 +1,8 @@
-package eng.it.loatool.resource;
+package eng.it.loatool.subscenario;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ResourceRepository extends CrudRepository<Resource, Integer>{
+public interface SubScenarioRepository extends CrudRepository<SubScenario, Integer> {
 }

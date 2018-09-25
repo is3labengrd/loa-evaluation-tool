@@ -1,5 +1,5 @@
 package eng.it.loatool.subprocess_level;
-// Generated Sep 21, 2018 4:03:34 PM by Hibernate Tools 5.2.11.Final
+// Generated Sep 24, 2018 11:43:01 AM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import javax.persistence.Column;

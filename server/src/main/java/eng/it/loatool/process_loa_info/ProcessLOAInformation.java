@@ -1,5 +1,5 @@
 package eng.it.loatool.process_loa_info;
-// Generated Sep 21, 2018 4:03:34 PM by Hibernate Tools 5.2.11.Final
+// Generated Sep 24, 2018 11:43:01 AM by Hibernate Tools 5.2.11.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -18,24 +18,24 @@ import javax.persistence.TemporalType;
 ) public class ProcessLOAInformation implements java.io.Serializable {
 
     private Integer pkTbId;
-    private int fkTbAceProSeq;
     private int fkTbAcePhyLoa;
     private int fkTbAceCogLoa;
     private boolean possibility;
     private String bestRange;
     private Date createDate;
     private Date updateDate;
+    private int fkTbAceSubProLev;
 
     public ProcessLOAInformation() {}
 
-    public ProcessLOAInformation(int fkTbAceProSeq, int fkTbAcePhyLoa, int fkTbAceCogLoa, boolean possibility, String bestRange, Date createDate, Date updateDate) {
-        this.fkTbAceProSeq = fkTbAceProSeq;
+    public ProcessLOAInformation(int fkTbAcePhyLoa, int fkTbAceCogLoa, boolean possibility, String bestRange, Date createDate, Date updateDate, int fkTbAceSubProLev) {
         this.fkTbAcePhyLoa = fkTbAcePhyLoa;
         this.fkTbAceCogLoa = fkTbAceCogLoa;
         this.possibility = possibility;
         this.bestRange = bestRange;
         this.createDate = createDate;
         this.updateDate = updateDate;
+        this.fkTbAceSubProLev = fkTbAceSubProLev;
     }
 
     @Id @GeneratedValue(strategy = IDENTITY)
@@ -46,14 +46,6 @@ import javax.persistence.TemporalType;
 
     public void setPkTbId(Integer pkTbId) {
         this.pkTbId = pkTbId;
-    }
-
-    @Column(name = "FK_TB_ACE_PRO_SEQ", nullable = false) public int getFkTbAceProSeq() {
-        return this.fkTbAceProSeq;
-    }
-
-    public void setFkTbAceProSeq(int fkTbAceProSeq) {
-        this.fkTbAceProSeq = fkTbAceProSeq;
     }
 
     @Column(name = "FK_TB_ACE_PHY_LOA", nullable = false) public int getFkTbAcePhyLoa() {
@@ -102,6 +94,14 @@ import javax.persistence.TemporalType;
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    @Column(name = "FK_TB_ACE_SUB_PRO_LEV", nullable = false) public int getFkTbAceSubProLev() {
+        return this.fkTbAceSubProLev;
+    }
+
+    public void setFkTbAceSubProLev(int fkTbAceSubProLev) {
+        this.fkTbAceSubProLev = fkTbAceSubProLev;
     }
 
 }
