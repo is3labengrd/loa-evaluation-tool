@@ -2,6 +2,7 @@ package eng.it.loatool.api.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import eng.it.loatool.api.ResponseEntityTransformer;
 import eng.it.loatool.product_planning.ProductPlanning;
 import eng.it.loatool.product_planning.ProductPlanningRepository;
 
+@Controller
 public class ProductPlanningApi {
 
     @GetMapping("/v1/product-planning")
