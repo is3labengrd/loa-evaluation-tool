@@ -6,7 +6,8 @@ import { environment } from './../environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'LoA-tool';
-  // baseImg = '/' + environment.hostUrl + '/assets/';
+  baseImg = '/' + environment.hostUrl + '/assets/';
 }
