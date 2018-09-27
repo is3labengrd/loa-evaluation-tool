@@ -60,32 +60,43 @@ export class AsIsLOAComponent implements OnInit {
       data: {
         datasets: [
           {
-            label: '',
+            label: 'Main process',
+            backgroundColor: 'orange',
+            borderColor: 'black',
+            borderWidth: 1,
             data: [
               {
                 x: 3,
                 y: 5,
-                r: 10
-              },
+                r: 10,
+              }
+            ]
+          },
+          {
+            label: 'blabla process',
+            backgroundColor: 'red',
+            borderColor: 'black',
+            borderWidth: 1,
+            data: [
               {
                 x: 6,
                 y: 2,
                 r: 10
-              },
+              }
+            ]
+          },
+          {
+            label: 'sssnake processss',
+            backgroundColor: 'blue',
+            borderColor: 'black',
+            borderWidth: 1,
+            data: [
               {
                 x: 4,
                 y: 3,
                 r: 10
-              },
-              {
-                x: 7,
-                y: 7,
-                r: 10
               }
-            ],
-            backgroundColor: ['orange', 'red', 'green', 'blue'],
-            borderColor: 'black',
-            borderWidth: 1
+            ]
           }
         ]
       },

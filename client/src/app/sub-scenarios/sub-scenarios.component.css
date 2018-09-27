@@ -30,3 +30,7 @@ fieldset legend {
 .roto {
   transform: rotate(-90deg);
 }
+
+input[type="number"] {
+  width: 50px;
+}
