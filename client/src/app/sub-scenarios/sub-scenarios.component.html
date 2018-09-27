@@ -1,3 +1,111 @@
+<!-- Modal 1 -->
+<div class="modal fade" id="productInfo" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Product planing</h5>
+      </div>
+      <div class="modal-body">
+        <div>Number of produced pieces per hour: <input type="number" name="productsNum" id=""> </div> <br>
+        <!-- <div class="btn-group d-flex justify-content-center">
+          <button class="btn btn-primary">Close</button>
+          <button class="btn btn-secondary">Cancel</button>
+          <button class="btn btn-success">Save</button>
+        </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2 -->
+<div class="modal fade" id="addProcessInfo" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Add process specific information</h5>
+      </div>
+      <div class="modal-body">
+        <div>Number of shifts per day: <input type="number" class="float-right"></div> <br>
+        <div>Hours per shift: <input type="number" class="float-right"></div> <br>
+        <div>Working days per year: <input type="number" class="float-right"></div> <br>
+        <div>Proportional wage costs per hour: <input type="number" class="float-right"></div> <br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3 -->
+<div class="modal fade bd-example-modal-lg" id="createSubScenario" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Create sub-scenario</h5>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <caption style="caption-side: top;">Best physical LoA range 4-5</caption>
+          <thead>
+            <th></th>
+            <th>Scenario 1</th>
+            <th>Scenario 2</th>
+            <th>Scenario 3</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Select resource</td>
+              <td>
+                <select>
+                  <option value="resource1">Resource 1</option>
+                </select>
+              </td>
+              <td>
+                <select>
+                  <option value="resource2">Resource 2</option>
+                </select>
+              </td>
+              <td>
+                <select>
+                  <option value="resource3">Resource 3</option>
+                </select></td>
+            </tr>
+            <tr>
+              <td>Physical LoA</td>
+              <td>3</td>
+              <td>4</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>Cognitive LoA</td>
+              <td>1</td>
+              <td>1</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>Process time</td>
+              <td><input type="number" ></td>
+              <td><input type="number" ></td>
+              <td><input type="number" ></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -24,19 +132,19 @@
 
   <div class="row linkovi text-center" >
     <span class="col-4">
-      <a href="#">Product info</a>
+      <a href="#" role="button"  data-toggle="modal" data-target="#productInfo">Product info</a>
     </span>
     <span class="col-4">
-      <a href="">Add process specific information</a>
+      <a href="#" role="button" data-toggle="modal" data-target="#addProcessInfo">Add process specific information</a>
     </span>
     <span class="col-4">
-      <a href="">Create Sub-scenarios</a>
+      <a href="#" role="button" data-toggle="modal" data-target="#createSubScenario">Create Sub-scenarios</a>
     </span>
   </div>
 
   <h1 class="text-center">Sub Scenario Matrix</h1>
 
-  <table class="table table-bordered">
+  <table class="table table-bordered text-center table-striped">
     <thead>
       <th></th>
       <th>Name</th>
@@ -47,44 +155,323 @@
     </thead>
     <tbody>
       <tr>
-        <td>LoA</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td class="roto  align-middle">Process <br> variables</td>
+        <td>
+          LoA physical <br>
+          LoA cognitive <br>
+          Process time
+        </td>
+        <td>
+          - <br>
+          - <br>
+          s
+        </td>
+        <td>
+          1 <br>
+          1 <br>
+          30
+        </td>
+        <td>
+          1 <br>
+          3 <br>
+          25
+        </td>
+        <td>
+          7 <br>
+          7 <br>
+          20
+        </td>
       </tr>
       <tr>
-        <td>Process Time</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td class="roto  align-middle" rowspan="2">Working <br> hours</td>
+        <td>
+          Number of shifts per day <br>
+          Hours per shift <br>
+          Working days per year
+        </td>
+        <td>
+          - <br>
+          h <br>
+          d <br>
+        </td>
+        <td>
+          2 <br>
+          8 <br>
+          225
+        </td>
+        <td>
+          2 <br>
+          8 <br>
+          225
+        </td>
+        <td>
+          2 <br>
+          8 <br>
+          225
+        </td>
       </tr>
       <tr>
-        <td>Time per year</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>Hours per year</td>
+        <td>h</td>
+        <td>3600</td>
+        <td>3600</td>
+        <td>3600</td>
       </tr>
       <tr>
-        <td>Labour Costs</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td class="roto  align-middle" rowspan="2">Prod.</td>
+        <td>Number of produced pieces</td>
+        <td>units/h</td>
+        <td>20</td>
+        <td>20</td>
+        <td>20</td>
       </tr>
       <tr>
-        <td>.....</td>
+        <td>Number od produced pieces</td>
+        <td>units/year</td>
+        <td>72000</td>
+        <td>72000</td>
+        <td>72000</td>
+      </tr>
+      <tr>
+        <td class="roto  align-middle" rowspan="6">Variable costs</td>
+        <td>
+          Proportional wage costs per hour <br>
+          Number of operations per machine <br>
+          Ratio of participation per hour
+        </td>
+        <td>
+          l/h<br>
+          -<br>
+          l/h
+        </td>
+        <td>
+          43,75<br>
+          1<br>
+          16,67%
+        </td>
+        <td>
+          43,75<br>
+          1<br>
+          13,89%
+        </td>
+        <td>
+          43,75<br>
+          0<br>
+          11,11%
+        </td>
+      </tr>
+      <tr>
+        <td>Labour costs</td>
+        <td>l/units</td>
+        <td>0,36</td>
+        <td>0,30</td>
+        <td>0,00</td>
+      </tr>
+      <tr>
+        <td>
+          Electricity consumption <br>
+          Electricity consumption - standby <br>
+          Electricity price
+        </td>
+        <td>
+          kWh<br>
+          kWh<br>
+          l/kWh
+        </td>
+        <td>
+          0<br>
+          0<br>
+          0,00
+        </td>
+        <td>
+          1440<br>
+          100<br>
+          0,1
+        </td>
+        <td>
+          72000<br>
+          100<br>
+          0,1
+        </td>
+      </tr>
+      <tr>
+        <td>Energy costs</td>
+        <td>l/units</td>
+        <td>0,00</td>
+        <td>1,43</td>
+        <td>40,44</td>
+      </tr>
+      <tr>
+        <td>
+          Annual maintenance costs (direct entry) <br>
+          Annual maintenance costs (estimate)
+        </td>
+        <td>
+          l/a<br>
+          %
+        </td>
+        <td>
+          0<br>
+          0,02
+        </td>
+        <td>
+          150<br>
+          0,05
+        </td>
+        <td>
+          1200<br>
+          0,03
+        </td>
+      </tr>
+      <tr>
+        <td>Maintenance costs</td>
+        <td>l/a</td>
+        <td>0,00</td>
+        <td>150</td>
+        <td>1200</td>
+      </tr>
+      <tr>
+        <td rowspan="6" class="roto align-middle">Fixed Costs</td>
+        <td>
+          Installation surface <br>
+          Costs per m<sup>3</sup> per month
+        </td>
+        <td>
+          m<sup>3</sup> <br>
+          l/m<sup>3</sup>
+        </td>
+        <td>
+          0<br>
+          0
+        </td>
+        <td>
+          0<br>
+          0
+        </td>
+        <td>
+          5<br>
+          8
+        </td>
+      </tr>
+      <tr>
+        <td>Annual space costs</td>
+        <td>l/a</td>
+        <td>0,00</td>
+        <td>0,00</td>
+        <td>480,00</td>
+      </tr>
+      <tr>
+        <td>
+          Machine purchase value <br>
+          Machine sales value <br>
+          Economic useful life
+        </td>
+        <td>
+          l<br>
+          l<br>
+          a
+        </td>
+        <td>
+          0<br>
+          0<br>
+          0
+        </td>
+        <td>
+          3000<br>
+          0<br>
+          5
+        </td>
+        <td>
+          40000 <br>
+          0 <br>
+          10
+        </td>
+      </tr>
+      <tr>
+        <td>Imputed deprecation</td>
+        <td>l/a</td>
+        <td>0,00</td>
+        <td>600,00</td>
+        <td>4000,00</td>
+      </tr>
+      <tr>
+        <td>
+          Machine purchase value <br>
+          Machine sales value <br>
+          Interest rate
+        </td>
+        <td>
+          l<br>
+          l<br>
+          %
+        </td>
+        <td>
+          0<br>
+          0<br>
+          0,02%
+        </td>
+        <td>
+          3000<br>
+          0<br>
+          0,02%
+        </td>
+        <td>
+          40000<br>
+          0<br>
+          0,02%
+        </td>
+      </tr>
+      <tr>
+        <td>Accured interest costs</td>
+        <td>l/a</td>
+        <td>0,00</td>
+        <td>0,30</td>
+        <td>4,00</td>
+      </tr>
+      <tr>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>
+          Variable costs total<br>
+          Fixed costs total
+        </td>
+        <td>
+          l/units<br>
+          l/units
+        </td>
+        <td>
+          0,36<br>
+          0,00
+        </td>
+        <td>
+          1,73<br>
+          0,01
+        </td>
+        <td>
+          40,44<br>
+          0,07
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          Assembly costs per piece<br>
+          Assembly costs (total)
+        </td>
+        <td>
+          l/units<br>
+          l/year
+        </td>
+        <td>
+          0,36<br>
+          26250,00
+        </td>
+        <td>
+          1,74<br>
+          125625,30
+        </td>
+        <td>
+          40,52<br>
+          2917684,00
+        </td>
       </tr>
     </tbody>
   </table>

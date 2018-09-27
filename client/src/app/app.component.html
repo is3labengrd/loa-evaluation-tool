@@ -1,7 +1,10 @@
 <div class="container h-100" >
   <header class="heder">
-    <div >
-      <a routerLink="/" > <img [src]="baseImg + 'a4blue.png'" alt="Logo"> </a>
+    <div style=" width: 100%;">
+      <!-- <a routerLink="/" > <img [src]="baseImg + 'a4blue.png'" alt="Logo"> </a> -->
+      <a routerLink="/" class="float-left "> <img src="../assets/a4blue.png" alt="Logo" style="height: 80px;"> </a>
+
+      <img src="../assets/LoA-Tool.png" alt="LoA tool" class=" float-right " style="height: 80px;">
     </div>
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" >
@@ -30,7 +33,7 @@
 
   <footer class="">
     <div class="float-left"> © 2018 A4BLUE </div>
-    <div class="float-right">Powered by Engineering <img src="../assets/inglogo.png" alt="Ing"></div>
+    <div class="float-right">Powered by Engineering <img [src]="baseImg + 'inglogo.png'" alt="Ing"></div>
   </footer>
 </div>
 

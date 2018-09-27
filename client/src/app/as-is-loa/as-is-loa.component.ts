@@ -60,7 +60,7 @@ export class AsIsLOAComponent implements OnInit {
       data: {
         datasets: [
           {
-            label: 'mehurici',
+            label: '',
             data: [
               {
                 x: 3,
@@ -95,6 +95,7 @@ export class AsIsLOAComponent implements OnInit {
             {
               ticks: {
                 beginAtZero: true,
+                stepSize: 0.5,
                 suggestedMax: 7
               },
               scaleLabel: {
@@ -118,7 +119,7 @@ export class AsIsLOAComponent implements OnInit {
           ]
         },
         title: {
-          display: true,
+          display: false,
           text: 'Moj chart',
           position: 'top'
         }

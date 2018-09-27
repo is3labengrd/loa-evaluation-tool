@@ -26,3 +26,7 @@ fieldset legend {
 .btn-group {
   margin-bottom: 25px;
 }
+
+.roto {
+  transform: rotate(-90deg);
+}
