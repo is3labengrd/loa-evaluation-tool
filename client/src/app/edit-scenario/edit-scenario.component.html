@@ -10,11 +10,11 @@
   <div class="border">
     <div class="row " >
       <span class="col-sm-6 text-center border-right">Main Process: </span>
-      <span class="col-sm-6 text-left">Process 5</span>
+      <span class="col-sm-6 text-left">Rear Light Assembly</span>
     </div>
     <div class="row">
       <span class="col-sm-6 text-center border-right">Level of Subprocesses: </span>
-      <span class="col-sm-6 text-left">3</span>
+      <span class="col-sm-6 text-left">2</span>
     </div>
   </div>
   <br>
@@ -22,7 +22,7 @@
   <table class="table">
     <caption style="caption-side: top; text-align: center; font-size: 30px;">Edit Scenario</caption>
     <thead>
-      <th> Syb process name: </th>
+      <th> Sub process name: </th>
       <th> Sub process: </th>
       <th> Optional cost: </th>
       <th> Physical LoA: </th>
@@ -30,75 +30,91 @@
     </thead>
     <tbody>
       <tr>
-        <td>Sub process X:</td>
+        <td>Checking</td>
         <td>
-          SC1 <input type="radio" name="subProX"> Resource 1 <br>
-          SC2 <input type="radio" name="subProX"> Resource 2 <br>
-          SC3 <input type="radio" name="subProX"> Resource 3 <br>
+          SC1 <input type="radio" name="subProX" checked="checked" > Manual Tool Trolley <br>
+          SC2 <input type="radio" name="subProX"> Semi Automated Tool Trolley <br>
+          SC3 <input type="radio" name="subProX"> Automated Tool Trolley <br>
         </td>
         <td></td>
         <td></td>
         <td></td>
       </tr>
       <tr>
-          <td>Sub process Y:</td>
+          <td>Rear light adjustment</td>
           <td>
-            SC1 <input type="radio" name="subProY"> Resource 1 <br>
-            SC2 <input type="radio" name="subProY"> Resource 2 <br>
-            SC3 <input type="radio" name="subProY"> Resource 3 <br>
+            SC1 <input type="radio" name="subProY" > Manual Screw <br>
+            SC2 <input type="radio" name="subProY" checked="checked" > AR Guidance Support Screw <br>
+            SC3 <input type="radio" name="subProY"> Robot to Screw <br>
           </td>
       </tr>
       <tr>
-          <td>Sub process Z:</td>
+          <td>Rivet nut fastening</td>
           <td>
-            SC1 <input type="radio" name="subProZ"> Resource 1 <br>
-            SC2 <input type="radio" name="subProZ"> Resource 2 <br>
-            SC3 <input type="radio" name="subProZ"> Resource 3 <br>
+            SC1 <input type="radio" name="subProZ"> Manual Inspection <br>
+            SC2 <input type="radio" name="subProZ" checked="checked" > AR Guided Inspection <br>
+            SC3 <input type="radio" name="subProZ"> Camera <br>
           </td>
       </tr>
       <tr>
-          <td>Sub process X1:</td>
+          <td>Add cover plates</td>
           <td>
-            SC1 <input type="radio" name="subProX1"> Resource 1 <br>
+            SC1 <input type="radio" name="subProX1" checked="checked" > Resource 1 <br>
             SC2 <input type="radio" name="subProX1"> Resource 2 <br>
             SC3 <input type="radio" name="subProX1"> Resource 3 <br>
           </td>
       </tr>
       <tr>
-          <td>Sub process Y1:</td>
+          <td>Install brake light module</td>
           <td>
             SC1 <input type="radio" name="subProY1"> Resource 1 <br>
-            SC2 <input type="radio" name="subProY1"> Resource 2 <br>
+            SC2 <input type="radio" name="subProY1" checked="checked" > Resource 2 <br>
             SC3 <input type="radio" name="subProY1"> Resource 3 <br>
           </td>
       </tr>
       <tr>
-          <td>Sub process Z1:</td>
+          <td>Mount screw</td>
           <td>
             SC1 <input type="radio" name="subProZ"> Resource 1 <br>
-            SC2 <input type="radio" name="subProZ"> Resource 2 <br>
+            SC2 <input type="radio" name="subProZ" checked="checked" > Resource 2 <br>
             SC3 <input type="radio" name="subProZ"> Resource 3 <br>
           </td>
       </tr>
       <tr>
-          <td>Sub process X2:</td>
+          <td>Screw positioning</td>
           <td>
             SC1 <input type="radio" name="subProX2"> Resource 1 <br>
             SC2 <input type="radio" name="subProX2"> Resource 2 <br>
-            SC3 <input type="radio" name="subProX2"> Resource 3 <br>
+            SC3 <input type="radio" name="subProX2" checked="checked" > Resource 3 <br>
           </td>
       </tr>
       <tr>
-        <td>Sub process Y2:</td>
+        <td>Screw rear light</td>
         <td>
           SC1 <input type="radio" name="subProY2"> Resource 1 <br>
-          SC2 <input type="radio" name="subProY2"> Resource 2 <br>
+          SC2 <input type="radio" name="subProY2" checked="checked" > Resource 2 <br>
           SC3 <input type="radio" name="subProY2"> Resource 3 <br>
         </td></tr>
       <tr>
-        <td>Sub process Z2:</td>
+        <td>Parts grasping</td>
         <td>
           SC1 <input type="radio" name="subProZ2"> Resource 1 <br>
+          SC2 <input type="radio" name="subProZ2" checked="checked"> Resource 2 <br>
+          SC3 <input type="radio" name="subProZ2"> Resource 3 <br>
+        </td>
+      </tr>
+      <tr>
+        <td>Initial trolley movement</td>
+        <td>
+          SC1 <input type="radio" name="subProZ2"> Resource 1 <br>
+          SC2 <input type="radio" name="subProZ2"> Resource 2 <br>
+          SC3 <input type="radio" name="subProZ2" checked="checked" > Resource 3 <br>
+        </td>
+      </tr>
+      <tr>
+        <td>Operation Start</td>
+        <td>
+          SC1 <input type="radio" name="subProZ2" checked="checked" > Resource 1 <br>
           SC2 <input type="radio" name="subProZ2"> Resource 2 <br>
           SC3 <input type="radio" name="subProZ2"> Resource 3 <br>
         </td>

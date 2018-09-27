@@ -13,7 +13,7 @@ export class ProcessListComponent implements OnInit {
       sub1: '-',
       sub2: '-',
       sub3: '-',
-      actions: 'add',
+      actions: 'Add',
       route: 'add-process'
     },
     { name: 'Rear Light Assembly',
@@ -21,15 +21,15 @@ export class ProcessListComponent implements OnInit {
       sub1: 'Checking',
       sub2: 'Final inspection',
       sub3: '-',
-      actions: 'analysis',
+      actions: 'Analysis',
       route: 'main-analysis'
     },
     { name: 'Rear Light Assembly',
       sublevels: '2',
       sub1: 'Handling',
-      sub2: 'ear light adjustment',
+      sub2: 'Rear light adjustment',
       sub3: '-',
-      actions: 'analysis',
+      actions: 'Analysis',
       route: 'main-analysis'
     },
     { name: 'Rear Light Assembly',
@@ -37,31 +37,23 @@ export class ProcessListComponent implements OnInit {
       sub1: 'Handling',
       sub2: 'Rivet nut fastening',
       sub3: '-',
-      actions: 'analysis',
+      actions: 'Analysis',
       route: 'main-analysis'
     },
     { name: 'Rear Light Assembly',
-      sublevels: '2',
-      sub1: 'Joining',
-      sub2: 'add cover plates',
-      sub3: '-',
-      actions: 'analysis',
-      route: 'main-analysis'
-     },
-     { name: 'Rear Light Assembly',
        sublevels: '2',
        sub1: 'Joining',
        sub2: 'Add cover plates',
        sub3: '-',
-       actions: 'analysis',
+       actions: 'Analysis',
        route: 'main-analysis'
       },
       { name: 'Rear Light Assembly',
        sublevels: '2',
        sub1: 'Joining',
-       sub2: 'install brake light module',
+       sub2: 'Install brake light module',
        sub3: '-',
-       actions: 'analysis',
+       actions: 'Analysis',
        route: 'main-analysis'
       },
      { name: 'Rear Light Assembly',
@@ -69,7 +61,7 @@ export class ProcessListComponent implements OnInit {
        sub1: 'Joining',
        sub2: 'Mount screw',
        sub3: '-',
-       actions: 'analysis',
+       actions: 'Analysis',
        route: 'main-analysis'
       },
       { name: 'Rear Light Assembly',
@@ -77,15 +69,15 @@ export class ProcessListComponent implements OnInit {
        sub1: 'Joining',
        sub2: 'Screw positioning',
        sub3: '-',
-       actions: 'analysis',
+       actions: 'Analysis',
        route: 'main-analysis'
       },
       { name: 'Rear Light Assembly',
        sublevels: '2',
        sub1: 'Joining',
-       sub2: 'screw rear light',
+       sub2: 'Screw rear light',
        sub3: '-',
-       actions: 'analysis',
+       actions: 'Analysis',
        route: 'main-analysis'
       },
       { name: 'Rear Light Assembly',
@@ -93,7 +85,7 @@ export class ProcessListComponent implements OnInit {
         sub1: 'Picking',
         sub2: 'Parts grasping',
         sub3: '-',
-        actions: 'analysis',
+        actions: 'Analysis',
         route: 'main-analysis'
        },
        { name: 'Rear Light Assembly',
@@ -101,7 +93,7 @@ export class ProcessListComponent implements OnInit {
          sub1: 'Preparation',
          sub2: 'Initial trolley movement',
          sub3: '-',
-         actions: 'analysis',
+         actions: 'Analysis',
          route: 'main-analysis'
         },
        { name: 'Rear Light Assembly',
@@ -109,7 +101,7 @@ export class ProcessListComponent implements OnInit {
          sub1: 'Preparation',
          sub2: 'Operation Start',
          sub3: '-',
-         actions: 'analysis',
+         actions: 'Analysis',
          route: 'main-analysis'
        }
        ];
