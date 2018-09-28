@@ -54,26 +54,25 @@ export class AsIsLOAComponent implements OnInit {
     //   }
     //   }
     // });
-
     this.BablChart = new Chart('bablChart', {
       type: 'bubble',
       data: {
         datasets: [
           {
-            label: 'Main process',
+            label: 'Final inspection',
             backgroundColor: 'orange',
             borderColor: 'black',
             borderWidth: 1,
             data: [
               {
-                x: 3,
-                y: 5,
-                r: 10,
+                x: 1,
+                y: 1,
+                r: 10
               }
             ]
           },
           {
-            label: 'blabla process',
+            label: 'Rear light adjustment',
             backgroundColor: 'red',
             borderColor: 'black',
             borderWidth: 1,
@@ -86,14 +85,14 @@ export class AsIsLOAComponent implements OnInit {
             ]
           },
           {
-            label: 'sssnake processss',
+            label: 'Rivet nut fastening',
             backgroundColor: 'blue',
             borderColor: 'black',
             borderWidth: 1,
             data: [
               {
-                x: 4,
-                y: 3,
+                x: 2,
+                y: 1,
                 r: 10
               }
             ]
