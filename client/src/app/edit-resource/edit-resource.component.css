@@ -3,7 +3,7 @@ h4 {
   color: blue;
 }
 
-#addRes {
+#editRes {
   margin-top: 35px;
 }
 
@@ -13,4 +13,18 @@ h4 {
 
 .energy {
   margin-top: 15px;
+}
+
+
+legend {
+  width: auto;
+  /* color: blue; */
+}
+
+fieldset {
+  border-top: 1px solid black;
+}
+
+.toLeft {
+  margin-left: -16px;
 }

@@ -54,6 +54,7 @@ export class AsIsLOAComponent implements OnInit {
     //   }
     //   }
     // });
+
     this.BablChart = new Chart('bablChart', {
       type: 'bubble',
       data: {
@@ -67,12 +68,12 @@ export class AsIsLOAComponent implements OnInit {
               {
                 x: 1,
                 y: 1,
-                r: 10
+                r: 10,
               }
             ]
           },
           {
-            label: 'Rear light adjustment',
+            label: 'Rear light adjusment',
             backgroundColor: 'red',
             borderColor: 'black',
             borderWidth: 1,
