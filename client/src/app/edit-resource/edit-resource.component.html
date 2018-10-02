@@ -127,15 +127,15 @@
         <fieldset>
           <legend>General info</legend>
             <div class="row data">
-              <span class="col-4">
+              <span class="col-4 text-left">
                 Resource name:
                 <input type="text" placeholder="Automated Tool Trolley">
               </span>
-              <span class="col-4">
+              <span class="col-4 text-right">
                  LoA Physical:
                 <input type="number">
               </span>
-              <span class="col-4">
+              <span class="col-4 text-right">
                  LoA Cognitive:
                 <input type="number" >
               </span>
@@ -145,8 +145,11 @@
         <fieldset>
           <legend>Labour costs</legend>
           <div class="row data">
-            <span class="col-4"> Number of operators per machine: </span>
-            <span  class="col-8"> <input type="number" class="toLeft"> </span>
+            <span class="col-6">Number of operators per machine:
+             <input type="number" class="float-right"> </span>
+            <span class="col-6">
+
+            </span>
           </div>
         </fieldset>
 
@@ -191,20 +194,20 @@
             </span>
             </div>
             <div class="row">
-              <span class="col-4">
+              <span class="col-6">
                  Economic useful life (a):
+              <input type="number" class="float-right">
               </span>
-              <span class="col-8">
-                <input type="number" class="toLeft">
-              </span>
+              <span class="col-6"> </span>
             </div>
         </fieldset>
 
         <fieldset>
           <legend>Interes costs</legend>
           <div class="row data">
-            <span class="col-4"> Interest rate (%): </span>
-            <span class="col-8"><input type="text" class="toLeft"></span>
+            <span class="col-6"> Interest rate (%):
+            <input type="text" class="float-right"></span>
+            <span class="col-6"></span>
           </div>
         </fieldset>
 
@@ -224,8 +227,7 @@
           </div>
           <hr>
           <div class="btn-group d-flex justify-content-center" >
-            <button class="btn btn-primary">Close</button>
-            <button class="btn btn-secondary">Cancel</button>
+            <button class="btn btn-primary">Cancel</button>
             <button class="btn btn-secondary">Save</button>
           </div>
         </fieldset>
