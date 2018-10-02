@@ -86,11 +86,11 @@ import javax.persistence.TemporalType;
         this.createDate = createDate;
     }
 
-    @Temporal(TemporalType.TIMESTAMP) @Column(name = "UDPATE_DATE", nullable = false, length = 19) public Date getUdpateDate() {
+    @Temporal(TemporalType.TIMESTAMP) @Column(name = "UDPATE_DATE", nullable = false, length = 19) public Date getUpdateDate() {
         return this.udpateDate;
     }
 
-    public void setUdpateDate(Date udpateDate) {
+    public void setUpdateDate(Date udpateDate) {
         this.udpateDate = udpateDate;
     }
 
