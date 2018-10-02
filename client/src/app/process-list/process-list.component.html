@@ -23,13 +23,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let proces of procesi">
-          <td> <a routerLink="/edit-process"> {{ proces.name }} </a> </td>
-          <td> {{ proces.sublevels }} </td>
-          <td> {{ proces.sub1 }} </td>
-          <td> {{ proces.sub2 }} </td>
-          <td> {{ proces.sub3 }} </td>
-          <td> <a routerLink="/{{ proces.route }}"> {{ proces.actions }} </a> </td>
+        <tr *ngFor="let process of processSegmentList">
+          <td> <a routerLink="/edit-process"> {{ process.name }} </a> </td>
+          <td> {{ process.sublevels }} </td>
+          <td> {{ process.sub1 }} </td>
+          <td> {{ process.sub2 }} </td>
+          <td> {{ process.sub3 }} </td>
+          <td> <a routerLink="/{{ process.route }}"> {{ process.actions }} </a> </td>
         </tr>
       </tbody>
 </table>
