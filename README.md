@@ -6,7 +6,7 @@ The LoA Evaluation Tool, consists of a sequence of operations, which begins with
 
 ### LoA Evalutation Tool Architecture
 
-The figure that follows, shows the technological architecture of the Tool composed of Open Source software components. The Core (LoA Evalutation Tool) provides in sequence (from left to right) the following technologies:
+The figure below shows the technological architecture of the Tool composed of Open Source software components. The Core (LoA Evalutation Tool) provides in sequence (from left to right) the following technologies:
 
 • Tomcat container
 • Angular (Frontend)
@@ -28,7 +28,7 @@ This procedure assumes that you have [Apache Tomcat](https://tomcat.apache.org/d
 
 #### Related components
 
-The LoA Tool communicates with the SAR component to save the cost items related to the scenario calculation. For install and start the SAR follow the git [semantic-asset-registry](https://github.com/is3labengrd/semantic-asset-registry) repository instructions. For the outher necessary components use the [docker-compose](https://github.com/is3labengrd/loa-evaluation-tool/blob/master/docker-compose.yml) file in your development environment (preferably use a VM with SO CentosOS7 or Ubuntu).
+The LoA Tool communicates with the SAR component to save the costs item related to the Scenario calculation. For install and start the SAR follow the git [semantic-asset-registry](https://github.com/is3labengrd/semantic-asset-registry) repository instructions. For the outher necessary components use the [docker-compose](https://github.com/is3labengrd/loa-evaluation-tool/blob/master/docker-compose.yml) file in your development environment (preferably use a VM with SO CentosOS7 or Ubuntu).
 
 This procedure assumes that you have installed [Docker](https://docs.docker.com/install/) and [Docker-Compose](https://docs.docker.com/compose/install/) command in your environment:
 
