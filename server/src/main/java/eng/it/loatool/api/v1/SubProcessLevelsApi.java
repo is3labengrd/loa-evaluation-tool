@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import eng.it.loatool.api.ResponseEntityTransformer;
 import eng.it.loatool.api.v1.subprocess_levels.CreateSubProcessLevelService;
@@ -20,9 +21,12 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
 public class SubProcessLevelsApi {
 
     @GetMapping("/v1/subprocess-levels")
-    public ResponseEntity<?> getSubProcessLevels() {
+    public ResponseEntity<?> getSubProcessLevels(
+		@RequestParam(value="page", defaultValue="-1") int page,
+		@RequestParam(value="size", defaultValue="-1") int size
+	) {
         return ResponseEntityTransformer.transformOk(
-            getSubProcessesService.getSubProcessLevels()
+            getSubProcessesService.getSubProcessLevels(page, size)
         );
     }
 
