@@ -14,10 +14,15 @@ export class ProcessListComponent implements OnInit {
 
   private processSegments:Array<any>;
   private subprocesses:Array<any>;
+  numberOfItems = "all";
 
   constructor(private http:HttpClient) { }
 
   ngOnInit() {
+    this.initateProcessSegmentListPopulation();
+  }
+
+  private initateProcessSegmentListPopulation() {
     var processSegmentsSubscription:Subscription = this.http
       .get(environment.apiUrl + '/v1/process-segments')
       .subscribe(
@@ -43,17 +48,27 @@ export class ProcessListComponent implements OnInit {
     return () => {
       i++;
       if (i == 2) {
+        i = 0;
         this.populateProcessSegmentList();
       }
     }
   })();
 
   private populateProcessSegmentList() {
+    switch (this.numberOfItems) {
+      case "all":
+        this.populateProcessSegmentListWithoutPagination();
+        break;
+      case "12":
+        this.populateProcessSegmentListWithPagination();
+    }
+  }
+
+  private populateProcessSegmentListWithoutPagination() {
     this.processSegmentList = this.subprocesses.reduce(
       (accumulator:Array<any>, subprocess) => {
         var currentDisplaySubprocess;
         var relatedProcess = this.processSegments[subprocess.fkTbAceProSeq-1];
-        console.log(subprocess);
         if (subprocess.proLevel == 1) {
           currentDisplaySubprocess = Object.create(null);
           currentDisplaySubprocess.name = relatedProcess.name;
@@ -68,22 +83,25 @@ export class ProcessListComponent implements OnInit {
           currentDisplaySubprocess = accumulator[accumulator.length-1];
         }
         switch (subprocess.proLevel) {
-          case 1: 
+          case 1:
             currentDisplaySubprocess.sub1=subprocess.name;
             break;
-          case 2: 
+          case 2:
             currentDisplaySubprocess.sub2=subprocess.name;
             break;
-          case 3: 
+          case 3:
             currentDisplaySubprocess.sub3=subprocess.name;
             break;
-          default:
-            console.log("AAAAAAA");
         }
         return accumulator;
       },
       []
     );
+  }
+
+  private populateProcessSegmentListWithPagination() {
+    // TODO: Implement;
+    console.log("populateProcessSegmentListWithPagination");
   }
 
 }
