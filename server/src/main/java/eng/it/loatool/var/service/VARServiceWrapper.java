@@ -1,15 +1,19 @@
 package eng.it.loatool.var.service;
 
+import static eng.it.loatool.var.request.VARProcessSegmentImpl.buildProcessSegmentList;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import eng.it.loatool.var.bean.Attrs;
+import eng.it.loatool.var.bean.MainProcess;
 import eng.it.loatool.var.bean.Processes;
-import eng.it.loatool.var.request.*;
-
-import static eng.it.loatool.var.request.VARProcessSegmentImpl.buildProcessSegmentTree;
+import eng.it.loatool.var.request.VARProcessSegmentImpl;
+import eng.it.loatool.var.request.VARProcessSpecificInformationImpl;
+import eng.it.loatool.var.request.VARProductDefinitionImpl;
+import eng.it.loatool.var.request.VARProportionalWageCost;
+import eng.it.loatool.var.request.VARWorkUnitImpl;
 
 public class VARServiceWrapper {
 
@@ -19,7 +23,7 @@ public class VARServiceWrapper {
 	  * @return Process hierarchy as json string
 	  */
 
-	 public static String getProcessesSegmentList () {
+	 public static List<MainProcess> getProcessesSegmentList () {
 		 
 		 		List<Processes> processes = VARProcessSegmentImpl.getProcessSegment();		 		
 		 		List<Processes> mainProcess = new ArrayList<Processes>();
@@ -46,7 +50,7 @@ public class VARServiceWrapper {
 		 				mainProcessFinal.add(proc2);
 				}
 
-			    return buildProcessSegmentTree(mainProcessFinal, processes);
+			    return buildProcessSegmentList(mainProcessFinal, processes);
 	 }
 	 
 	 /**
