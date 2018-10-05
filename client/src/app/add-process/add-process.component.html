@@ -28,38 +28,27 @@
     <tr>
       <td>Level 1:</td>
       <td>
-        <select name="" id="">
-          <option value="">Checking</option>
-          <option value="">Handling</option>
-          <option value="">Joining</option>
-          <option value="">Picking</option>
-          <option value="">Preparation</option>
-        </select>
+        <select (change)="firstDropDownChanged($event.target.selectedIndex -1)" >
+        <option>Select</option>
+        <option *ngFor="let v of _values1[0]">{{ v }}</option>
+      </select>
       </td>
     </tr>
     <tr>
       <td>Level 2:</td>
       <td>
-        <select name="" id="">
-          <option value="">Final inspection</option>
-          <option value="">Rear light adjustment</option>
-          <option value="">Rivet nut fastening</option>
-          <option value="">Trolley Movement</option>
-          <option value="">Add cover plates</option>
-          <option value="">Install brake light module</option>
-          <option value="">Mount screw</option>
-          <option value="">Screw rear light</option>
-          <option value="">Parts grasping</option>
-          <option value="">Initial trolley movement</option>
-          <option value="">Operation Start</option>
+        <select (change)="secondDropDownChanged($event.target.selectedIndex -1)">
+          <option>Select</option>
+          <option *ngFor='let v of _values2'>{{ v }}</option>
         </select>
       </td>
     </tr>
     <tr>
       <td>Level 3:</td>
       <td>
-        <select name="" id="">
-          <option value="">-</option>
+        <select >
+          <option>Select</option>
+          <option *ngFor='let v of _values3'>{{ v }}</option>
         </select>
       </td>
     </tr>
@@ -69,6 +58,6 @@
 <br>
 
 <div class="btn-group" role="group" >
-  <button type="button" class="btn btn-secondary">Cancel</button>
+  <button type="button" class="btn btn-secondary" (click)="mainProcess()">Cancel</button>
   <button type="button" class="btn btn-primary">Save</button>
 </div>
