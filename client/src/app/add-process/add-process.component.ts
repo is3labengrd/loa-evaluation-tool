@@ -54,7 +54,7 @@ export class AddProcessComponent implements OnInit {
     const obj2 = this._values2;
     //console.log(val, obj);
     if (!obj2) return;
-    this._values3 = this.subProcessL3('latchValveProduction',this.lvl2selection,obj2[val2]));
+    this._values3 = this.subProcessL3('latchValveProduction',this.lvl2selection,obj2[val2]);
   }
 
   mainProcess(){
