@@ -40,7 +40,9 @@
     <select name="numberOfItems" [(ngModel)]="numberOfItems" (ngModelChange)="page=0; populateProcessSegmentList();">
       <option value="all">All subprocesses</option>
       <option value="3">3 subprocesses</option>
+      <option value="5">5 subprocesses</option>
       <option value="6">6 subprocesses</option>
+      <option value="10">10 subprocesses</option>
       <option value="12">12 subprocesses</option>
     </select> &nbsp;
     <select name="pageRange" [(ngModel)]="page" (ngModelChange)="populateProcessSegmentList();">
