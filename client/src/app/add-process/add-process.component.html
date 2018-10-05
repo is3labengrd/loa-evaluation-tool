@@ -28,27 +28,27 @@
     <tr>
       <td>Level 1:</td>
       <td>
-        <select (change)="firstDropDownChanged($event.target.selectedIndex -1)" >
+        <select (change)="firstDropDownChanged($event.target.selectedIndex -1)">
         <option>Select</option>
-        <option *ngFor="let v of _values1[0]">{{ v }}</option>
+        <option *ngFor="let v of _values1[0]" value="{{v.name}}" >{{ v.name }}</option>
       </select>
       </td>
     </tr>
     <tr>
       <td>Level 2:</td>
       <td>
-        <select (change)="secondDropDownChanged($event.target.selectedIndex -1)">
+        <select *ngIf="(_values2.length > 0)" (change)="secondDropDownChanged($event.target.selectedIndex -1)">
           <option>Select</option>
-          <option *ngFor='let v of _values2'>{{ v }}</option>
+          <option  *ngFor='let v of _values2'>{{ v.name }}</option>
         </select>
       </td>
     </tr>
     <tr>
       <td>Level 3:</td>
       <td>
-        <select >
+        <select *ngIf="(_values3.length > 0)"(change)="thirdDropDownChanged($event.target.selectedIndex -1)">
           <option>Select</option>
-          <option *ngFor='let v of _values3'>{{ v }}</option>
+          <option *ngFor='let v of _values3'>{{ v.name }}</option>
         </select>
       </td>
     </tr>
@@ -58,6 +58,6 @@
 <br>
 
 <div class="btn-group" role="group" >
-  <button type="button" class="btn btn-secondary" (click)="mainProcess()">Cancel</button>
-  <button type="button" class="btn btn-primary">Save</button>
+  <button type="button" class="btn btn-secondary"  (click)="refresh()">Cancel</button>
+  <button type="button" class="btn btn-primary" (click)="addProcess()">Save</button>
 </div>
