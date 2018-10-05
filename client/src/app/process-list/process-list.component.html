@@ -37,23 +37,26 @@
 <!-- selekt i paginacija -->
 <div class="row">
   <div class="col-md-5 col-sm-12">
-    <select name="numberOfItems" [(ngModel)]="numberOfItems" (ngModelChange)="initateProcessSegmentListPopulation()">
-      <option value="all">All items</option>
-      <option value="12">12 items</option>
+    <select name="numberOfItems" [(ngModel)]="numberOfItems" (ngModelChange)="page=0; populateProcessSegmentList();">
+      <option value="all">All subprocesses</option>
+      <option value="3">3 subprocesses</option>
+      <option value="6">6 subprocesses</option>
+      <option value="12">12 subprocesses</option>
     </select> &nbsp;
-    <select name="pageNumber">
-      <option value="">page 1 of 1</option>
+    <select name="pageRange" [(ngModel)]="page" (ngModelChange)="populateProcessSegmentList();">
+      <option *ngFor="let page of pageIterable">{{page}}</option>
     </select>
   </div>
   <div class="col-md-7 col-sm-12">
     <nav aria-label="Page navigation">
       <ul class="pagination float-right">
-        <li class="page-item"><a class="page-link">First</a></li>
-        <li class="page-item"><a class="page-link">Previous</a></li>
-        <li class="page-item"><a class="page-link">Next</a></li>
+        <li class="page-item"><a class="page-link" (click)="page=0; populateProcessSegmentList();">First</a></li>
+        <li class="page-item"><a class="page-link" (click)="page=page-1; populateProcessSegmentList();">Previous</a></li>
+        <li class="page-item"><a class="page-link" (click)="page=page+1; populateProcessSegmentList();">Next</a></li>
         <li class="page-item"><a class="page-link">Last</a></li>
       </ul>
     </nav>
   </div>
 </div>
+{{page}}
 
