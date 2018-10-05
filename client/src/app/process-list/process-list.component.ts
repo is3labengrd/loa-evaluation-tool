@@ -106,7 +106,6 @@ export class ProcessListComponent implements OnInit {
         (subprocesses:any) => {
           this.pageIterable[Symbol.iterator] = this
             .getPageIteratorGetter(subprocesses.totalPages);
-          console.log(subprocesses.totalPages);
           this.subprocesses = subprocesses.content;
           subprocessLevelsSubscription.unsubscribe();
           this.triggerProcessSegmentListPopulation();
