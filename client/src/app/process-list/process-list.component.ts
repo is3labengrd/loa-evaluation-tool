@@ -8,14 +8,14 @@ import { Component, OnInit } from '@angular/core';
 export class ProcessListComponent implements OnInit {
 
   procesi = [
-    { name: 'Rear Light Assembly',
+   /** { name: 'Rear Light Assembly',
       sublevels: '2',
       sub1: '-',
       sub2: '-',
       sub3: '-',
       actions: 'Add',
       route: 'add-process'
-    },
+    },*/
     { name: 'Rear Light Assembly',
       sublevels: '2',
       sub1: 'Checking',

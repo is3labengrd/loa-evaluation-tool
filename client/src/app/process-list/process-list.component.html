@@ -23,6 +23,14 @@
         </tr>
       </thead>
       <tbody>
+         <tr>
+           <td>Rear Light Assembly</td>
+           <td>2</td>
+           <td>-</td>
+           <td>-</td>
+           <td>-</td>
+           <td><a routerLink="/add-process"> Add </a></td>
+      </tr>
         <tr *ngFor="let proces of procesi">
           <td> <a routerLink="/edit-process"> {{ proces.name }} </a> </td>
           <td> {{ proces.sublevels }} </td>
