@@ -18,12 +18,13 @@ main:Array<any> = [];
 subL1:Array<any> = [];
 subL2:Array<any> = [];
 subL3:Array<any> = [];
-lvl1selection:string;
-lvl2selection:string;
-lvl3selection:string;
+lvl1selection:any;
+lvl2selection:any;
+lvl3selection:any;
 private _values1 = [];
 private _values2 = [];
 private _values3 = [];
+
 
 constructor(private http: HttpClient) {}
 
@@ -51,10 +52,9 @@ refresh(): void {
 
 addProcess() {
  const mainProcUrl = environment.apiUrl + '/v1/process-segments';
-
  this.http.post(mainProcUrl, {"name": "latchValveProduction","varProSeqId": "1","nlowerLevelSubPro": 10})
         .toPromise()
-        .then(res => {
+        .then((res:any) => {
           if (res.pkTbId != null) {
             alert('Process segment added');
             this.addSubProcessL1(res.pkTbId);
@@ -69,11 +69,11 @@ addSubProcessL1(pkTbId) {
 const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
 this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl1selection.name,"varProSeqId": this.lvl1selection.processSegmentId, "proLevel": this.lvl1selection.level})
         .toPromise()
-        .then(res => {
+        .then((res:any) => {
           if (res.pkTbId != null) {
             this.addSubProcessL2(res.pkTbId);}
           },
-  (err) => alert('Something went wrong. \nStatus: ' +  err.error.status););
+  (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);});
 
 }
 
@@ -82,12 +82,12 @@ const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
 
 this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl2selection.name,"varProSeqId": this.lvl2selection.processSegmentId, "proLevel": this.lvl2selection.level})
        .toPromise()
-       .then(res => {
+       .then((res:any) => {
          if (res.pkTbId != null) {
            this.addSubProcessL3(res.pkTbId);}
          },
 
- (err) => alert('Something went wrong. \nStatus: ' +  err.error.status););
+ (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);});
 }
 
 addSubProcessL3(pkTbId) {
@@ -95,11 +95,11 @@ const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
 
 this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl3selection.name,"varProSeqId": this.lvl3selection.processSegmentId, "proLevel": this.lvl3selection.level})
        .toPromise()
-       .then(res => {
+       .then((res:any) => {
          if (res.pkTbId != null) {
            //alert('Process segment added');
        }},
- (err) => alert('Something went wrong. \nStatus: ' +  err.error.status);)
+ (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);})
 
 }
 
@@ -109,7 +109,7 @@ firstDropDownChanged(val: any) {
  const obj = this._values1[0];
  //console.log(val, obj);
  if (!obj) return;
- this._values2 = this.subProcessL2('latchValveProduction',obj[val].name));
+ this._values2 = this.subProcessL2('latchValveProduction',obj[val].name);
  this.lvl1selection = obj[val];
 }
 
@@ -131,7 +131,6 @@ thirdDropDownChanged(val3: any) {
 /*
 mainProcess(){
   this.main = [];
-
  for (let entry of this.processSegmentList[0]) {
      //console.log(entry.name);
      //console.log(entry.processSegmentId);
