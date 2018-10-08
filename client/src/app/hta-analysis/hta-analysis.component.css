@@ -8,9 +8,34 @@
   padding: 10px;
 }
 
+/* #table2 td:hover {
+  background-color: orange;
+} */
+
+#table2 td::selection {
+  background: red;
+}
+
 #table2 {
   margin-top: 20px;
 }
+
+
+.danger {
+  background-color: rebeccapurple;
+}
+
+.on {
+  background-color: red;
+}
+
+/* .on2 {
+  background-color: aqua;
+}
+
+.on3 {
+  background-color: orangered;
+} */
 
 fieldset {
   border: 2px solid;
@@ -79,4 +104,8 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+input[type=number] {
+  width: 60px;
 }

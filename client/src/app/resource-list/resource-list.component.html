@@ -6,23 +6,28 @@
         <li class="breadcrumb-item active"> Resource list </li>
       </ol>
     </nav>
-    <table id="table1" >
+
+    <!-- header table -->
+    <table id="table1" cellpadding="10">
         <tr>
           <td>Main process:</td>
-          <td style="border-right: 1px solid">Process 5</td>
-          <td>Sub process level 1: P5.1</td>
-          <td>Sub process level 2: P5.1.1</td>
+          <td style="border-right: 1px solid">Rear Light Assembly</td>
+          <td>Sub process level 1: Checking</td>
+          <td>Sub process level 2: Final inspection</td>
         </tr>
         <tr>
           <td>Level of sub processes:</td>
-          <td style="border-right: 1px solid">3</td>
-          <td>Sub process level 3: P5.2.1</td>
+          <td style="border-right: 1px solid">2</td>
+          <td>Sub process level 3: -</td>
           <td></td>
         </tr>
       </table>
 
-      <h1>Process List Resources</h1>
-      <span class="float-right"> <i class="fas fa-search"></i> &nbsp;<input type="search" name="" id=""  style="margin-top: 10px" placeholder="process name"> <a href="#">Search</a></span>
+  <div>
+     <h1>Process List Resources</h1>
+     <span class="float-right"> <i class="fas fa-search"></i> &nbsp;<input type="search" name="" id=""  style="margin-top: 10px; margin-bottom: 15px;" placeholder="resource name"> <a href="#">Search</a></span>
+  </div>
+
 
       <table class="table table-striped table-bordered">
           <thead>
@@ -44,31 +49,55 @@
               <td>Manual tool troley</td>
               <td>4</td>
               <td>6</td>
-              <td><a routerLink="/edit-resource">Edit</a> - <a href="#">De-asaign</a></td>
+              <td><a routerLink="/edit-resource">Edit</a> - <a href="#">De-assign</a></td>
             </tr>
             <tr>
               <td>Semi automated tool troley</td>
               <td>2</td>
               <td>3</td>
-              <td><a routerLink="/edit-resource">Edit</a> - <a href="#">De-asaign</a></td>
+              <td><a routerLink="/edit-resource">Edit</a> - <a href="#">De-assign</a></td>
             </tr>
             <tr>
               <td>Automated tool troley</td>
               <td>4</td>
               <td>6</td>
-              <td><a routerLink="/edit-resource">Edit</a> - <a href="#">De-asaign</a></td>
+              <td><a routerLink="/edit-resource">Edit</a> - <a href="#">De-assign</a></td>
             </tr>
             <tr>
-              <td>Resource 4</td>
+              <td>Manual Screw</td>
               <td>1</td>
               <td>1</td>
-              <td><a href="#">Asaign</a></td>
+              <td><a href="#">Assign</a></td>
             </tr>
             <tr>
-              <td>Resource 5</td>
+              <td>AR Guidance Support Screw</td>
               <td>2</td>
               <td>6</td>
-              <td><a href="#">Asaign</a></td>
+              <td><a href="#">Assign</a></td>
+            </tr>
+            <tr>
+              <td>Robot to Screw</td>
+              <td>2</td>
+              <td>6</td>
+              <td><a href="#">Assign</a></td>
+            </tr>
+            <tr>
+              <td>Manual Inspection</td>
+              <td>2</td>
+              <td>6</td>
+              <td><a href="#">Assign</a></td>
+            </tr>
+            <tr>
+              <td>AR Guided Inspection</td>
+              <td>2</td>
+              <td>6</td>
+              <td><a href="#">Assign</a></td>
+            </tr>
+            <tr>
+              <td>Camera</td>
+              <td>2</td>
+              <td>6</td>
+              <td><a href="#">Assign</a></td>
             </tr>
             <tr></tr>
             <tr></tr>
@@ -82,10 +111,10 @@
 <div class="row">
     <div class="col-md-5 col-sm-12">
       <select name="numberOfItems">
-        <option value="">15 items per page</option>
+        <option value="">9 items per page</option>
       </select> &nbsp;
       <select name="pageNumber">
-        <option value="">page 1 of 2</option>
+        <option value="">page 1 of 1</option>
       </select>
     </div>
     <div class="col-md-7 col-sm-12">
@@ -103,3 +132,4 @@
     <div class="addButton">
       <a class="btn btn-primary float-right" routerLink="/add-resource">Add Resource</a>
     </div>
+</div>
