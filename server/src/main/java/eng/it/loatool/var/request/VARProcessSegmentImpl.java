@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+
 import eng.it.loatool.var.bean.Attrs;
 import eng.it.loatool.var.bean.MainProcess;
 import eng.it.loatool.var.bean.Processes;
@@ -154,7 +154,12 @@ public class VARProcessSegmentImpl {
 	}
 
 	public static String buildProcessSegmentTree (List<Processes> mainProcessFinal, List<Processes> processes) {
+		List<MainProcess> mainProcessTree = buildProcessSegmentList(mainProcessFinal, processes);
+		Gson gson = new Gson();
+		return gson.toJson(mainProcessTree);
+	}
 
+	public static List<MainProcess> buildProcessSegmentList (List<Processes> mainProcessFinal, List<Processes> processes) {
 		List<Processes> mainProcess = new ArrayList<Processes>();
 		List<MainProcess> mainProcessTree = new ArrayList<MainProcess>();
 
@@ -193,17 +198,11 @@ public class VARProcessSegmentImpl {
 				}
 			}
 
-
 			mainProcessTree.add(main);
 
-
-
-
 		}
-
-		Gson gson = new Gson();
-
-		return gson.toJson(mainProcessTree);
+		
+		return mainProcessTree;
 	}
 
 }

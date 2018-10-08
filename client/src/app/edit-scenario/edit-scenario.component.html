@@ -2,7 +2,7 @@
   <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/process-list"> Process list </a></li>
       <li class="breadcrumb-item"><a routerLink="/main-analysis"> Main analysis Functionalities</a></li>
-      <li class="breadcrumb-item"> <a routerLink="/resource-list"> Scenario Resource Analysis </a> </li>
+      <li class="breadcrumb-item"> <a routerLink="/scenarios"> Scenario Resource Analysis </a> </li>
       <li class="breadcrumb-item active" aria-current="page"> Edit Scenario </li>
     </ol>
   </nav>
@@ -10,20 +10,20 @@
   <table id="table1" cellpadding="10">
       <tr>
         <td>Main process:</td>
-        <td style="border-right: 1px solid">Process 5</td>
+        <td style="border-right: 1px solid">Rear Light Assembly</td>
         <td>Scenario number:</td>
         <td>1</td>
       </tr>
       <tr>
         <td>Number of lower level sub-processes:</td>
-        <td style="border-right: 1px solid">9</td>
+        <td style="border-right: 1px solid">11</td>
         <td></td>
         <td></td>
       </tr>
     </table>
 
   <table class="table">
-    <caption style="caption-side: top; text-align: center; font-size: 30px;">Edit Scenario</caption>
+    <caption style="caption-side: top; text-align: center; font-size: 30px; color:black;"><h1>Edit Scenario</h1></caption>
     <thead>
       <th> Sub process name: </th>
       <th> Sub process: </th>
@@ -35,106 +35,269 @@
       <tr>
         <td>Checking</td>
         <td>
-          SC1 <input type="radio" name="subProX" checked="checked" > Manual Tool Trolley <br>
-          SC2 <input type="radio" name="subProX"> Semi Automated Tool Trolley <br>
+          SC1 <input type="radio" name="subProX" checked="checked" > Manual Tool Trolley <br> <br>
+          SC2 <input type="radio" name="subProX"> Semi Automated Tool Trolley <br> <br>
           SC3 <input type="radio" name="subProX"> Automated Tool Trolley <br>
         </td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>
+          <input type="text" class="float-left" disabled value="2812,38" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="43644,3" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="39474,5" size="10"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    3" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    4" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    7" size="3"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    6" size="3"> <br>
+        </td>
       </tr>
       <tr>
           <td>Rear light adjustment</td>
           <td>
-            SC1 <input type="radio" name="subProY" > Manual Screw <br>
-            SC2 <input type="radio" name="subProY" checked="checked" > AR Guidance Support Screw <br>
+            SC1 <input type="radio" name="subProY" > Manual Screw <br> <br>
+            SC2 <input type="radio" name="subProY" checked="checked" > AR Guidance Support Screw <br> <br>
             SC3 <input type="radio" name="subProY"> Robot to Screw <br>
           </td>
+        <td>
+          <input type="text" class="float-left" disabled value="1,11" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="1,15" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="0,73" size="10"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    7" size="3"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    3" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    7" size="3"> <br>
+        </td>
       </tr>
       <tr>
           <td>Rivet nut fastening</td>
           <td>
-            SC1 <input type="radio" name="subProZ"> Manual Inspection <br>
-            SC2 <input type="radio" name="subProZ" checked="checked" > AR Guided Inspection <br>
+            SC1 <input type="radio" name="subProZ"> Manual Inspection <br> <br>
+            SC2 <input type="radio" name="subProZ" checked="checked" > AR Guided Inspection <br> <br>
             SC3 <input type="radio" name="subProZ"> Camera <br>
           </td>
+        <td>
+          <input type="text" class="float-left" disabled value="15750,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="108105,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="23050,00" size="10"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    7" size="3"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    3" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    6" size="3"> <br>
+        </td>
       </tr>
       <tr>
           <td>Add cover plates</td>
           <td>
-            SC1 <input type="radio" name="subProX1" checked="checked" > Resource 1 <br>
-            SC2 <input type="radio" name="subProX1"> Resource 2 <br>
+            SC1 <input type="radio" name="subProX1" checked="checked" > Resource 1 <br> <br>
+            SC2 <input type="radio" name="subProX1"> Resource 2 <br> <br>
             SC3 <input type="radio" name="subProX1"> Resource 3 <br>
           </td>
+        <td>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br>
+        </td>
       </tr>
       <tr>
           <td>Install brake light module</td>
           <td>
-            SC1 <input type="radio" name="subProY1"> Resource 1 <br>
-            SC2 <input type="radio" name="subProY1" checked="checked" > Resource 2 <br>
+            SC1 <input type="radio" name="subProY1"> Resource 1 <br> <br>
+            SC2 <input type="radio" name="subProY1" checked="checked" > Resource 2 <br> <br>
             SC3 <input type="radio" name="subProY1"> Resource 3 <br>
           </td>
+        <td>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br>
+        </td>
       </tr>
       <tr>
           <td>Mount screw</td>
           <td>
-            SC1 <input type="radio" name="subProZ"> Resource 1 <br>
-            SC2 <input type="radio" name="subProZ" checked="checked" > Resource 2 <br>
+            SC1 <input type="radio" name="subProZ"> Resource 1 <br> <br>
+            SC2 <input type="radio" name="subProZ" checked="checked" > Resource 2 <br> <br>
             SC3 <input type="radio" name="subProZ"> Resource 3 <br>
           </td>
+        <td>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br>
+        </td>
       </tr>
       <tr>
           <td>Screw positioning</td>
           <td>
-            SC1 <input type="radio" name="subProX2"> Resource 1 <br>
-            SC2 <input type="radio" name="subProX2"> Resource 2 <br>
+            SC1 <input type="radio" name="subProX2"> Resource 1 <br> <br>
+            SC2 <input type="radio" name="subProX2"> Resource 2 <br> <br>
             SC3 <input type="radio" name="subProX2" checked="checked" > Resource 3 <br>
           </td>
+        <td>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br>
+        </td>
       </tr>
       <tr>
         <td>Screw rear light</td>
         <td>
-          SC1 <input type="radio" name="subProY2"> Resource 1 <br>
-          SC2 <input type="radio" name="subProY2" checked="checked" > Resource 2 <br>
+          SC1 <input type="radio" name="subProY2"> Resource 1 <br> <br>
+          SC2 <input type="radio" name="subProY2" checked="checked" > Resource 2 <br> <br>
           SC3 <input type="radio" name="subProY2"> Resource 3 <br>
-        </td></tr>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br>
+        </td>
+      </tr>
       <tr>
         <td>Parts grasping</td>
         <td>
-          SC1 <input type="radio" name="subProZ2"> Resource 1 <br>
-          SC2 <input type="radio" name="subProZ2" checked="checked"> Resource 2 <br>
+          SC1 <input type="radio" name="subProZ2"> Resource 1 <br> <br>
+          SC2 <input type="radio" name="subProZ2" checked="checked"> Resource 2 <br> <br>
           SC3 <input type="radio" name="subProZ2"> Resource 3 <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="0,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="0,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="0,00" size="10"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    0" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    0" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    0" size="3"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    0" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    0" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    0" size="3"> <br>
         </td>
       </tr>
       <tr>
         <td>Initial trolley movement</td>
         <td>
-          SC1 <input type="radio" name="subProZ2"> Resource 1 <br>
-          SC2 <input type="radio" name="subProZ2"> Resource 2 <br>
+          SC1 <input type="radio" name="subProZ2"> Resource 1 <br> <br>
+          SC2 <input type="radio" name="subProZ2"> Resource 2 <br> <br>
           SC3 <input type="radio" name="subProZ2" checked="checked" > Resource 3 <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="0,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="0,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="0,00" size="10"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    0" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    0" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    0" size="3"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    0" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    0" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    0" size="3"> <br>
         </td>
       </tr>
       <tr>
         <td>Operation Start</td>
         <td>
-          SC1 <input type="radio" name="subProZ2" checked="checked" > Resource 1 <br>
-          SC2 <input type="radio" name="subProZ2"> Resource 2 <br>
+          SC1 <input type="radio" name="subProZ2" checked="checked" > Resource 1 <br> <br>
+          SC2 <input type="radio" name="subProZ2"> Resource 2 <br> <br>
           SC3 <input type="radio" name="subProZ2"> Resource 3 <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br> <br>
+          <input type="text" class="float-left" disabled value="1,00" size="10"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br>
+        </td>
+        <td>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br> <br>
+          <input type="text" class="float-left" disabled value="    1" size="3"> <br>
         </td>
       </tr>
       <tr>
         <td></td>
         <td> Total cost: </td>
-        <td> 0 </td>
+        <td> 45640,80 </td>
         <td> Physical LoA: </td>
-        <td> 0 </td>
+        <td> 2 </td>
       </tr>
       <tr>
         <td></td>
         <td> Cost per piece: </td>
-        <td> 0 </td>
+        <td> 6,68 </td>
         <td> Cognitive LoA: </td>
-        <td> 0 </td>
+        <td> 3 </td>
       </tr>
     </tbody>
   </table>

@@ -11,6 +11,9 @@
 /* #table2 td:hover {
   background-color: orange;
 } */
+#table2 td:hover {
+  background-color: orange;
+}
 
 #table2 td::selection {
   background: red;

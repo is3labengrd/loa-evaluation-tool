@@ -29,25 +29,12 @@
       <th colspan="4">Direction of increasing expediture -------------------------------------------------------------------></th>
     </thead>
     <tbody>
-    <tr *ngFor="let criter of rows; let i=index" (click)="changeBG()">
-      <!-- <td> <strong>{{ criter.strong }}</strong> </td>
-      <td (click)="changeColor(i,1)" [ngClass]="{'on1' : i==0 && i==selectedIndex && selected==1, 
-      'on2' : i==1 && i==selectedIndex && selected==1,
-      'on3' : i==2 && i==selectedIndex && selected==1}" >{{ criter.criteria1 }}</td>
-      <td (click)="changeColor(i,2)" [ngClass]="{'on1' : i==1 && i==selectedIndex && selected==2, 
-      'on2' : i==2 && i==selectedIndex && selected==2,
-      'on3' : i==3 && i==selectedIndex && selected==2}">{{ criter.criteria2 }}</td>
-      <td (click)="changeColor(i,3)" [ngClass]="{'on1' : i==2 && i==selectedIndex && selected==1, 
-      'on2' : i==2 && i==selectedIndex && selected==1,
-      'on3' : i==3 && i==selectedIndex && selected==1}">{{ criter.criteria3 }}</td>
-      <td (click)="changeColor(i,4)" [ngClass]="{'on1' : i==3 && i==selectedIndex && selected==1, 
-      'on2' : i==2 && i==selectedIndex && selected==1,
-      'on3' : i==3 && i==selectedIndex && selected==1}" >{{ criter.criteria4 }}</td> -->
-      <td> <strong>{{ criter.strong }}</strong>
-      <td >{{ criter.criteria1 }}</td>
-      <td>{{ criter.criteria2 }}</td>
-      <td>{{ criter.criteria3 }}</td>
-      <td>{{ criter.criteria4 }}</td>
+    <tr *ngFor="let criter of rows; let i=index">
+      <td> <strong>{{ criter.strong }}</strong> </td>
+      <td (click)="column1.click()" [class.on]="rows[i].value==1">{{ criter.criteria1 }}<input hidden #column1 type="radio" name="group-{{i}}" value="1" [(ngModel)]="rows[i].value"></td>
+      <td (click)="column2.click()" [class.on]="rows[i].value==2">{{ criter.criteria2 }}<input hidden #column2 type="radio" name="group-{{i}}" value="2" [(ngModel)]="rows[i].value"></td>
+      <td (click)="column3.click()" [class.on]="rows[i].value==3">{{ criter.criteria3 }}<input hidden #column3 type="radio" name="group-{{i}}" value="3" [(ngModel)]="rows[i].value"></td>
+      <td (click)="column4.click()" [class.on]="rows[i].value==4">{{ criter.criteria4 }}<input hidden #column4 type="radio" name="group-{{i}}" value="4" [(ngModel)]="rows[i].value"></td>
     </tr>
     <tr>
       <td></td>
