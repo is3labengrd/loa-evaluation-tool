@@ -149,21 +149,6 @@ export class HTAAnalysisComponent implements OnInit {
     this.status = !this.status;
   }
 
-  changeBG(val) { // on tr element
-    // val is event.target
-    let table = document.querySelector('#table2');
-    let selectedCells = table.getElementsByClassName('on');
-    if (val.tagName !== 'TD') {
-        return;
-      }
-    if (selectedCells.length) {
-      selectedCells[0].className = '';
-    }
-    val.className = 'on';
-  }
-
-
-
   constructor() { }
 
   ngOnInit() {
