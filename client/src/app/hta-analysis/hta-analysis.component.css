@@ -16,6 +16,10 @@
   background: red;
 }
 
+.selected {
+  background: red;
+}
+
 #table2 {
   margin-top: 20px;
 }

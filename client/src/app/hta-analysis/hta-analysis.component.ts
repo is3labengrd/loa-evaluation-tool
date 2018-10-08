@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HTAAnalysisComponent implements OnInit {
 
+  criteriaMatrix = {
+    "dimensionalStability": null
+  };
+
   constructor() { }
 
   ngOnInit() {

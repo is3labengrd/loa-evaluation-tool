@@ -30,10 +30,50 @@
     </thead>
     <tr>
       <td><strong>Dimensional stability</strong></td>
-      <td>Stable</td>
-      <td>Reduced stability</td>
-      <td>Hardly stable</td>
-      <td>Unstable</td>
+      <td (click)="stableInput.click()" [class.selected]="criteriaMatrix.dimensionalStability == 1">
+        Stable
+        <input
+          #stableInput
+          type="radio"
+          name="dimensional-stability"
+          value="1"
+          hidden
+          [(ngModel)]="criteriaMatrix.dimensionalStability"
+        >
+      </td>
+      <td (click)="reducedStabilityInput.click()" [class.selected]="criteriaMatrix.dimensionalStability == 2">
+        Reduced stability
+        <input
+          #reducedStabilityInput
+          type="radio"
+          name="dimensional-stability"
+          value="2"
+          hidden
+          [(ngModel)]="criteriaMatrix.dimensionalStability"
+        >
+      </td>
+      <td (click)="hardlyStableInput.click()" [class.selected]="criteriaMatrix.dimensionalStability == 3">
+        Hardly stable
+        <input
+          #hardlyStableInput
+          type="radio"
+          name="dimensional-stability"
+          value="3"
+          hidden
+          [(ngModel)]="criteriaMatrix.dimensionalStability"
+        >
+      </td>
+      <td (click)="unstableInput.click()" [class.selected]="criteriaMatrix.dimensionalStability == 4">
+        Unstable
+        <input
+          #unstableInput
+          type="radio"
+          name="dimensional-stability"
+          value="4"
+          hidden
+          [(ngModel)]="criteriaMatrix.dimensionalStability"
+        >
+      </td>
     </tr>
     <tr>
       <td><strong>Sensitivity</strong></td>
