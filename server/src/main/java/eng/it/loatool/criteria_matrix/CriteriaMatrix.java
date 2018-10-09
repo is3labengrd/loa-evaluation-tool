@@ -23,6 +23,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 ) public class CriteriaMatrix implements java.io.Serializable {
 
     private Integer pkTbId;
+    private int fkTbAceSubProLev;
     private Integer dsStable;
     private Integer dsReducedStability;
     private Integer dsHandlyStable;
@@ -98,7 +99,8 @@ import org.hibernate.annotations.UpdateTimestamp;
         this.updateDate = updateDate;
     }
 
-    public CriteriaMatrix(Integer dsStable, Integer dsReducedStability, Integer dsHandlyStable, Integer dsUnstable, Integer stInsensitive, Integer stHardlySensitive, Integer stSensitive, Integer stVerySensitive, Integer grExGripSurface, Integer grIntGripSurface, Integer grMagneticGripper, Integer grFabClosureGripper, Integer nvNoFurtherVariants, Integer nvOneFurtherVariants, Integer nvTwoFurtherVariants, Integer nvMoreFurtherVariants, Integer spUp, Integer spMore, Integer spStableUnstable, Integer spOnlyUnstable, Integer smRotSymmetrical, Integer smArSymmetry, Integer smMaAsymmetrical, Integer smSeSymmetrical, Integer haNone, Integer haStiJamPossible, Integer haComPenPossibile, Integer haSeeSymmetrical, Integer fjNever, Integer fjOcasionally, Integer fjRarely, Integer fjOften, Integer acVeryGood, Integer acGood, Integer acSatisfactory, Integer acSufficient, Integer orNoAxes, Integer orOneAxis, Integer orTwoAxes, Integer orThreeAxes, Integer jmLinear, Integer jmRotation, Integer jmLinearRotatory, Integer jmPathMovement, Integer jfNone, Integer jfLow, Integer jfMedium, Integer jfHigh, Integer jaJoinBasicComp, Integer jaJoinComp, Integer jaBasicComp, Integer jaMoreComp, Integer ncOneBasicComp, Integer ncTwoBasicComp, Integer ncThreeBasicComp, Integer ncMoreComp, Integer jsSecAllDirection, Integer jsGravityFit, Integer jsGravityRubbing, Integer jsAdditionalSec, Integer soNone, Integer soOne, Integer soTwo, Integer soMore, Integer ecAEleConsumFun, Date createDate, Date updateDate) {
+    public CriteriaMatrix(int fkTbAceSubProLev, Integer dsStable, Integer dsReducedStability, Integer dsHandlyStable, Integer dsUnstable, Integer stInsensitive, Integer stHardlySensitive, Integer stSensitive, Integer stVerySensitive, Integer grExGripSurface, Integer grIntGripSurface, Integer grMagneticGripper, Integer grFabClosureGripper, Integer nvNoFurtherVariants, Integer nvOneFurtherVariants, Integer nvTwoFurtherVariants, Integer nvMoreFurtherVariants, Integer spUp, Integer spMore, Integer spStableUnstable, Integer spOnlyUnstable, Integer smRotSymmetrical, Integer smArSymmetry, Integer smMaAsymmetrical, Integer smSeSymmetrical, Integer haNone, Integer haStiJamPossible, Integer haComPenPossibile, Integer haSeeSymmetrical, Integer fjNever, Integer fjOcasionally, Integer fjRarely, Integer fjOften, Integer acVeryGood, Integer acGood, Integer acSatisfactory, Integer acSufficient, Integer orNoAxes, Integer orOneAxis, Integer orTwoAxes, Integer orThreeAxes, Integer jmLinear, Integer jmRotation, Integer jmLinearRotatory, Integer jmPathMovement, Integer jfNone, Integer jfLow, Integer jfMedium, Integer jfHigh, Integer jaJoinBasicComp, Integer jaJoinComp, Integer jaBasicComp, Integer jaMoreComp, Integer ncOneBasicComp, Integer ncTwoBasicComp, Integer ncThreeBasicComp, Integer ncMoreComp, Integer jsSecAllDirection, Integer jsGravityFit, Integer jsGravityRubbing, Integer jsAdditionalSec, Integer soNone, Integer soOne, Integer soTwo, Integer soMore, Integer ecAEleConsumFun, Date createDate, Date updateDate) {
+        this.fkTbAceSubProLev = fkTbAceSubProLev;
         this.dsStable = dsStable;
         this.dsReducedStability = dsReducedStability;
         this.dsHandlyStable = dsHandlyStable;
@@ -176,6 +178,14 @@ import org.hibernate.annotations.UpdateTimestamp;
 
     public void setPkTbId(Integer pkTbId) {
         this.pkTbId = pkTbId;
+    }
+
+    @Column(name = "FK_TB_ACE_SUB_PRO_LEV", nullable = false) public int getFkTbAceSubProLev() {
+        return this.fkTbAceSubProLev;
+    }
+
+    public void setFkTbAceSubProLev(int fkTbAceSubProLev) {
+        this.fkTbAceSubProLev = fkTbAceSubProLev;
     }
 
     @Column(name = "DS_STABLE") public Integer getDsStable() {
