@@ -13,7 +13,6 @@ styleUrls: ['./add-process.component.css']
 export class AddProcessComponent implements OnInit {
 
 processSegmentList:Array<any> = [];
-countries:any[];
 main:Array<any> = [];
 subL1:Array<any> = [];
 subL2:Array<any> = [];
@@ -97,7 +96,6 @@ this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl3selection.n
        .toPromise()
        .then((res:any) => {
          if (res.pkTbId != null) {
-           //alert('Process segment added');
        }},
  (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);})
 

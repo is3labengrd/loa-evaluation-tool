@@ -28,39 +28,25 @@
       <tr>
         <td>Level 1:</td>
         <td>
-          <select name="" id="">
-            <option value="">Checking</option>
-            <option value="">Handling</option>
-            <option value="">Joining</option>
-            <option value="">Picking</option>
-            <option value="">Preparation</option>
-          </select>
+          <select [(ngModel)]="selectedModule1" (ngModelChange)="firstDropDownChanged($event)">
+              <option *ngFor="let module1 of _values1[0]" [value]="module1.name">{{module1.name}}</option>
+            </select>
         </td>
       </tr>
       <tr>
         <td>Level 2:</td>
         <td>
-          <select name="" id="">
-            <option value="">Final inspection</option>
-            <option value="">Rear light adjustment</option>
-            <option value="">Rivet nut fastening</option>
-            <option value="">Trolley Movement</option>
-            <option value="">Add cover plates</option>
-            <option value="">Install brake light module</option>
-            <option value="">Mount screw</option>
-            <option value="">Screw rear light</option>
-            <option value="">Parts grasping</option>
-            <option value="">Initial trolley movement</option>
-            <option value="">Operation Start</option>
-          </select>
+          <select *ngIf="(_values2.length > 0)" [(ngModel)]="selectedModule2" (ngModelChange)="secondDropDownChanged($event)">
+              <option *ngFor="let module2 of _values2" [value]="module2.name">{{module2.name}}</option>
+            </select>
         </td>
       </tr>
       <tr>
         <td>Level 3:</td>
         <td>
-          <select name="" id="">
-            <option value="">-</option>
-          </select>
+          <select *ngIf="(_values3.length > 0)" [(ngModel)]="selectedModule3" (ngModelChange)="thirdDropDownChanged($event)">
+             <option *ngFor="let module3 of _values3" [value]="module3.name">{{module3.name}}</option>
+            </select>
         </td>
       </tr>
     </tbody>
@@ -69,6 +55,6 @@
   <br>
 
   <div class="btn-group"  role="group" >
-      <button type="button" class="btn btn-secondary">Cancel</button>
-      <button type="button" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="refresh()">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="save()">Save</button>
     </div>
