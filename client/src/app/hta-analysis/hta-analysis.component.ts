@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HTAAnalysisComponent implements OnInit {
 
-  // columns = [];
   rows = [
     {
       strong: 'Dimensional stabilty',
@@ -123,36 +122,9 @@ export class HTAAnalysisComponent implements OnInit {
     }
   ];
 
-  criteriaMatrix = {
-    "dimensionalStability": null
-  };
-
-  selectedIndex;
-  status;
-  preSelected;
-  selected: boolean;
-  selectedRow = [];
-
-  check(data) {
-    console.log(data);
-  }
-
- changeColor() {
-    // this.selectedIndex = i;
-    // this.selected = id;
-    // console.log('selectedIndex=' + this.selectedIndex + ' i=' + i + ' id=' + id + ' seleected=' + this.selected);
-    this.selected = !this.selected;
-
-  }
-
-  toggleClass() {
-    this.status = !this.status;
-  }
-
   constructor() { }
 
   ngOnInit() {
   }
 
-  // test(x) {console.log(x)}
 }
