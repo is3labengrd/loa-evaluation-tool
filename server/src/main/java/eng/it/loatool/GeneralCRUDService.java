@@ -24,7 +24,7 @@ public class GeneralCRUDService {
     }
 
     @Transactional
-    public Optional create (
+    public Optional create(
         CrudRepository repository,
         PrimaryKeyOwner entity
     ) {
@@ -48,6 +48,19 @@ public class GeneralCRUDService {
             return Optional.empty();
         }
         return Optional.of(repository.save(entity));
+    }
+
+    @Transactional
+    public Optional delete(
+        CrudRepository repository,
+        Object id
+    ) {
+        Optional entity = repository.findById(id);
+        if (entity.isPresent()) {
+            repository.deleteById(id);
+            return entity;
+        }
+        return Optional.empty();
     }
 
 }
