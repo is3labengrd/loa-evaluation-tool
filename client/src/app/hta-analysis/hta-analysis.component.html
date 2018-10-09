@@ -23,127 +23,24 @@
 
   <h1 class="text-center">Criteria Matrix</h1>
 
-  <table id="table2" class="table table-bordered text-center">
+  <table id="table2"  class="table table-bordered text-center">
     <thead class="thead-light">
       <th>Criteria</th>
       <th colspan="4">Direction of increasing expediture -------------------------------------------------------------------></th>
     </thead>
-    <tr>
-      <td><strong>Dimensional stability</strong></td>
-      <td>Stable</td>
-      <td>Reduced stability</td>
-      <td>Hardly stable</td>
-      <td>Unstable</td>
-    </tr>
-    <tr>
-      <td><strong>Sensitivity</strong></td>
-      <td>Insensitive</td>
-      <td>Handly sensitive</td>
-      <td>Sensitive</td>
-      <td>Very Sensitive</td>
-    </tr>
-    <tr>
-      <td><strong>Grip</strong></td>
-      <td>External grip surfaces</td>
-      <td>Internal grip surfaces</td>
-      <td>Magnetic Gripper</td>
-      <td>Fabric closure gripper</td>
-    </tr>
-    <tr>
-      <td><strong>No. of Variants</strong></td>
-      <td>No further variants</td>
-      <td>One further variant</td>
-      <td>Two further variants</td>
-      <td>More than two further variants</td>
-    </tr>
-    <tr>
-      <td><strong>Stable Positions</strong></td>
-      <td>Up until four</td>
-      <td>More than four</td>
-      <td>Stable and unstable</td>
-      <td>Only unstable</td>
-    </tr>
-    <tr>
-      <td><strong>Symmetry</strong></td>
-      <td>Rotationally symmetrical</td>
-      <td>Areal symmetry</td>
-      <td>Markedly asymmetrical</td>
-      <td>Seemingly symmetrical</td>
-    </tr>
-    <tr>
-      <td><strong>Hook Up or Adhesion</strong></td>
-      <td>None</td>
-      <td>Sticking or jamming Possible</td>
-      <td>Component penetration Possible</td>
-      <td>Seemingly symmetrical</td>
-    </tr>
-    <tr>
-      <td><strong>Faulty Joining</strong></td>
-      <td>Never</td>
-      <td>Occasionally</td>
-      <td>Rarely</td>
-      <td>Often</td>
-    </tr>
-    <tr>
-      <td><strong>Accessibility</strong></td>
-      <td>Very good</td>
-      <td>Good</td>
-      <td>Satisfactory</td>
-      <td>Sufficient</td>
-    </tr>
-    <tr>
-      <td><strong>Orientation</strong></td>
-      <td>No axis</td>
-      <td>One axis</td>
-      <td>Two axis</td>
-      <td>Thress axis</td>
-    </tr>
-    <tr>
-      <td><strong>Joining mov.</strong></td>
-      <td>Linear</td>
-      <td>Rotation</td>
-      <td>Linear-rotatory</td>
-      <td>Path movement</td>
-    </tr>
-    <tr>
-      <td><strong>Joining force</strong></td>
-      <td>None</td>
-      <td>Low</td>
-      <td>Medium</td>
-      <td>High</td>
-    </tr>
-    <tr>
-      <td><strong>Joining aid</strong></td>
-      <td>Joining nad basic component</td>
-      <td>Joining component</td>
-      <td>Basic component</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td><strong>Number of basic components</strong></td>
-      <td>One basic component</td>
-      <td>Two basic components</td>
-      <td>Three basic components</td>
-      <td>More than three basic components</td>
-    </tr>
-    <tr>
-      <td><strong>Joining Security</strong></td>
-      <td>Secured in all directions</td>
-      <td>Gravity and form fit</td>
-      <td>Gravity and rubbing</td>
-      <td>Additional securing necessary</td>
-    </tr>
-    <tr>
-      <td><strong>Special operations</strong></td>
-      <td>None</td>
-      <td>One</td>
-      <td>Two</td>
-      <td>More than two</td>
+    <tbody>
+    <tr *ngFor="let criter of rows; let i=index">
+      <td> <strong>{{ criter.strong }}</strong> </td>
+      <td (click)="column1.click()" [class.on]="rows[i].value==1">{{ criter.criteria1 }}<input hidden #column1 type="radio" name="group-{{i}}" value="1" [(ngModel)]="rows[i].value"></td>
+      <td (click)="column2.click()" [class.on]="rows[i].value==2">{{ criter.criteria2 }}<input hidden #column2 type="radio" name="group-{{i}}" value="2" [(ngModel)]="rows[i].value"></td>
+      <td (click)="column3.click()" [class.on]="rows[i].value==3">{{ criter.criteria3 }}<input hidden #column3 type="radio" name="group-{{i}}" value="3" [(ngModel)]="rows[i].value"></td>
+      <td (click)="column4.click()" [class.on]="rows[i].value==4">{{ criter.criteria4 }}<input hidden #column4 type="radio" name="group-{{i}}" value="4" [(ngModel)]="rows[i].value"></td>
     </tr>
     <tr>
       <td></td>
       <td colspan="4"> <strong><-------------------------------------------------------------------------------- Direction of increasing LoA </strong></td>
     </tr>
+  </tbody>
   </table><br>
 
   <form action="">
@@ -200,3 +97,4 @@
     </div>
   </form>
 </div>
+
