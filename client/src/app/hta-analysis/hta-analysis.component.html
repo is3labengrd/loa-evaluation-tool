@@ -31,10 +31,10 @@
     <tbody>
     <tr *ngFor="let criter of rows; let i=index">
       <td> <strong>{{ criter.strong }}</strong> </td>
-      <td (click)="column1.click()" [class.on]="rows[i].value==1">{{ criter.criteria1 }}<input hidden #column1 type="radio" name="group-{{i}}" value="1" [(ngModel)]="rows[i].value"></td>
-      <td (click)="column2.click()" [class.on]="rows[i].value==2">{{ criter.criteria2 }}<input hidden #column2 type="radio" name="group-{{i}}" value="2" [(ngModel)]="rows[i].value"></td>
-      <td (click)="column3.click()" [class.on]="rows[i].value==3">{{ criter.criteria3 }}<input hidden #column3 type="radio" name="group-{{i}}" value="3" [(ngModel)]="rows[i].value"></td>
-      <td (click)="column4.click()" [class.on]="rows[i].value==4">{{ criter.criteria4 }}<input hidden #column4 type="radio" name="group-{{i}}" value="4" [(ngModel)]="rows[i].value"></td>
+      <td (click)="column1.click()" [class.on]="rows[i].value==0">{{ criter.criteria1 }}<input hidden #column1 type="radio" name="group-{{i}}" value="0" [(ngModel)]="rows[i].value" (change)="updateMatrix()"></td>
+      <td (click)="column2.click()" [class.on]="rows[i].value==1">{{ criter.criteria2 }}<input hidden #column2 type="radio" name="group-{{i}}" value="1" [(ngModel)]="rows[i].value" (change)="updateMatrix()"></td>
+      <td (click)="column3.click()" [class.on]="rows[i].value==2">{{ criter.criteria3 }}<input hidden #column3 type="radio" name="group-{{i}}" value="2" [(ngModel)]="rows[i].value" (change)="updateMatrix()"></td>
+      <td (click)="column4.click()" [class.on]="rows[i].value==3">{{ criter.criteria4 }}<input hidden #column4 type="radio" name="group-{{i}}" value="3" [(ngModel)]="rows[i].value" (change)="updateMatrix()"></td>
     </tr>
     <tr>
       <td></td>

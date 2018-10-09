@@ -700,7 +700,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "CREATE_DATE", nullable = false, length = 19)
+    @Column(name = "CREATE_DATE", updatable = false, nullable = false, length = 19)
     public Date getCreateDate() {
         return this.createDate;
     }
