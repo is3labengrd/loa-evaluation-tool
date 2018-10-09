@@ -434,16 +434,34 @@ export class HTAAnalysisComponent implements OnInit {
   }
 
   matrixId;
+  cognitiveLoaArray;
+  physicalLoaArray;
 
   constructor(private http:HttpClient) { }
 
   ngOnInit() {
-    var subscription:Subscription = this.http
+    var matrixCreation:Subscription = this.http
       .post(environment.apiUrl + "/v1/criteria-matrices", this.request)
       .subscribe(
         (matrix:any) => {
           this.matrixId = matrix.pkTbId;
-          subscription.unsubscribe();
+          matrixCreation.unsubscribe();
+        }
+      );
+    var cognitiveLoaSubscription:Subscription = this.http
+      .get(`${environment.apiUrl}/v1/cognitive-loa`)
+      .subscribe(
+        (cognitiveLoaArray:Array<any>) => {
+          this.cognitiveLoaArray = cognitiveLoaArray;
+          cognitiveLoaSubscription.unsubscribe();
+        }
+      );
+    var physicalLoaSubscription:Subscription = this.http
+      .get(`${environment.apiUrl}/v1/physical-loa`)
+      .subscribe(
+        (physicalLoaArray:Array<any>) => {
+          this.physicalLoaArray = physicalLoaArray;
+          physicalLoaSubscription.unsubscribe();
         }
       );
   }
@@ -455,7 +473,7 @@ export class HTAAnalysisComponent implements OnInit {
         this.request
       )
       .subscribe(
-        (matrix) => {
+        () => {
           subscription.unsubscribe();
         }
       );
