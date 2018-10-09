@@ -9,7 +9,7 @@ export class HTAAnalysisComponent implements OnInit {
 
   rows = [
     {
-      strong: 'Dimensional stabilty',
+      strong: 'Dimensional stability',
       criteria1: 'Stable',
       criteria2: 'Reduced stability',
       criteria3: 'Hardly stable',
@@ -17,7 +17,7 @@ export class HTAAnalysisComponent implements OnInit {
     },
     {
       strong: 'Sensitivity',
-      criteria1: 'Insesitive',
+      criteria1: 'Insensitive',
       criteria2: 'Handly sensitive',
       criteria3: 'Sensitive',
       criteria4: 'Very sensitive'
@@ -31,7 +31,7 @@ export class HTAAnalysisComponent implements OnInit {
     },
     {
       strong: 'No. of variants',
-      criteria1: 'No futher variants',
+      criteria1: 'No further variants',
       criteria2: 'One further variant',
       criteria3: 'Two further variants',
       criteria4: 'More than two variants'
@@ -60,7 +60,7 @@ export class HTAAnalysisComponent implements OnInit {
     {
       strong: 'Faulty joining',
       criteria1: 'Never',
-      criteria2: 'Occasionaly',
+      criteria2: 'Occasionally',
       criteria3: 'Rarely',
       criteria4: 'Often'
     },
@@ -72,7 +72,7 @@ export class HTAAnalysisComponent implements OnInit {
       criteria4: 'Sufficient'
     },
     {
-      strong: 'Orienation',
+      strong: 'Orientation',
       criteria1: 'No axis',
       criteria2: 'One axis',
       criteria3: 'Two axis',

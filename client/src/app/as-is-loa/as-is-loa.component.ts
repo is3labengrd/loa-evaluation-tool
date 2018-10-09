@@ -60,7 +60,7 @@ export class AsIsLOAComponent implements OnInit {
       data: {
         datasets: [
           {
-            label: 'Final inspection',
+            label: 'Checking - Final inspection',
             backgroundColor: 'orange',
             borderColor: 'black',
             borderWidth: 1,
@@ -73,7 +73,7 @@ export class AsIsLOAComponent implements OnInit {
             ]
           },
           {
-            label: 'Rear light adjustment - Add cover plates - 	Install brake light module',
+            label: 'Handling - Rear light adjustment | Joining - Add cover plates | Joining - Install brake light module',
             backgroundColor: 'red',
             borderColor: 'black',
             borderWidth: 1,
@@ -86,7 +86,7 @@ export class AsIsLOAComponent implements OnInit {
             ]
           },
           {
-            label: 'Rivet nut fastening',
+            label: 'Handling - Rivet nut fastening',
             backgroundColor: 'blue',
             borderColor: 'black',
             borderWidth: 1,
