@@ -31,6 +31,7 @@ const ROUTES: Routes = [
   { path: 'scenarios', component: ScenariosComponent },
   { path: 'add-scenario', component: AddScenarioComponent },
   { path: 'edit-scenario', component: EditScenarioComponent }
+
 ];
 
 @NgModule({

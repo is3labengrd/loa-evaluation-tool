@@ -10,13 +10,12 @@ import { environment } from '../../environments/environment';
 })
 export class ProcessListComponent implements OnInit {
 
-  processSegmentList:Array<any> = []
-
+  processSegmentList:Array<any> = [];
   private processSegments:Array<any>;
   private subprocesses:Array<any>;
   numberOfItems = "all";
   page = 0;
-  private paginate = false;
+  lastPage = 0;
 
   private getAllPageIterator = () => {
     var i = 1;
@@ -41,7 +40,6 @@ export class ProcessListComponent implements OnInit {
       }
     }
   }
-
 
   pageIterable = {
     [Symbol.iterator]: this.getAllPageIterator
@@ -106,6 +104,7 @@ export class ProcessListComponent implements OnInit {
         (subprocesses:any) => {
           this.pageIterable[Symbol.iterator] = this
             .getPageIteratorGetter(subprocesses.totalPages);
+          this.lastPage = subprocesses.totalPages-1;
           this.subprocesses = subprocesses.content;
           subprocessLevelsSubscription.unsubscribe();
           this.triggerProcessSegmentListPopulation();
@@ -157,6 +156,14 @@ export class ProcessListComponent implements OnInit {
       },
       []
     );
+  }
+
+  private previousPage() {
+    this.page = Math.max(0, --this.page);
+  }
+
+  private nextPage() {
+    this.page = Math.min(this.lastPage, ++this.page);
   }
 
 }
