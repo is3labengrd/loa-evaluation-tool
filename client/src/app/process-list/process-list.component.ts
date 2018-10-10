@@ -127,7 +127,10 @@ export class ProcessListComponent implements OnInit {
     this.processSegmentList = this.subprocesses.reduce(
       (accumulator:Array<any>, subprocess) => {
         var currentDisplaySubprocess;
-        var relatedProcess = this.processSegments[subprocess.fkTbAceProSeq-1];
+        var relatedProcess = this.processSegments[subprocess.fkTbAceProSeq-1] || {
+          name: "error",
+          nlowerLevelSubPro: "error"
+        };
         if (subprocess.proLevel == 1 || accumulator.length == 0) {
           currentDisplaySubprocess = Object.create(null);
           currentDisplaySubprocess.name = relatedProcess.name;
