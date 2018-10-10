@@ -124,12 +124,14 @@ export class ProcessListComponent implements OnInit {
   })();
 
   private populateProcessSegmentListFromSubprocesses() {
+    console.log(this.processSegments);
     this.processSegmentList = this.subprocesses.reduce(
       (accumulator:Array<any>, subprocess) => {
         var currentDisplaySubprocess;
         var relatedProcess = this.processSegments[subprocess.fkTbAceProSeq-1] || {
           name: "error",
-          nlowerLevelSubPro: "error"
+          nlowerLevelSubPro: "error",
+          pkTbId: NaN
         };
         if (subprocess.proLevel == 1 || accumulator.length == 0) {
           currentDisplaySubprocess = Object.create(null);
@@ -139,6 +141,12 @@ export class ProcessListComponent implements OnInit {
           currentDisplaySubprocess.sub2 = "-";
           currentDisplaySubprocess.sub3 = "-";
           currentDisplaySubprocess.route = "main-analysis";
+          currentDisplaySubprocess.editRoute = (
+            Number.isNaN(relatedProcess.pkTbId)?
+              "/error"
+            :
+              `/edit-process/${relatedProcess.pkTbId}`
+          );
           currentDisplaySubprocess.actions = "Analysis";
           accumulator.push(currentDisplaySubprocess);
         } else {

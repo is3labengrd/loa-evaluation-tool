@@ -24,7 +24,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let process of processSegmentList">
-      <td> <a routerLink="/edit-process"> {{ process.name }} </a> </td>
+      <td> <a routerLink="{{process.editRoute}}"> {{ process.name }} </a> </td>
       <td> {{ process.sublevels }} </td>
       <td> {{ process.sub1 }} </td>
       <td> {{ process.sub2 }} </td>
