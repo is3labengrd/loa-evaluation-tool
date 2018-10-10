@@ -31,10 +31,62 @@
     <tbody>
     <tr *ngFor="let criter of rows; let i=index">
       <td> <strong>{{ criter.strong }}</strong> </td>
-      <td (click)="column1.click()" [class.on]="rows[i].value==0">{{ criter.criteria1 }}<input hidden #column1 type="radio" name="group-{{i}}" value="0" [(ngModel)]="rows[i].value" (change)="updateMatrix()"></td>
-      <td (click)="column2.click()" [class.on]="rows[i].value==1">{{ criter.criteria2 }}<input hidden #column2 type="radio" name="group-{{i}}" value="1" [(ngModel)]="rows[i].value" (change)="updateMatrix()"></td>
-      <td (click)="column3.click()" [class.on]="rows[i].value==2">{{ criter.criteria3 }}<input hidden #column3 type="radio" name="group-{{i}}" value="2" [(ngModel)]="rows[i].value" (change)="updateMatrix()"></td>
-      <td (click)="column4.click()" [class.on]="rows[i].value==3">{{ criter.criteria4 }}<input hidden #column4 type="radio" name="group-{{i}}" value="3" [(ngModel)]="rows[i].value" (change)="updateMatrix()"></td>
+      <td
+        (click)="column1.click()"
+        [class.on]="rows[i].value==0"
+      >
+        {{ criter.criteria1 }}
+        <input hidden
+          #column1
+          type="radio"
+          name="group-{{i}}"
+          value="0"
+          [(ngModel)]="rows[i].value"
+          (change)="updateMatrix()"
+        >
+      </td>
+      <td
+        (click)="column2.click()"
+        [class.on]="rows[i].value==1"
+      >
+        {{ criter.criteria2 }}
+        <input hidden
+          #column2
+          type="radio"
+          name="group-{{i}}"
+          value="1"
+          [(ngModel)]="rows[i].value"
+          (change)="updateMatrix()"
+        >
+      </td>
+      <td
+        (click)="column3.click()"
+        [class.on]="rows[i].value==2"
+      >
+        {{ criter.criteria3 }}
+        <input hidden
+          #column3
+          type="radio"
+          name="group-{{i}}"
+          value="2"
+          [(ngModel)]="rows[i].value"
+          (change)="updateMatrix()"
+        >
+      </td>
+      <td
+        (click)="column4.click()"
+        [class.on]="rows[i].value==3"
+      >
+        {{ criter.criteria4 }}
+        <input hidden
+          #column4
+          type="radio"
+          name="group-{{i}}"
+          value="3"
+          [(ngModel)]="rows[i].value"
+          (change)="updateMatrix()"
+        >
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -55,45 +107,33 @@
         </thead>
         <tr>
           <td>
-              <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-              </label>
+            <label class="switch">
+              <input type="checkbox" name="possibility" [(ngModel)]="loaInfoRequest.possibility">
+              <span class="slider round"></span>
+            </label>
           </td>
           <td>
-            <select name="" id="">
-              <option value="">LoA 1 - Totally manual</option>
-              <option value="">LoA 2 - Static hand tool</option>
-              <option value="">LoA 3 - Flexible hand tool</option>
-              <option value="">LoA 4 - Automated hand tool</option>
-              <option value="">LoA 5 - Static machine/Workstation</option>
-              <option value="">LoA 6 - Flexible machine/Workstation</option>
-              <option value="">LoA 7 - Totally automatic</option>
+            <select name="physical-loa" [(ngModel)]="loaInfoRequest.fkTbAcePhyLoa">
+              <option *ngFor="let loa of physicalLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}}</option>
             </select>
           </td>
           <td>
-            <select name="" id="">
-              <option value="">LoA 1 - Operator knowledge</option>
-              <option value="">LoA 2 - Information is provided</option>
-              <option value="">LoA 3 - Detail of guided information</option>
-              <option value="">LoA 4 - Technology starts monitoring information</option>
-              <option value="">LoA 5 - Technology monitors and analyse</option>
-              <option value="">LoA 6 - Technology responsible for majority of tasks </option>
-              <option value="">LoA 7 - System handles all information </option>
+            <select name="cognitive-loa" [(ngModel)]="loaInfoRequest.fkTbAceCogLoa">
+              <option *ngFor="let loa of cognitiveLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}}</option>
             </select>
           </td>
           <td>
-            <input type="number" name="" id="" max="7" min="1" value="1">
+            <input type="number" name="minBestLoa" max="7" min="1" [(ngModel)]="loaInfoRequest.bestRangeMin">
           </td>
           <td>
-            <input type="number" name="" id="" max="7" min="1" value="1" >
+            <input type="number" name="maxBestLoa" max="7" min="1" [(ngModel)]="loaInfoRequest.bestRangeMax">
           </td>
         </tr>
       </table>
     </fieldset>
     <div class="btn-group" style="justify-content: center; width: 100%;">
       <button class="btn btn-secondary">Cancel</button>
-      <button class="btn btn-primary">Save</button>
+      <button class="btn btn-primary" (click)="saveLoaInfo()">Save</button>
     </div>
   </form>
 </div>

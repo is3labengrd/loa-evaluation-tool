@@ -18,9 +18,9 @@ export class HTAAnalysisComponent implements OnInit {
       return (number) => {
         for (let i=0; i<4; i++) {
           if (i == number) {
-            self.request[prefix + values[i]] = 1;
+            self.matrixRequest[prefix + values[i]] = 1;
           } else {
-            self.request[prefix + values[i]] = 0;
+            self.matrixRequest[prefix + values[i]] = 0;
           }
         }
       }
@@ -365,7 +365,7 @@ export class HTAAnalysisComponent implements OnInit {
     ];
   })();
 
-  request = {
+  matrixRequest = {
     "dsStable": 0,
     "dsReducedStability": 0,
     "dsHandlyStable": 0,
@@ -433,6 +433,46 @@ export class HTAAnalysisComponent implements OnInit {
     "ecAEleConsumFun": 0
   }
 
+  actualLoaInfoRequest = {
+    "fkTbAcePhyLoa": "1",
+    "fkTbAceCogLoa": "1",
+    "possibility": false,
+    "bestRange": "1-1",
+    "fkTbAceSubProLev": 0
+  }
+
+  loaInfoRequest:any = new Proxy(
+    this.actualLoaInfoRequest,
+    {
+      set: function (obj, prop, value) {
+        switch (prop) {
+          case "bestRangeMin":
+            obj.bestRange = obj.bestRange
+              .replace(/^(\d+)/, value);
+            return value;
+          case "bestRangeMax":
+            obj.bestRange = obj.bestRange
+              .replace(/(\d+)$/, value);
+            return value;
+          case "bestRange":
+            return false;
+          default:
+            return Reflect.set(obj, prop, value);
+        }
+      },
+      get: function (obj, prop) {
+        switch (prop) {
+          case "bestRangeMin":
+            return /^(\d+)/.exec(obj.bestRange)[0].toString();
+          case "bestRangeMax":
+            return /(\d+)$/.exec(obj.bestRange)[0].toString();
+          default:
+            return Reflect.get(obj, prop);
+        }
+      }
+    }
+  );
+
   matrixId;
   cognitiveLoaArray;
   physicalLoaArray;
@@ -441,7 +481,7 @@ export class HTAAnalysisComponent implements OnInit {
 
   ngOnInit() {
     var matrixCreation:Subscription = this.http
-      .post(environment.apiUrl + "/v1/criteria-matrices", this.request)
+      .post(environment.apiUrl + "/v1/criteria-matrices", this.matrixRequest)
       .subscribe(
         (matrix:any) => {
           this.matrixId = matrix.pkTbId;
@@ -470,13 +510,23 @@ export class HTAAnalysisComponent implements OnInit {
     var subscription:Subscription = this.http
       .put(
         `${environment.apiUrl}/v1/criteria-matrices/${this.matrixId}`,
-        this.request
+        this.matrixRequest
       )
       .subscribe(
         () => {
           subscription.unsubscribe();
         }
       );
+  }
+
+  saveLoaInfo() {
+    var loaInfoCreation:Subscription = this.http
+    .post(environment.apiUrl + "/v1/process-loa-info", this.actualLoaInfoRequest)
+    .subscribe(
+      (matrix:any) => {
+        loaInfoCreation.unsubscribe();
+      }
+    );
   }
 
 }
