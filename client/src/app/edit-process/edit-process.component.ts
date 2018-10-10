@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class EditProcessComponent implements OnInit {
   subProcessesListToEdit:Array<any> = [];
   checkEdit1:any =[];
   checkEdit2:any =[];
-  main:Array<any> = [];
+  mainProcess:Array<any> = [];
   subL1:Array<any> = [];
   subL2:Array<any> = [];
   subL3:Array<any> = [];
@@ -33,30 +33,49 @@ export class EditProcessComponent implements OnInit {
   private _values3 = [];
   fk:any;
   fk2:any;
+  id:number;
+  lowerLevel:any;
 
-  constructor(private http: HttpClient, public router: Router) {}
+  constructor(private http: HttpClient, public router: Router, private route:ActivatedRoute) {}
 
-    async ngOnInit() {
+  ngOnInit() {
+      this.id  = this.route.snapshot.params['id'];
+
+      this.http
+        .get(environment.apiUrl + '/v1/process-segments/'+this.id)
+        .toPromise()
+        .then(
+          (main:any) => {
+              this.fetchFromCAM(main);
+              this.mainProcess.push(main);
+          }
+        )
+    }
+
+    fetchFromCAM(mainP) {
       this.http
         .get(environment.apiUrl + '/v1/var/process-segments')
         .toPromise()
         .then(
           (processSegments:Array<any>) => {
             this.processSegmentList.push(processSegments);
-            this._values1.push(this.subProcessL1('latchValveProduction'));
-            this.startDropDownMenu(this._values1[0]);
+            this._values1.push(this.subProcessL1(mainP.name));
+            this.startDropDownMenu(this._values1[0],mainP);
+            this.lowerLevel = this.findObj(this.processSegmentList[0],this.mainProcess[0].name);
+
           }
         )
+
     }
 
-    startDropDownMenu(objList) {
+    startDropDownMenu(objList,mainP) {
        this.http.get(environment.apiUrl + '/v1/subprocess-levels')
         .toPromise()
         .then(
           (subProcessesList:any) => {
 
             for (let i in subProcessesList) {
-              if (subProcessesList[i].fkTbAceProSeq === 4){
+              if (subProcessesList[i].fkTbAceProSeq === mainP.pkTbId){
                 this.fk = subProcessesList[i];
                 this.subProcessesList.push(subProcessesList[i]);
                 this.selectedModule1 = subProcessesList[i].name;
@@ -67,7 +86,7 @@ export class EditProcessComponent implements OnInit {
             for (let j in subProcessesList) {
               if (subProcessesList[j].fkTbAceProSeq === this.fk.pkTbId){
                 this.fk2 = subProcessesList[j];
-                this._values2 = this.subProcessL2('latchValveProduction',this.selectedModule1);
+                this._values2 = this.subProcessL2(mainP.name,this.selectedModule1);
                 this.subProcessesList.push(subProcessesList[j]);
                 this.selectedModule2 = subProcessesList[j].name;
                 this.lvl2selection = this.findObj(this._values2,this.selectedModule2);
@@ -75,7 +94,7 @@ export class EditProcessComponent implements OnInit {
             }
             for (let k in subProcessesList) {
               if (subProcessesList[k].fkTbAceProSeq === this.fk2.pkTbId){
-                this._values3 = this.subProcessL3('latchValveProduction',this.selectedModule1,this.selectedModule2);
+                this._values3 = this.subProcessL3(mainP.name,this.selectedModule1,this.selectedModule2);
                 this.subProcessesList.push(subProcessesList[k]);
                 this.selectedModule3 = subProcessesList[k].name;
                 this.lvl3selection = this.findObj(this._values3,this.selectedModule2);
@@ -186,7 +205,7 @@ export class EditProcessComponent implements OnInit {
 
      this._values2 = [];
      this._values3 = [];
-     this._values2 = this.subProcessL2('latchValveProduction',this.selectedModule1);
+     this._values2 = this.subProcessL2(this.mainProcess[0].name,this.selectedModule1);
      this.lvl1selection = this.findObj(obj,this.selectedModule1);
     }
 
@@ -196,7 +215,7 @@ export class EditProcessComponent implements OnInit {
       const obj2 = this._values2;
       //console.log(val, obj);
       if (!obj2) return;
-      this._values3 = this.subProcessL3('latchValveProduction',this.selectedModule1,this.selectedModule2);
+      this._values3 = this.subProcessL3(this.mainProcess[0].name,this.selectedModule1,this.selectedModule2);
       this.lvl2selection = this.findObj(obj2,this.selectedModule2);
     }
 

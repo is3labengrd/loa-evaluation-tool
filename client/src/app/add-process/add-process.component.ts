@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Router, ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,7 @@ styleUrls: ['./add-process.component.css']
 export class AddProcessComponent implements OnInit {
 
 processSegmentList:Array<any> = [];
-main:Array<any> = [];
+mainProcess:Array<any> = [];
 subL1:Array<any> = [];
 subL2:Array<any> = [];
 subL3:Array<any> = [];
@@ -23,22 +24,46 @@ lvl3selection:any;
 private _values1 = [];
 private _values2 = [];
 private _values3 = [];
+id:number;
+lowerLevel:any;
 
+constructor(private http: HttpClient, public router: Router, private route:ActivatedRoute) {}
 
-constructor(private http: HttpClient) {}
+ngOnInit() {
 
-async ngOnInit() {
+  this.id  = this.route.snapshot.params['id'];
 
-  var processSegmentsSubscription:Subscription = this.http
-    .get(environment.apiUrl + '/v1/var/process-segments')
-    .subscribe(
-      (processSegments:Array<any>) => {
-        this.processSegmentList.push(processSegments);
-        processSegmentsSubscription.unsubscribe();
-        this._values1.push(this.subProcessL1('latchValveProduction'));
+  this.http
+    .get(environment.apiUrl + '/v1/process-segments/'+this.id)
+    .toPromise()
+    .then(
+      (main:any) => {
+          this.mainProcess.push(main);
+          this.fetchFromCAM(main);
       }
     )
+}
 
+fetchFromCAM(mainP) {
+
+  this.http
+    .get(environment.apiUrl + '/v1/var/process-segments')
+    .toPromise()
+    .then(
+      (processSegments:Array<any>) => {
+        this.processSegmentList.push(processSegments);
+        this._values1.push(this.subProcessL1(mainP.name));
+        this.lowerLevel = this.findObj(this.processSegmentList[0],this.mainProcess[0].name);
+      }
+    )
+}
+
+findObj(obj: any, name: any){
+  for (let k in obj) {
+    if (obj[k].name === name){
+      return obj[k];
+     }
+  }
 }
 
 refresh(): void {
@@ -50,14 +75,16 @@ refresh(): void {
 }
 
 addProcess() {
+
  const mainProcUrl = environment.apiUrl + '/v1/process-segments';
- this.http.post(mainProcUrl, {"name": "latchValveProduction","varProSeqId": "1","nlowerLevelSubPro": 10})
+ this.http.post(mainProcUrl, {"name": this.mainProcess[0].name,"varProSeqId": this.mainProcess[0].varProSeqId,"nlowerLevelSubPro": this.lowerLevel.subProcLowerLevel})
         .toPromise()
         .then((res:any) => {
           if (res.pkTbId != null) {
             alert('Process segment added');
             this.addSubProcessL1(res.pkTbId);
             }
+            this.router.navigate(['process-list']);
  },
   (err) => alert('Something went wrong. \nStatus: ' +  err.error.status))
 
@@ -107,7 +134,7 @@ firstDropDownChanged(val: any) {
  const obj = this._values1[0];
  //console.log(val, obj);
  if (!obj) return;
- this._values2 = this.subProcessL2('latchValveProduction',obj[val].name);
+ this._values2 = this.subProcessL2(this.mainProcess[0].name,obj[val].name);
  this.lvl1selection = obj[val];
 }
 
@@ -116,7 +143,7 @@ firstDropDownChanged(val: any) {
   const obj2 = this._values2;
   //console.log(val, obj);
   if (!obj2) return;
-  this._values3 = this.subProcessL3('latchValveProduction',this.lvl1selection.name,obj2[val2].name);
+  this._values3 = this.subProcessL3(this.mainProcess[0].name,this.lvl1selection.name,obj2[val2].name);
   this.lvl2selection = obj2[val2];
 }
 
@@ -130,9 +157,6 @@ thirdDropDownChanged(val3: any) {
 mainProcess(){
   this.main = [];
  for (let entry of this.processSegmentList[0]) {
-     //console.log(entry.name);
-     //console.log(entry.processSegmentId);
-     //console.log(entry.subProcLowerLevel);
      this.main.push(entry.name);
    }
    return this.main;

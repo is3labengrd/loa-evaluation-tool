@@ -19,8 +19,8 @@ import { EditScenarioComponent } from './edit-scenario/edit-scenario.component';
 const ROUTES: Routes = [
   { path: '', redirectTo: '/process-list', pathMatch: 'full' },
   { path: 'process-list', component: ProcessListComponent },
-  { path: 'add-process', component: AddProcessComponent },
-  { path: 'edit-process', component: EditProcessComponent },
+  { path: 'add-process/:id', component: AddProcessComponent },
+  { path: 'edit-process/:id', component: EditProcessComponent },
   { path: 'as-is-loa', component: AsIsLOAComponent },
   { path: 'resource-list', component: ResourceListComponent },
   { path: 'main-analysis', component: MainAnalysisComponent},
