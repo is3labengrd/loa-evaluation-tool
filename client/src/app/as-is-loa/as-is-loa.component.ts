@@ -10,11 +10,10 @@ export class AsIsLOAComponent implements OnInit {
 
   title = 'LoA Graph';
 
-  BarChart = [];
-  BablChart = [];
+  bubbleChart:any;
 
   ngOnInit() {
-    this.BablChart = new Chart('bablChart', {
+    this.bubbleChart = new Chart('bubbleChart', {
       type: 'bubble',
       data: {
         datasets: [
