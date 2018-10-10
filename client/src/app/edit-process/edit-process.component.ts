@@ -16,13 +16,11 @@ export class EditProcessComponent implements OnInit {
   selectedModule1: any = null;
   selectedModule2: any = null;
   selectedModule3: any = null;
-
   processSegmentList:Array<any> = [];
   subProcessesList:Array<any> = [];
   subProcessesListToEdit:Array<any> = [];
   checkEdit1:any =[];
   checkEdit2:any =[];
-
   main:Array<any> = [];
   subL1:Array<any> = [];
   subL2:Array<any> = [];
@@ -33,31 +31,25 @@ export class EditProcessComponent implements OnInit {
   private _values1 = [];
   private _values2 = [];
   private _values3 = [];
-
   fk:any;
   fk2:any;
-
-
 
   constructor(private http: HttpClient, public router: Router) {}
 
     async ngOnInit() {
-
-      //var processSegmentsSubscription:Subscription =
       this.http
         .get(environment.apiUrl + '/v1/var/process-segments')
         .toPromise()
         .then(
           (processSegments:Array<any>) => {
             this.processSegmentList.push(processSegments);
-            //processSegmentsSubscription.unsubscribe();
             this._values1.push(this.subProcessL1('latchValveProduction'));
-            this.startDropDownMenu();
+            this.startDropDownMenu(this._values1[0]);
           }
         )
     }
 
-    startDropDownMenu() {
+    startDropDownMenu(objList) {
        this.http.get(environment.apiUrl + '/v1/subprocess-levels')
         .toPromise()
         .then(
@@ -68,7 +60,7 @@ export class EditProcessComponent implements OnInit {
                 this.fk = subProcessesList[i];
                 this.subProcessesList.push(subProcessesList[i]);
                 this.selectedModule1 = subProcessesList[i].name;
-
+                this.lvl1selection = this.findObj(objList,this.selectedModule1);
                }
             }
 
@@ -78,6 +70,7 @@ export class EditProcessComponent implements OnInit {
                 this._values2 = this.subProcessL2('latchValveProduction',this.selectedModule1);
                 this.subProcessesList.push(subProcessesList[j]);
                 this.selectedModule2 = subProcessesList[j].name;
+                this.lvl2selection = this.findObj(this._values2,this.selectedModule2);
                }
             }
             for (let k in subProcessesList) {
@@ -85,9 +78,9 @@ export class EditProcessComponent implements OnInit {
                 this._values3 = this.subProcessL3('latchValveProduction',this.selectedModule1,this.selectedModule2);
                 this.subProcessesList.push(subProcessesList[k]);
                 this.selectedModule3 = subProcessesList[k].name;
+                this.lvl3selection = this.findObj(this._values3,this.selectedModule2);
                }
             }
-            //subProcessesSubscription.unsubscribe();
           }
         )
     }
@@ -121,16 +114,16 @@ export class EditProcessComponent implements OnInit {
 
         if (this.checkEdit1.toString() === this.checkEdit2.toString()){
           alert("Nothing to modify");
+        }else{
+          for(let i in this.subProcessesList){
+            this.deleteSubProccess((this.subProcessesList[i].pkTbId).toString());
+          }
+
+            this.addSubProcessL1(4);
+            this.router.navigate(['process-list']);
+            alert("Process edited successfully");
         }
 
-      }else{
-        for(let i in this.subProcessesList){
-          this.deleteSubProccess((this.subProcessesList[i].pkTbId).toString());
-        }
-
-          this.addSubProcessL1(4);
-          this.router.navigate(['process-list']);
-          alert("Process edited successfully");
       }
     }
 
