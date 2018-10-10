@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -365,6 +366,8 @@ export class HTAAnalysisComponent implements OnInit {
     ];
   })();
 
+  subprocessId = this.route.snapshot.params['subprocessId'];
+
   matrixRequest = {
     "dsStable": 0,
     "dsReducedStability": 0,
@@ -430,7 +433,8 @@ export class HTAAnalysisComponent implements OnInit {
     "soOne": 0,
     "soTwo": 0,
     "soMore": 0,
-    "ecAEleConsumFun": 0
+    "ecAEleConsumFun": 0,
+    "fkTbAceSubProLev": this.subprocessId
   }
 
   actualLoaInfoRequest = {
@@ -438,7 +442,7 @@ export class HTAAnalysisComponent implements OnInit {
     "fkTbAceCogLoa": "1",
     "possibility": false,
     "bestRange": "1-1",
-    "fkTbAceSubProLev": 0
+    "fkTbAceSubProLev": this.subprocessId
   }
 
   loaInfoRequest:any = new Proxy(
@@ -477,7 +481,10 @@ export class HTAAnalysisComponent implements OnInit {
   cognitiveLoaArray;
   physicalLoaArray;
 
-  constructor(private http:HttpClient) { }
+  constructor(
+    private http:HttpClient,
+    private route:ActivatedRoute
+  ) { }
 
   ngOnInit() {
     var matrixCreation:Subscription = this.http
