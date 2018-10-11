@@ -13,7 +13,7 @@ public class GetSubProcessLevelsService {
 
     @Transactional
     public Iterable<SubProcessLevel> getSubProcessLevels(int page, int size) {
-        if (page == -1 && size == -1) {
+        if (page < 0 || size < 1) {
             return tbAceSubProLevRepository.findAll();
         }
         return tbAceSubProLevRepository.findAll(PageRequest.of(page, size));
