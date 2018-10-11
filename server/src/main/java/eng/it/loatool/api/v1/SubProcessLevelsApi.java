@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
 import eng.it.loatool.api.v1.subprocess_levels.CreateSubProcessLevelService;
+import eng.it.loatool.api.v1.subprocess_levels.GetSubProcessLevelInfoService;
 import eng.it.loatool.api.v1.subprocess_levels.GetSubProcessLevelService;
 import eng.it.loatool.api.v1.subprocess_levels.GetSubProcessLevelsService;
 import eng.it.loatool.api.v1.subprocess_levels.UpdateSubProcessLevelService;
@@ -37,6 +38,13 @@ public class SubProcessLevelsApi {
     public ResponseEntity<?> getSubProcessLevel(@PathVariable("subprocessId") Integer processId) {
         return ResponseEntityTransformer.transform(
             getSubProcessService.getSubProcessLevel(processId)
+        );
+    }
+
+    @GetMapping("/v1/subprocess-levels/{subprocessId}/info")
+    public ResponseEntity<?> getSubProcessLevelInfo(@PathVariable("subprocessId") Integer processId) {
+        return ResponseEntityTransformer.transform(
+                getSubProcessLevelInfoService.getSubProcessInfo(processId)
         );
     }
 
@@ -72,6 +80,7 @@ public class SubProcessLevelsApi {
     @Autowired private CreateSubProcessLevelService createSubProcessService;
     @Autowired private GetSubProcessLevelsService getSubProcessesService;
     @Autowired private GetSubProcessLevelService getSubProcessService;
+    @Autowired private GetSubProcessLevelInfoService getSubProcessLevelInfoService;
     @Autowired private SubProcessLevelRepository subProcessLevelRepository;
     @Autowired private GeneralCRUDService generalCRUDService;
 

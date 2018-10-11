@@ -40,17 +40,20 @@ public class ProcessesSpecificInformation implements java.io.Serializable, PkTbP
         this.updateDate = updateDate;
     }
 
+    @Override
     @Id @GeneratedValue(strategy = IDENTITY)
 
     @Column(name = "PK_TB_ID", unique = true, nullable = false) public Integer getPkTbId() {
         return this.pkTbId;
     }
 
+    @Override
     public void setPkTbId(Integer pkTbId) {
         this.pkTbId = pkTbId;
     }
 
-    @Column(name = "FK_TB_ACE_SUB_PRO_LEV", nullable = false) public int getFkTbAceSubProLev() {
+    @Column(name = "FK_TB_ACE_SUB_PRO_LEV", nullable = false)
+    public int getFkTbAceSubProLev() {
         return this.fkTbAceSubProLev;
     }
 

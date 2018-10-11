@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import eng.it.loatool.subprocess_level.SubProcessLevel;
+import eng.it.loatool.process_loa_info.ProcessLOAInformation;
 import eng.it.loatool.subprocess_level.SubProcessLevelRepository;
 
 @Service
-public class GetSubProcessLevelService {
+public class GetSubProcessLevelInfoService {
 
     @Transactional
-    public Optional<SubProcessLevel> getSubProcessLevel(Integer processId) {
-        return tbAceSubProLevRepository.findById(processId);
+    public Optional<ProcessLOAInformation> getSubProcessInfo(Integer processId) {
+        return tbAceSubProLevRepository.getSubProcessInfo(processId);
     }
 
 
