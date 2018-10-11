@@ -13,6 +13,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import eng.it.loatool.PkTbPrimaryKeyOwner;
@@ -195,7 +198,10 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.ecElePrice = ecElePrice;
     }
 
-    @Temporal(TemporalType.TIMESTAMP) @Column(name = "CREATE_DATE", nullable = false, length = 19) public Date getCreateDate() {
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATE_DATE", updatable = false, nullable = false, length = 19)
+    public Date getCreateDate() {
         return this.createDate;
     }
 
@@ -203,7 +209,10 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.createDate = createDate;
     }
 
-    @Temporal(TemporalType.TIMESTAMP) @Column(name = "UPDATE_DATE", nullable = false, length = 19) public Date getUpdateDate() {
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "UPDATE_DATE", nullable = false, length = 19)
+    public Date getUpdateDate() {
         return this.updateDate;
     }
 
