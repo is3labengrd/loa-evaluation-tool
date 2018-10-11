@@ -1,3 +1,4 @@
+import { StateHolderService } from '../state-holder.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription, Observable } from 'rxjs';
@@ -45,7 +46,10 @@ export class ProcessListComponent implements OnInit {
     [Symbol.iterator]: this.getAllPageIterator
   };
 
-  constructor(private http:HttpClient) { }
+  constructor(
+    private http:HttpClient,
+    private stateHolder:StateHolderService
+  ) {}
 
   ngOnInit() {
     this.populateProcessSegmentList();
@@ -136,9 +140,9 @@ export class ProcessListComponent implements OnInit {
           currentDisplaySubprocess = Object.create(null);
           currentDisplaySubprocess.name = relatedProcess.name;
           currentDisplaySubprocess.sublevels = relatedProcess.nlowerLevelSubPro;
-          currentDisplaySubprocess.sub1 = "-";
-          currentDisplaySubprocess.sub2 = "-";
-          currentDisplaySubprocess.sub3 = "-";
+          currentDisplaySubprocess.sub1 = { name: "-" };
+          currentDisplaySubprocess.sub2 = { name: "-" };
+          currentDisplaySubprocess.sub3 = { name: "-" };
           currentDisplaySubprocess.route = "main-analysis";
           currentDisplaySubprocess.editRoute = (
             Number.isNaN(relatedProcess.pkTbId)?
@@ -153,13 +157,13 @@ export class ProcessListComponent implements OnInit {
         }
         switch (subprocess.proLevel) {
           case 1:
-            currentDisplaySubprocess.sub1=subprocess.name;
+            currentDisplaySubprocess.sub1=subprocess;
             break;
           case 2:
-            currentDisplaySubprocess.sub2=subprocess.name;
+            currentDisplaySubprocess.sub2=subprocess;
             break;
           case 3:
-            currentDisplaySubprocess.sub3=subprocess.name;
+            currentDisplaySubprocess.sub3=subprocess;
             break;
         }
         return accumulator;
@@ -174,6 +178,10 @@ export class ProcessListComponent implements OnInit {
 
   private nextPage() {
     this.page = Math.min(this.lastPage, ++this.page);
+  }
+
+  private saveAsIsInfo(info:Array<any>) {
+    this.stateHolder.storeData(info);
   }
 
 }
