@@ -124,7 +124,6 @@ export class ProcessListComponent implements OnInit {
   })();
 
   private populateProcessSegmentListFromSubprocesses() {
-    console.log(this.processSegments);
     this.processSegmentList = this.subprocesses.reduce(
       (accumulator:Array<any>, subprocess) => {
         var currentDisplaySubprocess;
