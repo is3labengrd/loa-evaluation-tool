@@ -4,7 +4,9 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +15,14 @@ public class GeneralCRUDService {
     @Transactional
     public Iterable getAll(CrudRepository repository) {
         return repository.findAll();
+    }
+
+    @Transactional
+    public Iterable getAll(PagingAndSortingRepository repository, int page, int size) {
+        if (page < 0 || size < 1) {
+            return repository.findAll();
+        }
+        return repository.findAll(PageRequest.of(page, size));
     }
 
     @Transactional
