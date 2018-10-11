@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
@@ -18,9 +19,12 @@ import eng.it.loatool.resource.ResourceRepository;
 public class ResourcesApi {
 
     @GetMapping("/v1/resources")
-    public ResponseEntity<?> getEveryResource() {
+    public ResponseEntity<?> getEveryResource(
+        @RequestParam(value="page", defaultValue="-1") int page,
+        @RequestParam(value="size", defaultValue="-1") int size
+    ) {
         return ResponseEntityTransformer.transformOk(
-            generalCRUDService.getAll(resourceRepository)
+            generalCRUDService.getAll(resourceRepository, page, size)
         );
     }
 
