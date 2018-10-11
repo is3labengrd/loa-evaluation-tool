@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import eng.it.loatool.PkTbPrimaryKeyOwner;
 
 /**
@@ -21,7 +23,7 @@ import eng.it.loatool.PkTbPrimaryKeyOwner;
 @Entity @Table(name = "TB_ACE_RES", catalog = "loa_evaluation_tool")
 public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
-    private Integer pkTbId;
+    @JsonProperty private Integer pkTbId;
     private String name;
     private int loaPhysical;
     private int loaCognitive;
@@ -62,12 +64,13 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.updateDate = updateDate;
     }
 
+    @Override
     @Id @GeneratedValue(strategy = IDENTITY)
-
     @Column(name = "PK_TB_ID", unique = true, nullable = false) public Integer getPkTbId() {
         return this.pkTbId;
     }
 
+    @Override
     public void setPkTbId(Integer pkTbId) {
         this.pkTbId = pkTbId;
     }
