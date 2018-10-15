@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
+import {ProcessListService} from '../process-list/process-list.service';
 
 @Component({
   selector: 'app-sub-scenarios',
@@ -19,12 +20,19 @@ export class SubScenariosComponent implements OnInit {
   disableButton:boolean;
   resources:any;
   selectedRes1:any = null;
+  sub1:any;
+  sub2:any;
+  sub3:any;
+  mainProcess:any;
+  lowerLevel:any;
 
 
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private _processListService: ProcessListService) { }
 
   ngOnInit() {
+    console.log(this._processListService.getCookie("loa_test"));
+    this.getMainProc(3);
+
     this.checkMandatoryData();
 
     this.http
@@ -33,7 +41,6 @@ export class SubScenariosComponent implements OnInit {
       .then(
         (res:any) => {
           this.resources = res;
-          console.log(res);
         }
       )
   }
@@ -54,8 +61,70 @@ export class SubScenariosComponent implements OnInit {
   }
 
   firstDropDownChanged(val: any) {
-    console.log(val);
+    //console.log(val);
    //this.resources = val;
+  }
+
+
+  getMainProc(id){
+      this.http
+        .get(environment.apiUrl + '/v1/process-segments/'+id)
+        .toPromise()
+        .then(
+          (main:any) => {
+            this.getSubProc(main);
+            this.fetchFromCAM(main);
+            this.mainProcess = main;
+          }
+        )
+  }
+
+  fetchFromCAM(mainP) {
+    this.http
+      .get(environment.apiUrl + '/v1/var/process-segments')
+      .toPromise()
+      .then(
+        (processSegments:Array<any>) => {
+          let LL = this.findObj(processSegments,mainP.name);
+          this.lowerLevel = LL.subProcLowerLevel;
+        }
+      )
+
+  }
+
+  findObj(obj: any, name: any){
+    for (let k in obj) {
+      if (obj[k].name === name){
+        return obj[k];
+       }
+    }
+  }
+
+  getSubProc(mainP) {
+
+    this.http.get(environment.apiUrl + '/v1/subprocess-levels')
+      .toPromise()
+      .then(
+        (subProcessesList:any) => {
+
+          for (let i in subProcessesList) {
+            if (subProcessesList[i].fkTbAceProSeq === mainP.pkTbId){
+              this.sub1 = subProcessesList[i];
+             }
+          }
+
+          for (let j in subProcessesList) {
+            if (subProcessesList[j].fkTbAceProSeq === this.sub1.pkTbId){
+              this.sub2 = subProcessesList[j];
+             }
+          }
+          for (let k in subProcessesList) {
+            if (subProcessesList[k].fkTbAceProSeq === this.sub2.pkTbId){
+              this.sub3 = subProcessesList[k];
+             }
+          }
+        }
+      )
   }
 
 }
