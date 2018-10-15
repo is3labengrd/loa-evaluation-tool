@@ -6,11 +6,11 @@
         <h5 class="modal-title" >Product planing</h5>
       </div>
       <div class="modal-body">
-        <div>Number of produced pieces per hour: <input type="number" name="productsNum" id=""> </div> <br>
+        <div>Number of produced pieces per hour: <input type="number" id="productsNum" [(ngModel)]="productsNum"> </div> <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="productInfo()">Save changes</button>
       </div>
     </div>
   </div>
@@ -24,14 +24,14 @@
         <h5 class="modal-title" >Add process specific information</h5>
       </div>
       <div class="modal-body">
-        <div>Number of shifts per day: <input type="number" class="float-right"></div> <br>
-        <div>Hours per shift: <input type="number" class="float-right"></div> <br>
-        <div>Working days per year: <input type="number" class="float-right"></div> <br>
-        <div>Proportional wage costs per hour: <input type="number" class="float-right"></div> <br>
+        <div>Number of shifts per day: <input type="number" [(ngModel)]="shiftsPerDay"  id="shiftsPerDay" class="float-right"></div> <br>
+        <div>Hours per shift: <input type="number"  [(ngModel)]="hoursPerShift" id="hoursPerShift" class="float-right"></div> <br>
+        <div>Working days per year: <input type="number" [(ngModel)]="workingDayPerY" id="workingDayPerY" class="float-right"></div> <br>
+        <div>Proportional wage costs per hour: <input type="number" [(ngModel)]="propWageCostsPerH" id="propWageCostsPerH" class="float-right"></div> <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="procSpecInfo()" >Save changes</button>
       </div>
     </div>
   </div>
@@ -57,52 +57,31 @@
             <tr>
               <td>Select resource</td>
               <td>
-                <select>
-                  <option value="resource1">Semi Automated Tool Trolley</option>
-                  <option value="resource1">Automated Tool Trolley</option>
-                  <option value="resource1">Manual Screw</option>
-                  <option value="resource1">AR Guidance Support Screw</option>
-                  <option value="resource1">Robot to Screw</option>
-                  <option value="resource1">Manual Inspection</option>
-                  <option value="resource1">AR Guided Inspection</option>
-                  <option value="resource1">Camera</option>
+                <select [(ngModel)]="selectedRes1" (ngModelChange)="firstDropDownChanged($event)">
+                  <option *ngFor="let res1 of resources" [value]="res1.loaPhysical">{{res1.name}}</option>
                 </select>
               </td>
               <td>
-                <select>
-                  <option value="resource1">Semi Automated Tool Trolley</option>
-                  <option value="resource1">Automated Tool Trolley</option>
-                  <option value="resource1">Manual Screw</option>
-                  <option value="resource1">AR Guidance Support Screw</option>
-                  <option value="resource1">Robot to Screw</option>
-                  <option value="resource1">Manual Inspection</option>
-                  <option value="resource1">AR Guided Inspection</option>
-                  <option value="resource1">Camera</option>
+                <select [(ngModel)]="selectedRes1" (ngModelChange)="firstDropDownChanged($event)">
+                  <option *ngFor="let res1 of resources" [value]="res1.loaPhysical">{{res1.name}}</option>
                 </select>
               </td>
               <td>
-                <select>
-                  <option value="resource1">Semi Automated Tool Trolley</option>
-                  <option value="resource1">Automated Tool Trolley</option>
-                  <option value="resource1">Manual Screw</option>
-                  <option value="resource1">AR Guidance Support Screw</option>
-                  <option value="resource1">Robot to Screw</option>
-                  <option value="resource1">Manual Inspection</option>
-                  <option value="resource1">AR Guided Inspection</option>
-                  <option value="resource1">Camera</option>
-                </select></td>
+                <select [(ngModel)]="selectedRes1" (ngModelChange)="firstDropDownChanged($event)">
+                  <option *ngFor="let res1 of resources" [value]="res1.loaPhysical">{{res1.name}}</option>
+                </select>
             </tr>
             <tr>
               <td>Physical LoA</td>
-              <td>3</td>
-              <td>4</td>
-              <td>7</td>
+              <td>{{selectedRes1}}</td>
+              <td>{{selectedRes1}}</td>
+              <td>{{selectedRes1}}</td>
             </tr>
             <tr>
               <td>Cognitive LoA</td>
-              <td>1</td>
-              <td>1</td>
-              <td>6</td>
+              <td>{{selectedRes1}}</td>
+              <td>{{selectedRes1}}</td>
+              <td>{{selectedRes1}}</td>
             </tr>
             <tr>
               <td>Process time</td>
@@ -500,7 +479,7 @@
     </tbody>
   </table>
 
-  <div class="btn-group d-flex justify-content-center">
+  <div  *ngIf="disableButton" class="btn-group d-flex justify-content-center">
     <button class="btn btn-primary">Cancel</button>
     <button class="btn btn-secondary">Save</button>
   </div>
@@ -542,7 +521,7 @@
         </tbody>
       </table>
     </div>
-    <span class="btn-group d-flex justify-content-center">
+    <span *ngIf="disableButton" class="btn-group d-flex justify-content-center">
       <button class="btn btn-primary">Cancel</button>
       <button class="btn btn-secondary">Save LoA</button>
     </span>
