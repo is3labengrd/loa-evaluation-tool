@@ -1,4 +1,3 @@
-import { StateHolderService } from '../state-holder.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription, Observable } from 'rxjs';
@@ -50,7 +49,6 @@ export class ProcessListComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private stateHolder: StateHolderService,
     private _processListService: ProcessListService
   ) {}
 
@@ -185,7 +183,9 @@ export class ProcessListComponent implements OnInit {
   }
 
   private saveAsIsInfo(info: Array<any>) {
-    this.stateHolder.storeData(info);
+    for (let key in info) {
+      document.cookie = `it.eng.loatool.asIsinfo[${key}]=${JSON.stringify(info[key])}`;
+    }
   }
 
 }

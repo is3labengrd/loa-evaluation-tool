@@ -1,6 +1,5 @@
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { StateHolderService } from '../state-holder.service';
 import { Component, OnInit } from '@angular/core';
 import { Chart } from '../../../node_modules/chart.js/dist/Chart.min.js';
 import { Subscription } from 'rxjs';
@@ -13,8 +12,7 @@ import { Subscription } from 'rxjs';
 export class AsIsLOAComponent implements OnInit {
 
   constructor(
-    private http:HttpClient,
-    private stateHolder:StateHolderService
+    private http:HttpClient
   ) {}
 
   title = 'LoA Graph';
@@ -67,7 +65,17 @@ export class AsIsLOAComponent implements OnInit {
 
     const bubbleChart = this.bubbleChart;
 
-    const subprocesses:Array<any> = this.stateHolder.read();
+    const subprocessProvider = () => {
+      let result = [];
+      let regex = /it\.eng\.loatool\.asIsinfo\[(\d+)\]=(.+?)(;|$)/g;
+      let iteration;
+      while ((iteration = regex.exec(document.cookie)) != null) {
+        result[iteration[1]]=JSON.parse(iteration[2]);
+      }
+      return result;
+    }
+
+    const subprocesses:Array<any> = subprocessProvider();
 
     subprocesses.forEach(
       (subprocess) => {
