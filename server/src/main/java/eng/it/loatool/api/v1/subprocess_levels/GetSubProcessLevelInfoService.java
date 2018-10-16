@@ -17,8 +17,6 @@ public class GetSubProcessLevelInfoService {
         return tbAceSubProLevRepository.getSubProcessInfo(processId);
     }
 
-
-
     @Autowired private SubProcessLevelRepository tbAceSubProLevRepository;
 
 }
