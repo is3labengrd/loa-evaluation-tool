@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import {ProcessListService} from './process-list.service';
+
 
 @Component({
   selector: 'app-process-list',
@@ -48,10 +50,12 @@ export class ProcessListComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private stateHolder: StateHolderService
+    private stateHolder: StateHolderService,
+    private _processListService: ProcessListService
   ) {}
 
   ngOnInit() {
+    //this._processListService.setCookie("loa_test","100",1,"");
     this.populateProcessSegmentList();
   }
 

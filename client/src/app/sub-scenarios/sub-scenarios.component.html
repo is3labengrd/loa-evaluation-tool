@@ -113,14 +113,14 @@
   <table id="table1" >
     <tr>
       <td>Main process:</td>
-      <td style="border-right: 1px solid">Rear Light Assembly</td>
-      <td>Sub process level 1: Checking</td>
-      <td>Sub process level 2: Final inspection</td>
+      <td style="border-right: 1px solid">{{mainProcess.name}}</td>
+      <td>Sub process level 1: {{sub1.name}}</td>
+      <td>Sub process level 2: {{sub2.name}}</td>
     </tr>
     <tr>
-      <td>Level of sub processes:</td>
-      <td style="border-right: 1px solid">2</td>
-      <td>Sub process level 3: -</td>
+      <td>Level of sub processes: </td>
+      <td style="border-right: 1px solid"> {{lowerLevel}}</td>
+      <td>Sub process level 3:  {{sub3.name}}</td>
       <td></td>
     </tr>
   </table>
