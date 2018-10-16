@@ -58,30 +58,30 @@
               <td>Select resource</td>
               <td>
                 <select [(ngModel)]="selectedRes1" (ngModelChange)="firstDropDownChanged($event)">
-                  <option *ngFor="let res1 of resources" [value]="res1.loaPhysical">{{res1.name}}</option>
+                  <option *ngFor="let res1 of resources" [value]="res1.name">{{res1.name}}</option>
                 </select>
               </td>
               <td>
-                <select [(ngModel)]="selectedRes1" (ngModelChange)="firstDropDownChanged($event)">
-                  <option *ngFor="let res1 of resources" [value]="res1.loaPhysical">{{res1.name}}</option>
+                <select [(ngModel)]="selectedRes2" (ngModelChange)="firstDropDownChanged($event)">
+                  <option *ngFor="let res2 of resources" [value]="res2.name">{{res2.name}}</option>
                 </select>
               </td>
               <td>
-                <select [(ngModel)]="selectedRes1" (ngModelChange)="firstDropDownChanged($event)">
-                  <option *ngFor="let res1 of resources" [value]="res1.loaPhysical">{{res1.name}}</option>
+                <select [(ngModel)]="selectedRes3" (ngModelChange)="firstDropDownChanged($event)">
+                  <option *ngFor="let res3 of resources" [value]="res3.name">{{res3.name}}</option>
                 </select>
             </tr>
             <tr>
               <td>Physical LoA</td>
-              <td>{{selectedRes1}}</td>
-              <td>{{selectedRes1}}</td>
-              <td>{{selectedRes1}}</td>
+              <td>{{selectedtest?.loaPhysical}}</td>
+              <td>{{selectedtest?.loaPhysical}}</td>
+              <td>{{selectedtest?.loaPhysical}}</td>
             </tr>
             <tr>
               <td>Cognitive LoA</td>
-              <td>{{selectedRes1}}</td>
-              <td>{{selectedRes1}}</td>
-              <td>{{selectedRes1}}</td>
+              <td>{{selectedtest?.loaCognitive}}</td>
+              <td>{{selectedtest?.loaCognitive}}</td>
+              <td>{{selectedtest?.loaCognitive}}</td>
             </tr>
             <tr>
               <td>Process time</td>
@@ -113,14 +113,14 @@
   <table id="table1" >
     <tr>
       <td>Main process:</td>
-      <td style="border-right: 1px solid">{{mainProcess.name}}</td>
-      <td>Sub process level 1: {{sub1.name}}</td>
-      <td>Sub process level 2: {{sub2.name}}</td>
+      <td style="border-right: 1px solid">{{mainProcess?.name}}</td>
+      <td>Sub process level 1: {{sub1?.name}}</td>
+      <td>Sub process level 2: {{sub2?.name}}</td>
     </tr>
     <tr>
       <td>Level of sub processes: </td>
       <td style="border-right: 1px solid"> {{lowerLevel}}</td>
-      <td>Sub process level 3:  {{sub3.name}}</td>
+      <td>Sub process level 3:  {{sub3?.name}}</td>
       <td></td>
     </tr>
   </table>
@@ -153,9 +153,9 @@
       <td class="roto  align-middle"></td>
       <td><strong>Resource name</strong></td>
       <td>-</td>
-      <td>Manual Tool Trolley</td>
-      <td>Semi Automated Tool Trolley</td>
-      <td>Automated Tool Trolley</td>
+      <td>{{selectedtest?.name}}</td>
+      <td>{{selectedtest?.name}}</td>
+      <td>{{selectedtest?.name}}</td>
     </tr>
      <tr>
         <td class="roto  align-middle">Process <br> variables</td>
@@ -500,9 +500,9 @@
           <tr>
             <td>Best LoA</td>
             <td>-</td>
-            <td>Manual Tool Trolley</td>
-            <td>Semi Automated Tool Trolley</td>
-            <td>Automated Tool Trolley</td>
+            <td>{{selectedRes1}}</td>
+            <td>{{selectedRes1}}</td>
+            <td>{{selectedRes1}}</td>
           </tr>
           <tr>
             <td>Best LoA physical</td>

@@ -19,28 +19,36 @@ export class SubScenariosComponent implements OnInit {
   propWageCostsPerH:number;
   disableButton:boolean;
   resources:any;
-  selectedRes1:any = null;
+  selectedRes1:any;
+  selectedRes2:any;
+  selectedRes3:any;
+
+  selectedtest:any;
   sub1:any;
   sub2:any;
   sub3:any;
   mainProcess:any;
   lowerLevel:any;
+  resourcesList:Array<any> = [];
 
 
   constructor(private http: HttpClient, private _processListService: ProcessListService) { }
 
   ngOnInit() {
-    console.log(this._processListService.getCookie("loa_test"));
+//    console.log(this._processListService.getCookie("loa_test"));
     this.getMainProc(3);
-
     this.checkMandatoryData();
+    this.getResource();
+  }
 
+  getResource(){
     this.http
       .get(environment.apiUrl + '/v1/resources')
       .toPromise()
       .then(
         (res:any) => {
           this.resources = res;
+          this.resourcesList.push(res);
         }
       )
   }
@@ -61,10 +69,8 @@ export class SubScenariosComponent implements OnInit {
   }
 
   firstDropDownChanged(val: any) {
-    //console.log(val);
-   //this.resources = val;
+    this.selectedtest = this.findObj(this.resourcesList[0], val);
   }
-
 
   getMainProc(id){
       this.http
