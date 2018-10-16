@@ -9,11 +9,7 @@ import java.util.List;
 import eng.it.loatool.var.bean.Attrs;
 import eng.it.loatool.var.bean.MainProcess;
 import eng.it.loatool.var.bean.Processes;
-import eng.it.loatool.var.request.VARProcessSegmentImpl;
-import eng.it.loatool.var.request.VARProcessSpecificInformationImpl;
-import eng.it.loatool.var.request.VARProductDefinitionImpl;
-import eng.it.loatool.var.request.VARProportionalWageCost;
-import eng.it.loatool.var.request.VARWorkUnitImpl;
+import eng.it.loatool.var.request.*;
 
 public class VARServiceWrapper {
 
@@ -185,6 +181,18 @@ public class VARServiceWrapper {
 	public static void editProportionalWageCost (String json) throws IOException {
 
 		VARProportionalWageCost.createBody(json);
+
+	}
+
+	/**
+	 * input  Class Instance Name
+	 *
+	 * return Product Planning Instance
+	 */
+
+	public static String getProductPlanningIntance(String InstanceName) throws IOException {
+
+		return VARGetAssetImpl.getProductPlanningIntance(InstanceName);
 
 	}
 
