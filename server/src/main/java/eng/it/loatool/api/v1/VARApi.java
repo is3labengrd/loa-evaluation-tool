@@ -1,9 +1,6 @@
 package eng.it.loatool.api.v1;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import eng.it.loatool.var.service.VARServiceWrapper;
 
@@ -45,5 +42,10 @@ public class VARApi {
     public void editProportionalWageCost (@RequestBody String json) throws IOException {
 
         VARServiceWrapper.editProportionalWageCost(json);
+    }
+
+    @RequestMapping("/v1/var/ProductPlanning/{name}")
+    public String getProductPlanningIntance(@PathVariable("name") String name) throws IOException {
+        return VARServiceWrapper.getProductPlanningIntance(name);
     }
 }
