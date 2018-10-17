@@ -13,24 +13,25 @@ import {ProcessListService} from '../process-list/process-list.service';
 export class SubScenariosComponent implements OnInit {
 
   productsNum:number;
-  shiftsPerDay:number;
-  hoursPerShift:number;
-  workingDayPerY:number;
-  propWageCostsPerH:number;
+  procSpecInfoObj: { shiftsPerDay: number, hoursPerShift: number, workingDayPerY: number,propWageCostsPerH: number} =
+                   { shiftsPerDay: null, hoursPerShift: null, workingDayPerY: null, propWageCostsPerH: null};
+  sub: { sub1: any, sub2: any, sub3: any} =
+       { sub1: null, sub2: null, sub3: null};
+  bestLoaCog: Object = {};
+  bestLoaPhy: Object = {};
+  ProcTime: Object = {};
   disableButton:boolean;
   resources:any;
   selectedRes1:any;
   selectedRes2:any;
   selectedRes3:any;
-
-  selectedtest:any;
-  sub1:any;
-  sub2:any;
-  sub3:any;
+  firstdropdown:any;
+  seconddropdown:any;
+  thirddropdown:any;
   mainProcess:any;
   lowerLevel:any;
+  lowerLevelObj:any;
   resourcesList:Array<any> = [];
-
 
   constructor(private http: HttpClient, private _processListService: ProcessListService) { }
 
@@ -54,7 +55,7 @@ export class SubScenariosComponent implements OnInit {
   }
 
   checkMandatoryData(){
-    if(this.productsNum != null && this.shiftsPerDay != null && this.hoursPerShift != null && this.workingDayPerY != null && this.propWageCostsPerH != null){
+    if(this.productsNum != null && this.procSpecInfoObj.shiftsPerDay != null && this.procSpecInfoObj. hoursPerShift != null && this.procSpecInfoObj.workingDayPerY != null && this.procSpecInfoObj.propWageCostsPerH != null){
       this.disableButton=true;}else{
         this.disableButton=false;
       }
@@ -68,8 +69,20 @@ export class SubScenariosComponent implements OnInit {
     this.checkMandatoryData();
   }
 
+  createSubScenarios(): void{
+    this.checkMandatoryData();
+  }
+
   firstDropDownChanged(val: any) {
-    this.selectedtest = this.findObj(this.resourcesList[0], val);
+    this.firstdropdown = this.findObj(this.resourcesList[0], val);
+  }
+
+  secondDropDownChanged(val: any) {
+    this.seconddropdown = this.findObj(this.resourcesList[0], val);
+  }
+
+  thirdDropDownChanged(val: any) {
+    this.thirddropdown = this.findObj(this.resourcesList[0], val);
   }
 
   getMainProc(id){
@@ -91,8 +104,9 @@ export class SubScenariosComponent implements OnInit {
       .toPromise()
       .then(
         (processSegments:Array<any>) => {
-          let LL = this.findObj(processSegments,mainP.name);
-          this.lowerLevel = LL.subProcLowerLevel;
+          this.lowerLevelObj = this.findObj(processSegments,mainP.name);
+          this.lowerLevel = this.lowerLevelObj.subProcLowerLevel;
+          console.log(this.lowerLevel);
         }
       )
 
@@ -115,18 +129,18 @@ export class SubScenariosComponent implements OnInit {
 
           for (let i in subProcessesList) {
             if (subProcessesList[i].fkTbAceProSeq === mainP.pkTbId){
-              this.sub1 = subProcessesList[i];
+              this.sub.sub1 = subProcessesList[i];
              }
           }
 
           for (let j in subProcessesList) {
-            if (subProcessesList[j].fkTbAceProSeq === this.sub1.pkTbId){
-              this.sub2 = subProcessesList[j];
+            if (subProcessesList[j].fkTbAceProSeq === this.sub.sub1.pkTbId){
+              this.sub.sub2 = subProcessesList[j];
              }
           }
           for (let k in subProcessesList) {
-            if (subProcessesList[k].fkTbAceProSeq === this.sub2.pkTbId){
-              this.sub3 = subProcessesList[k];
+            if (subProcessesList[k].fkTbAceProSeq === this.sub.sub2.pkTbId){
+              this.sub.sub3 = subProcessesList[k];
              }
           }
         }

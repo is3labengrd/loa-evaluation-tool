@@ -24,10 +24,10 @@
         <h5 class="modal-title" >Add process specific information</h5>
       </div>
       <div class="modal-body">
-        <div>Number of shifts per day: <input type="number" [(ngModel)]="shiftsPerDay"  id="shiftsPerDay" class="float-right"></div> <br>
-        <div>Hours per shift: <input type="number"  [(ngModel)]="hoursPerShift" id="hoursPerShift" class="float-right"></div> <br>
-        <div>Working days per year: <input type="number" [(ngModel)]="workingDayPerY" id="workingDayPerY" class="float-right"></div> <br>
-        <div>Proportional wage costs per hour: <input type="number" [(ngModel)]="propWageCostsPerH" id="propWageCostsPerH" class="float-right"></div> <br>
+        <div>Number of shifts per day: <input type="number" [(ngModel)]="procSpecInfoObj.shiftsPerDay"  name="shiftsPerDay" class="float-right"></div> <br>
+        <div>Hours per shift: <input type="number"  [(ngModel)]="procSpecInfoObj.hoursPerShift" name="hoursPerShift" class="float-right"></div> <br>
+        <div>Working days per year: <input type="number" [(ngModel)]="procSpecInfoObj.workingDayPerY" name="workingDayPerY" class="float-right"></div> <br>
+        <div>Proportional wage costs per hour: <input type="number" [(ngModel)]="procSpecInfoObj.propWageCostsPerH" name="propWageCostsPerH" class="float-right"></div> <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -62,39 +62,39 @@
                 </select>
               </td>
               <td>
-                <select [(ngModel)]="selectedRes2" (ngModelChange)="firstDropDownChanged($event)">
+                <select [(ngModel)]="selectedRes2" (ngModelChange)="secondDropDownChanged($event)">
                   <option *ngFor="let res2 of resources" [value]="res2.name">{{res2.name}}</option>
                 </select>
               </td>
               <td>
-                <select [(ngModel)]="selectedRes3" (ngModelChange)="firstDropDownChanged($event)">
+                <select [(ngModel)]="selectedRes3" (ngModelChange)="thirdDropDownChanged($event)">
                   <option *ngFor="let res3 of resources" [value]="res3.name">{{res3.name}}</option>
                 </select>
             </tr>
             <tr>
               <td>Physical LoA</td>
-              <td>{{selectedtest?.loaPhysical}}</td>
-              <td>{{selectedtest?.loaPhysical}}</td>
-              <td>{{selectedtest?.loaPhysical}}</td>
+              <td>{{firstdropdown?.loaPhysical}}</td>
+              <td>{{seconddropdown?.loaPhysical}}</td>
+              <td>{{thirddropdown?.loaPhysical}}</td>
             </tr>
             <tr>
               <td>Cognitive LoA</td>
-              <td>{{selectedtest?.loaCognitive}}</td>
-              <td>{{selectedtest?.loaCognitive}}</td>
-              <td>{{selectedtest?.loaCognitive}}</td>
+              <td>{{firstdropdown?.loaCognitive}}</td>
+              <td>{{seconddropdown?.loaCognitive}}</td>
+              <td>{{thirddropdown?.loaCognitive}}</td>
             </tr>
             <tr>
               <td>Process time</td>
-              <td><input type="number" ></td>
-              <td><input type="number" ></td>
-              <td><input type="number" ></td>
+              <td><input type="number" [(ngModel)]="ProcTime.selRes1ProcTime"  name="selRes1ProcTime" ></td>
+              <td><input type="number" [(ngModel)]="ProcTime.selRes2ProcTime"  name="selRes2ProcTime" ></td>
+              <td><input type="number" [(ngModel)]="ProcTime.selRes3ProcTime"  name="selRes3ProcTime" ></td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="createSubScenarios()">Save changes</button>
       </div>
     </div>
   </div>
@@ -114,13 +114,13 @@
     <tr>
       <td>Main process:</td>
       <td style="border-right: 1px solid">{{mainProcess?.name}}</td>
-      <td>Sub process level 1: {{sub1?.name}}</td>
-      <td>Sub process level 2: {{sub2?.name}}</td>
+      <td>Sub process level 1: {{sub.sub1?.name}}</td>
+      <td>Sub process level 2: {{sub.sub2?.name}}</td>
     </tr>
     <tr>
       <td>Level of sub processes: </td>
       <td style="border-right: 1px solid"> {{lowerLevel}}</td>
-      <td>Sub process level 3:  {{sub3?.name}}</td>
+      <td>Sub process level 3:  {{sub.sub3?.name}}</td>
       <td></td>
     </tr>
   </table>
@@ -153,9 +153,9 @@
       <td class="roto  align-middle"></td>
       <td><strong>Resource name</strong></td>
       <td>-</td>
-      <td>{{selectedtest?.name}}</td>
-      <td>{{selectedtest?.name}}</td>
-      <td>{{selectedtest?.name}}</td>
+      <td>{{firstdropdown?.name}}</td>
+      <td>{{seconddropdown?.name}}</td>
+      <td>{{thirddropdown?.name}}</td>
     </tr>
      <tr>
         <td class="roto  align-middle">Process <br> variables</td>
@@ -501,22 +501,22 @@
             <td>Best LoA</td>
             <td>-</td>
             <td>{{selectedRes1}}</td>
-            <td>{{selectedRes1}}</td>
-            <td>{{selectedRes1}}</td>
+            <td>{{selectedRes2}}</td>
+            <td>{{selectedRes3}}</td>
           </tr>
           <tr>
             <td>Best LoA physical</td>
             <td>-</td>
-            <td><input type="number" min="1" max="7" value="1"></td>
-            <td><input type="number" min="1" max="7" value="2"></td>
-            <td><input type="number" min="1" max="7" value="2"></td>
+            <td><input type="number" [(ngModel)]="bestLoaPhy.bestP1" name="bestP1" min="1" max="7" value="1"></td>
+            <td><input type="number" [(ngModel)]="bestLoaPhy.bestP2" name="bestP2" min="1" max="7" value="2"></td>
+            <td><input type="number" [(ngModel)]="bestLoaPhy.bestP3" name="bestP3" min="1" max="7" value="2"></td>
           </tr>
           <tr>
             <td>Best LoA cognitive</td>
             <td>-</td>
-            <td><input type="number" min="1" max="7" value="2" ></td>
-            <td><input type="number" min="1" max="7" value="3" ></td>
-            <td><input type="number" min="1" max="7" value="1"></td>
+            <td><input type="number" [(ngModel)]="bestLoaCog.bestC1" name="bestC1" min="1" max="7" value="2" ></td>
+            <td><input type="number" [(ngModel)]="bestLoaCog.bestC2" name="bestC2" min="1" max="7" value="3" ></td>
+            <td><input type="number" [(ngModel)]="bestLoaCog.bestC3" name="bestC3" min="1" max="7" value="1"></td>
           </tr>
         </tbody>
       </table>
