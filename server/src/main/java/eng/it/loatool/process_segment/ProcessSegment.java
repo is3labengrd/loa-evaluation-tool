@@ -39,8 +39,8 @@ import org.hibernate.annotations.UpdateTimestamp;
         this.updateDate = updateDate;
     }
 
-    @Id @GeneratedValue(strategy = IDENTITY)
-
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "PK_TB_ID", unique = true, nullable = false) public Integer getPkTbId() {
         return this.pkTbId;
     }
