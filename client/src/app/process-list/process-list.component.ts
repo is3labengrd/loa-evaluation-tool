@@ -54,7 +54,12 @@ export class ProcessListComponent implements OnInit {
 
   ngOnInit() {
     //this._processListService.setCookie("loa_test","100",1,"");
-    this.populateProcessSegmentList();
+    this.http
+      .post(environment.apiUrl + '/v1/var/populate-process-segments', {})
+      .toPromise()
+      .then(
+        () => {this.populateProcessSegmentList();}
+      )
   }
 
   private populateProcessSegmentList() {
