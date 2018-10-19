@@ -49,7 +49,7 @@ public class ProcessSegmentListElementsApi {
         @RequestBody ProcessSegmentListElement body
     ) {
         return ResponseEntityTransformer.transform(
-                persistProcessSegmentListElementService.updateProcessSegmentListElement(id, body)
+            persistProcessSegmentListElementService.updateProcessSegmentListElement(id, body)
         );
     }
 
