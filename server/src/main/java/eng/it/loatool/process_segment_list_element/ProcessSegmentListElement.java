@@ -17,6 +17,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -88,6 +90,7 @@ public class ProcessSegmentListElement implements java.io.Serializable, PkTbPrim
     }
 
     @ManyToOne
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name="FK_TB_ACE_PRO_SEQ", referencedColumnName="PK_TB_ID")
     public ProcessSegment getMainProcess() {
         return mainProcess;
