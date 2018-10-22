@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs';
@@ -27,7 +27,12 @@ private _values3 = [];
 id:number;
 lowerLevel:any;
 
-constructor(private http: HttpClient, public router: Router, private route:ActivatedRoute) {}
+constructor(
+  private http: HttpClient,
+  public router: Router,
+  private route:ActivatedRoute,
+  private zone: NgZone
+) {}
 
 ngOnInit() {
 
@@ -80,40 +85,44 @@ addProcess() {
  this.http.post(mainProcUrl, {"name": this.mainProcess[0].name,"varProSeqId": this.mainProcess[0].varProSeqId,"nlowerLevelSubPro": this.lowerLevel.subProcLowerLevel})
         .toPromise()
         .then((res:any) => {
-          if (res.pkTbId != null) {
-            alert('Process segment added');
-            this.addSubProcessL1(res.pkTbId);
+            if (res.pkTbId != null) {
+              alert('Process segment added');
+              return this.addSubProcessL1(res.pkTbId);
             }
-            this.router.navigate(['process-list']);
- },
-  (err) => alert('Something went wrong. \nStatus: ' +  err.error.status))
+          },
+          (err) => alert('Something went wrong. \nStatus: ' +  err.error.status)
+        )
+        .then(
+          () => {
+            this.zone.run(() => this.router.navigate(['process-list']));
+          }
+        )
 
 }
 
 addSubProcessL1(pkTbId) {
 
 const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
-this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl1selection.name,"varProSeqId": this.lvl1selection.processSegmentId, "proLevel": this.lvl1selection.level})
-        .toPromise()
-        .then((res:any) => {
-          if (res.pkTbId != null) {
-            this.addSubProcessL2(res.pkTbId);}
-          },
-  (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);});
-
+return this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl1selection.name,"varProSeqId": this.lvl1selection.processSegmentId, "proLevel": this.lvl1selection.level})
+  .toPromise()
+  .then((res:any) => {
+    if (res.pkTbId != null) {
+      this.addSubProcessL2(res.pkTbId);}
+    },
+    (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);}
+  );
 }
 
 addSubProcessL2(pkTbId) {
-const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
+  const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
 
-this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl2selection.name,"varProSeqId": this.lvl2selection.processSegmentId, "proLevel": this.lvl2selection.level})
+  this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl2selection.name,"varProSeqId": this.lvl2selection.processSegmentId, "proLevel": this.lvl2selection.level})
        .toPromise()
        .then((res:any) => {
-         if (res.pkTbId != null) {
-           this.addSubProcessL3(res.pkTbId);}
-         },
-
- (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);});
+        if (res.pkTbId != null) {
+          this.addSubProcessL3(res.pkTbId);}
+        },
+          (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);});
 }
 
 addSubProcessL3(pkTbId) {
