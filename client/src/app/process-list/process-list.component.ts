@@ -111,7 +111,7 @@ export class ProcessListComponent implements OnInit {
 
   saveAnalysisData(data) {
     let stringifiedData = JSON.stringify(data);
-    document.cookie=`it.eng.loa.analysisData=${stringifiedData}`;
+    document.cookie=`it.eng.loatool.analysisData=${stringifiedData}`;
   }
 
 }
