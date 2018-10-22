@@ -87,12 +87,13 @@ export class ProcessListComponent implements OnInit {
           currentListElement.sub3 == "-"
         ) {
           let id = listElement.mainProcess ? listElement.mainProcess.pkTbId : "error"
-          currentListElement.route = `add-process/${id}`;
+          currentListElement.route = `/add-process/${id}`;
           currentListElement.actions = "Add";
         } else {
-          currentListElement.route = "main-analysis";
+          currentListElement.route = "/main-analysis";
           currentListElement.actions = "Analysis";
         }
+        currentListElement.rawElementReference = listElement;
         accumulator.push(currentListElement);
         return accumulator;
       },
@@ -108,10 +109,9 @@ export class ProcessListComponent implements OnInit {
     this.page = Math.min(this.lastPage, ++this.page);
   }
 
-  private saveAsIsInfo(info: Array<any>) {
-    for (let key in info) {
-      document.cookie = `it.eng.loatool.asIsinfo[${key}]=${JSON.stringify(info[key])}`;
-    }
+  saveAnalysisData(data) {
+    let stringifiedData = JSON.stringify(data);
+    document.cookie=`it.eng.loa.analysisData=${stringifiedData}`;
   }
 
 }
