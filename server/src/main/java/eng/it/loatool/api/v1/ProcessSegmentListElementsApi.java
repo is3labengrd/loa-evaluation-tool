@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
 import eng.it.loatool.api.v1.process_segment_list_elements.PersistProcessSegmentListElementService;
+import eng.it.loatool.api.v1.process_segment_list_elements.ProcessSegmentListElementPaginationService;
 import eng.it.loatool.process_segment_list_element.ProcessSegmentListElement;
 import eng.it.loatool.process_segment_list_element.ProcessSegmentListElementRepository;
 
@@ -25,7 +26,7 @@ public class ProcessSegmentListElementsApi {
         @RequestParam(value="size", defaultValue="-1") int size
     ) {
         return ResponseEntityTransformer.transformOk(
-            generalCRUDService.getAll(processSegmentListElementRepository, page, size)
+            processSegmentListElementPaginationService.getAll(page, size)
         );
     }
 
@@ -55,6 +56,7 @@ public class ProcessSegmentListElementsApi {
 
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private PersistProcessSegmentListElementService persistProcessSegmentListElementService;
+    @Autowired private ProcessSegmentListElementPaginationService processSegmentListElementPaginationService;
     @Autowired private ProcessSegmentListElementRepository processSegmentListElementRepository;
 
 }
