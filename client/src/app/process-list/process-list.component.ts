@@ -12,24 +12,11 @@ import {ProcessListService} from './process-list.service';
 })
 export class ProcessListComponent implements OnInit {
 
-  processSegmentList: Array<any> = [];
-  private processSegments: Array<any>;
-  private subprocesses: Array<any>;
-  numberOfItems = 'all';
+  rawProcessSegmentList: Array<any> = [];
+  processSegmentList: Array<any> = Array(12);
+  numberOfItems = 12;
   page = 0;
   lastPage = 0;
-
-  private getAllPageIterator = () => {
-    let i = 1;
-    return {
-      next: function() {
-        return {
-          'value': '0',
-          'done': !(i--)
-        }
-      }
-    };
-  }
 
   private getPageIteratorGetter(maxNumberOfPages) {
     return () => {
@@ -44,7 +31,7 @@ export class ProcessListComponent implements OnInit {
   }
 
   pageIterable = {
-    [Symbol.iterator]: this.getAllPageIterator
+    [Symbol.iterator]: () => {}
   };
 
   constructor(
@@ -53,7 +40,7 @@ export class ProcessListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //this._processListService.setCookie("loa_test","100",1,"");
+    this.populateProcessSegmentList();
     this.http
       .post(environment.apiUrl + '/v1/var/populate-process-segments', {})
       .toPromise()
@@ -63,116 +50,50 @@ export class ProcessListComponent implements OnInit {
   }
 
   private populateProcessSegmentList() {
-    switch (this.numberOfItems) {
-      case 'all':
-        this.pageIterable[Symbol.iterator] = this.getAllPageIterator;
-        this.initateProcessSegmentListPopulationWithoutPagination();
-        break;
-      default:
-        this.initiateProcessSegmentListPopulationWithPagination();
-        break;
-    }
-  }
-
-  private initateProcessSegmentListPopulationWithoutPagination() {
-    let processSegmentsSubscription: Subscription = this.http
-      .get(environment.apiUrl + '/v1/process-segments')
-      .subscribe(
-        (processSegments: Array<any>) => {
-          this.processSegments = processSegments;
-          processSegmentsSubscription.unsubscribe();
-          this.triggerProcessSegmentListPopulation();
-        }
-      );
-    let subprocessLevelsSubscription: Subscription = this.http
-      .get(environment.apiUrl + '/v1/subprocess-levels')
-      .subscribe(
-        (subprocesses: Array<any>) => {
-          this.subprocesses = subprocesses;
-          subprocessLevelsSubscription.unsubscribe();
-          this.triggerProcessSegmentListPopulation();
-        }
-      );
+    this.initiateProcessSegmentListPopulationWithPagination();
   }
 
   private initiateProcessSegmentListPopulationWithPagination() {
-    let processSegmentsSubscription: Subscription = this.http
-      .get(environment.apiUrl + '/v1/process-segments')
-      .subscribe(
-        (processSegments: Array<any>) => {
-          this.processSegments = processSegments;
-          processSegmentsSubscription.unsubscribe();
-          this.triggerProcessSegmentListPopulation();
-        }
-      );
     let subprocessLevelsSubscription: Subscription = this.http
       .get(
-        environment.apiUrl + '/v1/subprocess-levels?' +
+        environment.apiUrl + '/v1/process-segment-list-elements?' +
         'page=' + this.page + '&' +
         'size=' + this.numberOfItems
       )
       .subscribe(
-        (subprocesses: any) => {
+        (processSegmentListElements: any) => {
           this.pageIterable[Symbol.iterator] = this
-            .getPageIteratorGetter(subprocesses.totalPages);
-          this.lastPage = subprocesses.totalPages - 1;
-          this.subprocesses = subprocesses.content;
+            .getPageIteratorGetter(processSegmentListElements.totalPages);
+          this.lastPage = processSegmentListElements.totalPages - 1;
+          this.rawProcessSegmentList = processSegmentListElements.content;
           subprocessLevelsSubscription.unsubscribe();
-          this.triggerProcessSegmentListPopulation();
+          this.adaptProcessSegmentList();
         }
       );
   }
 
-  private triggerProcessSegmentListPopulation = (() => {
-    let i = 0;
-    return () => {
-      i++;
-      if (i == 2) {
-        i = 0;
-        this.populateProcessSegmentListFromSubprocesses();
-      }
-    }
-  })();
-
-  private populateProcessSegmentListFromSubprocesses() {
-    this.processSegmentList = this.subprocesses.reduce(
-      (accumulator: Array<any>, subprocess) => {
-        let currentDisplaySubprocess;
-        let relatedProcess = this.processSegments[subprocess.fkTbAceProSeq - 1] || {
-          name: 'error',
-          nlowerLevelSubPro: 'error',
-          pkTbId: NaN
-        };
-        if (subprocess.proLevel == 1 || accumulator.length == 0) {
-          currentDisplaySubprocess = Object.create(null);
-          currentDisplaySubprocess.name = relatedProcess.name;
-          currentDisplaySubprocess.sublevels = relatedProcess.nlowerLevelSubPro;
-          currentDisplaySubprocess.sub1 = { name: '-' };
-          currentDisplaySubprocess.sub2 = { name: '-' };
-          currentDisplaySubprocess.sub3 = { name: '-' };
-          currentDisplaySubprocess.route = 'main-analysis';
-          currentDisplaySubprocess.editRoute = (
-            Number.isNaN(relatedProcess.pkTbId) ?
-              '/error'
-            :
-              `/edit-process/${relatedProcess.pkTbId}`
-          );
-          currentDisplaySubprocess.actions = 'Analysis';
-          accumulator.push(currentDisplaySubprocess);
+  private adaptProcessSegmentList() {
+    this.processSegmentList = this.rawProcessSegmentList.reduce(
+      (accumulator: Array<any>, listElement) => {
+        let currentListElement = Object.create(null);
+        currentListElement.name = listElement.mainProcess ? listElement.mainProcess.name : "error";
+        currentListElement.sublevels = listElement.mainProcess ? listElement.mainProcess.nlowerLevelSubPro : "error";
+        currentListElement.sub1 = listElement.subProcessLevel1 ? listElement.subProcessLevel1.name : "-";
+        currentListElement.sub2 = listElement.subProcessLevel2 ? listElement.subProcessLevel2.name : "-";
+        currentListElement.sub3 = listElement.subProcessLevel3 ? listElement.subProcessLevel3.name : "-";
+        if (
+          currentListElement.sub1 == "-" &&
+          currentListElement.sub2 == "-" &&
+          currentListElement.sub3 == "-"
+        ) {
+          let id = listElement.mainProcess ? listElement.mainProcess.pkTbId : "error"
+          currentListElement.route = `add-process/${id}`;
+          currentListElement.actions = "Add";
         } else {
-          currentDisplaySubprocess = accumulator[accumulator.length - 1];
+          currentListElement.route = "main-analysis";
+          currentListElement.actions = "Analysis";
         }
-        switch (subprocess.proLevel) {
-          case 1:
-            currentDisplaySubprocess.sub1 = subprocess;
-            break;
-          case 2:
-            currentDisplaySubprocess.sub2 = subprocess;
-            break;
-          case 3:
-            currentDisplaySubprocess.sub3 = subprocess;
-            break;
-        }
+        accumulator.push(currentListElement);
         return accumulator;
       },
       []
