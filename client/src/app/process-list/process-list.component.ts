@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import {ProcessListService} from './process-list.service';
+import { ProcessListService } from './process-list.service';
 
 
 @Component({
