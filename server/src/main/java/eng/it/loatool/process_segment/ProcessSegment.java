@@ -31,9 +31,12 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
     private String name;
     private int NLowerLevelSubPro;
     private String varProSeqId;
-    private Collection<SubProcessLevel> subprocessLevels;
     private Date createDate;
     private Date updateDate;
+
+    @OneToMany
+    @JoinColumn(name="FK_TB_ACE_PRO_SEQ", referencedColumnName="PK_TB_ID")
+    private Collection<SubProcessLevel> subprocessLevels;
 
     public ProcessSegment() {}
 
@@ -79,16 +82,6 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
         this.varProSeqId = varProSeqId;
     }
 
-    @OneToMany
-    @JoinColumn(name="FK_TB_ACE_PRO_SEQ", referencedColumnName="PK_TB_ID")
-    public Collection<SubProcessLevel> getSubprocessLevels() {
-        return subprocessLevels;
-    }
-
-    public void setSubprocessLevels(Collection<SubProcessLevel> subprocessLevels) {
-        this.subprocessLevels = subprocessLevels;
-    }
-
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATE_DATE", nullable = false, length = 19, insertable = true, updatable = false)
@@ -109,6 +102,11 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    @Override
+    public String toString() {
+        return "ProcessSegment [pkTbId=" + pkTbId + ", name=" + name + ", NLowerLevelSubPro=" + NLowerLevelSubPro + ", varProSeqId=" + varProSeqId + ", createDate=" + createDate + ", updateDate=" + updateDate + ", subprocessLevels=" + subprocessLevels + "]";
     }
 
 }

@@ -226,4 +226,9 @@ public class ProcessSegmentListElement implements java.io.Serializable, PkTbPrim
         this.updateDate = updateDate;
     }
 
+    @Override
+    public String toString() {
+        return "ProcessSegmentListElement [pkTbId=" + pkTbId + ", mainProcess=" + mainProcess + ", fkTbAceProSeq=" + fkTbAceProSeq + ", subProcessLevel1=" + subProcessLevel1 + ", fkTbAceSubProLev1=" + fkTbAceSubProLev1 + ", subProcessLevel2=" + subProcessLevel2 + ", fkTbAceSubProLev2=" + fkTbAceSubProLev2 + ", subProcessLevel3=" + subProcessLevel3 + ", fkTbAceSubProLev3=" + fkTbAceSubProLev3 + ", subProcessLevel4=" + subProcessLevel4 + ", fkTbAceSubProLev4=" + fkTbAceSubProLev4 + ", subProcessLevel5=" + subProcessLevel5 + ", fkTbAceSubProLev5=" + fkTbAceSubProLev5 + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
+    }
+
 }

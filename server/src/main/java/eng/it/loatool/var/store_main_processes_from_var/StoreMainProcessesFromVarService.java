@@ -35,6 +35,7 @@ public class StoreMainProcessesFromVarService {
                     savedProcessSegment.getPkTbId()
                 )
                 .orElseGet(() -> {
+                    ProcessSegmentListElement elementWithNoSubProcesses = new ProcessSegmentListElement();
                     Integer savedProcessSegmentId = savedProcessSegment.getPkTbId();
                     elementWithNoSubProcesses.setFkTbAceProSeq(savedProcessSegmentId);
                     persistProcessSegmentListElementService.createProcessSegmentListElement(elementWithNoSubProcesses);
@@ -54,13 +55,11 @@ public class StoreMainProcessesFromVarService {
         this.varToNativeProcessSegmentTransformer = varToNativeProcessSegmentTransformer;
         this.processSegmentListElementRepository = processSegmentListElementRepository;
         this.persistProcessSegmentListElementService = persistProcessSegmentListElementService;
-        this.elementWithNoSubProcesses = new ProcessSegmentListElement();
     }
 
     private ProcessSegmentRepository processSegmentRepository;
     private VarToNativeProcessSegmentTransformer varToNativeProcessSegmentTransformer;
     private ProcessSegmentListElementRepository processSegmentListElementRepository;
     private PersistProcessSegmentListElementService persistProcessSegmentListElementService;
-    private ProcessSegmentListElement elementWithNoSubProcesses;
 
 }

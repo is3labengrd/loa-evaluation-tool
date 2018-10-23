@@ -51,7 +51,8 @@ import org.hibernate.annotations.UpdateTimestamp;
         this.pkTbId = pkTbId;
     }
 
-    @Column(name = "FK_TB_ACE_PRO_SEQ", nullable = false) public int getFkTbAceProSeq() {
+    @Column(name = "FK_TB_ACE_PRO_SEQ", nullable = false)
+    public int getFkTbAceProSeq() {
         return this.fkTbAceProSeq;
     }
 
