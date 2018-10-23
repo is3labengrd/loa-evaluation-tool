@@ -31,12 +31,9 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
     private String name;
     private int NLowerLevelSubPro;
     private String varProSeqId;
+    private Collection<SubProcessLevel> subprocessLevels;
     private Date createDate;
     private Date updateDate;
-
-    @OneToMany
-    @JoinColumn(name="FK_TB_ACE_PRO_SEQ", referencedColumnName="PK_TB_ID")
-    private Collection<SubProcessLevel> subprocessLevels;
 
     public ProcessSegment() {}
 
@@ -80,6 +77,16 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
 
     public void setVarProSeqId(String varProSeqId) {
         this.varProSeqId = varProSeqId;
+    }
+
+    @OneToMany
+    @JoinColumn(name="FK_TB_ACE_PRO_SEQ", referencedColumnName="PK_TB_ID")
+    public Collection<SubProcessLevel> getSubprocessLevels() {
+        return subprocessLevels;
+    }
+
+    public void setSubprocessLevels(Collection<SubProcessLevel> subprocessLevels) {
+        this.subprocessLevels = subprocessLevels;
     }
 
     @CreationTimestamp

@@ -24,8 +24,9 @@ public class StoreMainProcessesFromVarService {
             ProcessSegment savedProcessSegment = processSegmentRepository
                 .findByVarId(processSegment.getVarProSeqId())
                 .map((segment) -> {
-                    processSegment.setPkTbId(segment.getPkTbId());
-                    return processSegmentRepository.save(processSegment);
+                    segment.setName(processSegment.getName());
+                    segment.setNLowerLevelSubPro(processSegment.getNLowerLevelSubPro());
+                    return processSegmentRepository.save(segment);
                 })
                 .orElseGet(() -> {
                     return processSegmentRepository.save(processSegment);
