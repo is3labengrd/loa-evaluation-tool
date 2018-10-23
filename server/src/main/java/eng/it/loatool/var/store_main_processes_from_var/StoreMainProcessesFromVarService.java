@@ -1,5 +1,6 @@
 package eng.it.loatool.var.store_main_processes_from_var;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class StoreMainProcessesFromVarService {
                     return processSegmentRepository.save(segment);
                 })
                 .orElseGet(() -> {
+                    processSegment.setSubprocessLevels(new ArrayList());
                     return processSegmentRepository.save(processSegment);
                 });
             processSegmentListElementRepository
