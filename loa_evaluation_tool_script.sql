@@ -325,7 +325,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `loa_evaluation_tool`.`TB_ACE_PRO_SEC_ORDERED`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `loa_evaluation_tool`.`TB_ACE_PRO_SEC_ORDERED`
+DROP TABLE IF EXISTS `loa_evaluation_tool`.`TB_ACE_PRO_SEC_ORDERED` ;
 
 CREATE TABLE IF NOT EXISTS `loa_evaluation_tool`.`TB_ACE_PRO_SEC_ORDERED` (
   `PK_TB_ID` INT(11) NOT NULL AUTO_INCREMENT,
