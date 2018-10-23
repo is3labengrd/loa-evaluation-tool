@@ -57,7 +57,7 @@ public class VARApi {
     }
 
     @PostMapping("/v1/var/populate-process-segments")
-    public void populateProcessSegments() {
+    public void populateProcessSegments() throws IOException {
         StoreMainProcessesService.storeMainProcessesFromVar();
     }
     @Autowired private StoreMainProcessesFromVarService StoreMainProcessesService;

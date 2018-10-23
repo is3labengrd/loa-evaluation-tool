@@ -1,5 +1,6 @@
 package eng.it.loatool.var.store_main_processes_from_var;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import eng.it.loatool.var.service.VARServiceWrapper;
 @Service
 public class StoreMainProcessesFromVarService {
 
-    public void storeMainProcessesFromVar() {
+    public void storeMainProcessesFromVar() throws IOException {
         List<MainProcess> mainProcesses = VARServiceWrapper.getProcessesSegmentList();
         for (MainProcess mainProcess: mainProcesses) {
             ProcessSegment processSegment = varToNativeProcessSegmentTransformer

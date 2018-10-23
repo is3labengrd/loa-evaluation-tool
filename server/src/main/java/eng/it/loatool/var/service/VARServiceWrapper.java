@@ -1,6 +1,9 @@
 package eng.it.loatool.var.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import eng.it.loatool.var.bean.MainProcess;
 import eng.it.loatool.var.request.*;
 
@@ -12,8 +15,10 @@ public class VARServiceWrapper {
 	  * @return Process hierarchy as json string
 	  */
 
-	 public static MainProcess getProcessesSegmentList () throws IOException {
-		 	return VARProcessSegmentImpl.main();
+	 public static List<MainProcess> getProcessesSegmentList () throws IOException {
+            List<MainProcess> mainProcess = new ArrayList<MainProcess>();
+            mainProcess.add(VARProcessSegmentImpl.main());
+		 	return mainProcess;
 	 }
 	 
 	 /**
