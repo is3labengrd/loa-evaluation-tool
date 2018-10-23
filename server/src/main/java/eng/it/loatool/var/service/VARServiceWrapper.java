@@ -1,14 +1,7 @@
 package eng.it.loatool.var.service;
 
-import static eng.it.loatool.var.request.VARProcessSegmentImpl.buildProcessSegmentList;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import eng.it.loatool.var.bean.Attrs;
 import eng.it.loatool.var.bean.MainProcess;
-import eng.it.loatool.var.bean.Processes;
 import eng.it.loatool.var.request.*;
 
 public class VARServiceWrapper {
@@ -19,34 +12,8 @@ public class VARServiceWrapper {
 	  * @return Process hierarchy as json string
 	  */
 
-	 public static List<MainProcess> getProcessesSegmentList () {
-		 
-		 		List<Processes> processes = VARProcessSegmentImpl.getProcessSegment();		 		
-		 		List<Processes> mainProcess = new ArrayList<Processes>();
-		 		List<Processes> mainProcessFinal = new ArrayList<Processes>();
-		 		List<String> checkAttrs = new ArrayList<String>();
-
-		 		
-		 		for (Processes proc : processes) {
-		 			checkAttrs.clear();
-		 			for (Attrs attrs : proc.getAttr()) {
-		 				checkAttrs.add(attrs.getName());
-					}
-		 			if(!checkAttrs.contains("hasAfterEndDependency"))		 					
-		 				mainProcess.add(proc);
-		 								
-				}
-		 		
-		 		for (Processes proc2 : mainProcess) {
-		 			checkAttrs.clear();
-		 			for (Attrs attrs : proc2.getAttr()) {
-		 				checkAttrs.add(attrs.getName());
-					}
-		 			if (checkAttrs.contains("isMadeOf"))
-		 				mainProcessFinal.add(proc2);
-				}
-
-			    return buildProcessSegmentList(mainProcessFinal, processes);
+	 public static MainProcess getProcessesSegmentList () throws IOException {
+		 	return VARProcessSegmentImpl.main();
 	 }
 	 
 	 /**

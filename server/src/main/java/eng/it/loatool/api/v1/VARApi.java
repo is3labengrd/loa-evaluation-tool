@@ -10,7 +10,7 @@ import java.io.IOException;
 public class VARApi {
 
     @RequestMapping("/v1/var/process-segments")
-    public Object getVarProcessSegmentList() {
+    public Object getVarProcessSegmentList() throws IOException {
         return VARServiceWrapper.getProcessesSegmentList();
     }
 
