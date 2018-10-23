@@ -50,7 +50,7 @@ export class HTAAnalysisComponent implements OnInit {
       },
       {
         strong: 'Sensitivity',
-        criteria1: 'Insesitive',
+        criteria1: 'Insensitive',
         criteria2: 'Handly sensitive',
         criteria3: 'Sensitive',
         criteria4: 'Very sensitive',

@@ -6,7 +6,7 @@
         <h5 class="modal-title" >Product planing</h5>
       </div>
       <div class="modal-body">
-        <div>Number of produced pieces per hour: <input type="number" id="productsNum" [(ngModel)]="productsNum"> </div> <br>
+        <div>Number of produced pieces per hour: <input type="number" id="productsNum" [(ngModel)]="productsNum" min="0"> </div> <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -24,10 +24,10 @@
         <h5 class="modal-title" >Add process specific information</h5>
       </div>
       <div class="modal-body">
-        <div>Number of shifts per day: <input type="number" [(ngModel)]="shiftsPerDay"  id="shiftsPerDay" class="float-right"></div> <br>
-        <div>Hours per shift: <input type="number"  [(ngModel)]="hoursPerShift" id="hoursPerShift" class="float-right"></div> <br>
-        <div>Working days per year: <input type="number" [(ngModel)]="workingDayPerY" id="workingDayPerY" class="float-right"></div> <br>
-        <div>Proportional wage costs per hour: <input type="number" [(ngModel)]="propWageCostsPerH" id="propWageCostsPerH" class="float-right"></div> <br>
+        <div>Number of shifts per day: <input type="number" [(ngModel)]="procSpecInfoObj.shiftsPerDay"  name="shiftsPerDay" class="float-right" min="0"></div> <br>
+        <div>Hours per shift: <input type="number"  [(ngModel)]="procSpecInfoObj.hoursPerShift" name="hoursPerShift" class="float-right" min="0"></div> <br>
+        <div>Working days per year: <input type="number" [(ngModel)]="procSpecInfoObj.workingDayPerY" name="workingDayPerY" class="float-right" min="0" ></div> <br>
+        <div>Proportional wage costs per hour: <input type="number" [(ngModel)]="procSpecInfoObj.propWageCostsPerH" name="propWageCostsPerH" class="float-right" min="0"></div> <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -58,43 +58,43 @@
               <td>Select resource</td>
               <td>
                 <select [(ngModel)]="selectedRes1" (ngModelChange)="firstDropDownChanged($event)">
-                  <option *ngFor="let res1 of resources" [value]="res1.loaPhysical">{{res1.name}}</option>
+                  <option *ngFor="let res1 of resources" [value]="res1.name">{{res1.name}}</option>
                 </select>
               </td>
               <td>
-                <select [(ngModel)]="selectedRes1" (ngModelChange)="firstDropDownChanged($event)">
-                  <option *ngFor="let res1 of resources" [value]="res1.loaPhysical">{{res1.name}}</option>
+                <select [(ngModel)]="selectedRes2" (ngModelChange)="secondDropDownChanged($event)">
+                  <option *ngFor="let res2 of resources" [value]="res2.name">{{res2.name}}</option>
                 </select>
               </td>
               <td>
-                <select [(ngModel)]="selectedRes1" (ngModelChange)="firstDropDownChanged($event)">
-                  <option *ngFor="let res1 of resources" [value]="res1.loaPhysical">{{res1.name}}</option>
+                <select [(ngModel)]="selectedRes3" (ngModelChange)="thirdDropDownChanged($event)">
+                  <option *ngFor="let res3 of resources" [value]="res3.name">{{res3.name}}</option>
                 </select>
             </tr>
             <tr>
               <td>Physical LoA</td>
-              <td>{{selectedRes1}}</td>
-              <td>{{selectedRes1}}</td>
-              <td>{{selectedRes1}}</td>
+              <td>{{firstdropdown?.loaPhysical}}</td>
+              <td>{{seconddropdown?.loaPhysical}}</td>
+              <td>{{thirddropdown?.loaPhysical}}</td>
             </tr>
             <tr>
               <td>Cognitive LoA</td>
-              <td>{{selectedRes1}}</td>
-              <td>{{selectedRes1}}</td>
-              <td>{{selectedRes1}}</td>
+              <td>{{firstdropdown?.loaCognitive}}</td>
+              <td>{{seconddropdown?.loaCognitive}}</td>
+              <td>{{thirddropdown?.loaCognitive}}</td>
             </tr>
             <tr>
               <td>Process time</td>
-              <td><input type="number" ></td>
-              <td><input type="number" ></td>
-              <td><input type="number" ></td>
+              <td><input type="number" [(ngModel)]="selRes1ProcTime"  id="selRes1ProcTime" min="1" max="7" ></td>
+              <td><input type="number" [(ngModel)]="selRes2ProcTime"  id="selRes2ProcTime" min="1" max="7" ></td>
+              <td><input type="number" [(ngModel)]="selRes3ProcTime"  id="selRes3ProcTime" min="1" max="7" ></td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="createSubScenarios()">Save changes</button>
       </div>
     </div>
   </div>
@@ -113,14 +113,14 @@
   <table id="table1" >
     <tr>
       <td>Main process:</td>
-      <td style="border-right: 1px solid">{{mainProcess.name}}</td>
-      <td>Sub process level 1: {{sub1.name}}</td>
-      <td>Sub process level 2: {{sub2.name}}</td>
+      <td style="border-right: 1px solid">{{mainProcess?.name}}</td>
+      <td>Sub process level 1: {{sub.sub1?.name}}</td>
+      <td>Sub process level 2: {{sub.sub2?.name}}</td>
     </tr>
     <tr>
       <td>Level of sub processes: </td>
       <td style="border-right: 1px solid"> {{lowerLevel}}</td>
-      <td>Sub process level 3:  {{sub3.name}}</td>
+      <td>Sub process level 3:  {{sub.sub3?.name}}</td>
       <td></td>
     </tr>
   </table>
@@ -153,9 +153,9 @@
       <td class="roto  align-middle"></td>
       <td><strong>Resource name</strong></td>
       <td>-</td>
-      <td>Manual Tool Trolley</td>
-      <td>Semi Automated Tool Trolley</td>
-      <td>Automated Tool Trolley</td>
+      <td>{{scenario1.resourceName}}</td>
+      <td>{{scenario2.resourceName}}</td>
+      <td>{{scenario3.resourceName}}</td>
     </tr>
      <tr>
         <td class="roto  align-middle">Process <br> variables</td>
@@ -170,19 +170,19 @@
           s
         </td>
         <td>
-          1 <br>
-          1 <br>
-          30
+          {{scenario1.loaPhysical}} <br>
+          {{scenario1.loaCognitive}} <br>
+          {{scenario1.processTime}}
         </td>
         <td>
-          1 <br>
-          3 <br>
-          25
+          {{scenario2.loaPhysical}}<br>
+          {{scenario1.loaCognitive}}<br>
+          {{scenario2.processTime}}
         </td>
         <td>
-          7 <br>
-          7 <br>
-          20
+          {{scenario3.loaPhysical}} <br>
+          {{scenario1.loaCognitive}} <br>
+          {{scenario3.processTime}}
         </td>
       </tr>
       <tr>
@@ -198,42 +198,42 @@
           d <br>
         </td>
         <td>
-          2 <br>
-          8 <br>
-          225
+          {{scenario1.numberShiftsPerDay}} <br>
+          {{scenario1.hoursPerShift}}<br>
+          {{scenario1.workingDaysPerYear}}
         </td>
         <td>
-          2 <br>
-          8 <br>
-          225
+          {{scenario2.numberShiftsPerDay}} <br>
+          {{scenario2.hoursPerShift}}<br>
+          {{scenario2.workingDaysPerYear}}
         </td>
         <td>
-          2 <br>
-          8 <br>
-          225
+          {{scenario3.numberShiftsPerDay}} <br>
+          {{scenario3.hoursPerShift}}<br>
+          {{scenario3.workingDaysPerYear}}
         </td>
       </tr>
       <tr>
         <td>Hours per year</td>
         <td>h</td>
-        <td>3600</td>
-        <td>3600</td>
-        <td>3600</td>
+        <td>{{scenario1.hoursPerYear}}</td>
+        <td>{{scenario2.hoursPerYear}}</td>
+        <td>{{scenario3.hoursPerYear}}</td>
       </tr>
       <tr>
         <td class="roto  align-middle" rowspan="2">Prod.</td>
         <td>Number of produced pieces</td>
         <td>units/h</td>
-        <td>20</td>
-        <td>20</td>
-        <td>20</td>
+        <td>{{scenario1.numProducedPiecesHour}}</td>
+        <td>{{scenario2.numProducedPiecesHour}}</td>
+        <td>{{scenario3.numProducedPiecesHour}}</td>
       </tr>
       <tr>
-        <td>Number od produced pieces</td>
+        <td>Number of produced pieces</td>
         <td>units/year</td>
-        <td>72000</td>
-        <td>72000</td>
-        <td>72000</td>
+        <td>{{scenario1.numProducedPiecesYear}}</td>
+        <td>{{scenario2.numProducedPiecesYear}}</td>
+        <td>{{scenario3.numProducedPiecesYear}}</td>
       </tr>
       <tr>
         <td class="roto  align-middle" rowspan="6">Variable costs</td>
@@ -248,27 +248,27 @@
           l/h
         </td>
         <td>
-          43,75<br>
-          1<br>
-          16,67%
+          {{scenario1.propWageCostsPerHour}}<br>
+          {{scenario1.numberOperationsPerMachine}}<br>
+          {{scenario1.ratioOfParticipPerHour}}
         </td>
         <td>
-          43,75<br>
-          1<br>
-          13,89%
+          {{scenario2.propWageCostsPerHour}}<br>
+          {{scenario2.numberOperationsPerMachine}}<br>
+          {{scenario2.ratioOfParticipPerHour}}
         </td>
         <td>
-          43,75<br>
-          0<br>
-          11,11%
+         {{scenario3.propWageCostsPerHour}} <br>
+         {{scenario3.numberOperationsPerMachine}} <br>
+         {{scenario3.ratioOfParticipPerHour}}
         </td>
       </tr>
       <tr>
         <td>Labour costs</td>
         <td>l/units</td>
-        <td>0,36</td>
-        <td>0,30</td>
-        <td>0,00</td>
+        <td>{{scenario1.labourCosts}}</td>
+        <td>{{scenario2.labourCosts}}</td>
+        <td>{{scenario3.labourCosts}}</td>
       </tr>
       <tr>
         <td>
@@ -282,27 +282,27 @@
           l/kWh
         </td>
         <td>
-          0<br>
-          0<br>
-          0,00
+          {{scenario1.electrConsumption}}<br>
+          {{scenario1.electrConsumptionStandby}}<br>
+          {{scenario1.electrPrice}}
         </td>
         <td>
-          1440<br>
-          100<br>
-          0,1
+          {{scenario2.electrConsumption}}<br>
+          {{scenario2.electrConsumptionStandby}}<br>
+          {{scenario2.electrPrice}}
         </td>
         <td>
-          72000<br>
-          100<br>
-          0,1
+          {{scenario3.electrConsumption}}<br>
+          {{scenario3.electrConsumptionStandby}}<br>
+          {{scenario3.electrPrice}}
         </td>
       </tr>
       <tr>
         <td>Energy costs</td>
         <td>l/units</td>
-        <td>0,00</td>
-        <td>1,43</td>
-        <td>40,44</td>
+        <td>{{scenario1.energyCosts}}</td>
+        <td>{{scenario2.energyCosts}}</td>
+        <td>{{scenario3.energyCosts}}</td>
       </tr>
       <tr>
         <td>
@@ -314,24 +314,23 @@
           %
         </td>
         <td>
-          0<br>
-          0,02
+          {{scenario1.annualMaintenanceCostsDirect}}<br>
+          {{scenario1.annualMaintenanceCostsEstimate}}
         </td>
         <td>
-          150<br>
-          0,05
+          {{scenario2.annualMaintenanceCostsDirect}}  <br>
+          {{scenario2.annualMaintenanceCostsEstimate}}
         </td>
         <td>
-          1200<br>
-          0,03
-        </td>
+          {{scenario3.annualMaintenanceCostsDirect}}  <br>
+          {{scenario3.annualMaintenanceCostsEstimate}}  </td>
       </tr>
       <tr>
         <td>Maintenance costs</td>
         <td>l/a</td>
-        <td>0,00</td>
-        <td>150</td>
-        <td>1200</td>
+        <td>{{scenario1.maintenanceCosts}}</td>
+        <td>{{scenario2.maintenanceCosts}}</td>
+        <td>{{scenario3.maintenanceCosts}}</td>
       </tr>
       <tr>
         <td rowspan="6" class="roto align-middle">Fixed Costs</td>
@@ -344,24 +343,24 @@
           l/m<sup>3</sup>
         </td>
         <td>
-          0<br>
-          0
+          {{scenario1.installSurface}}  <br>
+          {{scenario1.costsM3PerMonth}}
         </td>
         <td>
-          0<br>
-          0
+          {{scenario2.installSurface}} <br>
+          {{scenario2.costsM3PerMonth}}
         </td>
         <td>
-          5<br>
-          8
+          {{scenario3.installSurface}}<br>
+          {{scenario3.costsM3PerMonth}}
         </td>
       </tr>
       <tr>
         <td>Annual space costs</td>
         <td>l/a</td>
-        <td>0,00</td>
-        <td>0,00</td>
-        <td>480,00</td>
+        <td>{{scenario1.annualSpaceCosts}}</td>
+        <td>{{scenario2.annualSpaceCosts}}</td>
+        <td>{{scenario3.annualSpaceCosts}}</td>
       </tr>
       <tr>
         <td>
@@ -375,27 +374,27 @@
           a
         </td>
         <td>
-          0<br>
-          0<br>
-          0
+        {{scenario1.machinePurchase}} <br>
+        {{scenario1.machineSales}} <br>
+        {{scenario1.economicUsefulLife}}
         </td>
         <td>
-          3000<br>
-          0<br>
-          5
+         {{scenario2.machinePurchase}}  <br>
+         {{scenario2.machineSales}} <br>
+         {{scenario2.economicUsefulLife}}
         </td>
         <td>
-          40000 <br>
-          0 <br>
-          10
+        {{scenario3.machinePurchase}}  <br>
+        {{scenario3.machineSales}}   <br>
+        {{scenario3.economicUsefulLife}}
         </td>
       </tr>
       <tr>
         <td>Imputed deprecation</td>
         <td>l/a</td>
-        <td>0,00</td>
-        <td>600,00</td>
-        <td>4000,00</td>
+        <td>{{scenario1.imputedDeprecation}}</td>
+        <td>{{scenario2.imputedDeprecation}}</td>
+        <td>{{scenario3.imputedDeprecation}}</td>
       </tr>
       <tr>
         <td>
@@ -409,27 +408,27 @@
           %
         </td>
         <td>
-          0<br>
-          0<br>
-          0,02%
+          {{scenario1.machinePurchase}} <br>
+          {{scenario1.machineSales}} <br>
+          {{scenario1.interestRate}}
         </td>
         <td>
-          3000<br>
-          0<br>
-          0,02%
+          {{scenario2.machinePurchase}}<br>
+          {{scenario2.machineSales}} <br>
+          {{scenario2.interestRate}}
         </td>
         <td>
-          40000<br>
-          0<br>
-          0,02%
+          {{scenario3.machinePurchase}}  <br>
+          {{scenario3.machineSales}} <br>
+          {{scenario3.interestRate}}
         </td>
       </tr>
       <tr>
-        <td>Accured interest costs</td>
+        <td>Accrued interest costs</td>
         <td>l/a</td>
-        <td>0,00</td>
-        <td>0,30</td>
-        <td>4,00</td>
+        <td>{{scenario1.accruedInterestCosts}}</td>
+        <td>{{scenario2.accruedInterestCosts}}</td>
+        <td>{{scenario3.accruedInterestCosts}}</td>
       </tr>
       <tr>
         <td></td>
@@ -442,16 +441,16 @@
           l/units
         </td>
         <td>
-          0,36<br>
-          0,00
+          {{scenario1.variableCostsTotal}}<br>
+          {{scenario1.fixedCostsTotal}}
         </td>
         <td>
-          1,73<br>
-          0,01
+          {{scenario2.variableCostsTotal}}<br>
+          {{scenario2.fixedCostsTotal}}
         </td>
         <td>
-          40,44<br>
-          0,07
+          {{scenario3.variableCostsTotal}} <br>
+          {{scenario3.fixedCostsTotal}}
         </td>
       </tr>
       <tr>
@@ -464,23 +463,23 @@
           l/year
         </td>
         <td>
-          0,36<br>
-          26250,00
+          {{scenario1.assemblyCostsPerPiece}} <br>
+          {{scenario1.assemblyCostsTotal}}
         </td>
         <td>
-          1,74<br>
-          125625,30
+          {{scenario2.assemblyCostsPerPiece}}<br>
+          {{scenario2.assemblyCostsTotal}}
         </td>
         <td>
-          40,52<br>
-          2917684,00
+          {{scenario3.assemblyCostsPerPiece}}<br>
+          {{scenario3.assemblyCostsTotal}}
         </td>
       </tr>
     </tbody>
   </table>
 
   <div  *ngIf="disableButton" class="btn-group d-flex justify-content-center">
-    <button class="btn btn-primary">Cancel</button>
+    <button class="btn btn-primary" (click)="cancelScenariosValues()">Cancel</button>
     <button class="btn btn-secondary">Save</button>
   </div>
 
@@ -500,23 +499,23 @@
           <tr>
             <td>Best LoA</td>
             <td>-</td>
-            <td>Manual Tool Trolley</td>
-            <td>Semi Automated Tool Trolley</td>
-            <td>Automated Tool Trolley</td>
+            <td>{{selectedRes1}}</td>
+            <td>{{selectedRes2}}</td>
+            <td>{{selectedRes3}}</td>
           </tr>
           <tr>
             <td>Best LoA physical</td>
             <td>-</td>
-            <td><input type="number" min="1" max="7" value="1"></td>
-            <td><input type="number" min="1" max="7" value="2"></td>
-            <td><input type="number" min="1" max="7" value="2"></td>
+            <td><input type="number" [(ngModel)]="bestLoaPhy.bestP1" name="bestP1" min="1" max="7" value="1"></td>
+            <td><input type="number" [(ngModel)]="bestLoaPhy.bestP2" name="bestP2" min="1" max="7" value="2"></td>
+            <td><input type="number" [(ngModel)]="bestLoaPhy.bestP3" name="bestP3" min="1" max="7" value="2"></td>
           </tr>
           <tr>
             <td>Best LoA cognitive</td>
             <td>-</td>
-            <td><input type="number" min="1" max="7" value="2" ></td>
-            <td><input type="number" min="1" max="7" value="3" ></td>
-            <td><input type="number" min="1" max="7" value="1"></td>
+            <td><input type="number" [(ngModel)]="bestLoaCog.bestC1" name="bestC1" min="1" max="7" value="2" ></td>
+            <td><input type="number" [(ngModel)]="bestLoaCog.bestC2" name="bestC2" min="1" max="7" value="3" ></td>
+            <td><input type="number" [(ngModel)]="bestLoaCog.bestC3" name="bestC3" min="1" max="7" value="1"></td>
           </tr>
         </tbody>
       </table>

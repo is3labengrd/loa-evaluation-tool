@@ -1,10 +1,17 @@
 package eng.it.loatool.api.v1;
 
-import org.springframework.web.bind.annotation.*;
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import eng.it.loatool.var.service.VARServiceWrapper;
-
-import java.io.IOException;
+import eng.it.loatool.var.store_main_processes_from_var.StoreMainProcessesFromVarService;
 
 @RestController
 public class VARApi {
@@ -48,4 +55,11 @@ public class VARApi {
     public String getProductPlanningIntance(@PathVariable("name") String name) throws IOException {
         return VARServiceWrapper.getProductPlanningIntance(name);
     }
+
+    @PostMapping("/v1/var/populate-process-segments")
+    public void populateProcessSegments() {
+        StoreMainProcessesService.storeMainProcessesFromVar();
+    }
+    @Autowired private StoreMainProcessesFromVarService StoreMainProcessesService;
+
 }

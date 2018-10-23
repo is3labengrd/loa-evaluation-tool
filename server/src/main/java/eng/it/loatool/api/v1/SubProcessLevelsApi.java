@@ -44,7 +44,7 @@ public class SubProcessLevelsApi {
     @GetMapping("/v1/subprocess-levels/{subprocessId}/info")
     public ResponseEntity<?> getSubProcessLevelInfo(@PathVariable("subprocessId") Integer processId) {
         return ResponseEntityTransformer.transform(
-                getSubProcessLevelInfoService.getSubProcessInfo(processId)
+            getSubProcessLevelInfoService.getSubProcessInfo(processId)
         );
     }
 
