@@ -1,8 +1,11 @@
+import { DataSet } from './data-set';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Chart } from '../../../node_modules/chart.js/dist/Chart.min.js';
-import { Subscription } from 'rxjs';
+import { SubprocessSequence } from './subprocess-sequence';
+import { LoaInfo } from './loa-info';
+
 
 @Component({
   selector: 'app-as-is-loa',
@@ -19,7 +22,81 @@ export class AsIsLOAComponent implements OnInit {
 
   bubbleChart:any;
 
+  analysisData:any;
+
   data = { datasets: [] };
+
+  getAnalysisData() {
+    let regex =  /it\.eng\.loatool\.analysisData=(.+?)(;|$)/;
+    let mainProcessId = JSON
+      .parse(regex.exec(document.cookie)[1])
+      .mainProcess
+      .pkTbId;
+    this.analysisData = this.http
+      .get(`${environment.apiUrl}/v1/process-segments/${mainProcessId}`)
+      .toPromise()
+      .then(
+        function createSubprocessArraySequences(process:any) {
+          var subprocessSequences = [];
+          var singleSequenceReference = [];
+          var lastLevel = 0;
+          for (let subprocess of process.subprocessLevels) {
+            if (subprocess.proLevel > lastLevel) {
+              lastLevel = subprocess.proLevel;
+              singleSequenceReference.push(subprocess);
+            } else {
+              lastLevel = subprocess.proLevel;
+              subprocessSequences.push(new SubprocessSequence(singleSequenceReference));
+              singleSequenceReference = [subprocess];
+            }
+          }
+          subprocessSequences.push(new SubprocessSequence(singleSequenceReference));
+          return subprocessSequences;
+        }
+      )
+      .then(
+        function generateLoaToLabelMap(sequences) {
+          let loaInfoPrimitiveToLabel = new Map();
+          for (let sequence of sequences) {
+            if (!sequence.loaInfo) continue; 
+            let label = ((sequence) => {
+              let label = "";
+              sequence.forEach(element => {
+                label += element.name + " - ";
+              });
+              return label.slice(0, label.length-3);
+            })(sequence.subprocessArray);
+            if (loaInfoPrimitiveToLabel.has(sequence.loaInfo.valueOf())) {
+              let currentValue = loaInfoPrimitiveToLabel.get(sequence.loaInfo.valueOf());
+              currentValue+=` | ${label}`;
+              loaInfoPrimitiveToLabel.set(sequence.loaInfo.valueOf(), currentValue);
+            } else {
+              loaInfoPrimitiveToLabel.set(sequence.loaInfo.valueOf(), label);
+            }
+          }
+          return loaInfoPrimitiveToLabel;
+        }
+      )
+      .then(
+        /* UpdateBubbleChart */(map:Map<any,any>) => {
+          map.forEach(
+            (value, key) => {
+              console.log(
+                LoaInfo.valueOfInverse(key)
+              );
+              this.data.datasets.push(
+                new DataSet(
+                  LoaInfo.valueOfInverse(key),
+                  value
+                )
+              );
+            }
+          );
+          console.log(this.data.datasets)
+          this.bubbleChart.update();
+        }
+      );
+  }
 
   ngOnInit() {
     const data = this.data;
@@ -64,46 +141,8 @@ export class AsIsLOAComponent implements OnInit {
     });
 
     const bubbleChart = this.bubbleChart;
+    
+    this.getAnalysisData();
 
-    const subprocessProvider = () => {
-      let result = [];
-      let regex = /it\.eng\.loatool\.asIsinfo\[(\d+)\]=(.+?)(;|$)/g;
-      let iteration;
-      while ((iteration = regex.exec(document.cookie)) != null) {
-        result[iteration[1]]=JSON.parse(iteration[2]);
-      }
-      return result;
-    }
-
-    const subprocesses:Array<any> = subprocessProvider();
-
-    subprocesses.forEach(
-      (subprocess) => {
-        let subscription:Subscription = this.http
-          .get(`${environment.apiUrl}/v1/subprocess-levels/${subprocess.pkTbId}/info`)
-          .subscribe({
-            next: (info:any) => {
-              data.datasets.push({
-                label: subprocess.name,
-                backgroundColor: 'orange',
-                borderColor: 'black',
-                borderWidth: 1,
-                data: [
-                  {
-                    x: info.fkTbAcePhyLoa,
-                    y: info.fkTbAceCogLoa,
-                    r: 10
-                  }
-                ]
-              });
-              bubbleChart.update();
-            },
-            error: () => {},
-            complete: () => {
-              subscription.unsubscribe();
-            }
-          })
-      }
-    );
   }
 }

@@ -76,17 +76,18 @@ export class ProcessListComponent implements OnInit {
     this.processSegmentList = this.rawProcessSegmentList.reduce(
       (accumulator: Array<any>, listElement) => {
         let currentListElement = Object.create(null);
+        let id = listElement.mainProcess ? listElement.mainProcess.pkTbId : "error"
         currentListElement.name = listElement.mainProcess ? listElement.mainProcess.name : "error";
         currentListElement.sublevels = listElement.mainProcess ? listElement.mainProcess.nlowerLevelSubPro : "error";
         currentListElement.sub1 = listElement.subProcessLevel1 ? listElement.subProcessLevel1.name : "-";
         currentListElement.sub2 = listElement.subProcessLevel2 ? listElement.subProcessLevel2.name : "-";
         currentListElement.sub3 = listElement.subProcessLevel3 ? listElement.subProcessLevel3.name : "-";
+        currentListElement.editRoute = `/edit-process/${id}`;
         if (
           currentListElement.sub1 == "-" &&
           currentListElement.sub2 == "-" &&
           currentListElement.sub3 == "-"
         ) {
-          let id = listElement.mainProcess ? listElement.mainProcess.pkTbId : "error"
           currentListElement.route = `/add-process/${id}`;
           currentListElement.actions = "Add";
         } else {
@@ -110,7 +111,10 @@ export class ProcessListComponent implements OnInit {
   }
 
   saveAnalysisData(data) {
-    let stringifiedData = JSON.stringify(data);
+    let skimmedData = {
+      mainProcess: data.mainProcess
+    }
+    let stringifiedData = JSON.stringify(skimmedData);
     document.cookie=`it.eng.loatool.analysisData=${stringifiedData}`;
   }
 
