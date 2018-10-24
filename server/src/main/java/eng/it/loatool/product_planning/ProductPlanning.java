@@ -13,6 +13,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import eng.it.loatool.PkTbPrimaryKeyOwner;
 
 /**
@@ -21,7 +26,7 @@ import eng.it.loatool.PkTbPrimaryKeyOwner;
 @Entity @Table(name = "TB_ACE_PRO_PLAN", catalog = "loa_evaluation_tool")
 public class ProductPlanning implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
-    private Integer pkTbId;
+    @JsonProperty private Integer pkTbId;
     private int fkTbAceProSeq;
     private int NProdPiecePerHours;
     private Date createDate;
@@ -36,12 +41,14 @@ public class ProductPlanning implements java.io.Serializable, PkTbPrimaryKeyOwne
         this.updateDate = updateDate;
     }
 
+    @Override
     @Id @GeneratedValue(strategy = IDENTITY)
 
     @Column(name = "PK_TB_ID", unique = true, nullable = false) public Integer getPkTbId() {
         return this.pkTbId;
     }
 
+    @Override
     public void setPkTbId(Integer pkTbId) {
         this.pkTbId = pkTbId;
     }
@@ -62,7 +69,10 @@ public class ProductPlanning implements java.io.Serializable, PkTbPrimaryKeyOwne
         this.NProdPiecePerHours = NProdPiecePerHours;
     }
 
-    @Temporal(TemporalType.TIMESTAMP) @Column(name = "CREATE_DATE", nullable = false, length = 19) public Date getCreateDate() {
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATE_DATE", updatable = false, nullable = false, length = 19)
+    public Date getCreateDate() {
         return this.createDate;
     }
 
@@ -70,7 +80,10 @@ public class ProductPlanning implements java.io.Serializable, PkTbPrimaryKeyOwne
         this.createDate = createDate;
     }
 
-    @Temporal(TemporalType.TIMESTAMP) @Column(name = "UPDATE_DATE", nullable = false, length = 19) public Date getUpdateDate() {
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "UPDATE_DATE", nullable = false, length = 19)
+    public Date getUpdateDate() {
         return this.updateDate;
     }
 
