@@ -12,11 +12,18 @@ import eng.it.loatool.process_loa_info.ProcessLOAInformationRepository;
 public class UpdateProcessLOAInformationService {
 
     public Optional<ProcessLOAInformation> updateInformation(Integer processId, ProcessLOAInformation processLOAInformation) {
-        processLOAInformation.setPkTbId(processId);
-        if (processId == null || !processLOAInformationRepository.existsById(processId)) {
-            return Optional.empty();
-        }
-        return Optional.of(processLOAInformationRepository.save(processLOAInformation));
+        return processLOAInformationRepository
+            .findById(processId)
+            .map(
+                (info) -> {
+                    processLOAInformation.setPkTbId(processId);
+                    processLOAInformation.setSubProcessLevel(
+                        info.getSubProcessLevel()
+                    );
+                    return processLOAInformationRepository
+                        .save(processLOAInformation);
+                }
+            );
     }
 
     @Autowired private ProcessLOAInformationRepository processLOAInformationRepository;

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import eng.it.loatool.process_loa_info.ProcessLOAInformation;
 import eng.it.loatool.process_loa_info.ProcessLOAInformationRepository;
+import eng.it.loatool.subprocess_level.SubProcessLevelRepository;
 
 @Service
 public class CreateProcessLOAInformationService {
@@ -18,11 +19,19 @@ public class CreateProcessLOAInformationService {
             processLOAInformation.getPkTbId() == null ||
             !processLOAInformationRepository.existsById(processLOAInformation.getPkTbId())
         ) {
+            subProcessLevelRepository
+                .findById(processLOAInformation.getFkTbAceSubProLev())
+                .ifPresent(
+                    (subprocessLevel) -> {
+                        processLOAInformation.setSubProcessLevel(subprocessLevel);
+                    }
+                );
             return Optional.of(processLOAInformationRepository.save(processLOAInformation));
         }
         return Optional.empty();
     }
 
     @Autowired private ProcessLOAInformationRepository processLOAInformationRepository;
+    @Autowired private SubProcessLevelRepository subProcessLevelRepository;
 
 }
