@@ -24,12 +24,28 @@ public class VARProcessSegment {
 		final String uri = BASE_URL + "/SPARQLQuery";
 
 	    RestTemplate restTemplate = new RestTemplate();
-	    String request = prefix() + "SELECT *" +
+	    String request = prefix() + "SELECT * " +
 	    		"WHERE { ?list a b2mml:ProcessSegment ." +
 	    		"}";
 	    String result = restTemplate.postForObject(uri, request, String.class);
 	     
 	    return result;
+	}
+
+	public static String getIsMadeOf() throws IOException {
+		PropertyManager prop = new PropertyManager();
+		final String BASE_URL = prop.getPropValues("base.url");
+		final String uri = BASE_URL + "/SPARQLQuery";
+
+		RestTemplate restTemplate = new RestTemplate();
+		String request = prefix() + "select ?isFather ?isChildren " +
+				"where{" +
+				"?isChildren a b2mml:ProcessSegment ." +
+				"?isFather var:isMadeOf ?isChildren ." +
+				"}";
+		String result = restTemplate.postForObject(uri, request, String.class);
+
+		return result;
 	}
 	
 	public static String getProcessSegmentAttribute(String addressSpace) throws IOException {
@@ -38,7 +54,7 @@ public class VARProcessSegment {
 	    final String uri = BASE_URL + "/SPARQLQuery";
 	     
 	    RestTemplate restTemplate = new RestTemplate();
-	    String request = prefix() + "SELECT DISTINCT ?name ?value ?type ?range" + 
+	    String request = prefix() + "SELECT DISTINCT ?name ?value ?type ?range " +
 	    		"WHERE { ?end ?name ?value. " + 
 	    		"FILTER(?end = <"+addressSpace+">)" + 
 	    		"?name rdf:type ?type." + 
@@ -50,6 +66,16 @@ public class VARProcessSegment {
 	     
 	    return result;
 	}
-	
 
+	public static String getList() throws IOException {
+		PropertyManager prop = new PropertyManager();
+		final String BASE_URL = prop.getPropValues("base.url");
+		final String uri = BASE_URL + "/assets?className=ProcessSegment&retrieveForChildren=true";
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		String result = restTemplate.getForObject(uri, String.class);
+
+		return result;
+	}
 }

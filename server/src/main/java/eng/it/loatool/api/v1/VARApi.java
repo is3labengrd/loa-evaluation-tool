@@ -17,7 +17,7 @@ import eng.it.loatool.var.store_main_processes_from_var.StoreMainProcessesFromVa
 public class VARApi {
 
     @RequestMapping("/v1/var/process-segments")
-    public Object getVarProcessSegmentList() {
+    public Object getVarProcessSegmentList() throws IOException {
         return VARServiceWrapper.getProcessesSegmentList();
     }
 
@@ -57,7 +57,7 @@ public class VARApi {
     }
 
     @PostMapping("/v1/var/populate-process-segments")
-    public void populateProcessSegments() {
+    public void populateProcessSegments() throws IOException {
         StoreMainProcessesService.storeMainProcessesFromVar();
     }
     @Autowired private StoreMainProcessesFromVarService StoreMainProcessesService;
