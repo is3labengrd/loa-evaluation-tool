@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import {ProcessListService} from '../process-list/process-list.service';
 
 @Component({
   selector: 'app-resource-list',
@@ -19,10 +20,12 @@ export class ResourceListComponent implements OnInit {
   searchTerm: string;
   resources = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,  private _processListService: ProcessListService) { }
 
+  cookie:any;
   ngOnInit() {
     this.updateResourceList();
+    this.cookie = this._processListService.getCookie("selectedSubprocess");
   }
 
   updateResourceList() {

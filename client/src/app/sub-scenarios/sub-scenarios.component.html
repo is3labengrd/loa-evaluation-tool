@@ -6,7 +6,7 @@
         <h5 class="modal-title" >Product planing</h5>
       </div>
       <div class="modal-body">
-        <div>Number of produced pieces per hour: <input type="number" id="productsNum" [(ngModel)]="productsNum" min="0"> </div> <br>
+        <div>Number of produced pieces per hour: <input type="number" id="nprodPiecePerHours" [(ngModel)]="nprodPiecePerHours" min="0"> </div> <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -113,14 +113,15 @@
   <table id="table1" >
     <tr>
       <td>Main process:</td>
-      <td style="border-right: 1px solid">{{mainProcess?.name}}</td>
-      <td>Sub process level 1: {{sub.sub1?.name}}</td>
-      <td>Sub process level 2: {{sub.sub2?.name}}</td>
+      <!--<td style="border-right: 1px solid">{{mainProcess?.name}}</td>-->
+      <td style="border-right: 1px solid">{{cookie.mainProcessName}}</td>
+      <td>Sub process level 1: {{cookie.level1.name}}</td>
+      <td>Sub process level 2: {{cookie.level2.name}}</td>
     </tr>
     <tr>
       <td>Level of sub processes: </td>
-      <td style="border-right: 1px solid"> {{lowerLevel}}</td>
-      <td>Sub process level 3:  {{sub.sub3?.name}}</td>
+      <td style="border-right: 1px solid"> {{cookie.subLevels}}</td>
+      <td>Sub process level 3:  {{cookie.level3.name}}</td>
       <td></td>
     </tr>
   </table>
@@ -176,12 +177,12 @@
         </td>
         <td>
           {{scenario2.loaPhysical}}<br>
-          {{scenario1.loaCognitive}}<br>
+          {{scenario2.loaCognitive}}<br>
           {{scenario2.processTime}}
         </td>
         <td>
           {{scenario3.loaPhysical}} <br>
-          {{scenario1.loaCognitive}} <br>
+          {{scenario3.loaCognitive}} <br>
           {{scenario3.processTime}}
         </td>
       </tr>
@@ -480,7 +481,7 @@
 
   <div  *ngIf="disableButton" class="btn-group d-flex justify-content-center">
     <button class="btn btn-primary" (click)="cancelScenariosValues()">Cancel</button>
-    <button class="btn btn-secondary">Save</button>
+    <button class="btn btn-secondary" (click)="saveSubscenarios()">Save</button>
   </div>
 
   <fieldset>

@@ -12,12 +12,11 @@ import {ProcessListService} from '../process-list/process-list.service';
 })
 export class SubScenariosComponent implements OnInit {
 
-  productsNum:number;
-
-
-
-
-
+  nprodPiecePerHours:number;
+  subscenario1 = new Subscenario("1");
+  subscenario2 = new Subscenario("2");
+  subscenario3 = new Subscenario("3");
+  produtsPiece = new ProdutsPiece();
 
 
   scenario1: {resourceName: any, loaPhysical: number, loaCognitive: number, processTime: number,
@@ -126,11 +125,11 @@ export class SubScenariosComponent implements OnInit {
   constructor(private http: HttpClient, private _processListService: ProcessListService) { }
 
 
-
+   cookie:any;
 
   ngOnInit() {
-//    console.log(this._processListService.getCookie("loa_test"));
-    this.getMainProc(3);
+    this.cookie = this._processListService.getCookie("selectedSubprocess");
+    this.getMainProc(1);
     this.checkMandatoryData();
     this.getResource();
   }
@@ -149,17 +148,29 @@ export class SubScenariosComponent implements OnInit {
 
   checkMandatoryData(){
   //console.log(this.ProcTime.selRes1ProcTime)
-    if(this.productsNum != null && this.procSpecInfoObj.shiftsPerDay != null && this.procSpecInfoObj.hoursPerShift != null && this.procSpecInfoObj.workingDayPerY != null && this.procSpecInfoObj.propWageCostsPerH != null){
+    if(this.nprodPiecePerHours != null && this.procSpecInfoObj.shiftsPerDay != null && this.procSpecInfoObj.hoursPerShift != null && this.procSpecInfoObj.workingDayPerY != null && this.procSpecInfoObj.propWageCostsPerH != null){
       this.disableButton=true;}else{
         this.disableButton=false;
       }
   }
 
   productInfo(): void{
+
+  this.produtsPiece.nprodPiecePerHours = this.nprodPiecePerHours;
+  this.produtsPiece.fkTbAceProSeq=this.mainProcess.pkTbId;
+  //console.log(this.mainProcess);
+   if(this.nprodPiecePerHours!=null){
+    this.http.post(environment.apiUrl + '/v1/product-planning',  this.produtsPiece)
+               .subscribe(res =>
+                   console.log('Done nprodPiecePerHours'));
+          }
+
+
+
    this.checkMandatoryData();
-   this.scenario1.numProducedPiecesHour=this.productsNum;
-   this.scenario2.numProducedPiecesHour=this.productsNum;
-   this.scenario3.numProducedPiecesHour=this.productsNum;
+   this.scenario1.numProducedPiecesHour=this.nprodPiecePerHours;
+   this.scenario2.numProducedPiecesHour=this.nprodPiecePerHours;
+   this.scenario3.numProducedPiecesHour=this.nprodPiecePerHours;
   }
 
   procSpecInfo(): void{
@@ -225,6 +236,7 @@ export class SubScenariosComponent implements OnInit {
    this.scenario1.economicUsefulLife=this.firstdropdown.idEcoUsefullLife;
    this.scenario1.interestRate= this.firstdropdown.icInterRate;
 
+   this.subscenario1.fkTbAceRes=this.firstdropdown.pkTbId;
 
  // console.log(this.selRes1ProcTime);
   }
@@ -340,6 +352,10 @@ export class SubScenariosComponent implements OnInit {
       this.scenario2.hoursPerYear=this.scenario2.numberShiftsPerDay*this.scenario2.hoursPerShift*this.scenario2.workingDaysPerYear;
       this.scenario3.hoursPerYear=this.scenario3.numberShiftsPerDay*this.scenario3.hoursPerShift*this.scenario3.workingDaysPerYear;
 
+      this.subscenario1.hoursPerYears=this.scenario1.hoursPerYear;
+      this.subscenario2.hoursPerYears=this.scenario2.hoursPerYear;
+      this.subscenario3.hoursPerYears=this.scenario3.hoursPerYear;
+
   }
 
    updateNumbersNumYear() : void {
@@ -347,15 +363,22 @@ export class SubScenariosComponent implements OnInit {
     this.scenario2.numProducedPiecesYear=this.scenario2.hoursPerYear*this.scenario2.numProducedPiecesHour;
     this.scenario3.numProducedPiecesYear=this.scenario3.hoursPerYear*this.scenario3.numProducedPiecesHour;
 
+    this.subscenario1.nprodPieces=this.scenario1.numProducedPiecesYear;
+    this.subscenario2.nprodPieces=this.scenario2.numProducedPiecesYear;
+    this.subscenario3.nprodPieces=this.scenario3.numProducedPiecesYear;
 
-    //this.productsNumYear=this.hoursPerYear*this.productsNum;
 
   }
 
   updateRateParticipationPerHour() : void{
-  this.scenario1.ratioOfParticipPerHour = this.roundValue((this.scenario1.numProducedPiecesHour*this.scenario1.processTime)/3600);
-  this.scenario2.ratioOfParticipPerHour = this.roundValue((this.scenario2.numProducedPiecesHour*this.scenario2.processTime)/3600);
-  this.scenario3.ratioOfParticipPerHour = this.roundValue((this.scenario3.numProducedPiecesHour*this.scenario3.processTime)/3600);
+    this.scenario1.ratioOfParticipPerHour = this.roundValue((this.scenario1.numProducedPiecesHour*this.scenario1.processTime)/3600);
+    this.scenario2.ratioOfParticipPerHour = this.roundValue((this.scenario2.numProducedPiecesHour*this.scenario2.processTime)/3600);
+    this.scenario3.ratioOfParticipPerHour = this.roundValue((this.scenario3.numProducedPiecesHour*this.scenario3.processTime)/3600);
+
+     this.subscenario1.rateOfPart=this.scenario1.ratioOfParticipPerHour;
+     this.subscenario2.rateOfPart=this.scenario2.ratioOfParticipPerHour;
+     this.subscenario3.rateOfPart=this.scenario3.ratioOfParticipPerHour;
+
   }
 
   updateLabourCost(): void{
@@ -364,6 +387,9 @@ export class SubScenariosComponent implements OnInit {
     this.scenario2.labourCosts=this.roundValue(this.scenario2.propWageCostsPerHour*this.scenario2.numberOperationsPerMachine*this.scenario2.ratioOfParticipPerHour/this.scenario2.workingDaysPerYear);
     this.scenario3.labourCosts=this.roundValue(this.scenario3.propWageCostsPerHour*this.scenario3.numberOperationsPerMachine*this.scenario3.ratioOfParticipPerHour/this.scenario3.workingDaysPerYear);
 
+    this.subscenario1.labourCost=this.scenario1.labourCosts;
+    this.subscenario2.labourCost=this.scenario2.labourCosts;
+    this.subscenario3.labourCost=this.scenario3.labourCosts;
   }
 
   updateEnergyCosts(): void{
@@ -373,6 +399,9 @@ export class SubScenariosComponent implements OnInit {
     this.scenario2.energyCosts = this.roundValue((this.scenario2.electrConsumption*this.scenario2.electrPrice*this.scenario2.processTime)/3600+((3600-this.scenario2.processTime*this.scenario2.numProducedPiecesHour) / (this.scenario2.numProducedPiecesHour*3600))*this.scenario2.electrConsumptionStandby*this.scenario2.electrPrice);
     this.scenario3.energyCosts = this.roundValue((this.scenario3.electrConsumption*this.scenario3.electrPrice*this.scenario3.processTime)/3600+((3600-this.scenario3.processTime*this.scenario3.numProducedPiecesHour) / (this.scenario3.numProducedPiecesHour*3600))*this.scenario3.electrConsumptionStandby*this.scenario3.electrPrice);
 
+    this.subscenario1.energyCost=this.scenario1.energyCosts;
+    this.subscenario2.energyCost=this.scenario2.energyCosts;
+    this.subscenario3.energyCost=this.scenario3.energyCosts;
   }
 
   updateMaintenanceCosts(): void {
@@ -394,6 +423,10 @@ export class SubScenariosComponent implements OnInit {
       }else{
          this.scenario3.maintenanceCosts= this.scenario3.annualMaintenanceCostsDirect;
       }
+
+   this.subscenario1.maintCost=this.scenario1.annualMaintenanceCostsDirect;
+   this.subscenario2.maintCost=this.scenario2.annualMaintenanceCostsDirect;
+   this.subscenario3.maintCost=this.scenario3.annualMaintenanceCostsDirect;
   }
 
 
@@ -402,6 +435,10 @@ export class SubScenariosComponent implements OnInit {
       this.scenario1.annualSpaceCosts = this.scenario1.costsM3PerMonth*12*this.scenario1.installSurface;
       this.scenario2.annualSpaceCosts = this.scenario2.costsM3PerMonth*12*this.scenario2.installSurface;
       this.scenario3.annualSpaceCosts = this.scenario3.costsM3PerMonth*12*this.scenario3.installSurface;
+
+      this.subscenario1.annualSpaceCost= this.scenario1.annualSpaceCosts;
+      this.subscenario2.annualSpaceCost= this.scenario2.annualSpaceCosts;
+      this.subscenario3.annualSpaceCost= this.scenario3.annualSpaceCosts;
   }
 
   updateImputedDepreciation(): void{
@@ -428,36 +465,60 @@ export class SubScenariosComponent implements OnInit {
         }else{
      this.scenario3.imputedDeprecation=0;
     }
+
+    this.subscenario1.inputedDepreciation=this.scenario1.imputedDeprecation;
+    this.subscenario2.inputedDepreciation=this.scenario2.imputedDeprecation;
+    this.subscenario3.inputedDepreciation=this.scenario3.imputedDeprecation;
   }
 
   updateAccruedInterestCosts(): void{
       this.scenario1.accruedInterestCosts=this.roundValue(((this.scenario1.machinePurchase+this.scenario1.machineSales)/2)*this.scenario1.interestRate);
       this.scenario2.accruedInterestCosts=this.roundValue(((this.scenario2.machinePurchase+this.scenario2.machineSales)/2)*this.scenario2.interestRate);
       this.scenario3.accruedInterestCosts=this.roundValue(((this.scenario3.machinePurchase+this.scenario3.machineSales)/2)*this.scenario3.interestRate);
+
+      this.subscenario1.accruedIntCosts=this.scenario1.accruedInterestCosts;
+      this.subscenario2.accruedIntCosts=this.scenario2.accruedInterestCosts;
+      this.subscenario3.accruedIntCosts=this.scenario3.accruedInterestCosts;
   }
 
   updateVariableCostsTotal(): void{
       this.scenario1.variableCostsTotal = this.roundValue(this.scenario1.labourCosts*this.scenario1.energyCosts);
       this.scenario2.variableCostsTotal = this.roundValue(this.scenario2.labourCosts*this.scenario2.energyCosts);
       this.scenario3.variableCostsTotal = this.roundValue(this.scenario3.labourCosts*this.scenario3.energyCosts);
+
+      this.subscenario1.varCostTotal=this.scenario1.variableCostsTotal;
+      this.subscenario2.varCostTotal=this.scenario2.variableCostsTotal;
+      this.subscenario3.varCostTotal=this.scenario3.variableCostsTotal;
   }
 
   updateFixedCostsTotal():  void{
       this.scenario1.fixedCostsTotal= this.roundValue((this.scenario1.maintenanceCosts+this.scenario1.annualSpaceCosts+this.scenario1.imputedDeprecation+this.scenario1.accruedInterestCosts)/this.scenario1.numProducedPiecesYear);
       this.scenario2.fixedCostsTotal= this.roundValue((this.scenario2.maintenanceCosts+this.scenario2.annualSpaceCosts+this.scenario2.imputedDeprecation+this.scenario2.accruedInterestCosts)/this.scenario2.numProducedPiecesYear);
       this.scenario3.fixedCostsTotal= this.roundValue((this.scenario3.maintenanceCosts+this.scenario3.annualSpaceCosts+this.scenario3.imputedDeprecation+this.scenario3.accruedInterestCosts)/this.scenario3.numProducedPiecesYear);
+
+     this.subscenario1.fixedCostTotal=this.scenario1.fixedCostsTotal;
+     this.subscenario2.fixedCostTotal=this.scenario2.fixedCostsTotal;
+     this.subscenario3.fixedCostTotal=this.scenario3.fixedCostsTotal;
   }
 
   updateAssemblyCostsPerPiece(): void {
       this.scenario1.assemblyCostsPerPiece = this.scenario1.variableCostsTotal+this.scenario1.fixedCostsTotal;
       this.scenario2.assemblyCostsPerPiece = this.scenario2.variableCostsTotal+this.scenario2.fixedCostsTotal;
       this.scenario3.assemblyCostsPerPiece = this.scenario3.variableCostsTotal+this.scenario3.fixedCostsTotal;
+
+     this.subscenario1.assemblyCostPerPiece=this.scenario1.assemblyCostsPerPiece;
+     this.subscenario2.assemblyCostPerPiece=this.scenario2.assemblyCostsPerPiece;
+     this.subscenario3.assemblyCostPerPiece=this.scenario3.assemblyCostsPerPiece;
   }
 
   updateAssemblyCostsTotal(): void{
       this.scenario1.assemblyCostsTotal=this.scenario1.assemblyCostsPerPiece+this.scenario1.numProducedPiecesYear;
       this.scenario2.assemblyCostsTotal=this.scenario2.assemblyCostsPerPiece+this.scenario2.numProducedPiecesYear;
       this.scenario3.assemblyCostsTotal=this.scenario3.assemblyCostsPerPiece+this.scenario3.numProducedPiecesYear;
+
+      this.subscenario1.assemblyCosts=this.scenario1.assemblyCostsTotal;
+      this.subscenario2.assemblyCosts=this.scenario2.assemblyCostsTotal;
+      this.subscenario3.assemblyCosts=this.scenario3.assemblyCostsTotal;
   }
 
 
@@ -473,4 +534,29 @@ export class SubScenariosComponent implements OnInit {
       this.setAll(this.scenario3, null);
   }
 
+  saveSubscenarios(): void{
+
+  this.http
+        .post(environment.apiUrl + '/v1/subscenarios', this.subscenario1)
+        .subscribe(res =>
+            console.log('Done subscanario 1'));
+
+
+  this.http
+           .post(environment.apiUrl + '/v1/subscenarios', this.subscenario2)
+           .subscribe(res =>
+               console.log('Done subscanario 2'));
+
+
+   this.http
+           .post(environment.apiUrl + '/v1/subscenarios', this.subscenario3)
+           .subscribe(res =>
+               console.log('Done subscanario 3'));
+      }
+
 }
+function Subscenario(scenarioNumber){
+      this.scenarioNumber = scenarioNumber;
+  }
+
+function ProdutsPiece(){}
