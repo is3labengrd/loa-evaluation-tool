@@ -13,6 +13,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import eng.it.loatool.PkTbPrimaryKeyOwner;
 
 /**
@@ -21,11 +26,12 @@ import eng.it.loatool.PkTbPrimaryKeyOwner;
 @Entity @Table(name = "TB_ACE_PRO_SPEC", catalog = "loa_evaluation_tool")
 public class ProcessesSpecificInformation implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
-    private Integer pkTbId;
+    @JsonProperty private Integer pkTbId;
     private int fkTbAceSubProLev;
     private float NShiptsDay;
     private float hoursShift;
     private float workingDaysYear;
+    private double propWCPerHours;
     private Date createDate;
     private Date updateDate;
 
@@ -85,7 +91,19 @@ public class ProcessesSpecificInformation implements java.io.Serializable, PkTbP
         this.workingDaysYear = workingDaysYear;
     }
 
-    @Temporal(TemporalType.TIMESTAMP) @Column(name = "CREATE_DATE", nullable = false, length = 19) public Date getCreateDate() {
+    @Column(name = "PROP_W_C_PER_HOURS", nullable = false, precision = 22, scale = 0)
+    public double getPropWCPerHours() {
+        return this.propWCPerHours;
+    }
+
+    public void setPropWCPerHours(double propWCPerHours) {
+        this.propWCPerHours = propWCPerHours;
+    }
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATE_DATE", updatable = false, nullable = false, length = 19)
+    public Date getCreateDate() {
         return this.createDate;
     }
 
@@ -93,7 +111,10 @@ public class ProcessesSpecificInformation implements java.io.Serializable, PkTbP
         this.createDate = createDate;
     }
 
-    @Temporal(TemporalType.TIMESTAMP) @Column(name = "UPDATE_DATE", nullable = false, length = 19) public Date getUpdateDate() {
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "UPDATE_DATE", nullable = false, length = 19)
+    public Date getUpdateDate() {
         return this.updateDate;
     }
 
