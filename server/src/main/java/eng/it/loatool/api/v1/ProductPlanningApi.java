@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
+import eng.it.loatool.api.v1.product_planning.GetProductPlanningByProcessSegmentId;
 import eng.it.loatool.product_planning.ProductPlanning;
 import eng.it.loatool.product_planning.ProductPlanningRepository;
 
@@ -31,6 +32,15 @@ public class ProductPlanningApi {
         );
     }
 
+    @GetMapping("/v1/product-planning-by-process-segment-id/{processSegmentId}")
+    public ResponseEntity<?> getProductPlanningByProcessSegmentId(
+        @PathVariable("processSegmentId") Integer processSegmentId
+    ) {
+        return ResponseEntityTransformer.transform(
+            getProductPlanningByProcessSegmentId.getOne(processSegmentId)
+        );
+    }
+
     @PostMapping("/v1/product-planning")
     public ResponseEntity<?> createProductPlanning(@RequestBody ProductPlanning body) {
         return ResponseEntityTransformer.transform(
@@ -48,6 +58,7 @@ public class ProductPlanningApi {
         );
     }
 
+    @Autowired private GetProductPlanningByProcessSegmentId getProductPlanningByProcessSegmentId;
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private ProductPlanningRepository productPlanningRepository;
 
