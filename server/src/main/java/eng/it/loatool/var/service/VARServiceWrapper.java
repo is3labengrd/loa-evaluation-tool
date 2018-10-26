@@ -16,9 +16,7 @@ public class VARServiceWrapper {
 	  */
 
 	 public static List<MainProcess> getProcessesSegmentList () throws IOException {
-            List<MainProcess> mainProcess = new ArrayList<MainProcess>();
-            mainProcess.add(VARProcessSegmentImpl.main());
-		 	return mainProcess;
+		 	return VARProcessSegmentImpl.main();
 	 }
 	 
 	 /**

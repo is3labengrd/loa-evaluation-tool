@@ -16,9 +16,9 @@ public class VARProcessSegmentImpl {
 	}
 
 
-	public static String findMain(String procList) throws IOException {
+	public static List<String> findMain(String procList) throws IOException {
 
-		String main = "";
+		List<String> main = new ArrayList<String>();
 
 		List<String> FatherList = new ArrayList<String>();
 		List<String> ChildList = new ArrayList<String>();
@@ -34,7 +34,7 @@ public class VARProcessSegmentImpl {
 
 		for(String father: FatherList){
 			if(!ChildList.contains(father))
-				main = father;
+				main.add(father);
 		}
 
 		return main;
@@ -112,19 +112,24 @@ public class VARProcessSegmentImpl {
 
 
 
-	public static MainProcess main() throws IOException {
+	public static List<MainProcess> main() throws IOException {
 
 		String procList = getIsMadeOf();
-		String father = findMain(procList);
+		List<String> fathers = findMain(procList);
+		List<MainProcess> mainProcesses = new ArrayList<MainProcess>();
 
-		MainProcess mainP = new MainProcess();
-		mainP.setName(stringParser(father));
-		mainP.setProcessSegmentId(getProcessSegmentId(VARProcessSegment.getProcessSegmentAttribute(father)));
-		List<SubProcesses> subList = loop(findChildren(father, procList),procList,0);
+		for(String father: fathers){
+			MainProcess mainP = new MainProcess();
+			mainP.setName(stringParser(father));
+			mainP.setProcessSegmentId(getProcessSegmentId(VARProcessSegment.getProcessSegmentAttribute(father)));
+			List<SubProcesses> subList = loop(findChildren(father, procList),procList,0);
 
-		mainP.setSubProcLowerLevel(countLowerLevel(procList));
-		mainP.setSubProcesses(subList);
+			mainP.setSubProcLowerLevel(countLowerLevel(procList));
+			mainP.setSubProcesses(subList);
 
-		return mainP;
+			mainProcesses.add(mainP);
+		}
+
+		return mainProcesses;
 	}
 }
