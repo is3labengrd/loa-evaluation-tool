@@ -84,7 +84,7 @@ export class ProcessListComponent implements OnInit {
         currentListElement.sub1 = listElement.subProcessLevel1 ? listElement.subProcessLevel1.name : "-";
         currentListElement.sub2 = listElement.subProcessLevel2 ? listElement.subProcessLevel2.name : "-";
         currentListElement.sub3 = listElement.subProcessLevel3 ? listElement.subProcessLevel3.name : "-";
-        currentListElement.editRoute = `/edit-process/${id}`;
+        currentListElement.editRoute = `/edit-process/${listElement.pkTbId}`;
         if (
           currentListElement.sub1 == "-" &&
           currentListElement.sub2 == "-" &&
