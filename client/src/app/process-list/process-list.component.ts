@@ -31,23 +31,21 @@ export class ProcessListComponent implements OnInit {
   }
 
   pageIterable = {
-    [Symbol.iterator]: () => {}
+    [Symbol.iterator]: () => { }
   };
 
   constructor(
     private http: HttpClient,
     private _processListService: CookieService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this._processListService.deleteCookie("selectedSubprocess");
-
     this.populateProcessSegmentList();
     this.http
       .post(environment.apiUrl + '/v1/var/populate-process-segments', {})
       .toPromise()
       .then(
-        () => {this.populateProcessSegmentList();}
+        () => { this.populateProcessSegmentList(); }
       )
   }
 
@@ -84,7 +82,7 @@ export class ProcessListComponent implements OnInit {
         currentListElement.sub1 = listElement.subProcessLevel1 ? listElement.subProcessLevel1.name : "-";
         currentListElement.sub2 = listElement.subProcessLevel2 ? listElement.subProcessLevel2.name : "-";
         currentListElement.sub3 = listElement.subProcessLevel3 ? listElement.subProcessLevel3.name : "-";
-        currentListElement.editRoute = `/edit-process/${id}`;
+        currentListElement.editRoute = `/edit-process/${listElement.pkTbId}`;
         if (
           currentListElement.sub1 == "-" &&
           currentListElement.sub2 == "-" &&
@@ -113,37 +111,23 @@ export class ProcessListComponent implements OnInit {
   }
 
   saveAnalysisData(data, subProcessData) {
-    let skimmedData = {
-      mainProcess: data.mainProcess
-    }
-    let stringifiedData = JSON.stringify(skimmedData);
-    document.cookie=`it.eng.loatool.analysisData=${stringifiedData}`;
-
-
-
-
-    //create cookie containing the specific subprocess info
     var actualSubProcessInfo = {};
-
-    actualSubProcessInfo['mainProcessName']= subProcessData.name;
-    actualSubProcessInfo['mainProcessId']= subProcessData.rawElementReference.mainProcess.pkTbId;
-    actualSubProcessInfo['subLevels']= subProcessData.sublevels;
-    actualSubProcessInfo['totalNumberSubprocs']  = data.mainProcess.subprocessLevels.length;
-
-  for (var i = 1; i <= subProcessData.sublevels; i++) {
-     if(!("undefined" === typeof(subProcessData.rawElementReference['subProcessLevel'+i])) && subProcessData.rawElementReference['subProcessLevel'+i]!=null )
-     actualSubProcessInfo['level'+i] = new SubProcess(subProcessData.rawElementReference['subProcessLevel'+i].pkTbId, subProcessData.rawElementReference['subProcessLevel'+i].name);
+    actualSubProcessInfo['mainProcessName'] = subProcessData.name;
+    actualSubProcessInfo['mainProcessId'] = subProcessData.rawElementReference.mainProcess.pkTbId;
+    actualSubProcessInfo['subLevels'] = subProcessData.sublevels;
+    actualSubProcessInfo['totalNumberSubprocs'] = data.mainProcess.subprocessLevels.length;
+    for (var i = 1; i <= subProcessData.sublevels; i++) {
+      if (!("undefined" === typeof (subProcessData.rawElementReference['subProcessLevel' + i])) && subProcessData.rawElementReference['subProcessLevel' + i] != null)
+        actualSubProcessInfo['level' + i] = new SubProcess(subProcessData.rawElementReference['subProcessLevel' + i].pkTbId, subProcessData.rawElementReference['subProcessLevel' + i].name);
+    }
+    this._processListService.setCookie("selectedSubprocess", JSON.stringify(actualSubProcessInfo), 1, "");
   }
-
-    this._processListService.setCookie("selectedSubprocess",JSON.stringify(actualSubProcessInfo),1,"");
-
- }
 
 }
 
-function SubProcess(id, name){
-    this.id = id;
-    this.name = name;
+function SubProcess(id, name) {
+  this.id = id;
+  this.name = name;
 }
 
 

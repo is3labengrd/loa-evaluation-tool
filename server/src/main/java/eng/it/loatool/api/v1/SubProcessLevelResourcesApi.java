@@ -3,6 +3,7 @@ package eng.it.loatool.api.v1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,6 +46,15 @@ public class SubProcessLevelResourcesApi {
     ) {
         return ResponseEntityTransformer.transform(
             generalCRUDService.update(subProcessLevelResourceRepository, id, body)
+        );
+    }
+
+    @DeleteMapping("/v1/subprocess-level-resources/{id}")
+    public ResponseEntity<?> deleteSubProcessLevelResource(
+        @PathVariable("id") Integer id
+    ) {
+        return ResponseEntityTransformer.transform(
+            generalCRUDService.delete(subProcessLevelResourceRepository, id)
         );
     }
 
