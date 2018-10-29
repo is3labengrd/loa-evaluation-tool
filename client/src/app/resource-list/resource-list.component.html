@@ -49,7 +49,11 @@
             <td>{{ data.name }}</td>
             <td>{{ data.loaPhysical }}</td>
             <td>{{ data.loaCognitive }}</td>
-            <td><a routerLink="/edit-resource">Edit</a></td>
+            <td>
+              <a routerLink="/edit-resource">Edit</a> 
+              <button class="btn btn-link" (click)="promena(); assignRes(data.name, data.loaPhysical, data.loaCognitive)" *ngIf="linkChange" >Assign</button>
+              <button class="btn btn-link" (click)="promena(); deassignRes(data.name);" *ngIf="!linkChange">De-Assign</button>
+            </td>
           </tr>
         </tbody>
     </table>

@@ -1,7 +1,10 @@
+import { AssaignService } from './../assaign.service';
 import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Http } from '@angular/http';
+
 
 @Component({
   selector: 'app-resource-list',
@@ -17,12 +20,41 @@ export class ResourceListComponent implements OnInit {
     totalPages: []
   };
   searchTerm: string;
-  resources = [];
+  // resources = [];
+  resources = [
+    {
+      name: 'Manual tool trolley',
+      loaPhysical: 4,
+      loaCognitive: 6
+    },
+    {
+      name: 'Semi automated tool trolley',
+      loaPhysical: 2,
+      loaCognitive: 3
+    },
+    {
+      name: 'Automated tool trolley',
+      loaPhysical: 4,
+      loaCognitive: 6
+    },
+    {
+      name: 'Resource 4',
+      loaPhysical: 1,
+      loaCognitive: 1
+    },
+    {
+      name: 'Resource 5',
+      loaPhysical: 2,
+      loaCognitive: 6
+    }
+  ];
 
-  constructor(private http: HttpClient) { }
+  linkChange = true;
+
+  constructor(private http: Http, private assaignService: AssaignService) { }
 
   ngOnInit() {
-    this.updateResourceList();
+    // this.updateResourceList();
   }
 
   updateResourceList() {
@@ -35,7 +67,27 @@ export class ResourceListComponent implements OnInit {
         this.pagination.lastPage = resources.totalPages - 1;
         this.pagination.totalPages = Array(this.pagination.lastPage + 1)
           .fill(0).map((x, y) => x + y);
+          console.log(this.resources);
     });
+  }
+
+  assignRes(
+    name: string,
+    loaPhysical: number,
+    loaCognitive: number
+  ) {
+      const data = {
+        name: name,
+        loaPhysical: loaPhysical,
+        loaCognitive: loaCognitive
+      };
+
+      this.assaignService.assaignRes(data);
+      console.log(data);
+  }
+
+  deassignRes(name) {
+    console.log(name);
   }
 
   resetPage() {
@@ -49,4 +101,16 @@ export class ResourceListComponent implements OnInit {
   private previousPage() {
     this.pagination.page = Math.max(0, --this.pagination.page);
   }
+
+  promena() {
+    this.linkChange = !this.linkChange;
+    console.log(this.linkChange);
+    if (this.linkChange === false) {
+      alert('Assign successful!');
+    } else {
+      alert('Deassaign successful!');
+    }
+  }
+
+
 }

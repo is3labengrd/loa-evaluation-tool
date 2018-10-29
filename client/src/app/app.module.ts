@@ -1,3 +1,4 @@
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -42,7 +43,8 @@ import { ScenariosComponent } from './scenarios/scenarios.component';
     AppRoutingModule,
     ChartsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent],

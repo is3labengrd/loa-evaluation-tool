@@ -24,7 +24,7 @@ const ROUTES: Routes = [
   { path: 'as-is-loa', component: AsIsLOAComponent },
   { path: 'resource-list', component: ResourceListComponent },
   { path: 'main-analysis', component: MainAnalysisComponent},
-  { path: 'hta-analysis/:subprocessId', component: HTAAnalysisComponent },
+  { path: 'hta-analysis', component: HTAAnalysisComponent },
   { path: 'add-resource', component: AddResourceComponent },
   { path: 'edit-resource', component: EditResourceComponent },
   { path: 'sub-scenarios', component: SubScenariosComponent },
