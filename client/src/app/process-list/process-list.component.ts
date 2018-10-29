@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { ProcessListService } from './process-list.service';
+import { CookieService } from '../cookie.service';
 
 
 @Component({
@@ -36,7 +36,7 @@ export class ProcessListComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private _processListService: ProcessListService
+    private _processListService: CookieService
   ) {}
 
   ngOnInit() {

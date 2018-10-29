@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import {ProcessListService} from '../process-list/process-list.service';
+import { CookieService } from '../cookie.service';
 
 @Component({
   selector: 'app-resource-list',
@@ -20,9 +20,9 @@ export class ResourceListComponent implements OnInit {
   searchTerm: string;
   resources = [];
 
-  constructor(private http: HttpClient,  private _processListService: ProcessListService) { }
+  constructor(private http: HttpClient, private _processListService: CookieService) { }
 
-  cookie:any;
+  cookie: any;
   ngOnInit() {
     this.updateResourceList();
     this.cookie = this._processListService.getCookie("selectedSubprocess");
@@ -34,10 +34,10 @@ export class ResourceListComponent implements OnInit {
       'page=' + this.pagination.page + '&' +
       'size=' + this.pagination.size
     ).subscribe((resources: any) => {
-        this.resources = resources.content;
-        this.pagination.lastPage = resources.totalPages - 1;
-        this.pagination.totalPages = Array(this.pagination.lastPage + 1)
-          .fill(0).map((x, y) => x + y);
+      this.resources = resources.content;
+      this.pagination.lastPage = resources.totalPages - 1;
+      this.pagination.totalPages = Array(this.pagination.lastPage + 1)
+        .fill(0).map((x, y) => x + y);
     });
   }
 

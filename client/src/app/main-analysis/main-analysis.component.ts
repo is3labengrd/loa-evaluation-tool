@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ProcessListService} from '../process-list/process-list.service';
+import {CookieService} from '../cookie.service';
 
 @Component({
   selector: 'app-main-analysis',
@@ -8,7 +8,7 @@ import {ProcessListService} from '../process-list/process-list.service';
 })
 export class MainAnalysisComponent implements OnInit {
 
-  constructor(private _processListService: ProcessListService) { }
+  constructor(private _processListService: CookieService) { }
 
   cookie: any;
 
