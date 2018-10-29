@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from '../cookie.service';
 
 @Component({
   selector: 'app-scenarios',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScenariosComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _processListService: CookieService) { }
+
+  cookie: any;
 
   ngOnInit() {
+    this.cookie = this._processListService.getCookie("selectedSubprocess");
   }
 
 }

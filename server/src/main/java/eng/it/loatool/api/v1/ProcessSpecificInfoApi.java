@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
+import eng.it.loatool.api.v1.process_specific_info.GetProcessSpecificInfoBySubProcessId;
 import eng.it.loatool.process_specific_info.ProcessSpecificInfoRepository;
 import eng.it.loatool.process_specific_info.ProcessesSpecificInformation;
 
@@ -31,6 +32,13 @@ public class ProcessSpecificInfoApi {
         );
     }
 
+    @GetMapping("/v1/process-specific-info-by-subprocess-id/{id}")
+    public ResponseEntity<?> getProcessSpecificInfoBySubProcessId(@PathVariable("id") Integer id) {
+        return ResponseEntityTransformer.transform(
+            getProcessSpecificInfoBySubProcessId.getOne(id)
+        );
+    }
+
     @PostMapping("/v1/process-specific-info")
     public ResponseEntity<?> createProcessSpecificInfo(@RequestBody ProcessesSpecificInformation body) {
         return ResponseEntityTransformer.transform(
@@ -48,6 +56,7 @@ public class ProcessSpecificInfoApi {
         );
     }
 
+    @Autowired private GetProcessSpecificInfoBySubProcessId getProcessSpecificInfoBySubProcessId;
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private ProcessSpecificInfoRepository processSpecificInfoRepository;
 

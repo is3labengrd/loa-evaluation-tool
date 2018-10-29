@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { ProcessListService } from './process-list.service';
+import { CookieService } from '../cookie.service';
 
 
 @Component({
@@ -36,10 +36,12 @@ export class ProcessListComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private _processListService: ProcessListService
+    private _processListService: CookieService
   ) {}
 
   ngOnInit() {
+    this._processListService.deleteCookie("selectedSubprocess");
+
     this.populateProcessSegmentList();
     this.http
       .post(environment.apiUrl + '/v1/var/populate-process-segments', {})
@@ -76,17 +78,18 @@ export class ProcessListComponent implements OnInit {
     this.processSegmentList = this.rawProcessSegmentList.reduce(
       (accumulator: Array<any>, listElement) => {
         let currentListElement = Object.create(null);
+        let id = listElement.mainProcess ? listElement.mainProcess.pkTbId : "error"
         currentListElement.name = listElement.mainProcess ? listElement.mainProcess.name : "error";
         currentListElement.sublevels = listElement.mainProcess ? listElement.mainProcess.nlowerLevelSubPro : "error";
         currentListElement.sub1 = listElement.subProcessLevel1 ? listElement.subProcessLevel1.name : "-";
         currentListElement.sub2 = listElement.subProcessLevel2 ? listElement.subProcessLevel2.name : "-";
         currentListElement.sub3 = listElement.subProcessLevel3 ? listElement.subProcessLevel3.name : "-";
+        currentListElement.editRoute = `/edit-process/${id}`;
         if (
           currentListElement.sub1 == "-" &&
           currentListElement.sub2 == "-" &&
           currentListElement.sub3 == "-"
         ) {
-          let id = listElement.mainProcess ? listElement.mainProcess.pkTbId : "error"
           currentListElement.route = `/add-process/${id}`;
           currentListElement.actions = "Add";
         } else {
@@ -109,9 +112,38 @@ export class ProcessListComponent implements OnInit {
     this.page = Math.min(this.lastPage, ++this.page);
   }
 
-  saveAnalysisData(data) {
-    let stringifiedData = JSON.stringify(data);
+  saveAnalysisData(data, subProcessData) {
+    let skimmedData = {
+      mainProcess: data.mainProcess
+    }
+    let stringifiedData = JSON.stringify(skimmedData);
     document.cookie=`it.eng.loatool.analysisData=${stringifiedData}`;
+
+
+
+
+    //create cookie containing the specific subprocess info
+    var actualSubProcessInfo = {};
+
+    actualSubProcessInfo['mainProcessName']= subProcessData.name;
+    actualSubProcessInfo['mainProcessId']= subProcessData.rawElementReference.mainProcess.pkTbId;
+    actualSubProcessInfo['subLevels']= subProcessData.sublevels;
+    actualSubProcessInfo['totalNumberSubprocs']  = data.mainProcess.subprocessLevels.length;
+
+  for (var i = 1; i <= subProcessData.sublevels; i++) {
+     if(!("undefined" === typeof(subProcessData.rawElementReference['subProcessLevel'+i])) && subProcessData.rawElementReference['subProcessLevel'+i]!=null )
+     actualSubProcessInfo['level'+i] = new SubProcess(subProcessData.rawElementReference['subProcessLevel'+i].pkTbId, subProcessData.rawElementReference['subProcessLevel'+i].name);
   }
 
+    this._processListService.setCookie("selectedSubprocess",JSON.stringify(actualSubProcessInfo),1,"");
+
+ }
+
 }
+
+function SubProcess(id, name){
+    this.id = id;
+    this.name = name;
+}
+
+
