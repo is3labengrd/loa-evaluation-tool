@@ -22,10 +22,6 @@ export class ProcessListService {
         return '';
     }
 
-    /*deleteCookie(name) {
-        this.setCookie(name, '', -1);
-    }*/
-
     deleteCookie(name) {
         document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     };
