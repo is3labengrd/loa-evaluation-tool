@@ -40,8 +40,6 @@ export class ProcessListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._processListService.deleteCookie("selectedSubprocess");
-
     this.populateProcessSegmentList();
     this.http
       .post(environment.apiUrl + '/v1/var/populate-process-segments', {})
