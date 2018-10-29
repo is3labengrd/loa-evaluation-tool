@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CookieService } from '../cookie.service';
 
+
 @Component({
   selector: 'app-sub-scenarios',
   templateUrl: './sub-scenarios.component.html',
@@ -18,6 +19,8 @@ export class SubScenariosComponent implements OnInit {
   subscenario3 = new Subscenario("3");
   produtsPiece = new ProdutsPiece();
 
+  productPlanningID: number = null;
+  procSpecInfoID: number = null;
 
   scenario1: {
     resourceName: any, loaPhysical: number, loaCognitive: number, processTime: number,
@@ -98,11 +101,11 @@ export class SubScenariosComponent implements OnInit {
       assemblyCostsPerPiece: null, assemblyCostsTotal: null
     };
 
-  procSpecInfoObj: { shiftsPerDay: number, hoursPerShift: number, workingDayPerY: number, propWageCostsPerH: number } =
-    { shiftsPerDay: null, hoursPerShift: null, workingDayPerY: null, propWageCostsPerH: null };
+  procSpecInfoObj: any = { nshiptsDay: null, hoursShift: null, workingDaysYear: null, propWCPerHours: null, fkTbAceSubProLev: null};
 
   sub: { sub1: any, sub2: any, sub3: any } =
     { sub1: null, sub2: null, sub3: null };
+
 
   bestLoaCog: Object = {};
   bestLoaPhy: Object = {};
@@ -141,9 +144,12 @@ export class SubScenariosComponent implements OnInit {
 
   ngOnInit() {
     this.cookie = this._processListService.getCookie("selectedSubprocess");
-    this.getMainProc(1);
+    this.productPlanningGET();
+    this.procSpecInfoGET();
+   // this.getMainProc(1);
     this.checkMandatoryData();
     this.getResource();
+
   }
 
   getResource() {
@@ -158,9 +164,9 @@ export class SubScenariosComponent implements OnInit {
       )
   }
 
-  checkMandatoryData() {
+checkMandatoryData() {
     //console.log(this.ProcTime.selRes1ProcTime)
-    if (this.nprodPiecePerHours != null && this.procSpecInfoObj.shiftsPerDay != null && this.procSpecInfoObj.hoursPerShift != null && this.procSpecInfoObj.workingDayPerY != null && this.procSpecInfoObj.propWageCostsPerH != null) {
+    if (this.nprodPiecePerHours != null && this.procSpecInfoObj.nshiptsDay != null && this.procSpecInfoObj.hoursShift != null && this.procSpecInfoObj.workingDaysYear != null && this.procSpecInfoObj.propWCPerHours != null) {
       this.disableButton = true;
     } else {
       this.disableButton = false;
@@ -170,38 +176,60 @@ export class SubScenariosComponent implements OnInit {
   productInfo(): void {
 
     this.produtsPiece.nprodPiecePerHours = this.nprodPiecePerHours;
-    this.produtsPiece.fkTbAceProSeq = this.mainProcess.pkTbId;
-    //console.log(this.mainProcess);
-    if (this.nprodPiecePerHours != null) {
+    this.produtsPiece.fkTbAceProSeq = this.cookie.mainProcessId;
+
+    if (this.productPlanningID == null && this.nprodPiecePerHours != null) {
       this.http.post(environment.apiUrl + '/v1/product-planning', this.produtsPiece)
         .subscribe(res =>
-          console.log('Done nprodPiecePerHours'));
+          console.log('Done post'));
+    }else{
+       this.http.put(environment.apiUrl + '/v1/product-planning/'+this.productPlanningID, this.produtsPiece)
+                .subscribe(res =>
+                  console.log('Done put'));
     }
 
 
-
     this.checkMandatoryData();
+
     this.scenario1.numProducedPiecesHour = this.nprodPiecePerHours;
     this.scenario2.numProducedPiecesHour = this.nprodPiecePerHours;
     this.scenario3.numProducedPiecesHour = this.nprodPiecePerHours;
   }
 
   procSpecInfo(): void {
-    this.checkMandatoryData();
-    this.scenario1.numberShiftsPerDay = this.procSpecInfoObj.shiftsPerDay;
-    this.scenario1.hoursPerShift = this.procSpecInfoObj.hoursPerShift;
-    this.scenario1.workingDaysPerYear = this.procSpecInfoObj.workingDayPerY;
-    this.scenario1.propWageCostsPerHour = this.procSpecInfoObj.propWageCostsPerH;
 
-    this.scenario2.numberShiftsPerDay = this.procSpecInfoObj.shiftsPerDay;
-    this.scenario2.hoursPerShift = this.procSpecInfoObj.hoursPerShift;
-    this.scenario2.workingDaysPerYear = this.procSpecInfoObj.workingDayPerY;
-    this.scenario2.propWageCostsPerHour = this.procSpecInfoObj.propWageCostsPerH;
 
-    this.scenario3.numberShiftsPerDay = this.procSpecInfoObj.shiftsPerDay;
-    this.scenario3.hoursPerShift = this.procSpecInfoObj.hoursPerShift;
-    this.scenario3.workingDaysPerYear = this.procSpecInfoObj.workingDayPerY;
-    this.scenario3.propWageCostsPerHour = this.procSpecInfoObj.propWageCostsPerH;
+       this.checkMandatoryData();
+       this.scenario1.numberShiftsPerDay = this.procSpecInfoObj.nshiptsDay;
+       this.scenario1.hoursPerShift = this.procSpecInfoObj.hoursShift;
+       this.scenario1.workingDaysPerYear = this.procSpecInfoObj.workingDaysYear;
+       this.scenario1.propWageCostsPerHour = this.procSpecInfoObj.propWCPerHours;
+
+       this.scenario2.numberShiftsPerDay = this.procSpecInfoObj.nshiptsDay;
+       this.scenario2.hoursPerShift = this.procSpecInfoObj.hoursShift;
+       this.scenario2.workingDaysPerYear = this.procSpecInfoObj.workingDaysYear;
+       this.scenario2.propWageCostsPerHour = this.procSpecInfoObj.propWCPerHours;
+
+      this.scenario3.numberShiftsPerDay = this.procSpecInfoObj.nshiptsDay;
+      this.scenario3.hoursPerShift = this.procSpecInfoObj.hoursShift;
+      this.scenario3.workingDaysPerYear = this.procSpecInfoObj.workingDaysYear;
+      this.scenario3.propWageCostsPerHour = this.procSpecInfoObj.propWCPerHours;
+
+      this.procSpecInfoObj.fkTbAceSubProLev=this.getFkAceSubProLevId(this.cookie);
+
+     if(this.procSpecInfoID==null){
+      this.http.post(environment.apiUrl + '/v1/process-specific-info', this.procSpecInfoObj)
+              .subscribe(res =>
+                console.log('Done post'));
+
+      }else{
+        this.http.put(environment.apiUrl + '/v1/process-specific-info/'+ this.procSpecInfoID, this.procSpecInfoObj)
+                      .subscribe(res =>
+                        console.log('Done put'));
+      }
+
+
+
 
   }
 
@@ -272,6 +300,8 @@ export class SubScenariosComponent implements OnInit {
     this.scenario2.machineSales = this.seconddropdown.idMacSalesValue;
     this.scenario2.economicUsefulLife = this.seconddropdown.idEcoUsefullLife;
     this.scenario2.interestRate = this.seconddropdown.icInterRate;
+
+   this.subscenario2.fkTbAceRes=this.seconddropdown.pkTbId;
 
   }
 
@@ -547,29 +577,104 @@ export class SubScenariosComponent implements OnInit {
     this.setAll(this.scenario3, null);
   }
 
-  saveSubscenarios(): void {
+ getFkAceSubProLevId(cookie): number {
+     if(!("undefined" === typeof(cookie['level3']))){
+            return cookie.level3.id;
+        }else{
+         if(!("undefined" === typeof(cookie['level2']))){
+         return cookie.level2.id;
+         }else{
+          return cookie.level1.id;
+          }
+        }
 
-    this.http
-      .post(environment.apiUrl + '/v1/subscenarios', this.subscenario1)
-      .subscribe(res =>
-        console.log('Done subscanario 1'));
+    }
 
+  saveSubscenarios(): void{
+
+  this.subscenario1.fkTbAceProSeq=this.cookie.mainProcessId;
+  this.subscenario1.fkTbAceSubProLev=this.getFkAceSubProLevId(this.cookie);
+
+  this.subscenario2.fkTbAceProSeq=this.cookie.mainProcessId;
+  this.subscenario2.fkTbAceSubProLev=this.getFkAceSubProLevId(this.cookie);
+
+  this.subscenario3.fkTbAceProSeq=this.cookie.mainProcessId;
+  this.subscenario3.fkTbAceSubProLev=this.getFkAceSubProLevId(this.cookie);
+
+  this.http
+        .post(environment.apiUrl + '/v1/subscenarios', this.subscenario1)
+        .subscribe(res =>
+            console.log('Done subscenario 1'));
 
     this.http
       .post(environment.apiUrl + '/v1/subscenarios', this.subscenario2)
       .subscribe(res =>
-        console.log('Done subscanario 2'));
+        console.log('Done subscenario 2'));
 
 
     this.http
       .post(environment.apiUrl + '/v1/subscenarios', this.subscenario3)
       .subscribe(res =>
-        console.log('Done subscanario 3'));
+        console.log('Done subscenario 3'));
   }
 
+
+
+    productPlanningGET() {
+          this.http
+            .get(environment.apiUrl + '/v1/product-planning-by-process-segment-id/'+this.cookie.mainProcessId)
+            .toPromise()
+            .then(
+            (result:any) => {
+
+                // this.scenario1.numProducedPiecesHour=result.nprodPiecePerHours;
+                // this.scenario2.numProducedPiecesHour=result.nprodPiecePerHours;
+                // this.scenario3.numProducedPiecesHour=result.nprodPiecePerHours;
+                 this.nprodPiecePerHours=result.nprodPiecePerHours;
+                 this.productPlanningID=result.pkTbId;
+                   //console.log(this.procSpecInfoObj);
+
+             },
+             err => {
+               //product not found
+               this.productPlanningID=null;
+             })
+      }
+
+      procSpecInfoGET(){
+          this.http
+                .get(environment.apiUrl + '/v1/process-specific-info-by-subprocess-id/'+this.getFkAceSubProLevId(this.cookie))
+                .toPromise()
+                .then(
+                (result:any) => {
+                     this.procSpecInfoObj=result;
+                     this.scenario1.numberShiftsPerDay=this.procSpecInfoObj.nshiptsDay;
+                     this.scenario1.hoursPerShift=this.procSpecInfoObj.hoursShift;
+                     this.scenario1.workingDaysPerYear=this.procSpecInfoObj.workingDaysYear;
+                     this.scenario1.propWageCostsPerHour=this.procSpecInfoObj.propWCPerHours;
+                     this.scenario2.numberShiftsPerDay=this.procSpecInfoObj.nshiptsDay;
+                     this.scenario2.hoursPerShift=this.procSpecInfoObj.hoursShift;
+                     this.scenario2.workingDaysPerYear=this.procSpecInfoObj.workingDaysYear;
+                     this.scenario2.propWageCostsPerHour=this.procSpecInfoObj.propWCPerHours;
+                     this.scenario3.numberShiftsPerDay=this.procSpecInfoObj.nshiptsDay;
+                     this.scenario3.hoursPerShift=this.procSpecInfoObj.hoursShift;
+                     this.scenario3.workingDaysPerYear=this.procSpecInfoObj.workingDaysYear;
+                     this.scenario3.propWageCostsPerHour=this.procSpecInfoObj.propWCPerHours;
+
+                     this.procSpecInfoID=result.pkTbId;
+                },
+                  err => {
+                  this.procSpecInfoID=null;
+                })
+            }
+
+
+
 }
+
 function Subscenario(scenarioNumber) {
   this.scenarioNumber = scenarioNumber;
 }
 
 function ProdutsPiece() { }
+

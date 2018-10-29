@@ -1,3 +1,4 @@
+import { CookieService } from './../cookie.service';
 import { DataSet } from './data-set';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -15,7 +16,8 @@ import { LoaInfo } from './loa-info';
 export class AsIsLOAComponent implements OnInit {
 
   constructor(
-    private http:HttpClient
+    private http:HttpClient,
+    private cookieService:CookieService
   ) {}
 
   title = 'LoA Graph';
@@ -27,11 +29,8 @@ export class AsIsLOAComponent implements OnInit {
   data = { datasets: [] };
 
   getAnalysisData() {
-    let regex =  /it\.eng\.loatool\.analysisData=(.+?)(;|$)/;
-    let mainProcessId = JSON
-      .parse(regex.exec(document.cookie)[1])
-      .mainProcess
-      .pkTbId;
+    let mainProcessId = this.cookieService
+      .getCookie("selectedSubprocess").mainProcessId;
     this.analysisData = this.http
       .get(`${environment.apiUrl}/v1/process-segments/${mainProcessId}`)
       .toPromise()

@@ -6,7 +6,7 @@
         <h5 class="modal-title" >Product planing</h5>
       </div>
       <div class="modal-body">
-        <div>Number of produced pieces per hour: <input type="number" id="nprodPiecePerHours" [(ngModel)]="nprodPiecePerHours" min="0"> </div> <br>
+        <div>Number of produced pieces per hour: <input type="number" id="nprodPiecePerHours" [(ngModel)]="nprodPiecePerHours" min="0" value="nprodPiecePerHours"> </div> <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -24,10 +24,10 @@
         <h5 class="modal-title" >Add process specific information</h5>
       </div>
       <div class="modal-body">
-        <div>Number of shifts per day: <input type="number" [(ngModel)]="procSpecInfoObj.shiftsPerDay"  name="shiftsPerDay" class="float-right" min="0"></div> <br>
-        <div>Hours per shift: <input type="number"  [(ngModel)]="procSpecInfoObj.hoursPerShift" name="hoursPerShift" class="float-right" min="0"></div> <br>
-        <div>Working days per year: <input type="number" [(ngModel)]="procSpecInfoObj.workingDayPerY" name="workingDayPerY" class="float-right" min="0" ></div> <br>
-        <div>Proportional wage costs per hour: <input type="number" [(ngModel)]="procSpecInfoObj.propWageCostsPerH" name="propWageCostsPerH" class="float-right" min="0"></div> <br>
+        <div>Number of shifts per day: <input type="number" [(ngModel)]="procSpecInfoObj.nshiptsDay"  name="nshiptsDay" class="float-right" min="0" value="procSpecInfoObj?.nshiptsDay"></div> <br>
+        <div>Hours per shift: <input type="number"  [(ngModel)]="procSpecInfoObj.hoursShift" name="hoursShift" class="float-right" min="0" value="procSpecInfoObj?.hoursShift"></div> <br>
+        <div>Working days per year: <input type="number" [(ngModel)]="procSpecInfoObj.workingDaysYear" name="workingDaysYear" class="float-right" min="0" value="procSpecInfoObj?.workingDaysYear"></div> <br>
+        <div>Proportional wage costs per hour: <input type="number" [(ngModel)]="procSpecInfoObj.propWCPerHours" name="propWCPerHours" class="float-right" min="0" value="procSpecInfoObj?.propWCPerHours"></div> <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -115,13 +115,13 @@
       <td>Main process:</td>
       <!--<td style="border-right: 1px solid">{{mainProcess?.name}}</td>-->
       <td style="border-right: 1px solid">{{cookie.mainProcessName}}</td>
-      <td>Sub process level 1: {{cookie.level1.name}}</td>
-      <td>Sub process level 2: {{cookie.level2.name}}</td>
+      <td>Sub process level 1: {{cookie?.level1?.name}}</td>
+      <td>Sub process level 2: {{cookie?.level2?.name}}</td>
     </tr>
     <tr>
       <td>Level of sub processes: </td>
-      <td style="border-right: 1px solid"> {{cookie.subLevels}}</td>
-      <td>Sub process level 3:  {{cookie.level3.name}}</td>
+      <td style="border-right: 1px solid"> {{cookie?.subLevels}}</td>
+      <td>Sub process level 3:  {{cookie?.level3?.name}}</td>
       <td></td>
     </tr>
   </table>
@@ -225,9 +225,9 @@
         <td class="roto  align-middle" rowspan="2">Prod.</td>
         <td>Number of produced pieces</td>
         <td>units/h</td>
-        <td>{{scenario1.numProducedPiecesHour}}</td>
-        <td>{{scenario2.numProducedPiecesHour}}</td>
-        <td>{{scenario3.numProducedPiecesHour}}</td>
+        <td>{{scenario1?.numProducedPiecesHour}}</td>
+        <td>{{scenario2?.numProducedPiecesHour}}</td>
+        <td>{{scenario3?.numProducedPiecesHour}}</td>
       </tr>
       <tr>
         <td>Number of produced pieces</td>
