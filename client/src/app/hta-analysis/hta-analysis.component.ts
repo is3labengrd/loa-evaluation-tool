@@ -37,7 +37,7 @@ export class HTAAnalysisComponent implements OnInit {
     "stVerySensitive": 0,
     "grExGripSurface": 0,
     "grIntGripSurface": 0,
-    "grMagneticGripper": 1,
+    "grMagneticGripper": 0,
     "grFabClosureGripper": 0,
     "nvNoFurtherVariants": 0,
     "nvOneFurtherVariants": 0,
