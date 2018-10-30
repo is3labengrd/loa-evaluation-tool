@@ -110,6 +110,7 @@ public class ProcessSegmentListElement implements java.io.Serializable, PkTbPrim
     }
 
     @ManyToOne
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name="FK_TB_ACE_SUB_PRO_LEV1", referencedColumnName="PK_TB_ID")
     public SubProcessLevel getSubProcessLevel1() {
         return subProcessLevel1;
@@ -129,6 +130,7 @@ public class ProcessSegmentListElement implements java.io.Serializable, PkTbPrim
     }
 
     @ManyToOne
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "FK_TB_ACE_SUB_PRO_LEV2", referencedColumnName="PK_TB_ID")
     public SubProcessLevel getSubProcessLevel2() {
         return subProcessLevel2;
@@ -148,6 +150,7 @@ public class ProcessSegmentListElement implements java.io.Serializable, PkTbPrim
     }
 
     @ManyToOne
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "FK_TB_ACE_SUB_PRO_LEV3", referencedColumnName="PK_TB_ID")
     public SubProcessLevel getSubProcessLevel3() {
         return subProcessLevel3;
@@ -167,6 +170,7 @@ public class ProcessSegmentListElement implements java.io.Serializable, PkTbPrim
     }
 
     @ManyToOne
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "FK_TB_ACE_SUB_PRO_LEV4", referencedColumnName="PK_TB_ID")
     public SubProcessLevel getSubProcessLevel4() {
         return subProcessLevel4;
@@ -186,6 +190,7 @@ public class ProcessSegmentListElement implements java.io.Serializable, PkTbPrim
     }
 
     @ManyToOne
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "FK_TB_ACE_SUB_PRO_LEV5", referencedColumnName="PK_TB_ID")
     public SubProcessLevel getSubProcessLevel5() {
         return subProcessLevel5;
