@@ -33,6 +33,13 @@ public class CriteriaMatricesApi {
         );
     }
 
+    @GetMapping("/v1/criteria-matrices-by-subprocess-id/{id}")
+    public ResponseEntity<?> getCriteriaMatrixBySubprocessId(@PathVariable("id") Integer id) {
+        return ResponseEntityTransformer.transform(
+            getCriteriaMatrixService.getCriteriaMatrixBySubprocessId(id)
+        );
+    }
+
     @PostMapping("/v1/criteria-matrices")
     public ResponseEntity<?> createCriteriaMatrix(@RequestBody CriteriaMatrix body) {
         return ResponseEntityTransformer.transform(

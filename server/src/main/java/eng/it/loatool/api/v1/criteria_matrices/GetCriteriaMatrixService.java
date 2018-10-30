@@ -18,6 +18,11 @@ public class GetCriteriaMatrixService {
         return criteriaMatrixRepository.findById(matrixId);
     }
 
+    @Transactional
+    public Optional<CriteriaMatrix> getCriteriaMatrixBySubprocessId(Integer id) {
+        return criteriaMatrixRepository.getCriteriaMatrixBySubprocessLevel(id);
+    }
+
     @Autowired private CriteriaMatrixRepository criteriaMatrixRepository;
 
 }

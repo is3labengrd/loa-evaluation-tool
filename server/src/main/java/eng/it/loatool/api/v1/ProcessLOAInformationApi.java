@@ -32,6 +32,13 @@ public class ProcessLOAInformationApi {
         );
     }
 
+    @GetMapping("/v1/process-loa-info-by-subprocess-id/{subprocessId}")
+    public ResponseEntity<?> getProcessBySubprocessId(@PathVariable("subprocessId") Integer subprocessId) {
+        return ResponseEntityTransformer.transform(
+            getProcessLOAInformationService.getInformationBySubprocessId(subprocessId)
+        );
+    }
+
     @PostMapping("/v1/process-loa-info")
     public ResponseEntity<?> createProcess(@RequestBody ProcessLOAInformation body) {
         return ResponseEntityTransformer.transform(

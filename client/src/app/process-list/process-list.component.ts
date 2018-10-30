@@ -116,9 +116,12 @@ export class ProcessListComponent implements OnInit {
     actualSubProcessInfo['mainProcessId'] = subProcessData.rawElementReference.mainProcess.pkTbId;
     actualSubProcessInfo['subLevels'] = subProcessData.sublevels;
     actualSubProcessInfo['totalNumberSubprocs'] = data.mainProcess.subprocessLevels.length;
+    actualSubProcessInfo['maxDepth'] = 0;
     for (var i = 1; i <= subProcessData.sublevels; i++) {
-      if (!("undefined" === typeof (subProcessData.rawElementReference['subProcessLevel' + i])) && subProcessData.rawElementReference['subProcessLevel' + i] != null)
+      if (!("undefined" === typeof (subProcessData.rawElementReference['subProcessLevel' + i])) && subProcessData.rawElementReference['subProcessLevel' + i] != null) {
         actualSubProcessInfo['level' + i] = new SubProcess(subProcessData.rawElementReference['subProcessLevel' + i].pkTbId, subProcessData.rawElementReference['subProcessLevel' + i].name);
+        actualSubProcessInfo['maxDepth'] = i;
+      }
     }
     this._processListService.setCookie("selectedSubprocess", JSON.stringify(actualSubProcessInfo), 1, "");
   }
