@@ -13,6 +13,13 @@ public class ResponseEntityTransformer {
         return ResponseEntity.notFound().build();
     }
 
+    public static <T> ResponseEntity<T> transform(Iterable<T> iterable) {
+        if (iterable.iterator().hasNext()) {
+            return (ResponseEntity<T>) ResponseEntity.ok(iterable);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     public static <T> ResponseEntity<T> transformOk(T object) {
         return ResponseEntity.ok(object);
     }
