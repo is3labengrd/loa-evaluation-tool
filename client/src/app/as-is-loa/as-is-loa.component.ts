@@ -80,9 +80,6 @@ export class AsIsLOAComponent implements OnInit {
         /* UpdateBubbleChart */(map:Map<any,any>) => {
           map.forEach(
             (value, key) => {
-              console.log(
-                LoaInfo.valueOfInverse(key)
-              );
               this.data.datasets.push(
                 new DataSet(
                   LoaInfo.valueOfInverse(key),
@@ -91,7 +88,6 @@ export class AsIsLOAComponent implements OnInit {
               );
             }
           );
-          console.log(this.data.datasets)
           this.bubbleChart.update();
         }
       );
