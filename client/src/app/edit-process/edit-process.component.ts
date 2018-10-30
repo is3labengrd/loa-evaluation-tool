@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Router, ActivatedRoute} from '@angular/router';
+import {CookieService} from '../cookie.service';
 
 
 @Component({
@@ -35,21 +36,52 @@ export class EditProcessComponent implements OnInit {
   fk2:any;
   id:number;
   lowerLevel:any;
+  SegmentList:Array<any> = [];
+  pks:Array<any> = [];
+  cookie: any;
 
-  constructor(private http: HttpClient, public router: Router, private route:ActivatedRoute) {}
+  constructor(private http: HttpClient, public router: Router, private route:ActivatedRoute,private _processListService: CookieService) {}
 
   ngOnInit() {
       this.id  = this.route.snapshot.params['id'];
+      this.cookie = this._processListService.getCookie("selectedSubprocess");
 
-      this.http
-        .get(environment.apiUrl + '/v1/process-segments/'+this.id)
+      var promise2 = this.getSegmentList()
+      promise2.then((x) => {
+        this.http
+          .get(environment.apiUrl + '/v1/process-segments/'+this.SegmentList[0].mainProcess.pkTbId)
+          .toPromise()
+          .then(
+            (main:any) => {
+                this.fetchFromCAM(main);
+                this.mainProcess.push(main);
+            }
+          )
+      });
+    }
+
+    getSegmentList() {
+      return this.http
+        .get(environment.apiUrl + '/v1/process-segment-list-elements/'+this.id)
         .toPromise()
         .then(
-          (main:any) => {
-              this.fetchFromCAM(main);
-              this.mainProcess.push(main);
+          (res:any) => {
+            this.SegmentList.push(res);
           }
         )
+    }
+
+    addProSecOrdered() {
+
+     const addProSecOrderedUrl = environment.apiUrl + '/v1/process-segment-list-elements/'+this.id;
+     this.http.put(addProSecOrderedUrl, {"fkTbAceProSeq": this.SegmentList[0].mainProcess.pkTbId ,"fkTbAceSubProLev1": this.pks[0], "fkTbAceSubProLev2": this.pks[1],"fkTbAceSubProLev3": this.pks[2]})
+            .toPromise()
+            .then((res:any) => {
+                if (res.pkTbId != null) {
+                }
+              },
+              (err) => alert('Something went wrong. \nStatus: ' +  err.error.status)
+            )
     }
 
     fetchFromCAM(mainP) {
@@ -69,13 +101,14 @@ export class EditProcessComponent implements OnInit {
     }
 
     startDropDownMenu(objList,mainP) {
+
        this.http.get(environment.apiUrl + '/v1/subprocess-levels')
         .toPromise()
         .then(
           (subProcessesList:any) => {
 
             for (let i in subProcessesList) {
-              if (subProcessesList[i].fkTbAceProSeq === mainP.pkTbId){
+              if (subProcessesList[i].pkTbId === this.SegmentList[0].subProcessLevel1.pkTbId){
                 this.fk = subProcessesList[i];
                 this.subProcessesList.push(subProcessesList[i]);
                 this.selectedModule1 = subProcessesList[i].name;
@@ -84,7 +117,7 @@ export class EditProcessComponent implements OnInit {
             }
 
             for (let j in subProcessesList) {
-              if (subProcessesList[j].fkTbAceProSeq === this.fk.pkTbId){
+              if (subProcessesList[j].pkTbId === this.SegmentList[0].subProcessLevel2.pkTbId){
                 this.fk2 = subProcessesList[j];
                 this._values2 = this.subProcessL2(mainP.name,this.selectedModule1);
                 this.subProcessesList.push(subProcessesList[j]);
@@ -93,7 +126,7 @@ export class EditProcessComponent implements OnInit {
                }
             }
             for (let k in subProcessesList) {
-              if (subProcessesList[k].fkTbAceProSeq === this.fk2.pkTbId){
+              if (subProcessesList[k].pkTbId === this.SegmentList[0].subProcessLevel3.pkTbId){
                 this._values3 = this.subProcessL3(mainP.name,this.selectedModule1,this.selectedModule2);
                 this.subProcessesList.push(subProcessesList[k]);
                 this.selectedModule3 = subProcessesList[k].name;
@@ -158,6 +191,7 @@ export class EditProcessComponent implements OnInit {
             .toPromise()
             .then((res:any) => {
               if (res.pkTbId != null) {
+                this.pks.push(res.pkTbId);
                 this.addSubProcessL2(res.pkTbId);}
               },
       (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);});
@@ -167,25 +201,34 @@ export class EditProcessComponent implements OnInit {
     addSubProcessL2(pkTbId) {
     const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
 
+    if(this.lvl2selection != null){
     this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl2selection.name,"varProSeqId": this.lvl2selection.processSegmentId, "proLevel": this.lvl2selection.level})
            .toPromise()
            .then((res:any) => {
              if (res.pkTbId != null) {
+               this.pks.push(res.pkTbId);
                this.addSubProcessL3(res.pkTbId);}
              },
 
-     (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);});
+     (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);})
+    } else{
+      this.addProSecOrdered();
+    }
     }
 
     addSubProcessL3(pkTbId) {
     const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
-
+    if(this.lvl3selection != null){
     this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl3selection.name,"varProSeqId": this.lvl3selection.processSegmentId, "proLevel": this.lvl3selection.level})
            .toPromise()
            .then((res:any) => {
+             this.pks.push(res.pkTbId);
              if (res.pkTbId != null) {
            }},
-     (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);})
+     (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);})}
+   else{
+     this.addProSecOrdered();
+   }
 
     }
 
@@ -200,7 +243,6 @@ export class EditProcessComponent implements OnInit {
 
     firstDropDownChanged(val: any) {
       const obj = this._values1[0];
-      //console.log(val, obj);
       if (!obj) return;
 
      this._values2 = [];
@@ -213,7 +255,6 @@ export class EditProcessComponent implements OnInit {
      secondDropDownChanged(val2: any) {
       this._values3 = [];
       const obj2 = this._values2;
-      //console.log(val, obj);
       if (!obj2) return;
       this._values3 = this.subProcessL3(this.mainProcess[0].name,this.selectedModule1,this.selectedModule2);
       this.lvl2selection = this.findObj(obj2,this.selectedModule2);
@@ -222,7 +263,6 @@ export class EditProcessComponent implements OnInit {
     thirdDropDownChanged(val3: any) {
 
      const obj3 = this._values3;
-     //console.log(val, obj);
      if (!obj3) return;
      this.lvl3selection = this.findObj(obj3,this.selectedModule3);
     }
