@@ -18,6 +18,11 @@ public class GetProcessLOAInformationService {
     }
 
     @Transactional
+    public Optional<ProcessLOAInformation> getInformationBySubprocessId(Integer subprocessId) {
+        return processLOAInformationRepository.getProcessLOAInformationBySubprocessId(subprocessId);
+    }
+
+    @Transactional
     public Iterable<ProcessLOAInformation> getAllInformation() {
         return processLOAInformationRepository.findAll();
     }

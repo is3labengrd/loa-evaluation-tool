@@ -1,8 +1,10 @@
+import { CookieService } from './../cookie.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { initializeMatrix, updateMatrix } from './matrix';
 
 @Component({
   selector: 'app-hta-analysis',
@@ -11,364 +13,20 @@ import { environment } from '../../environments/environment';
 })
 export class HTAAnalysisComponent implements OnInit {
 
-  rows = (() => {
-    var self = this;
-    var valueSymbol = Symbol();
+  constructor(
+    private http:HttpClient,
+    private route:ActivatedRoute,
+    private cookieService:CookieService
+  ) { }
 
-    var requestModifierFactory = (prefix, values) => {
-      return (number) => {
-        for (let i=0; i<4; i++) {
-          if (i == number) {
-            self.matrixRequest[prefix + values[i]] = 1;
-          } else {
-            self.matrixRequest[prefix + values[i]] = 0;
-          }
-        }
-      }
-    }
-    return [
-      {
-        strong: 'Dimensional stabilty',
-        criteria1: 'Stable',
-        criteria2: 'Reduced stability',
-        criteria3: 'Hardly stable',
-        criteria4: 'Unstable',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "ds", [
-              "Stable",
-              "ReducedStability",
-              "HandlyStable",
-              "Unstable"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'Sensitivity',
-        criteria1: 'Insensitive',
-        criteria2: 'Handly sensitive',
-        criteria3: 'Sensitive',
-        criteria4: 'Very sensitive',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "", [
-              "stInsensitive",
-              "stHardlySensitive",
-              "stSensitive",
-              "stVerySensitive"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'Grip',
-        criteria1: 'External grip surfaces',
-        criteria2: 'Internal grip surfaces',
-        criteria3: 'Magnetic grip surfaces',
-        criteria4: 'Fabric closure gripper',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "", [
-              "grExGripSurface",
-              "grIntGripSurface",
-              "grMagneticGripper",
-              "grFabClosureGripper"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'No. of variants',
-        criteria1: 'No futher variants',
-        criteria2: 'One further variant',
-        criteria3: 'Two further variants',
-        criteria4: 'More than two variants',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "", [
-              "nvNoFurtherVariants",
-              "nvOneFurtherVariants",
-              "nvTwoFurtherVariants",
-              "nvMoreFurtherVariants"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'Stable positions',
-        criteria1: 'Up until four',
-        criteria2: 'More than four',
-        criteria3: 'Stable and unstable',
-        criteria4: 'Only unstable',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "", [
-              "spUp",
-              "spMore",
-              "spStableUnstable",
-              "spOnlyUnstable"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'Symmetry',
-        criteria1: 'Rotationally symmetrical',
-        criteria2: 'Areal symmetry',
-        criteria3: 'Markedly asymmetrical',
-        criteria4: 'Seemingly symmetrical',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "", [
-              "smRotSymmetrical",
-              "smArSymmetry",
-              "smMaAsymmetrical",
-              "smSeSymmetrical"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'Hook up or adhesion',
-        criteria1: 'None',
-        criteria2: 'Sticking or jamming possible',
-        criteria3: 'Component penetration possible',
-        criteria4: 'Seemingly symmetry',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "", [
-              "haNone",
-              "haStiJamPossible",
-              "haComPenPossibile",
-              "haSeeSymmetrical"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'Faulty joining',
-        criteria1: 'Never',
-        criteria2: 'Occasionaly',
-        criteria3: 'Rarely',
-        criteria4: 'Often',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "", [
-              "fjNever",
-              "fjOcasionally",
-              "fjRarely",
-              "fjOften"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'Accessibility',
-        criteria1: 'Very good',
-        criteria2: 'Good',
-        criteria3: 'Satisfactory',
-        criteria4: 'Sufficient',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "", [
-              "acVeryGood",
-              "acGood",
-              "acSatisfactory",
-              "acSufficient"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'Orienation',
-        criteria1: 'No axis',
-        criteria2: 'One axis',
-        criteria3: 'Two axis',
-        criteria4: 'Three axis',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "", [
-              "orNoAxes",
-              "orOneAxis",
-              "orTwoAxes",
-              "orThreeAxes"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'Joining mov.',
-        criteria1: 'Linear',
-        criteria2: 'Rotation',
-        criteria3: 'Linear-rotatory',
-        criteria4: 'Path movement',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "", [
-              "jmLinear",
-              "jmRotation",
-              "jmLinearRotatory",
-              "jmPathMovement"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'Joining force',
-        criteria1: 'None',
-        criteria2: 'Low',
-        criteria3: 'Medium',
-        criteria4: 'High',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "jf", [
-              "None",
-              "Low",
-              "Medium",
-              "High"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'Joining aid',
-        criteria1: 'Joining and basic component',
-        criteria2: 'Joining component',
-        criteria3: 'Basic component',
-        criteria4: 'None',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "ja", [
-              "JoinBasicComp",
-              "JoinComp",
-              "BasicComp",
-              "MoreComp"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'Number of basic components',
-        criteria1: 'One basic component',
-        criteria2: 'Two basic components',
-        criteria3: 'Three basic components',
-        criteria4: 'More than three basic components',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "nc", [
-              "OneBasicComp",
-              "TwoBasicComp",
-              "ThreeBasicComp",
-              "MoreComp"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'Joining security',
-        criteria1: 'Secured in all directions',
-        criteria2: 'Gravity and form fit',
-        criteria3: 'Gravity and rubbing',
-        criteria4: 'Additional securing necessary',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "js", [
-              "SecAllDirection",
-              "GravityFit",
-              "GravityRubbing",
-              "AdditionalSec"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      },
-      {
-        strong: 'Special operations',
-        criteria1: 'None',
-        criteria2: 'One',
-        criteria3: 'Two',
-        criteria4: 'More than two',
-        set value(number) {
-          this[valueSymbol] = number;
-          void requestModifierFactory(
-            "so", [
-              "None",
-              "One",
-              "Two",
-              "More"
-            ]
-          )(number);
-        },
-        get value() {
-          return this[valueSymbol];
-        }
-      }
-    ];
-  })();
+  selectedSubprocess = this.cookieService
+    .getCookie("selectedSubprocess");
+  subprocessId = this.selectedSubprocess[
+    "level" + this.selectedSubprocess.maxDepth
+  ].id;
 
-  subprocessId = this.route.snapshot.params['subprocessId'];
-
-  matrixRequest = {
+  matrixRequest:any = {
+    "fkTbAceSubProLev": this.subprocessId,
     "dsStable": 0,
     "dsReducedStability": 0,
     "dsHandlyStable": 0,
@@ -379,7 +37,7 @@ export class HTAAnalysisComponent implements OnInit {
     "stVerySensitive": 0,
     "grExGripSurface": 0,
     "grIntGripSurface": 0,
-    "grMagneticGripper": 0,
+    "grMagneticGripper": 1,
     "grFabClosureGripper": 0,
     "nvNoFurtherVariants": 0,
     "nvOneFurtherVariants": 0,
@@ -433,9 +91,10 @@ export class HTAAnalysisComponent implements OnInit {
     "soOne": 0,
     "soTwo": 0,
     "soMore": 0,
-    "ecAEleConsumFun": 0,
-    "fkTbAceSubProLev": this.subprocessId
+    "ecAEleConsumFun": 0
   }
+
+  matrix = initializeMatrix(this.matrixRequest);
 
   actualLoaInfoRequest = {
     "fkTbAcePhyLoa": "1",
@@ -459,7 +118,8 @@ export class HTAAnalysisComponent implements OnInit {
               .replace(/(\d+)$/, value);
             return value;
           case "bestRange":
-            return false;
+            obj.bestRange = obj.bestRange;
+            return value;
           default:
             return Reflect.set(obj, prop, value);
         }
@@ -478,23 +138,43 @@ export class HTAAnalysisComponent implements OnInit {
   );
 
   matrixId;
+  infoId;
   cognitiveLoaArray;
   physicalLoaArray;
 
-  constructor(
-    private http:HttpClient,
-    private route:ActivatedRoute
-  ) { }
-
   ngOnInit() {
-    var matrixCreation:Subscription = this.http
-      .post(environment.apiUrl + "/v1/criteria-matrices", this.matrixRequest)
-      .subscribe(
+    this.http
+      .get(environment.apiUrl + "/v1/criteria-matrices-by-subprocess-id/" + this.subprocessId)
+      .toPromise()
+      .catch(
+        () => this.http
+          .post(environment.apiUrl + "/v1/criteria-matrices", this.matrixRequest)
+          .toPromise()
+      )
+      .then(
         (matrix:any) => {
           this.matrixId = matrix.pkTbId;
-          matrixCreation.unsubscribe();
+          updateMatrix(this.matrix, matrix);
         }
       );
+    this.http
+      .get(environment.apiUrl + "/v1/process-loa-info-by-subprocess-id/" + this.subprocessId)
+      .toPromise()
+      .catch(
+        () => this.http
+          .post(environment.apiUrl + "/v1/process-loa-info", this.actualLoaInfoRequest)
+          .toPromise()
+      )
+      .then(
+        (info:any) => {
+          this.infoId = info.pkTbId;
+          this.loaInfoRequest.fkTbAcePhyLoa = info.fkTbAcePhyLoa;
+          this.loaInfoRequest.fkTbAceCogLoa = info.fkTbAceCogLoa;
+          this.loaInfoRequest.bestRangeMin = info.bestRange;
+          this.loaInfoRequest.bestRangeMax = info.bestRange;
+        }
+      )
+
     var cognitiveLoaSubscription:Subscription = this.http
       .get(`${environment.apiUrl}/v1/cognitive-loa`)
       .subscribe(
@@ -527,13 +207,12 @@ export class HTAAnalysisComponent implements OnInit {
   }
 
   saveLoaInfo() {
-    var loaInfoCreation:Subscription = this.http
-    .post(environment.apiUrl + "/v1/process-loa-info", this.actualLoaInfoRequest)
-    .subscribe(
-      (matrix:any) => {
-        loaInfoCreation.unsubscribe();
-      }
-    );
+    this.http
+      .put(
+        environment.apiUrl + "/v1/process-loa-info/" + this.infoId,
+        this.actualLoaInfoRequest
+      )
+      .toPromise()
   }
 
 }
