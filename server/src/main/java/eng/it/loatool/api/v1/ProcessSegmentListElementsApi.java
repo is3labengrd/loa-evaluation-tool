@@ -30,6 +30,17 @@ public class ProcessSegmentListElementsApi {
         );
     }
 
+    @GetMapping("/v1/process-segment-list-elements-like/{namePiece}")
+    public ResponseEntity<?> getProcessSegmentListElementLike(
+        @RequestParam(value="page", defaultValue="-1") int page,
+        @RequestParam(value="size", defaultValue="-1") int size,
+        @PathVariable("namePiece") String namePiece
+    ) {
+        return ResponseEntityTransformer.transformOk(
+            processSegmentListElementPaginationService.getAllLike(namePiece, page, size)
+        );
+    }
+
     @GetMapping("/v1/process-segment-list-elements/{id}")
     public ResponseEntity<?> getProcessSegmentListElement(@PathVariable("id") Integer id) {
         return ResponseEntityTransformer.transform(
