@@ -26,6 +26,9 @@ export class SubScenariosComponent implements OnInit {
 
   productPlanningID: number = null;
   procSpecInfoID: number = null;
+  subScenarioID1: number = null;
+  subScenarioID2: number = null;
+  subScenarioID3: number = null;
 
  procSpecInfoObj: any = { nshiptsDay: null, hoursShift: null, workingDaysYear: null, propWCPerHours: null, fkTbAceSubProLev: null};
 
@@ -151,6 +154,11 @@ checkMandatoryData() {
   }
 
   createSubScenarios(): void {
+
+    this.subscenario1.processTime=this.selRes1ProcTime;
+    this.subscenario2.processTime=this.selRes2ProcTime;
+    this.subscenario3.processTime=this.selRes3ProcTime;
+
     this.updateHoursPerYear();
     this.updateNumbersNumYear();
     this.updateRateParticipationPerHour();
@@ -374,16 +382,16 @@ checkMandatoryData() {
   }
 
   updateAssemblyCostsPerPiece(): void {
-    this.subscenario1.assemblyCostPerPiece = this.subscenario1.varCostTotal + this.subscenario1.fixedCostTotal;
-    this.subscenario2.assemblyCostPerPiece = this.subscenario2.varCostTotal + this.subscenario2.fixedCostTotal;
-    this.subscenario3.assemblyCostPerPiece = this.subscenario3.varCostTotal + this.subscenario3.fixedCostTotal;
+    this.subscenario1.assemblyCostPerPiece = this.roundValue(this.subscenario1.varCostTotal + this.subscenario1.fixedCostTotal);
+    this.subscenario2.assemblyCostPerPiece = this.roundValue(this.subscenario2.varCostTotal + this.subscenario2.fixedCostTotal);
+    this.subscenario3.assemblyCostPerPiece = this.roundValue(this.subscenario3.varCostTotal + this.subscenario3.fixedCostTotal);
 
   }
 
   updateAssemblyCostsTotal(): void {
-    this.subscenario1.assemblyCosts = this.subscenario1.assemblyCostPerPiece + this.subscenario1.nprodPieces;
-    this.subscenario2.assemblyCosts = this.subscenario2.assemblyCostPerPiece + this.subscenario2.nprodPieces;
-    this.subscenario3.assemblyCosts = this.subscenario3.assemblyCostPerPiece + this.subscenario3.nprodPieces;
+    this.subscenario1.assemblyCosts = this.roundValue(this.subscenario1.assemblyCostPerPiece + this.subscenario1.nprodPieces);
+    this.subscenario2.assemblyCosts = this.roundValue(this.subscenario2.assemblyCostPerPiece + this.subscenario2.nprodPieces);
+    this.subscenario3.assemblyCosts = this.roundValue(this.subscenario3.assemblyCostPerPiece + this.subscenario3.nprodPieces);
    }
 
 
@@ -394,12 +402,18 @@ checkMandatoryData() {
   setAll = (obj, val) => Object.keys(obj).forEach(k => obj[k] = val);
 
   cancelScenariosValues(): void {
+    this.setAll(this.procSpecInfoObj, null);
+    this.nprodPiecePerHours=null;
+    this.selRes1ProcTime=null;
+    this.selRes2ProcTime=null;
+    this.selRes3ProcTime=null;
     this.setAll(this.subscenario1, null);
     this.setAll(this.resourceInfo1, null);
     this.setAll(this.subscenario2, null);
     this.setAll(this.resourceInfo2, null);
     this.setAll(this.subscenario3, null);
     this.setAll(this.resourceInfo3, null);
+
   }
 
  getFkAceSubProLevId(cookie): number {
@@ -426,21 +440,52 @@ checkMandatoryData() {
   this.subscenario3.fkTbAceProSeq=this.cookie.mainProcessId;
   this.subscenario3.fkTbAceSubProLev=this.getFkAceSubProLevId(this.cookie);
 
+  console.log(this.subscenario1);
+
+  if(this.subScenarioID1==null){
   this.http
         .post(environment.apiUrl + '/v1/subscenarios', this.subscenario1)
-        .subscribe(res =>
-            console.log('Done subscenario 1'));
+        .toPromise().then((res:any) => {
+            this.subScenarioID1=res.pkTbId;
+          });
+    }else{
+    //delete this.subscenario1.createDate;
+    //delete this.subscenario1.updateDate;
+    //console.log(this.subscenario1);
+    this.http
+            .put(environment.apiUrl + '/v1/subscenarios/'+this.subScenarioID1, this.subscenario1)
+            .toPromise().then((res:any) => {
+               this.subScenarioID1=res.pkTbId;
+              });
+    }
 
+    if(this.subScenarioID2==null){
     this.http
       .post(environment.apiUrl + '/v1/subscenarios', this.subscenario2)
-      .subscribe(res =>
-        console.log('Done subscenario 2'));
+      .toPromise().then((res:any) => {
+           this.subScenarioID2=res.pkTbId;
+        });
+    }else{
+     this.http
+          .put(environment.apiUrl + '/v1/subscenarios/'+this.subScenarioID2, this.subscenario2)
+          .toPromise().then((res:any) => {
+               this.subScenarioID2=res.pkTbId;
+            });
+    }
 
-
+    if(this.subScenarioID3==null){
     this.http
       .post(environment.apiUrl + '/v1/subscenarios', this.subscenario3)
-      .subscribe(res =>
-        console.log('Done subscenario 3'));
+      .toPromise().then((res:any) => {
+           this.subScenarioID3=res.pkTbId;
+         });
+     }else{
+      this.http
+           .put(environment.apiUrl + '/v1/subscenarios/'+this.subScenarioID3, this.subscenario3)
+           .toPromise().then((res:any) => {
+              this.subScenarioID3=res.pkTbId;
+          });
+     }
   }
 
 
@@ -481,28 +526,75 @@ checkMandatoryData() {
 
 
       subScenarioGET(){
-               let subscenarios: Array<any> ;
+              let subscenarios: Array<any> ;
+              var postObj = new PostObj();
+              postObj.fkTbAceSubProLev = this.getFkAceSubProLevId(this.cookie);
               this.http
-              .get(environment.apiUrl + '/v1/subscenarios')
+              .post(environment.apiUrl + '/v1/subscenarios/search',  postObj )
               .toPromise()
               .then((result:any) => {
                  subscenarios = result;
 
-                 //console.log(subscenarios);
+                 subscenarios.forEach((element:any)=>  {
+                    switch(element.scenarioNumber){
+                    case 1:
+                        this.subscenario1=element;
+                        this.subScenarioID1=element.pkTbId
+                        this.selRes1ProcTime=element.processTime;
+                        this.resourceInfoGET(element.fkTbAceRes, 1);
+                        break;
+                    case 2:
+                        this.subscenario2=element;
+                        this.subScenarioID2=element.pkTbId;
+                        this.selRes2ProcTime=element.processTime;
+                        this.resourceInfoGET(element.fkTbAceRes, 2);
+                        break;
+                    case 3:
+                        this.subscenario3=element;
+                        this.subScenarioID3=element.pkTbId;
+                        this.selRes3ProcTime=element.processTime;
+                        this.resourceInfoGET(element.fkTbAceRes, 3);
+                        break;
+                  }
 
-
+                 });
               },
               err => { })
       }
 
+      resourceInfoGET(primaryKey, scenarioNumber) {
+      this.http.get(environment.apiUrl + '/v1/resources/'+ primaryKey)
+              .toPromise()
+              .then((result:any) => {
+               switch(scenarioNumber){
+               case 1:
+                   this.resourceInfo1=result;
+                   this.firstDropDownChanged(result.name);
+                   break;
+               case 2:
+                   this.resourceInfo2=result;
+                   this.secondDropDownChanged(result.name);
+                   break;
+               case 3:
+                   this.resourceInfo3=result;
+                   this.thirdDropDownChanged(result.name);
+                   break;
+               }
+              },
+              err => {})
+       }
+
+
 
 
 
 }
 
-function Subscenario(scenarioNumber) {
+function Subscenario(scenarioNumber)  {
   this.scenarioNumber = scenarioNumber;
 }
 
 function ProdutsPiece() { }
+
+function PostObj(){}
 
