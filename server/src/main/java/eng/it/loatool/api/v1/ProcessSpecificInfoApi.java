@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
-import eng.it.loatool.api.v1.process_specific_info.GetProcessSpecificInfoBySubProcessId;
+import eng.it.loatool.process_specific_info.GetProcessSpecificInfoBySubProcessId;
 import eng.it.loatool.process_specific_info.ProcessSpecificInfoRepository;
 import eng.it.loatool.process_specific_info.ProcessesSpecificInformation;
 

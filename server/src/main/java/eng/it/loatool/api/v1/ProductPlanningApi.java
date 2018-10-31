@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
-import eng.it.loatool.api.v1.product_planning.GetProductPlanningByProcessSegmentId;
+import eng.it.loatool.product_planning.GetProductPlanningByProcessSegmentId;
 import eng.it.loatool.product_planning.ProductPlanning;
 import eng.it.loatool.product_planning.ProductPlanningRepository;
 

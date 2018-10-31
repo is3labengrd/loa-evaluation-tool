@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
-import eng.it.loatool.api.v1.subscenarios.SubScenariosSearchService;
 import eng.it.loatool.subscenario.SubScenario;
 import eng.it.loatool.subscenario.SubScenarioRepository;
+import eng.it.loatool.subscenario.SubScenariosSearchService;
 
 @Controller
 public class SubScenariosApi {

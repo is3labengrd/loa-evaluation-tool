@@ -7,9 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import eng.it.loatool.api.v1.process_segment_list_elements.PersistProcessSegmentListElementService;
 import eng.it.loatool.process_segment.ProcessSegment;
 import eng.it.loatool.process_segment.ProcessSegmentRepository;
+import eng.it.loatool.process_segment_list_element.PersistProcessSegmentListElementService;
 import eng.it.loatool.process_segment_list_element.ProcessSegmentListElement;
 import eng.it.loatool.process_segment_list_element.ProcessSegmentListElementRepository;
 import eng.it.loatool.var.bean.MainProcess;

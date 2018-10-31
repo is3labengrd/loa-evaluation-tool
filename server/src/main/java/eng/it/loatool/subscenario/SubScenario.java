@@ -27,11 +27,11 @@ import eng.it.loatool.PkTbPrimaryKeyOwner;
 public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
     @JsonProperty private Integer pkTbId;
-    private int fkTbAceProSeq;
-    private int fkTbAceSubProLev;
-    private int fkTbAceRes;
-    private int scenarioNumber;
-    private int processTime;
+    private Integer fkTbAceProSeq;
+    private Integer fkTbAceSubProLev;
+    private Integer fkTbAceRes;
+    private Integer scenarioNumber;
+    private Integer processTime;
     private Double assemblyCostPerPiece;
     private Double assemblyCosts;
     private Integer usPhysicalLoa;
@@ -54,7 +54,7 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
     public SubScenario() {}
 
-    public SubScenario(int fkTbAceProSeq, int fkTbAceSubProLev, int fkTbAceRes, int scenarioNumber, int processTime, Date createDate, Date updateDate) {
+    public SubScenario(Integer fkTbAceProSeq, Integer fkTbAceSubProLev, Integer fkTbAceRes, Integer scenarioNumber, Integer processTime, Date createDate, Date updateDate) {
         this.fkTbAceProSeq = fkTbAceProSeq;
         this.fkTbAceSubProLev = fkTbAceSubProLev;
         this.fkTbAceRes = fkTbAceRes;
@@ -103,43 +103,43 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.pkTbId = pkTbId;
     }
 
-    @Column(name = "FK_TB_ACE_PRO_SEQ", nullable = false) public int getFkTbAceProSeq() {
+    @Column(name = "FK_TB_ACE_PRO_SEQ", nullable = false) public Integer getFkTbAceProSeq() {
         return this.fkTbAceProSeq;
     }
 
-    public void setFkTbAceProSeq(int fkTbAceProSeq) {
+    public void setFkTbAceProSeq(Integer fkTbAceProSeq) {
         this.fkTbAceProSeq = fkTbAceProSeq;
     }
 
-    @Column(name = "FK_TB_ACE_SUB_PRO_LEV", nullable = false) public int getFkTbAceSubProLev() {
+    @Column(name = "FK_TB_ACE_SUB_PRO_LEV", nullable = false) public Integer getFkTbAceSubProLev() {
         return this.fkTbAceSubProLev;
     }
 
-    public void setFkTbAceSubProLev(int fkTbAceSubProLev) {
+    public void setFkTbAceSubProLev(Integer fkTbAceSubProLev) {
         this.fkTbAceSubProLev = fkTbAceSubProLev;
     }
 
-    @Column(name = "FK_TB_ACE_RES", nullable = false) public int getFkTbAceRes() {
+    @Column(name = "FK_TB_ACE_RES", nullable = false) public Integer getFkTbAceRes() {
         return this.fkTbAceRes;
     }
 
-    public void setFkTbAceRes(int fkTbAceRes) {
+    public void setFkTbAceRes(Integer fkTbAceRes) {
         this.fkTbAceRes = fkTbAceRes;
     }
 
-    @Column(name = "SCENARIO_NUMBER", nullable = false) public int getScenarioNumber() {
+    @Column(name = "SCENARIO_NUMBER", nullable = false) public Integer getScenarioNumber() {
         return this.scenarioNumber;
     }
 
-    public void setScenarioNumber(int scenarioNumber) {
+    public void setScenarioNumber(Integer scenarioNumber) {
         this.scenarioNumber = scenarioNumber;
     }
 
-    @Column(name = "PROCESS_TIME", nullable = false) public int getProcessTime() {
+    @Column(name = "PROCESS_TIME", nullable = false) public Integer getProcessTime() {
         return this.processTime;
     }
 
-    public void setProcessTime(int processTime) {
+    public void setProcessTime(Integer processTime) {
         this.processTime = processTime;
     }
 

@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
-import eng.it.loatool.api.v1.process_segment_list_elements.PersistProcessSegmentListElementService;
-import eng.it.loatool.api.v1.process_segment_list_elements.ProcessSegmentListElementPaginationService;
+import eng.it.loatool.process_segment_list_element.PersistProcessSegmentListElementService;
 import eng.it.loatool.process_segment_list_element.ProcessSegmentListElement;
+import eng.it.loatool.process_segment_list_element.ProcessSegmentListElementPaginationService;
 import eng.it.loatool.process_segment_list_element.ProcessSegmentListElementRepository;
 
 @Controller
@@ -27,6 +27,17 @@ public class ProcessSegmentListElementsApi {
     ) {
         return ResponseEntityTransformer.transformOk(
             processSegmentListElementPaginationService.getAll(page, size)
+        );
+    }
+
+    @GetMapping("/v1/process-segment-list-elements-like/{namePiece}")
+    public ResponseEntity<?> getProcessSegmentListElementLike(
+        @RequestParam(value="page", defaultValue="-1") int page,
+        @RequestParam(value="size", defaultValue="-1") int size,
+        @PathVariable("namePiece") String namePiece
+    ) {
+        return ResponseEntityTransformer.transformOk(
+            processSegmentListElementPaginationService.getAllLike(namePiece, page, size)
         );
     }
 
