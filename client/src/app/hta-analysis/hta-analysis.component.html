@@ -113,27 +113,27 @@
             </label>
           </td>
           <td>
-            <select name="physical-loa" [(ngModel)]="loaInfoRequest.fkTbAcePhyLoa">
+            <select name="physical-loa" [(ngModel)]="loaInfoRequest.fkTbAcePhyLoa" [disabled]="!loaInfoRequest.possibility">
               <option *ngFor="let loa of physicalLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}}</option>
             </select>
           </td>
           <td>
-            <select name="cognitive-loa" [(ngModel)]="loaInfoRequest.fkTbAceCogLoa">
+            <select name="cognitive-loa" [(ngModel)]="loaInfoRequest.fkTbAceCogLoa" [disabled]="!loaInfoRequest.possibility">
               <option *ngFor="let loa of cognitiveLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}}</option>
             </select>
           </td>
           <td>
-            <input type="number" name="minBestLoa" max="7" min="1" [(ngModel)]="loaInfoRequest.bestRangeMin">
+            <input type="number" name="minBestLoa" #minLoa max="7" min="1" [(ngModel)]="loaInfoRequest.bestRangeMin" [disabled]="!loaInfoRequest.possibility" required>
           </td>
           <td>
-            <input type="number" name="maxBestLoa" max="7" min="1" [(ngModel)]="loaInfoRequest.bestRangeMax">
+            <input type="number" name="maxBestLoa" #maxLoa max="7" min="1" [(ngModel)]="loaInfoRequest.bestRangeMax" [disabled]="!loaInfoRequest.possibility" required>
           </td>
         </tr>
       </table>
     </fieldset>
     <div class="btn-group" style="justify-content: center; width: 100%;">
-      <button class="btn btn-secondary">Cancel</button>
-      <button class="btn btn-primary" (click)="saveLoaInfo()">Save</button>
+      <button class="btn btn-secondary" (click)="loaInfoRequest.possibility=false">Cancel</button>
+      <button class="btn btn-primary" (click)="saveLoaInfo(minLoa.value, maxLoa.value)" >Save</button>
     </div>
   </form>
 </div>
