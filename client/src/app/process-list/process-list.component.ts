@@ -17,7 +17,7 @@ export class ProcessListComponent implements OnInit {
   numberOfItems = 12;
   page = 0;
   lastPage = 0;
-  searchText = "setup";
+  searchText = "";
 
   private getPageIteratorGetter(maxNumberOfPages) {
     return () => {
