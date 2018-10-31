@@ -3,12 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-<<<<<<< HEAD
 import { Http } from '@angular/http';
 
-=======
 import { CookieService } from '../cookie.service';
->>>>>>> c45d16f8b462d7d069b76d37871fb332cbfd1a21
 
 @Component({
   selector: 'app-resource-list',
@@ -55,20 +52,16 @@ export class ResourceListComponent implements OnInit {
 
   linkChange = true;
 
-<<<<<<< HEAD
-  constructor(private http: Http, private assaignService: AssaignService) { }
-=======
-  constructor(private http: HttpClient, private _processListService: CookieService) { }
->>>>>>> c45d16f8b462d7d069b76d37871fb332cbfd1a21
+  constructor(
+    private http: HttpClient,
+    private _processListService: CookieService,
+    private assaignService: AssaignService
+  ) { }
 
   cookie: any;
   ngOnInit() {
-<<<<<<< HEAD
-    // this.updateResourceList();
-=======
     this.updateResourceList();
     this.cookie = this._processListService.getCookie("selectedSubprocess");
->>>>>>> c45d16f8b462d7d069b76d37871fb332cbfd1a21
   }
 
   updateResourceList() {
@@ -77,18 +70,10 @@ export class ResourceListComponent implements OnInit {
       'page=' + this.pagination.page + '&' +
       'size=' + this.pagination.size
     ).subscribe((resources: any) => {
-<<<<<<< HEAD
-        this.resources = resources.content;
-        this.pagination.lastPage = resources.totalPages - 1;
-        this.pagination.totalPages = Array(this.pagination.lastPage + 1)
-          .fill(0).map((x, y) => x + y);
-          console.log(this.resources);
-=======
       this.resources = resources.content;
       this.pagination.lastPage = resources.totalPages - 1;
       this.pagination.totalPages = Array(this.pagination.lastPage + 1)
         .fill(0).map((x, y) => x + y);
->>>>>>> c45d16f8b462d7d069b76d37871fb332cbfd1a21
     });
   }
 
