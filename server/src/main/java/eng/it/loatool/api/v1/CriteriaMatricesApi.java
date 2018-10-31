@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.api.ResponseEntityTransformer;
-import eng.it.loatool.api.v1.criteria_matrices.CreateCriteriaMatrixService;
-import eng.it.loatool.api.v1.criteria_matrices.GetCriteriaMatricesService;
-import eng.it.loatool.api.v1.criteria_matrices.GetCriteriaMatrixService;
-import eng.it.loatool.api.v1.criteria_matrices.UpdateCriteriaMatrixService;
+import eng.it.loatool.criteria_matrix.CreateCriteriaMatrixService;
 import eng.it.loatool.criteria_matrix.CriteriaMatrix;
+import eng.it.loatool.criteria_matrix.GetCriteriaMatricesService;
+import eng.it.loatool.criteria_matrix.GetCriteriaMatrixService;
+import eng.it.loatool.criteria_matrix.UpdateCriteriaMatrixService;
 
 @Controller
 public class CriteriaMatricesApi {

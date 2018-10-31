@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.api.ResponseEntityTransformer;
-import eng.it.loatool.api.v1.process_loa_info.CreateProcessLOAInformationService;
-import eng.it.loatool.api.v1.process_loa_info.GetProcessLOAInformationService;
-import eng.it.loatool.api.v1.process_loa_info.UpdateProcessLOAInformationService;
+import eng.it.loatool.process_loa_info.CreateProcessLOAInformationService;
+import eng.it.loatool.process_loa_info.GetProcessLOAInformationService;
 import eng.it.loatool.process_loa_info.ProcessLOAInformation;
+import eng.it.loatool.process_loa_info.UpdateProcessLOAInformationService;
 
 @Controller
 public class ProcessLOAInformationApi {

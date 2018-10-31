@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
-import eng.it.loatool.api.v1.subprocess_levels.CreateSubProcessLevelService;
-import eng.it.loatool.api.v1.subprocess_levels.GetSubProcessLevelService;
-import eng.it.loatool.api.v1.subprocess_levels.GetSubProcessLevelsService;
-import eng.it.loatool.api.v1.subprocess_levels.UpdateSubProcessLevelService;
+import eng.it.loatool.subprocess_level.CreateSubProcessLevelService;
+import eng.it.loatool.subprocess_level.GetSubProcessLevelService;
+import eng.it.loatool.subprocess_level.GetSubProcessLevelsService;
 import eng.it.loatool.subprocess_level.SubProcessLevel;
 import eng.it.loatool.subprocess_level.SubProcessLevelRepository;
+import eng.it.loatool.subprocess_level.UpdateSubProcessLevelService;
 
 @Controller
 public class SubProcessLevelsApi {

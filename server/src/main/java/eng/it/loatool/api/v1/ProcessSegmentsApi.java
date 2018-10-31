@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.api.ResponseEntityTransformer;
-import eng.it.loatool.api.v1.process_segments.CreateProcessSegmentService;
-import eng.it.loatool.api.v1.process_segments.GetProcessSegmentService;
-import eng.it.loatool.api.v1.process_segments.GetProcessSegmentsService;
-import eng.it.loatool.api.v1.process_segments.UpdateProcessSegmentService;
+import eng.it.loatool.process_segment.CreateProcessSegmentService;
+import eng.it.loatool.process_segment.GetProcessSegmentService;
+import eng.it.loatool.process_segment.GetProcessSegmentsService;
 import eng.it.loatool.process_segment.ProcessSegment;
+import eng.it.loatool.process_segment.UpdateProcessSegmentService;
 
 @Controller
 public class ProcessSegmentsApi {
