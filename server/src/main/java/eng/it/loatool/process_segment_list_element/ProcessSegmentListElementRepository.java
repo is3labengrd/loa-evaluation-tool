@@ -34,7 +34,7 @@ public interface ProcessSegmentListElementRepository extends PagingAndSortingRep
     @Query(
         " from ProcessSegmentListElement p" +
         " where" +
-        "   lower(p.mainProcess.name) like lower(concat('%', :namePiece,'%'))"
+        "   lower(p.mainProcess.name) like lower(concat('%', :namePiece, '%'))"
     )
     Iterable<ProcessSegmentListElement> getProcessSegmentListElementsLike(@Param("namePiece") String namePiece);
 
