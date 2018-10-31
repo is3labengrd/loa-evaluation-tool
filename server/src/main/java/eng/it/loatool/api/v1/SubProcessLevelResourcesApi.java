@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
+import eng.it.loatool.subprocess_level_resource.GetSubProcessLevelResourcebySubProcessIdService;
 import eng.it.loatool.subprocess_level_resource.PersistSubProcessLevelResourceService;
 import eng.it.loatool.subprocess_level_resource.SubProcessLevelResource;
 import eng.it.loatool.subprocess_level_resource.SubProcessLevelResourceRepository;
@@ -30,6 +31,13 @@ public class SubProcessLevelResourcesApi {
     public ResponseEntity<?> getSubProcessLevelResource(@PathVariable("id") Integer id) {
         return ResponseEntityTransformer.transform(
             generalCRUDService.getOne(subProcessLevelResourceRepository, id)
+        );
+    }
+
+    @GetMapping("/v1/subprocess-level-resources-by-subprocess-id/{id}")
+    public ResponseEntity<?> getSubProcessLevelResourceBySubProcessId(@PathVariable("id") Integer id) {
+        return ResponseEntityTransformer.transformOk(
+            getSubProcessLevelResourcebySubProcessIdService.getBySubProcessId(id)
         );
     }
 
@@ -59,6 +67,7 @@ public class SubProcessLevelResourcesApi {
         );
     }
 
+    @Autowired private GetSubProcessLevelResourcebySubProcessIdService getSubProcessLevelResourcebySubProcessIdService;
     @Autowired private PersistSubProcessLevelResourceService persistSubProcessLevelResourceService;
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private SubProcessLevelResourceRepository subProcessLevelResourceRepository;
