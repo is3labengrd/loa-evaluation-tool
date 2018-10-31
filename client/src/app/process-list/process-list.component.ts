@@ -32,7 +32,16 @@ export class ProcessListComponent implements OnInit {
   }
 
   pageIterable = {
-    [Symbol.iterator]: () => { }
+    [Symbol.iterator]: () => {
+      return {
+        next () {
+          return {
+            value: undefined,
+            done: true
+          }
+        }
+      }
+    }
   };
 
   constructor(
