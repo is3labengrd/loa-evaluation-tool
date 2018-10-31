@@ -154,9 +154,9 @@
       <td class="roto  align-middle"></td>
       <td><strong>Resource name</strong></td>
       <td>-</td>
-      <td>{{scenario1.resourceName}}</td>
-      <td>{{scenario2.resourceName}}</td>
-      <td>{{scenario3.resourceName}}</td>
+      <td>{{resourceInfo1?.name}}</td>
+      <td>{{resourceInfo2?.name}}</td>
+      <td>{{resourceInfo3?.name}}</td>
     </tr>
      <tr>
         <td class="roto  align-middle">Process <br> variables</td>
@@ -171,19 +171,19 @@
           s
         </td>
         <td>
-          {{scenario1.loaPhysical}} <br>
-          {{scenario1.loaCognitive}} <br>
-          {{scenario1.processTime}}
+          {{resourceInfo1?.loaPhysical}} <br>
+          {{resourceInfo1?.loaCognitive}} <br>
+          {{selRes1ProcTime}}
         </td>
         <td>
-          {{scenario2.loaPhysical}}<br>
-          {{scenario2.loaCognitive}}<br>
-          {{scenario2.processTime}}
+          {{resourceInfo2?.loaPhysical}}<br>
+          {{resourceInfo2?.loaCognitive}}<br>
+          {{selRes2ProcTime}}
         </td>
         <td>
-          {{scenario3.loaPhysical}} <br>
-          {{scenario3.loaCognitive}} <br>
-          {{scenario3.processTime}}
+          {{resourceInfo3?.loaPhysical}} <br>
+          {{resourceInfo3?.loaCognitive}} <br>
+          {{selRes3ProcTime}}
         </td>
       </tr>
       <tr>
@@ -199,42 +199,42 @@
           d <br>
         </td>
         <td>
-          {{scenario1.numberShiftsPerDay}} <br>
-          {{scenario1.hoursPerShift}}<br>
-          {{scenario1.workingDaysPerYear}}
+          {{procSpecInfoObj?.nshiptsDay}} <br>
+          {{procSpecInfoObj?.hoursShift}}<br>
+          {{procSpecInfoObj?.workingDaysYear}}
         </td>
         <td>
-          {{scenario2.numberShiftsPerDay}} <br>
-          {{scenario2.hoursPerShift}}<br>
-          {{scenario2.workingDaysPerYear}}
+          {{procSpecInfoObj?.nshiptsDay}} <br>
+          {{procSpecInfoObj?.hoursShift}}<br>
+          {{procSpecInfoObj?.workingDaysYear}}
         </td>
         <td>
-          {{scenario3.numberShiftsPerDay}} <br>
-          {{scenario3.hoursPerShift}}<br>
-          {{scenario3.workingDaysPerYear}}
+          {{procSpecInfoObj?.nshiptsDay}} <br>
+          {{procSpecInfoObj?.hoursShift}}<br>
+          {{procSpecInfoObj?.workingDaysYear}}
         </td>
       </tr>
       <tr>
         <td>Hours per year</td>
         <td>h</td>
-        <td>{{scenario1.hoursPerYear}}</td>
-        <td>{{scenario2.hoursPerYear}}</td>
-        <td>{{scenario3.hoursPerYear}}</td>
+        <td>{{subscenario1?.hoursPerYears}}</td>
+        <td>{{subscenario2?.hoursPerYears}}</td>
+        <td>{{subscenario3?.hoursPerYears}}</td>
       </tr>
       <tr>
         <td class="roto  align-middle" rowspan="2">Prod.</td>
         <td>Number of produced pieces</td>
         <td>units/h</td>
-        <td>{{scenario1?.numProducedPiecesHour}}</td>
-        <td>{{scenario2?.numProducedPiecesHour}}</td>
-        <td>{{scenario3?.numProducedPiecesHour}}</td>
+        <td>{{nprodPiecePerHours}}</td>
+        <td>{{nprodPiecePerHours}}</td>
+        <td>{{nprodPiecePerHours}}</td>
       </tr>
       <tr>
         <td>Number of produced pieces</td>
         <td>units/year</td>
-        <td>{{scenario1.numProducedPiecesYear}}</td>
-        <td>{{scenario2.numProducedPiecesYear}}</td>
-        <td>{{scenario3.numProducedPiecesYear}}</td>
+        <td>{{subscenario1?.nprodPieces}}</td>
+        <td>{{subscenario2?.nprodPieces}}</td>
+        <td>{{subscenario3?.nprodPieces}}</td>
       </tr>
       <tr>
         <td class="roto  align-middle" rowspan="6">Variable costs</td>
@@ -249,27 +249,27 @@
           l/h
         </td>
         <td>
-          {{scenario1.propWageCostsPerHour}}<br>
-          {{scenario1.numberOperationsPerMachine}}<br>
-          {{scenario1.ratioOfParticipPerHour}}
+          {{procSpecInfoObj?.propWCPerHours}}<br>
+          {{resourceInfo1?.lcNOperMachine}}<br>
+          {{subscenario1?.rateOfPart}}
         </td>
         <td>
-          {{scenario2.propWageCostsPerHour}}<br>
-          {{scenario2.numberOperationsPerMachine}}<br>
-          {{scenario2.ratioOfParticipPerHour}}
+          {{procSpecInfoObj?.propWCPerHours}}<br>
+          {{resourceInfo2?.lcNOperMachine}}<br>
+          {{subscenario3?.rateOfPart}}
         </td>
         <td>
-         {{scenario3.propWageCostsPerHour}} <br>
-         {{scenario3.numberOperationsPerMachine}} <br>
-         {{scenario3.ratioOfParticipPerHour}}
+         {{procSpecInfoObj?.propWCPerHours}} <br>
+         {{resourceInfo3?.lcNOperMachine}} <br>
+         {{subscenario3?.rateOfPart}}
         </td>
       </tr>
       <tr>
         <td>Labour costs</td>
         <td>l/units</td>
-        <td>{{scenario1.labourCosts}}</td>
-        <td>{{scenario2.labourCosts}}</td>
-        <td>{{scenario3.labourCosts}}</td>
+        <td>{{subscenario1?.labourCost}}</td>
+        <td>{{subscenario1?.labourCost}}</td>
+        <td>{{subscenario1?.labourCost}}</td>
       </tr>
       <tr>
         <td>
@@ -283,27 +283,27 @@
           l/kWh
         </td>
         <td>
-          {{scenario1.electrConsumption}}<br>
-          {{scenario1.electrConsumptionStandby}}<br>
-          {{scenario1.electrPrice}}
+          {{resourceInfo1?.ecAEleConsumFun}}<br>
+          {{resourceInfo1?.ecAEleConsumSb}}<br>
+          {{resourceInfo1?.ecElePrice}}
         </td>
         <td>
-          {{scenario2.electrConsumption}}<br>
-          {{scenario2.electrConsumptionStandby}}<br>
-          {{scenario2.electrPrice}}
+          {{resourceInfo1?.ecAEleConsumFun}}<br>
+          {{resourceInfo1?.ecAEleConsumSb}}<br>
+          {{resourceInfo1?.ecElePrice}}
         </td>
         <td>
-          {{scenario3.electrConsumption}}<br>
-          {{scenario3.electrConsumptionStandby}}<br>
-          {{scenario3.electrPrice}}
+          {{resourceInfo1?.ecAEleConsumFun}}<br>
+          {{resourceInfo1?.ecAEleConsumSb}}<br>
+          {{resourceInfo1?.ecElePrice}}
         </td>
       </tr>
       <tr>
         <td>Energy costs</td>
         <td>l/units</td>
-        <td>{{scenario1.energyCosts}}</td>
-        <td>{{scenario2.energyCosts}}</td>
-        <td>{{scenario3.energyCosts}}</td>
+        <td>{{subscenario1?.energyCost}}</td>
+        <td>{{subscenario2?.energyCost}}</td>
+        <td>{{subscenario3?.energyCost}}</td>
       </tr>
       <tr>
         <td>
@@ -315,23 +315,23 @@
           %
         </td>
         <td>
-          {{scenario1.annualMaintenanceCostsDirect}}<br>
-          {{scenario1.annualMaintenanceCostsEstimate}}
+          {{resourceInfo1?.mcAMaintCosts}}<br>
+          {{resourceInfo1?.mcAMaintCostsPerc}}
         </td>
         <td>
-          {{scenario2.annualMaintenanceCostsDirect}}  <br>
-          {{scenario2.annualMaintenanceCostsEstimate}}
+          {{resourceInfo2?.mcAMaintCosts}}  <br>
+          {{resourceInfo2?.mcAMaintCostsPerc}}
         </td>
         <td>
-          {{scenario3.annualMaintenanceCostsDirect}}  <br>
-          {{scenario3.annualMaintenanceCostsEstimate}}  </td>
+          {{resourceInfo3?.mcAMaintCosts}}  <br>
+          {{resourceInfo3?.mcAMaintCostsPerc}}  </td>
       </tr>
       <tr>
         <td>Maintenance costs</td>
         <td>l/a</td>
-        <td>{{scenario1.maintenanceCosts}}</td>
-        <td>{{scenario2.maintenanceCosts}}</td>
-        <td>{{scenario3.maintenanceCosts}}</td>
+        <td>{{subscenario1?.maintCost}}</td>
+        <td>{{subscenario2?.maintCost}}</td>
+        <td>{{subscenario3?.maintCost}}</td>
       </tr>
       <tr>
         <td rowspan="6" class="roto align-middle">Fixed Costs</td>
@@ -344,24 +344,24 @@
           l/m<sup>3</sup>
         </td>
         <td>
-          {{scenario1.installSurface}}  <br>
-          {{scenario1.costsM3PerMonth}}
+          {{resourceInfo1?.rcInstSurface}}  <br>
+          {{resourceInfo1?.rcCostsMMonth}}
         </td>
         <td>
-          {{scenario2.installSurface}} <br>
-          {{scenario2.costsM3PerMonth}}
+          {{resourceInfo2?.rcInstSurface}} <br>
+          {{resourceInfo2?.rcCostsMMonth}}
         </td>
         <td>
-          {{scenario3.installSurface}}<br>
-          {{scenario3.costsM3PerMonth}}
+          {{resourceInfo3?.rcInstSurface}}<br>
+          {{resourceInfo3?.rcCostsMMonth}}
         </td>
       </tr>
       <tr>
         <td>Annual space costs</td>
         <td>l/a</td>
-        <td>{{scenario1.annualSpaceCosts}}</td>
-        <td>{{scenario2.annualSpaceCosts}}</td>
-        <td>{{scenario3.annualSpaceCosts}}</td>
+        <td>{{subscenario1?.annualSpaceCost}}</td>
+        <td>{{subscenario2?.annualSpaceCost}}</td>
+        <td>{{subscenario3?.annualSpaceCost}}</td>
       </tr>
       <tr>
         <td>
@@ -375,27 +375,27 @@
           a
         </td>
         <td>
-        {{scenario1.machinePurchase}} <br>
-        {{scenario1.machineSales}} <br>
-        {{scenario1.economicUsefulLife}}
+        {{resourceInfo1?.idMacPurhValue}} <br>
+        {{resourceInfo1?.idMacSalesValue}} <br>
+        {{resourceInfo1?.idEcoUsefullLife}}
         </td>
         <td>
-         {{scenario2.machinePurchase}}  <br>
-         {{scenario2.machineSales}} <br>
-         {{scenario2.economicUsefulLife}}
+         {{resourceInfo2?.idMacPurhValue}}  <br>
+         {{resourceInfo2?.idMacSalesValue}} <br>
+         {{resourceInfo2?.idEcoUsefullLife}}
         </td>
         <td>
-        {{scenario3.machinePurchase}}  <br>
-        {{scenario3.machineSales}}   <br>
-        {{scenario3.economicUsefulLife}}
+        {{resourceInfo3?.idMacPurhValue}}  <br>
+        {{resourceInfo3?.idMacSalesValue}}   <br>
+        {{resourceInfo3?.idEcoUsefullLife}}
         </td>
       </tr>
       <tr>
         <td>Imputed deprecation</td>
         <td>l/a</td>
-        <td>{{scenario1.imputedDeprecation}}</td>
-        <td>{{scenario2.imputedDeprecation}}</td>
-        <td>{{scenario3.imputedDeprecation}}</td>
+        <td>{{subscenario1?.inputedDepreciation}}</td>
+        <td>{{subscenario2?.inputedDepreciation}}</td>
+        <td>{{subscenario3?.inputedDepreciation}}</td>
       </tr>
       <tr>
         <td>
@@ -409,27 +409,27 @@
           %
         </td>
         <td>
-          {{scenario1.machinePurchase}} <br>
-          {{scenario1.machineSales}} <br>
-          {{scenario1.interestRate}}
+          {{resourceInfo1?.idMacPurhValu}} <br>
+          {{resourceInfo1?.idMacSalesValue}} <br>
+          {{resourceInfo1?.icInterRate}}
         </td>
         <td>
-          {{scenario2.machinePurchase}}<br>
-          {{scenario2.machineSales}} <br>
-          {{scenario2.interestRate}}
+          {{resourceInfo2?.idMacPurhValu}}<br>
+          {{resourceInfo2?.idMacSalesValue}} <br>
+          {{resourceInfo2?.icInterRate}}
         </td>
         <td>
-          {{scenario3.machinePurchase}}  <br>
-          {{scenario3.machineSales}} <br>
-          {{scenario3.interestRate}}
+          {{resourceInfo3?.idMacPurhValu}}  <br>
+          {{resourceInfo3?.idMacSalesValue}} <br>
+          {{resourceInfo3?.icInterRate}}
         </td>
       </tr>
       <tr>
         <td>Accrued interest costs</td>
         <td>l/a</td>
-        <td>{{scenario1.accruedInterestCosts}}</td>
-        <td>{{scenario2.accruedInterestCosts}}</td>
-        <td>{{scenario3.accruedInterestCosts}}</td>
+        <td>{{subscenario1.accruedIntCosts}}</td>
+        <td>{{subscenario2.accruedIntCosts}}</td>
+        <td>{{subscenario3.accruedIntCosts}}</td>
       </tr>
       <tr>
         <td></td>
@@ -442,16 +442,16 @@
           l/units
         </td>
         <td>
-          {{scenario1.variableCostsTotal}}<br>
-          {{scenario1.fixedCostsTotal}}
+          {{subscenario1?.varCostTotal}}<br>
+          {{subscenario1?.fixedCostTotal}}
         </td>
         <td>
-          {{scenario2.variableCostsTotal}}<br>
-          {{scenario2.fixedCostsTotal}}
+          {{subscenario2?.varCostTotal}}<br>
+          {{subscenario2?.fixedCostTotal}}
         </td>
         <td>
-          {{scenario3.variableCostsTotal}} <br>
-          {{scenario3.fixedCostsTotal}}
+          {{subscenario3?.varCostTotal}} <br>
+          {{subscenario3?.fixedCostTotal}}
         </td>
       </tr>
       <tr>
@@ -464,16 +464,16 @@
           l/year
         </td>
         <td>
-          {{scenario1.assemblyCostsPerPiece}} <br>
-          {{scenario1.assemblyCostsTotal}}
+          {{subscenario1?.assemblyCostPerPiece}} <br>
+          {{subscenario1?.assemblyCosts}}
         </td>
         <td>
-          {{scenario2.assemblyCostsPerPiece}}<br>
-          {{scenario2.assemblyCostsTotal}}
+          {{subscenario2?.assemblyCostPerPiece}}<br>
+          {{subscenario2?.assemblyCosts}}
         </td>
         <td>
-          {{scenario3.assemblyCostsPerPiece}}<br>
-          {{scenario3.assemblyCostsTotal}}
+          {{subscenario3?.assemblyCostPerPiece}}<br>
+          {{subscenario3?.assemblyCosts}}
         </td>
       </tr>
     </tbody>
