@@ -16,30 +16,33 @@ import { LoaInfo } from './loa-info';
 export class AsIsLOAComponent implements OnInit {
 
   constructor(
-    private http:HttpClient,
-    private cookieService:CookieService
+    private http: HttpClient,
+    private cookieService: CookieService
   ) {}
+
+  cookie = this.cookieService
+    .getCookie('selectedSubprocess');
 
   title = 'LoA Graph';
 
-  bubbleChart:any;
+  bubbleChart: any;
 
-  analysisData:any;
+  analysisData: any;
 
   data = { datasets: [] };
 
+
   getAnalysisData() {
-    let mainProcessId = this.cookieService
-      .getCookie("selectedSubprocess").mainProcessId;
+    const mainProcessId = this.cookie.mainProcessId;
     this.analysisData = this.http
       .get(`${environment.apiUrl}/v1/process-segments/${mainProcessId}`)
       .toPromise()
       .then(
-        function createSubprocessArraySequences(process:any) {
-          var subprocessSequences = [];
-          var singleSequenceReference = [];
-          var lastLevel = 0;
-          for (let subprocess of process.subprocessLevels) {
+        function createSubprocessArraySequences(process: any) {
+          const subprocessSequences = [];
+          let singleSequenceReference = [];
+          let lastLevel = 0;
+          for (const subprocess of process.subprocessLevels) {
             if (subprocess.proLevel > lastLevel) {
               lastLevel = subprocess.proLevel;
               singleSequenceReference.push(subprocess);
@@ -55,19 +58,21 @@ export class AsIsLOAComponent implements OnInit {
       )
       .then(
         function generateLoaToLabelMap(sequences) {
-          let loaInfoPrimitiveToLabel = new Map();
-          for (let sequence of sequences) {
-            if (!sequence.loaInfo) continue; 
-            let label = ((sequence) => {
-              let label = "";
+          const loaInfoPrimitiveToLabel = new Map();
+          for (const sequence of sequences) {
+            if (!sequence.loaInfo) { continue; }
+            // tslint:disable-next-line:no-shadowed-variable
+            const label = ((sequence) => {
+              // tslint:disable-next-line:no-shadowed-variable
+              let label = '';
               sequence.forEach(element => {
-                label += element.name + " - ";
+                label += element.name + ' - ';
               });
-              return label.slice(0, label.length-3);
+              return label.slice(0, label.length - 3);
             })(sequence.subprocessArray);
             if (loaInfoPrimitiveToLabel.has(sequence.loaInfo.valueOf())) {
               let currentValue = loaInfoPrimitiveToLabel.get(sequence.loaInfo.valueOf());
-              currentValue+=` | ${label}`;
+              currentValue += ` | ${label}`;
               loaInfoPrimitiveToLabel.set(sequence.loaInfo.valueOf(), currentValue);
             } else {
               loaInfoPrimitiveToLabel.set(sequence.loaInfo.valueOf(), label);
@@ -77,7 +82,7 @@ export class AsIsLOAComponent implements OnInit {
         }
       )
       .then(
-        /* UpdateBubbleChart */(map:Map<any,any>) => {
+        /* UpdateBubbleChart */(map: Map<any, any>) => {
           map.forEach(
             (value, key) => {
               this.data.datasets.push(
@@ -136,8 +141,10 @@ export class AsIsLOAComponent implements OnInit {
     });
 
     const bubbleChart = this.bubbleChart;
-    
+
     this.getAnalysisData();
+
+    console.log(this.cookie);
 
   }
 }
