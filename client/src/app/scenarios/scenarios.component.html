@@ -77,18 +77,11 @@
       <th>Resource scenario 3</th>
     </thead>
     <tbody>
-      <tr>
-        <td>Checking, Final inspection</td>
-        <td>Manual Tool Trolley</td>
-        <td>Semi Automated Tool Trolley</td>
-        <td>Automated Tool Trolley</td>
-      </tr>
-      <tr>
-        <td>Handling,	Rear light adjustment</td>
-        <td>Manual Screw</td>
-        <td>AR Guidance Support Screw</td>
-        <td>Robot to Screw</td>
-        <td></td>
+      <tr *ngFor="let subScen of subSceList">
+        <td>{{subScen.subProc.fkTbAceSubProLev}}</td>
+        <td *ngFor="let sc1 of subScen.objList">{{sc1?.scenNumber1?.fkTbAceRes}}</td>
+        <td *ngFor="let sc2 of subScen.objList">{{sc2?.scenNumber2?.fkTbAceRes}}</td>
+        <td *ngFor="let sc3 of subScen.objList">{{sc3?.scenNumber3?.fkTbAceRes}}</td>
       </tr>
       <tr>
         <td>------</td>

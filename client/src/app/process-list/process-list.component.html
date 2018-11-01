@@ -7,7 +7,11 @@
 </div>
 <div >
   <h1 class="float-left">Process Segments List</h1>
-  <span class="float-right"> <i class="fas fa-search"></i> &nbsp;<input type="search" name="" id=""  style="margin-top: 10px" placeholder="process name"> <a href="#"> Search </a></span>
+  <span class="float-right">
+    <i class="fas fa-search"></i>&nbsp;
+    <input type="search" name="search" style="margin-top: 10px" placeholder="process name" [(ngModel)]="searchText">
+    <a (click)="populateProcessSegmentList();"> Search </a>
+  </span>
 </div>
 
 <!-- tabela -->
@@ -24,12 +28,12 @@
   </thead>
   <tbody>
     <tr *ngFor="let process of processSegmentList">
-      <td> <a routerLink="{{ process.editRoute }}"> {{ process.name }} </a> </td>
-      <td> {{ process.sublevels }} </td>
-      <td> {{ process.sub1 }} </td>
-      <td> {{ process.sub2 }} </td>
-      <td> {{ process.sub3 }} </td>
-      <td> <a routerLink="{{ process.route }}" (click)="saveAnalysisData(process.rawElementReference, process)"> {{ process.actions }} </a> </td>
+      <td> <a routerLink="{{ process?.editRoute }}"> {{ process?.name }} </a> </td>
+      <td> {{ process?.sublevels }} </td>
+      <td> {{ process?.sub1 }} </td>
+      <td> {{ process?.sub2 }} </td>
+      <td> {{ process?.sub3 }} </td>
+      <td> <a routerLink="{{ process?.route }}" (click)="saveAnalysisData(process.rawElementReference, process)"> {{ process?.actions }} </a> </td>
     </tr>
   </tbody>
 </table>

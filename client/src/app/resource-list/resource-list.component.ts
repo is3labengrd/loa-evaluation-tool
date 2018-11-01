@@ -57,9 +57,14 @@ export class ResourceListComponent implements OnInit {
 
   linkChange = false;
 
-  constructor(private http: HttpClient, private _processListService: CookieService, private assignService: AssaignService) { }
+  constructor(
+    private http: HttpClient,
+    private _processListService: CookieService,
+    private assaignService: AssaignService
+  ) { }
 
   cookie: any;
+
   ngOnInit() {
     this.updateResourceList();
     this.cookie = this._processListService.getCookie('selectedSubprocess');
@@ -89,14 +94,14 @@ export class ResourceListComponent implements OnInit {
         loaCognitive: loaCognitive
       };
 
-      this.assignService.assaignRes(data);
+      this.assaignService.assaignRes(data);
       console.log(data);
   }
 
   deassignRes(id) {
     console.log(id);
 
-    this.assignService.deassignRes(id);
+    this.assaignService.deassignRes(id);
   }
 
   resetPage() {

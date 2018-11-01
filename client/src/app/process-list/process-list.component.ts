@@ -17,8 +17,9 @@ export class ProcessListComponent implements OnInit {
   numberOfItems = 12;
   page = 0;
   lastPage = 0;
+  searchText = "";
 
-  private getPageIteratorGetter(maxNumberOfPages) {
+  private getPageIterator(maxNumberOfPages) {
     return () => {
       let i = 0;
       return {
@@ -30,9 +31,7 @@ export class ProcessListComponent implements OnInit {
     }
   }
 
-  pageIterable = {
-    [Symbol.iterator]: () => { }
-  };
+  pageIterable:any = (function *(){}());
 
   constructor(
     private http: HttpClient,
@@ -54,19 +53,27 @@ export class ProcessListComponent implements OnInit {
   }
 
   private initiateProcessSegmentListPopulationWithPagination() {
-    let subprocessLevelsSubscription: Subscription = this.http
-      .get(
-        environment.apiUrl + '/v1/process-segment-list-elements?' +
+    let url;
+    if (this.searchText.length) {
+      url = environment.apiUrl +
+        `/v1/process-segment-list-elements-like/${this.searchText}?` +
         'page=' + this.page + '&' +
         'size=' + this.numberOfItems
-      )
-      .subscribe(
+    } else {
+      url = environment.apiUrl +
+        '/v1/process-segment-list-elements?' +
+        'page=' + this.page + '&' +
+        'size=' + this.numberOfItems
+    }
+    this.http
+      .get(url)
+      .toPromise()
+      .then(
         (processSegmentListElements: any) => {
           this.pageIterable[Symbol.iterator] = this
-            .getPageIteratorGetter(processSegmentListElements.totalPages);
+            .getPageIterator(processSegmentListElements.totalPages);
           this.lastPage = processSegmentListElements.totalPages - 1;
           this.rawProcessSegmentList = processSegmentListElements.content;
-          subprocessLevelsSubscription.unsubscribe();
           this.adaptProcessSegmentList();
         }
       );
