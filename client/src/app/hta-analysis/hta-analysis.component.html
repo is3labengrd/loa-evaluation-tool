@@ -131,6 +131,12 @@
         </tr>
       </table>
     </fieldset>
+
+    <div>
+      <span class='empty' [hidden]="!errorSpan">Number field must not be empty and must not be less than 1 and greater than 7.</span>
+      <span class='perform' [hidden]="!sucsess">Operation performed.</span>
+    </div>
+
     <div class="btn-group" style="justify-content: center; width: 100%;">
       <button class="btn btn-secondary" (click)="loaInfoRequest.possibility=false">Cancel</button>
       <button class="btn btn-primary" (click)="saveLoaInfo(minLoa.value, maxLoa.value)" >Save</button>
