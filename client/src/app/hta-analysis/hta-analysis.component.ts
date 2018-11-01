@@ -218,13 +218,6 @@ export class HTAAnalysisComponent implements OnInit {
   }
 
   saveLoaInfo(min, max) {
-
-    if (min == null && max == null) {
-      console.log('ne moze');
-    } else {
-      console.log('moze');
-    }
-    
     this.http
       .put(
         environment.apiUrl + '/v1/process-loa-info/' + this.infoId,
