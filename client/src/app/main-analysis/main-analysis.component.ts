@@ -13,7 +13,7 @@ export class MainAnalysisComponent implements OnInit {
   cookie: any;
 
    ngOnInit() {
-      this.cookie = this._processListService.getCookie("selectedSubprocess");
+      this.cookie = this._processListService.getCookie('selectedSubprocess');
   }
 
 }

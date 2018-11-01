@@ -18,4 +18,9 @@ export class AssaignService {
     this.http.post(url, data).subscribe();
   }
 
+  deassignRes(id) {
+    const url = environment.apiUrl + `/v1/subprocess-level-resources/${id}`;
+
+    this.http.delete(url).subscribe();
+  }
 }
