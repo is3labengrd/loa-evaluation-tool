@@ -46,13 +46,15 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of resources">
-            <td>{{ data.name }}</td>
+            <td>{{ data.name }} {{data.id}}</td>
             <td>{{ data.loaPhysical }}</td>
             <td>{{ data.loaCognitive }}</td>
             <td>
-              <a routerLink="/edit-resource">Edit</a> 
-              <button class="btn btn-link" (click)="promena(); assignRes(data.name, data.loaPhysical, data.loaCognitive)" *ngIf="linkChange" >Assign</button>
-              <button class="btn btn-link" (click)="promena(); deassignRes(data.name);" *ngIf="!linkChange">De-Assign</button>
+              <a routerLink="/edit-resource">Edit</a> &nbsp;
+              <!-- <button class="btn btn-link" (click)="promena(); assignRes(data.name, data.loaPhysical, data.loaCognitive)" *ngIf="linkChange" >Assign</button>
+              <button class="btn btn-link" (click)="promena(); deassignRes(data.id);" *ngIf="!linkChange">De-Assign</button> -->
+              <label >Assign<input type="checkbox" name="assign" (change)="isChecked($event, data.name, data.loaPhysical, data.loaCognitive, data.id)"  style="display: none" ></label>
+              <!-- <label>De-assign<input type="checkbox" name="deassign" (change)="isChecked()" [checked]="false" style="display: none" ></label> -->
             </td>
           </tr>
         </tbody>

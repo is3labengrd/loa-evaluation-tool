@@ -3,12 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-<<<<<<< HEAD
 import { Http } from '@angular/http';
 
-=======
 import { CookieService } from '../cookie.service';
->>>>>>> c45d16f8b462d7d069b76d37871fb332cbfd1a21
 
 @Component({
   selector: 'app-resource-list',
@@ -24,51 +21,48 @@ export class ResourceListComponent implements OnInit {
     totalPages: []
   };
   searchTerm: string;
-  // resources = [];
-  resources = [
+  resources = [];
+  resources1 = [
     {
+      id: 1,
       name: 'Manual tool trolley',
       loaPhysical: 4,
       loaCognitive: 6
     },
     {
+      id: 2,
       name: 'Semi automated tool trolley',
       loaPhysical: 2,
       loaCognitive: 3
     },
     {
+      id: 3,
       name: 'Automated tool trolley',
       loaPhysical: 4,
       loaCognitive: 6
     },
     {
+      id: 4,
       name: 'Resource 4',
       loaPhysical: 1,
       loaCognitive: 1
     },
     {
+      id: 8,
       name: 'Resource 5',
       loaPhysical: 2,
       loaCognitive: 6
     }
   ];
 
-  linkChange = true;
+  linkChange = false;
 
-<<<<<<< HEAD
-  constructor(private http: Http, private assaignService: AssaignService) { }
-=======
-  constructor(private http: HttpClient, private _processListService: CookieService) { }
->>>>>>> c45d16f8b462d7d069b76d37871fb332cbfd1a21
+  constructor(private http: HttpClient, private _processListService: CookieService, private assignService: AssaignService) { }
 
   cookie: any;
   ngOnInit() {
-<<<<<<< HEAD
-    // this.updateResourceList();
-=======
     this.updateResourceList();
-    this.cookie = this._processListService.getCookie("selectedSubprocess");
->>>>>>> c45d16f8b462d7d069b76d37871fb332cbfd1a21
+    this.cookie = this._processListService.getCookie('selectedSubprocess');
   }
 
   updateResourceList() {
@@ -77,18 +71,10 @@ export class ResourceListComponent implements OnInit {
       'page=' + this.pagination.page + '&' +
       'size=' + this.pagination.size
     ).subscribe((resources: any) => {
-<<<<<<< HEAD
-        this.resources = resources.content;
-        this.pagination.lastPage = resources.totalPages - 1;
-        this.pagination.totalPages = Array(this.pagination.lastPage + 1)
-          .fill(0).map((x, y) => x + y);
-          console.log(this.resources);
-=======
       this.resources = resources.content;
       this.pagination.lastPage = resources.totalPages - 1;
       this.pagination.totalPages = Array(this.pagination.lastPage + 1)
         .fill(0).map((x, y) => x + y);
->>>>>>> c45d16f8b462d7d069b76d37871fb332cbfd1a21
     });
   }
 
@@ -103,12 +89,14 @@ export class ResourceListComponent implements OnInit {
         loaCognitive: loaCognitive
       };
 
-      this.assaignService.assaignRes(data);
+      this.assignService.assaignRes(data);
       console.log(data);
   }
 
-  deassignRes(name) {
-    console.log(name);
+  deassignRes(id) {
+    console.log(id);
+
+    this.assignService.deassignRes(id);
   }
 
   resetPage() {
@@ -121,6 +109,18 @@ export class ResourceListComponent implements OnInit {
 
   private previousPage() {
     this.pagination.page = Math.max(0, --this.pagination.page);
+  }
+
+  isChecked(e, name, loaF, loaC, id) {
+
+    if (e.target.checked) {
+      console.log('obelezeno');
+      this.assignRes(name, loaF, loaC);
+    } else {
+      console.log('neobelezeno');
+    }
+    console.log(name, loaF, loaC);
+    this.deassignRes(id);
   }
 
   promena() {
