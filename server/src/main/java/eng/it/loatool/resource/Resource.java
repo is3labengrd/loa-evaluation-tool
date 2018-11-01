@@ -28,26 +28,26 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
     @JsonProperty private Integer pkTbId;
     private String name;
-    private int loaPhysical;
-    private int loaCognitive;
-    private double lcNOperMachine;
-    private double mcAMaintCosts;
-    private float mcAMaintCostsPerc;
+    private Integer loaPhysical;
+    private Integer loaCognitive;
+    private Double lcNOperMachine;
+    private Double mcAMaintCosts;
+    private Float mcAMaintCostsPerc;
     private String rcInstSurface;
-    private double rcCostsMMonth;
-    private double idMacPurhValue;
-    private double idMacSalesValue;
-    private int idEcoUsefullLife;
-    private float icInterRate;
-    private int ecAEleConsumFun;
-    private int ecAEleConsumSb;
-    private double ecElePrice;
+    private Double rcCostsMMonth;
+    private Double idMacPurhValue;
+    private Double idMacSalesValue;
+    private Integer idEcoUsefullLife;
+    private Float icInterRate;
+    private Integer ecAEleConsumFun;
+    private Integer ecAEleConsumSb;
+    private Double ecElePrice;
     private Date createDate;
     private Date updateDate;
 
     public Resource() {}
 
-    public Resource(String name, int loaPhysical, int loaCognitive, double lcNOperMachine, double mcAMaintCosts, float mcAMaintCostsPerc, String rcInstSurface, double rcCostsMMonth, double idMacPurhValue, double idMacSalesValue, int idEcoUsefullLife, float icInterRate, int ecAEleConsumFun, int ecAEleConsumSb, double ecElePrice, Date createDate, Date updateDate) {
+    public Resource(String name, Integer loaPhysical, Integer loaCognitive, Double lcNOperMachine, Double mcAMaintCosts, Float mcAMaintCostsPerc, String rcInstSurface, Double rcCostsMMonth, Double idMacPurhValue, Double idMacSalesValue, Integer idEcoUsefullLife, Float icInterRate, Integer ecAEleConsumFun, Integer ecAEleConsumSb, Double ecElePrice, Date createDate, Date updateDate) {
         this.name = name;
         this.loaPhysical = loaPhysical;
         this.loaCognitive = loaCognitive;
@@ -86,43 +86,43 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.name = name;
     }
 
-    @Column(name = "LOA_PHYSICAL", nullable = false) public int getLoaPhysical() {
+    @Column(name = "LOA_PHYSICAL", nullable = false) public Integer getLoaPhysical() {
         return this.loaPhysical;
     }
 
-    public void setLoaPhysical(int loaPhysical) {
+    public void setLoaPhysical(Integer loaPhysical) {
         this.loaPhysical = loaPhysical;
     }
 
-    @Column(name = "LOA_COGNITIVE", nullable = false) public int getLoaCognitive() {
+    @Column(name = "LOA_COGNITIVE", nullable = false) public Integer getLoaCognitive() {
         return this.loaCognitive;
     }
 
-    public void setLoaCognitive(int loaCognitive) {
+    public void setLoaCognitive(Integer loaCognitive) {
         this.loaCognitive = loaCognitive;
     }
 
-    @Column(name = "LC_N_OPER_MACHINE", nullable = false, precision = 22, scale = 0) public double getLcNOperMachine() {
+    @Column(name = "LC_N_OPER_MACHINE", nullable = false, precision = 22, scale = 0) public Double getLcNOperMachine() {
         return this.lcNOperMachine;
     }
 
-    public void setLcNOperMachine(double lcNOperMachine) {
+    public void setLcNOperMachine(Double lcNOperMachine) {
         this.lcNOperMachine = lcNOperMachine;
     }
 
-    @Column(name = "MC_A_MAINT_COSTS", nullable = false, precision = 22, scale = 0) public double getMcAMaintCosts() {
+    @Column(name = "MC_A_MAINT_COSTS", nullable = false, precision = 22, scale = 0) public Double getMcAMaintCosts() {
         return this.mcAMaintCosts;
     }
 
-    public void setMcAMaintCosts(double mcAMaintCosts) {
+    public void setMcAMaintCosts(Double mcAMaintCosts) {
         this.mcAMaintCosts = mcAMaintCosts;
     }
 
-    @Column(name = "MC_A_MAINT_COSTS_PERC", nullable = false, precision = 12, scale = 0) public float getMcAMaintCostsPerc() {
+    @Column(name = "MC_A_MAINT_COSTS_PERC", nullable = false, precision = 12, scale = 0) public Float getMcAMaintCostsPerc() {
         return this.mcAMaintCostsPerc;
     }
 
-    public void setMcAMaintCostsPerc(float mcAMaintCostsPerc) {
+    public void setMcAMaintCostsPerc(Float mcAMaintCostsPerc) {
         this.mcAMaintCostsPerc = mcAMaintCostsPerc;
     }
 
@@ -134,67 +134,67 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.rcInstSurface = rcInstSurface;
     }
 
-    @Column(name = "RC_COSTS_M_MONTH", nullable = false, precision = 22, scale = 0) public double getRcCostsMMonth() {
+    @Column(name = "RC_COSTS_M_MONTH", nullable = false, precision = 22, scale = 0) public Double getRcCostsMMonth() {
         return this.rcCostsMMonth;
     }
 
-    public void setRcCostsMMonth(double rcCostsMMonth) {
+    public void setRcCostsMMonth(Double rcCostsMMonth) {
         this.rcCostsMMonth = rcCostsMMonth;
     }
 
-    @Column(name = "ID_MAC_PURH_VALUE", nullable = false, precision = 22, scale = 0) public double getIdMacPurhValue() {
+    @Column(name = "ID_MAC_PURH_VALUE", nullable = false, precision = 22, scale = 0) public Double getIdMacPurhValue() {
         return this.idMacPurhValue;
     }
 
-    public void setIdMacPurhValue(double idMacPurhValue) {
+    public void setIdMacPurhValue(Double idMacPurhValue) {
         this.idMacPurhValue = idMacPurhValue;
     }
 
-    @Column(name = "ID_MAC_SALES_VALUE", nullable = false, precision = 22, scale = 0) public double getIdMacSalesValue() {
+    @Column(name = "ID_MAC_SALES_VALUE", nullable = false, precision = 22, scale = 0) public Double getIdMacSalesValue() {
         return this.idMacSalesValue;
     }
 
-    public void setIdMacSalesValue(double idMacSalesValue) {
+    public void setIdMacSalesValue(Double idMacSalesValue) {
         this.idMacSalesValue = idMacSalesValue;
     }
 
-    @Column(name = "ID_ECO_USEFULL_LIFE", nullable = false) public int getIdEcoUsefullLife() {
+    @Column(name = "ID_ECO_USEFULL_LIFE", nullable = false) public Integer getIdEcoUsefullLife() {
         return this.idEcoUsefullLife;
     }
 
-    public void setIdEcoUsefullLife(int idEcoUsefullLife) {
+    public void setIdEcoUsefullLife(Integer idEcoUsefullLife) {
         this.idEcoUsefullLife = idEcoUsefullLife;
     }
 
-    @Column(name = "IC_INTER_RATE", nullable = false, precision = 12, scale = 0) public float getIcInterRate() {
+    @Column(name = "IC_INTER_RATE", nullable = false, precision = 12, scale = 0) public Float getIcInterRate() {
         return this.icInterRate;
     }
 
-    public void setIcInterRate(float icInterRate) {
+    public void setIcInterRate(Float icInterRate) {
         this.icInterRate = icInterRate;
     }
 
-    @Column(name = "EC_A_ELE_CONSUM_FUN", nullable = false) public int getEcAEleConsumFun() {
+    @Column(name = "EC_A_ELE_CONSUM_FUN", nullable = false) public Integer getEcAEleConsumFun() {
         return this.ecAEleConsumFun;
     }
 
-    public void setEcAEleConsumFun(int ecAEleConsumFun) {
+    public void setEcAEleConsumFun(Integer ecAEleConsumFun) {
         this.ecAEleConsumFun = ecAEleConsumFun;
     }
 
-    @Column(name = "EC_A_ELE_CONSUM_SB", nullable = false) public int getEcAEleConsumSb() {
+    @Column(name = "EC_A_ELE_CONSUM_SB", nullable = false) public Integer getEcAEleConsumSb() {
         return this.ecAEleConsumSb;
     }
 
-    public void setEcAEleConsumSb(int ecAEleConsumSb) {
+    public void setEcAEleConsumSb(Integer ecAEleConsumSb) {
         this.ecAEleConsumSb = ecAEleConsumSb;
     }
 
-    @Column(name = "EC_ELE_PRICE", nullable = false, precision = 22, scale = 0) public double getEcElePrice() {
+    @Column(name = "EC_ELE_PRICE", nullable = false, precision = 22, scale = 0) public Double getEcElePrice() {
         return this.ecElePrice;
     }
 
-    public void setEcElePrice(double ecElePrice) {
+    public void setEcElePrice(Double ecElePrice) {
         this.ecElePrice = ecElePrice;
     }
 

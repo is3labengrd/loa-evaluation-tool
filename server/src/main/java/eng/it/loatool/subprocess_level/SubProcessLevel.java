@@ -26,9 +26,9 @@ import eng.it.loatool.process_loa_info.ProcessLOAInformation;
 ) public class SubProcessLevel implements java.io.Serializable {
 
     private Integer pkTbId;
-    private int fkTbAceProSeq;
+    private Integer fkTbAceProSeq;
     private String name;
-    private int proLevel;
+    private Integer proLevel;
     private String varProSeqId;
     private ProcessLOAInformation loaInfo;
     private Date createDate;
@@ -36,7 +36,7 @@ import eng.it.loatool.process_loa_info.ProcessLOAInformation;
 
     public SubProcessLevel() {}
 
-    public SubProcessLevel(int fkTbAceProSeq, String name, int proLevel, String varProSeqId, Date createDate, Date udpateDate) {
+    public SubProcessLevel(Integer fkTbAceProSeq, String name, Integer proLevel, String varProSeqId, Date createDate, Date udpateDate) {
         this.fkTbAceProSeq = fkTbAceProSeq;
         this.name = name;
         this.proLevel = proLevel;
@@ -56,11 +56,11 @@ import eng.it.loatool.process_loa_info.ProcessLOAInformation;
     }
 
     @Column(name = "FK_TB_ACE_PRO_SEQ", nullable = false)
-    public int getFkTbAceProSeq() {
+    public Integer getFkTbAceProSeq() {
         return this.fkTbAceProSeq;
     }
 
-    public void setFkTbAceProSeq(int fkTbAceProSeq) {
+    public void setFkTbAceProSeq(Integer fkTbAceProSeq) {
         this.fkTbAceProSeq = fkTbAceProSeq;
     }
 
@@ -72,11 +72,11 @@ import eng.it.loatool.process_loa_info.ProcessLOAInformation;
         this.name = name;
     }
 
-    @Column(name = "PRO_LEVEL", nullable = false) public int getProLevel() {
+    @Column(name = "PRO_LEVEL", nullable = false) public Integer getProLevel() {
         return this.proLevel;
     }
 
-    public void setProLevel(int proLevel) {
+    public void setProLevel(Integer proLevel) {
         this.proLevel = proLevel;
     }
 
