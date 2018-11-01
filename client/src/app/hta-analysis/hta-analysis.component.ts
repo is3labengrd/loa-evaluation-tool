@@ -114,14 +114,14 @@ export class HTAAnalysisComponent implements OnInit {
               throw 'Invalid parameter';
             }
             obj.bestRange = obj.bestRange
-              .replace(/^(\d+)/, value);
+              .replace(/^(\d+)/, Number(value).toString());
             return value;
           case 'bestRangeMax':
             if (Number.isNaN(Number(value))) {
               throw 'Invalid parameter';
             }
             obj.bestRange = obj.bestRange
-              .replace(/(\d+)$/, value);
+              .replace(/(\d+)$/, Number(value).toString());
             return value;
           case 'bestRange':
             if (/^(\d+)-(\d+)$/.test(value)) {
