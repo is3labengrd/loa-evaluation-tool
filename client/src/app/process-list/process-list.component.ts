@@ -19,7 +19,7 @@ export class ProcessListComponent implements OnInit {
   lastPage = 0;
   searchText = "";
 
-  private getPageIteratorGetter(maxNumberOfPages) {
+  private getPageIterator(maxNumberOfPages) {
     return () => {
       let i = 0;
       return {
@@ -71,7 +71,7 @@ export class ProcessListComponent implements OnInit {
       .then(
         (processSegmentListElements: any) => {
           this.pageIterable[Symbol.iterator] = this
-            .getPageIteratorGetter(processSegmentListElements.totalPages);
+            .getPageIterator(processSegmentListElements.totalPages);
           this.lastPage = processSegmentListElements.totalPages - 1;
           this.rawProcessSegmentList = processSegmentListElements.content;
           this.adaptProcessSegmentList();
