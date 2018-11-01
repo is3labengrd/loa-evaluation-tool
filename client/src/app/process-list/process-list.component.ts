@@ -31,18 +31,9 @@ export class ProcessListComponent implements OnInit {
     }
   }
 
-  pageIterable = {
-    [Symbol.iterator]: () => {
-      return {
-        next () {
-          return {
-            value: undefined,
-            done: true
-          }
-        }
-      }
-    }
-  };
+  pageIterable:any = (function * () {
+    return;
+  }());
 
   constructor(
     private http: HttpClient,
