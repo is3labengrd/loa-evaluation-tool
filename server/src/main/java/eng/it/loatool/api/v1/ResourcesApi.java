@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
+import eng.it.loatool.resource.GetResourceListItemService;
 import eng.it.loatool.resource.Resource;
 import eng.it.loatool.resource.ResourceRepository;
 
@@ -25,6 +26,17 @@ public class ResourcesApi {
     ) {
         return ResponseEntityTransformer.transformOk(
             generalCRUDService.getAll(resourceRepository, page, size)
+        );
+    }
+
+    @GetMapping("/v1/resource-items-by-subprocess-id/{id}")
+    public ResponseEntity<?> getResourceItemsByResourceId(
+        @PathVariable("id") Integer id,
+        @RequestParam(value="page", defaultValue="-1") int page,
+        @RequestParam(value="size", defaultValue="-1") int size
+    ) {
+        return ResponseEntityTransformer.transformOk(
+            getResourceListItemService.getAllBySubprocessId(id, page, size)
         );
     }
 
@@ -52,6 +64,7 @@ public class ResourcesApi {
         );
     }
 
+    @Autowired private GetResourceListItemService getResourceListItemService;
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private ResourceRepository resourceRepository;
 
