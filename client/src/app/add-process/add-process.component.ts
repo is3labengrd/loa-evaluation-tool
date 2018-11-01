@@ -13,39 +13,39 @@ styleUrls: ['./add-process.component.css']
 })
 export class AddProcessComponent implements OnInit {
 
-processSegmentList:Array<any> = [];
-mainProcess:Array<any> = [];
-subL1:Array<any> = [];
-subL2:Array<any> = [];
-subL3:Array<any> = [];
-lvl1selection:any;
-lvl2selection:any;
-lvl3selection:any;
+processSegmentList: Array<any> = [];
+mainProcess: Array<any> = [];
+subL1: Array<any> = [];
+subL2: Array<any> = [];
+subL3: Array<any> = [];
+lvl1selection: any;
+lvl2selection: any;
+lvl3selection: any;
 private _values1 = [];
 private _values2 = [];
 private _values3 = [];
-id:number;
-lowerLevel:any;
-pks:Array<any> = [];
+id: number;
+lowerLevel: any;
+pks: Array<any> = [];
 cookie: any;
 
 constructor(
   private http: HttpClient,
   public router: Router,
-  private route:ActivatedRoute,
+  private route: ActivatedRoute,
   private zone: NgZone,
   private _processListService: CookieService
 ) {}
 
 ngOnInit() {
-  this.cookie = this._processListService.getCookie("selectedSubprocess");
+  this.cookie = this._processListService.getCookie('selectedSubprocess');
   this.id  = this.route.snapshot.params['id'];
 
   return this.http
-    .get(environment.apiUrl + '/v1/process-segments/'+this.id)
+    .get(environment.apiUrl + '/v1/process-segments/' + this.id)
     .toPromise()
     .then(
-      (main:any) => {
+      (main: any) => {
           this.mainProcess.push(main);
           this.fetchFromCAM(main);
       }
@@ -58,12 +58,12 @@ fetchFromCAM(mainP) {
     .get(environment.apiUrl + '/v1/var/process-segments')
     .toPromise()
     .then(
-      (processSegments:Array<any>) => {
+      (processSegments: Array<any>) => {
         this.processSegmentList.push(processSegments);
         this._values1.push(this.subProcessL1(mainP.name));
-        this.lowerLevel = this.findObj(this.processSegmentList[0],this.mainProcess[0].name);
+        this.lowerLevel = this.findObj(this.processSegmentList[0], this.mainProcess[0].name);
       }
-    )
+    );
 }
 
 findObj(obj: any, name: any){
@@ -90,48 +90,48 @@ addProSecOrdered() {
 
  const addProSecOrderedUrl = environment.apiUrl + '/v1/process-segment-list-elements';
 
- return this.http.post(addProSecOrderedUrl, {"fkTbAceProSeq": this.id , "fkTbAceSubProLev1": this.pks[0], "fkTbAceSubProLev2": this.pks[1],"fkTbAceSubProLev3": this.pks[2]})
+ return this.http.post(addProSecOrderedUrl, {'fkTbAceProSeq': this.id , 'fkTbAceSubProLev1': this.pks[0], 'fkTbAceSubProLev2': this.pks[1], 'fkTbAceSubProLev3': this.pks[2]})
         .toPromise()
-        .then((res:any) => {
+        .then((res: any) => {
             if (res.pkTbId != null) {
             }
           },
           (err) => alert('Something went wrong. \nStatus: ' +  err.error.status)
-        )
+        );
 }
 
 addSubProcessL1(pkTbId) {
 
 const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
-return this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl1selection.name,"varProSeqId": this.lvl1selection.processSegmentId, "proLevel": this.lvl1selection.level})
+return this.http.post(subProcUrl, {'fkTbAceProSeq': pkTbId, 'name': this.lvl1selection.name, 'varProSeqId': this.lvl1selection.processSegmentId, 'proLevel': this.lvl1selection.level})
   .toPromise()
-  .then((res:any) => {
+  .then((res: any) => {
     if (res.pkTbId != null) {
       this.pks.push(res.pkTbId);
-      var response = this.addSubProcessL2(res.pkTbId);
+      let response = this.addSubProcessL2(res.pkTbId);
       response.then((x) => {
         alert('Process segment added');
         this.router.navigate(['process-list']);
         });
       }
     },
-    (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);}
-  )
+    (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status); }
+  );
 }
 
 addSubProcessL2(pkTbId) {
   const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
-if(this.lvl2selection != null){
-  return this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl2selection.name,"varProSeqId": this.lvl2selection.processSegmentId, "proLevel": this.lvl2selection.level})
+if (this.lvl2selection != null){
+  return this.http.post(subProcUrl, {'fkTbAceProSeq': pkTbId, 'name': this.lvl2selection.name, 'varProSeqId': this.lvl2selection.processSegmentId, 'proLevel': this.lvl2selection.level})
        .toPromise()
-       .then((res:any) => {
+       .then((res: any) => {
         if (res.pkTbId != null) {
           this.pks.push(res.pkTbId);
-          var promise2 = this.addSubProcessL3(res.pkTbId);
+          let promise2 = this.addSubProcessL3(res.pkTbId);
           promise2.then((x) => {this.addProSecOrdered()});
           }
         },
-          (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);})} else{
+          (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status); })} else{
              this.addProSecOrdered();
              return Promise.resolve();
            }
@@ -140,37 +140,37 @@ if(this.lvl2selection != null){
 addSubProcessL3(pkTbId) {
 const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
 
-if(this.lvl3selection != null){
-  return this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl3selection.name,"varProSeqId": this.lvl3selection.processSegmentId, "proLevel": this.lvl3selection.level})
+if (this.lvl3selection != null){
+  return this.http.post(subProcUrl, {'fkTbAceProSeq': pkTbId, 'name': this.lvl3selection.name, 'varProSeqId': this.lvl3selection.processSegmentId, 'proLevel': this.lvl3selection.level})
          .toPromise()
-         .then((res:any) => {
+         .then((res: any) => {
            if (res.pkTbId != null) {
               this.pks.push(res.pkTbId);
            }
        },
-   (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);})}
- else{
+   (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status); });
+  } else {
    return Promise.resolve();
  }
 }
 
 firstDropDownChanged(val: any) {
  const obj = this._values1[0];
- if (!obj) return;
- this._values2 = this.subProcessL2(this.mainProcess[0].name,obj[val].name);
+ if (!obj) { return; }
+ this._values2 = this.subProcessL2(this.mainProcess[0].name, obj[val].name);
  this.lvl1selection = obj[val];
 }
 
  secondDropDownChanged(val2: any) {
   const obj2 = this._values2;
-  if (!obj2) return;
-  this._values3 = this.subProcessL3(this.mainProcess[0].name,this.lvl1selection.name,obj2[val2].name);
+  if (!obj2) { return; }
+  this._values3 = this.subProcessL3(this.mainProcess[0].name, this.lvl1selection.name, obj2[val2].name);
   this.lvl2selection = obj2[val2];
 }
 
 thirdDropDownChanged(val3: any) {
  const obj3 = this._values3;
- if (!obj3) return;
+ if (!obj3) { return; }
  this.lvl3selection = obj3[val3];
 }
 
@@ -186,7 +186,7 @@ subProcessL1(mainProc){
    return this.subL1;
 }
 
- subProcessL2(mainProc,subProcessL1){
+ subProcessL2(mainProc, subProcessL1){
    this.subL2 = [];
      for (let entry of this.processSegmentList[0]) {
        if (mainProc === entry.name){
@@ -202,7 +202,7 @@ subProcessL1(mainProc){
      return this.subL2;
 }
 
-subProcessL3(mainProc,subProcessL1,subProcessL2){
+subProcessL3(mainProc, subProcessL1, subProcessL2){
  this.subL3 = [];
    for (let entry of this.processSegmentList[0]) {
      if (mainProc === entry.name){
