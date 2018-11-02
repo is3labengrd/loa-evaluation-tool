@@ -15,7 +15,7 @@ import { CookieService } from '../cookie.service';
 export class ResourceListComponent implements OnInit {
 
   pagination = {
-    size: 1,
+    size: 12,
     page: 0,
     lastPage: 0,
     totalPages: []
@@ -63,16 +63,18 @@ export class ResourceListComponent implements OnInit {
     private assaignService: AssaignService
   ) { }
 
-  cookie: any;
+  selectedSubprocess: any;
 
   ngOnInit() {
+    this.selectedSubprocess = this._processListService.getCookie('selectedSubprocess');
     this.updateResourceList();
-    this.cookie = this._processListService.getCookie('selectedSubprocess');
   }
 
   updateResourceList() {
     this.http.get(
-      environment.apiUrl + '/v1/resources?' +
+      environment.apiUrl +
+      '/v1/resource-items-by-subprocess-id/' +
+      this.selectedSubprocess[`level${this.selectedSubprocess.maxDepth}`].id + "?" +
       'page=' + this.pagination.page + '&' +
       'size=' + this.pagination.size
     ).subscribe((resources: any) => {

@@ -52,10 +52,14 @@
         <td>{{ data.loaPhysical }}</td>
         <td>{{ data.loaCognitive }}</td>
         <td>
-          <a routerLink="/edit-resource">Edit</a>
-          <button class="btn btn-link" (click)="promena(); assignRes(data.name, data.loaPhysical, data.loaCognitive)"
-            *ngIf="linkChange">Assign</button>
-          <button class="btn btn-link" (click)="promena(); deassignRes(data.name);" *ngIf="!linkChange">De-Assign</button>
+          <ng-template [ngIf]="data.assigned" [ngIfElse]="assign">
+            <a routerLink="edit-resource">Edit</a>
+            -
+            <a>De-assign</a>
+          </ng-template>
+          <ng-template #assign>
+            <a>Assign</a>
+          </ng-template>
         </td>
       </tr>
     </tbody>
@@ -65,9 +69,9 @@
   <div class="row">
     <div class="col-md-5 col-sm-12">
       <select name="numberOfItems" [(ngModel)]="pagination.size" (change)="pagination.page=0; updateResourceList();">
-        <option value="1">1 items per page</option>
         <option value="5">5 items per page</option>
         <option value="9">9 items per page</option>
+        <option value="12">12 items per page</option>
       </select> &nbsp;
       <select name="pageNumber" [(ngModel)]="pagination.page" (change)="updateResourceList();">
         <option *ngFor="let page of pagination.totalPages" value="{{page}}">Page {{ page + 1 }} of {{
