@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ResourceRepository extends PagingAndSortingRepository<Resource, Integer> {
 
-    @Query(
+    final static String getResourceItemsBySubprocessIdQuery = (
         " select new eng.it.loatool.resource.ResourceListItem(" +
         "    resource," +
         "    cast( coalesce(sign(subProcessLevelResource.pkTbId),0) as boolean)," +
@@ -23,23 +23,29 @@ public interface ResourceRepository extends PagingAndSortingRepository<Resource,
         " on" +
         "    subProcessLevelResource.resource.pkTbId=resource.pkTbId and" +
         "    subProcessLevelResource.subprocessLevel.pkTbId=:subprocessLevelId"
-    )
+    );
+
+    final static String getResourceItemsBySubprocessIdAndResourceSearchTermQuery = (
+        getResourceItemsBySubprocessIdQuery + " where lower(resource.name) like lower(concat('%', :namePiece,'%'))"
+    );
+
+    @Query(getResourceItemsBySubprocessIdQuery)
     Page<ResourceListItem> getResourceItemsBySubprocessId(@Param("subprocessLevelId") Integer subprocessLevelId, Pageable pageable);
 
-    @Query(
-        " select new eng.it.loatool.resource.ResourceListItem(" +
-        "    resource," +
-        "    cast( coalesce(sign(subProcessLevelResource.pkTbId),0) as boolean)," +
-        "    subProcessLevelResource.pkTbId" +
-        " )" +
-        " from" +
-        "    Resource resource" +
-        " left join" +
-        "    SubProcessLevelResource subProcessLevelResource" +
-        " on" +
-        "    subProcessLevelResource.resource.pkTbId=resource.pkTbId and" +
-        "    subProcessLevelResource.subprocessLevel.pkTbId=:subprocessLevelId"
-    )
+    @Query(getResourceItemsBySubprocessIdQuery)
     Iterable<ResourceListItem> getResourceItemsBySubprocessId(@Param("subprocessLevelId") Integer subprocessLevelId);
+
+    @Query(getResourceItemsBySubprocessIdAndResourceSearchTermQuery)
+    Page<ResourceListItem> getResourceItemsBySubprocessIdAndResourceSearchTerm(
+        @Param("subprocessLevelId") Integer subprocessLevelId,
+        @Param("namePiece") String namePiece,
+        Pageable pageable
+    );
+
+    @Query(getResourceItemsBySubprocessIdAndResourceSearchTermQuery)
+    Iterable<ResourceListItem> getResourceItemsBySubprocessIdAndResourceSearchTerm(
+        @Param("subprocessLevelId") Integer subprocessLevelId,
+        @Param("namePiece") String namePiece
+    );
 
 }

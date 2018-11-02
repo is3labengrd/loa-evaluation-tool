@@ -17,6 +17,16 @@ public class GetResourceListItemService {
         return resourceRepository.getResourceItemsBySubprocessId(subprocessLevelId, PageRequest.of(page, size));
     }
 
+    @Transactional
+    public Iterable getAllBySubprocessIdAndResourceSearchTerm(int subprocessLevelId, String namePiece, int page, int size) {
+        if (page < 0 || size < 1) {
+            return resourceRepository
+                .getResourceItemsBySubprocessIdAndResourceSearchTerm(subprocessLevelId, namePiece);
+        }
+        return resourceRepository
+            .getResourceItemsBySubprocessIdAndResourceSearchTerm(subprocessLevelId, namePiece, PageRequest.of(page, size));
+    }
+
     @Autowired private ResourceRepository resourceRepository;
 
 }

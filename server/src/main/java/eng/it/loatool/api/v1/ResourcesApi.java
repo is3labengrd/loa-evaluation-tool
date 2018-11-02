@@ -40,6 +40,19 @@ public class ResourcesApi {
         );
     }
 
+    @GetMapping("/v1/resource-items-by-subprocess-id/{id}/like/{searchTerm}")
+    public ResponseEntity<?> getResourceItemsByResourceId(
+        @PathVariable("id") Integer id,
+        @PathVariable("searchTerm") String searchTerm,
+        @RequestParam(value="page", defaultValue="-1") int page,
+        @RequestParam(value="size", defaultValue="-1") int size
+    ) {
+        return ResponseEntityTransformer.transformOk(
+            getResourceListItemService
+                .getAllBySubprocessIdAndResourceSearchTerm(id, searchTerm, page, size)
+        );
+    }
+
     @GetMapping("/v1/resources/{id}")
     public ResponseEntity<?> getResource(@PathVariable("id") Integer id) {
         return ResponseEntityTransformer.transform(
