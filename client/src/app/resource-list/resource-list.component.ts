@@ -22,40 +22,6 @@ export class ResourceListComponent implements OnInit {
   };
   searchTerm: string;
   resources = [];
-  resources1 = [
-    {
-      id: 1,
-      name: 'Manual tool trolley',
-      loaPhysical: 4,
-      loaCognitive: 6
-    },
-    {
-      id: 2,
-      name: 'Semi automated tool trolley',
-      loaPhysical: 2,
-      loaCognitive: 3
-    },
-    {
-      id: 3,
-      name: 'Automated tool trolley',
-      loaPhysical: 4,
-      loaCognitive: 6
-    },
-    {
-      id: 4,
-      name: 'Resource 4',
-      loaPhysical: 1,
-      loaCognitive: 1
-    },
-    {
-      id: 8,
-      name: 'Resource 5',
-      loaPhysical: 2,
-      loaCognitive: 6
-    }
-  ];
-
-  linkChange = false;
 
   constructor(
     private http: HttpClient,
@@ -85,27 +51,6 @@ export class ResourceListComponent implements OnInit {
     });
   }
 
-  assignRes(
-    name: string,
-    loaPhysical: number,
-    loaCognitive: number
-  ) {
-      const data = {
-        name: name,
-        loaPhysical: loaPhysical,
-        loaCognitive: loaCognitive
-      };
-
-      this.assaignService.assaignRes(data);
-      console.log(data);
-  }
-
-  deassignRes(id) {
-    console.log(id);
-
-    this.assaignService.deassignRes(id);
-  }
-
   resetPage() {
     this.pagination.page = 0;
   }
@@ -117,28 +62,5 @@ export class ResourceListComponent implements OnInit {
   private previousPage() {
     this.pagination.page = Math.max(0, --this.pagination.page);
   }
-
-  isChecked(e, name, loaF, loaC, id) {
-
-    if (e.target.checked) {
-      console.log('obelezeno');
-      this.assignRes(name, loaF, loaC);
-    } else {
-      console.log('neobelezeno');
-    }
-    console.log(name, loaF, loaC);
-    this.deassignRes(id);
-  }
-
-  promena() {
-    this.linkChange = !this.linkChange;
-    console.log(this.linkChange);
-    if (this.linkChange === false) {
-      alert('Assign successful!');
-    } else {
-      alert('Deassaign successful!');
-    }
-  }
-
 
 }
