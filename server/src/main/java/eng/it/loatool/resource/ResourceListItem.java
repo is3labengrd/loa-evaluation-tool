@@ -7,6 +7,12 @@ public class ResourceListItem {
     private Integer loaPhysical;
     private Integer loaCognitive;
     private Boolean assigned;
+    private Integer assignmentId;
+
+    public ResourceListItem(Resource item, Boolean assigned, Integer assignmentId) {
+        this(item, assigned);
+        this.assignmentId = assignmentId;
+    }
 
     public ResourceListItem(Resource item, Boolean assigned) {
         super();
@@ -37,6 +43,10 @@ public class ResourceListItem {
 
     public Boolean getAssigned() {
         return assigned;
+    }
+
+    public Integer getAssignmentId() {
+        return assignmentId;
     }
 
 }

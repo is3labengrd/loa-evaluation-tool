@@ -47,18 +47,18 @@
       </th>
     </thead>
     <tbody>
-      <tr *ngFor="let data of resources">
-        <td>{{ data.name }}</td>
-        <td>{{ data.loaPhysical }}</td>
-        <td>{{ data.loaCognitive }}</td>
+      <tr *ngFor="let resource of resources">
+        <td>{{ resource.name }}</td>
+        <td>{{ resource.loaPhysical }}</td>
+        <td>{{ resource.loaCognitive }}</td>
         <td>
-          <ng-template [ngIf]="data.assigned" [ngIfElse]="assign">
+          <ng-template [ngIf]="resource.assigned" [ngIfElse]="assignBlock">
             <a routerLink="/edit-resource">Edit</a>
             -
-            <a>De-assign</a>
+            <a (click)="deassign(resource).then(updateResourceList);">De-assign</a>
           </ng-template>
-          <ng-template #assign>
-            <a>Assign</a>
+          <ng-template #assignBlock>
+            <a (click)="assign(resource).then(updateResourceList);">Assign</a>
           </ng-template>
         </td>
       </tr>

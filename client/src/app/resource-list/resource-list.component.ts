@@ -20,6 +20,19 @@ export class ResourceListComponent implements OnInit {
     lastPage: 0,
     totalPages: []
   };
+
+  resetPage() {
+    this.pagination.page = 0;
+  }
+
+  private nextPage() {
+    this.pagination.page = Math.min(this.pagination.lastPage, ++this.pagination.page);
+  }
+
+  private previousPage() {
+    this.pagination.page = Math.max(0, --this.pagination.page);
+  }
+
   searchTerm: string;
   resources = [];
 
@@ -36,7 +49,7 @@ export class ResourceListComponent implements OnInit {
     this.updateResourceList();
   }
 
-  updateResourceList() {
+  updateResourceList = (function () {
     this.http.get(
       environment.apiUrl +
       '/v1/resource-items-by-subprocess-id/' +
@@ -49,18 +62,27 @@ export class ResourceListComponent implements OnInit {
       this.pagination.totalPages = Array(this.pagination.lastPage + 1)
         .fill(0).map((x, y) => x + y);
     });
-  }
+  }).bind(this);
 
-  resetPage() {
-    this.pagination.page = 0;
-  }
+  assign = (function (resource) {
+    let subProcessLevelId = this
+      .selectedSubprocess[
+        `level${this.selectedSubprocess.maxDepth}`
+      ].id;
+    return this.http.post(
+      `${environment.apiUrl}/v1/subprocess-level-resources`,
+      {
+        "fkTbAceRes": resource.resourceId,
+        "fkTbAceSubProLev": subProcessLevelId
+      }
+    ).toPromise();
+  }).bind(this);
 
-  private nextPage() {
-    this.pagination.page = Math.min(this.pagination.lastPage, ++this.pagination.page);
-  }
-
-  private previousPage() {
-    this.pagination.page = Math.max(0, --this.pagination.page);
-  }
+  deassign = (function (resource) {
+    return this.http
+      .delete(
+        `${environment.apiUrl}/v1/subprocess-level-resources/${resource.assignmentId}`
+      ).toPromise();
+  }).bind(this);
 
 }

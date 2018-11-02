@@ -13,7 +13,8 @@ public interface ResourceRepository extends PagingAndSortingRepository<Resource,
     @Query(
         " select new eng.it.loatool.resource.ResourceListItem(" +
         "    resource," +
-        "    cast( coalesce(sign(subProcessLevelResource.pkTbId),0) as boolean)" +
+        "    cast( coalesce(sign(subProcessLevelResource.pkTbId),0) as boolean)," +
+        "    subProcessLevelResource.pkTbId" +
         " )" +
         " from" +
         "    Resource resource" +
@@ -28,7 +29,8 @@ public interface ResourceRepository extends PagingAndSortingRepository<Resource,
     @Query(
         " select new eng.it.loatool.resource.ResourceListItem(" +
         "    resource," +
-        "    cast( coalesce(sign(subProcessLevelResource.pkTbId),0) as boolean)" +
+        "    cast( coalesce(sign(subProcessLevelResource.pkTbId),0) as boolean)," +
+        "    subProcessLevelResource.pkTbId" +
         " )" +
         " from" +
         "    Resource resource" +
