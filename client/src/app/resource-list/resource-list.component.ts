@@ -33,7 +33,7 @@ export class ResourceListComponent implements OnInit {
     this.pagination.page = Math.max(0, --this.pagination.page);
   }
 
-  searchTerm: string;
+  searchTerm:string = "";
   resources = [];
 
   constructor(
@@ -49,22 +49,29 @@ export class ResourceListComponent implements OnInit {
     this.updateResourceList();
   }
 
-  updateResourceList = (function () {
-    this.http.get(
-      environment.apiUrl +
-      '/v1/resource-items-by-subprocess-id/' +
-      this.selectedSubprocess[`level${this.selectedSubprocess.maxDepth}`].id + "?" +
+  updateResourceList = () => {
+    let subProcessId = this
+      .selectedSubprocess[`level${this.selectedSubprocess.maxDepth}`].id;
+    let url = this.searchTerm.length?
+      `${environment.apiUrl}/v1/resource-items-by-subprocess-id/${subProcessId}` +
+      `/like/${this.searchTerm}?` +
       'page=' + this.pagination.page + '&' +
       'size=' + this.pagination.size
-    ).subscribe((resources: any) => {
+    :
+      `${environment.apiUrl}/v1/resource-items-by-subprocess-id/${subProcessId}?` +
+      'page=' + this.pagination.page + '&' +
+      'size=' + this.pagination.size
+    ;
+    this.http.get(url)
+    .subscribe((resources: any) => {
       this.resources = resources.content;
       this.pagination.lastPage = resources.totalPages - 1;
       this.pagination.totalPages = Array(this.pagination.lastPage + 1)
         .fill(0).map((x, y) => x + y);
     });
-  }).bind(this);
+  };
 
-  assign = (function (resource) {
+  assign = (resource) => {
     let subProcessLevelId = this
       .selectedSubprocess[
         `level${this.selectedSubprocess.maxDepth}`
@@ -76,13 +83,13 @@ export class ResourceListComponent implements OnInit {
         "fkTbAceSubProLev": subProcessLevelId
       }
     ).toPromise();
-  }).bind(this);
+  };
 
-  deassign = (function (resource) {
+  deassign = (resource) => {
     return this.http
       .delete(
         `${environment.apiUrl}/v1/subprocess-level-resources/${resource.assignmentId}`
       ).toPromise();
-  }).bind(this);
+  };
 
 }

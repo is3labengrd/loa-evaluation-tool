@@ -26,7 +26,8 @@
   <div>
     <h1>Process List Resources</h1>
     <span class="float-right"> <i class="fas fa-search"></i> &nbsp;
-      <input type="search" [(ngModel)]="searchTerm" style="margin-top: 10px" placeholder="resource name"> Search
+      <input type="search" [(ngModel)]="searchTerm" style="margin-top: 10px" placeholder="resource name">
+      <span (click)="updateResourceList()">Search</span>
     </span>
   </div>
 
