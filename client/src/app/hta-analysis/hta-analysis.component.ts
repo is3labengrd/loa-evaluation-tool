@@ -111,6 +111,7 @@ export class HTAAnalysisComponent implements OnInit {
         switch (prop) {
           case 'bestRangeMin':
             if (Number.isNaN(Number(value))) {
+              // tslint:disable-next-line:no-string-throw
               throw 'Invalid parameter';
             }
             obj.bestRange = obj.bestRange
@@ -118,6 +119,7 @@ export class HTAAnalysisComponent implements OnInit {
             return value;
           case 'bestRangeMax':
             if (Number.isNaN(Number(value))) {
+              // tslint:disable-next-line:no-string-throw
               throw 'Invalid parameter';
             }
             obj.bestRange = obj.bestRange

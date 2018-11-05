@@ -1,4 +1,4 @@
-package eng.it.loatool.subprocess_level_resource;
+package eng.it.loatool.subscenario;
 
 import java.util.Optional;
 
@@ -13,18 +13,18 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
 import eng.it.loatool.subprocess_level.SubProcessLevelRepository;
 
 @Service
-public class PersistSubProcessLevelResourceService {
+public class PersistSubScenarioService {
 
     @Transactional
     public Optional create(
-        SubProcessLevelResource entity
+        SubScenario entity
     ) {
         if (
             entity.getPrimaryKey() == null ||
-            !subProcessLevelResourceRepository.existsById(entity.getPkTbId())
+            !subScenarioRepository.existsById(entity.getPkTbId())
         ) {
             entity = manageRelatedObjects(entity);
-            return Optional.of(subProcessLevelResourceRepository.save(entity));
+            return Optional.of(subScenarioRepository.save(entity));
         }
         return Optional.empty();
     }
@@ -32,28 +32,28 @@ public class PersistSubProcessLevelResourceService {
     @Transactional
     public Optional update(
         Integer primaryKey,
-        SubProcessLevelResource entity
+        SubScenario entity
     ) {
         entity.setPrimaryKey(primaryKey);
         entity = manageRelatedObjects(entity);
-        if (primaryKey == null || !subProcessLevelResourceRepository.existsById(primaryKey)) {
+        if (primaryKey == null || !subScenarioRepository.existsById(primaryKey)) {
             return Optional.empty();
         }
-        return Optional.of(subProcessLevelResourceRepository.save(entity));
+        return Optional.of(subScenarioRepository.save(entity));
     }
 
-    private SubProcessLevelResource manageRelatedObjects(SubProcessLevelResource element) {
+    private SubScenario manageRelatedObjects(SubScenario entity) {
         Optional<SubProcessLevel> subprocessMaybe = subProcessLevelRepository
-            .findById(zeroIfNull(element.getFkTbAceSubProLev()));
+            .findById(zeroIfNull(entity.getFkTbAceSubProLev()));
         Optional<Resource> resourceMaybe = resourceRepository
-            .findById(zeroIfNull(element.getFkTbAceRes()));
+            .findById(zeroIfNull(entity.getFkTbAceRes()));
         if (subprocessMaybe.isPresent()) {
-            element.setSubprocessLevel(subprocessMaybe.get());
+            entity.setSubprocessLevel(subprocessMaybe.get());
         }
         if (resourceMaybe.isPresent()) {
-            element.setResource(resourceMaybe.get());
+            entity.setResource(resourceMaybe.get());
         }
-        return element;
+        return entity;
     }
 
     private Integer zeroIfNull(Integer x) {
@@ -63,7 +63,7 @@ public class PersistSubProcessLevelResourceService {
         return x;
     }
 
-    @Autowired private SubProcessLevelResourceRepository subProcessLevelResourceRepository;
+    @Autowired private SubScenarioRepository subScenarioRepository;
     @Autowired private SubProcessLevelRepository subProcessLevelRepository;
     @Autowired private ResourceRepository resourceRepository;
 
