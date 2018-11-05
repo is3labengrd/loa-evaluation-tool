@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
+import eng.it.loatool.subscenario.PersistSubScenarioService;
 import eng.it.loatool.subscenario.SubScenario;
 import eng.it.loatool.subscenario.SubScenarioRepository;
 import eng.it.loatool.subscenario.SubScenariosSearchService;
@@ -42,7 +43,7 @@ public class SubScenariosApi {
     @PostMapping("/v1/subscenarios")
     public ResponseEntity<?> createSubScenario(@RequestBody SubScenario body) {
         return ResponseEntityTransformer.transform(
-            generalCRUDService.create(subScenarioRepository, body)
+            persistSubScenarioService.create(body)
         );
     }
 
@@ -52,10 +53,11 @@ public class SubScenariosApi {
         @RequestBody SubScenario body
     ) {
         return ResponseEntityTransformer.transform(
-            generalCRUDService.update(subScenarioRepository, id, body)
+            persistSubScenarioService.update(id, body)
         );
     }
 
+    @Autowired private PersistSubScenarioService persistSubScenarioService;
     @Autowired private SubScenariosSearchService subScenariosSearchService;
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private SubScenarioRepository subScenarioRepository;
