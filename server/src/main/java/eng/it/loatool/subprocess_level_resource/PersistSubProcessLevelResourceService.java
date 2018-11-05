@@ -17,7 +17,7 @@ public class PersistSubProcessLevelResourceService {
 
     @Transactional
     public Optional create(
-            SubProcessLevelResource entity
+        SubProcessLevelResource entity
     ) {
         if (
             entity.getPrimaryKey() == null ||
@@ -45,7 +45,7 @@ public class PersistSubProcessLevelResourceService {
     private SubProcessLevelResource manageRelatedObjects(SubProcessLevelResource element) {
         Optional<SubProcessLevel> subprocessMaybe = subProcessLevelRepository
             .findById(zeroIfNull(element.getFkTbAceSubProLev()));
-        Optional<Resource> resourceMaybe =resourceRepository
+        Optional<Resource> resourceMaybe = resourceRepository
             .findById(zeroIfNull(element.getFkTbAceRes()));
         if (subprocessMaybe.isPresent()) {
             element.setSubprocessLevel(subprocessMaybe.get());
