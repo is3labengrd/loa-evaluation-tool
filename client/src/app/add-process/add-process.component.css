@@ -7,3 +7,8 @@ table {
   display: flex;
   justify-content: center;
 }
+
+.performed {
+  background-color: greenyellow;
+  color: black;
+}
