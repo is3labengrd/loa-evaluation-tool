@@ -33,7 +33,9 @@ export class ResourceListComponent implements OnInit {
     this.pagination.page = Math.max(0, --this.pagination.page);
   }
 
-  searchTerm:string = "";
+  // tslint:disable-next-line:member-ordering
+  searchTerm = '';
+  // tslint:disable-next-line:member-ordering
   resources = [];
 
   constructor(
@@ -42,6 +44,7 @@ export class ResourceListComponent implements OnInit {
     private assaignService: AssaignService
   ) { }
 
+  // tslint:disable-next-line:member-ordering
   selectedSubprocess: any;
 
   ngOnInit() {
@@ -49,10 +52,33 @@ export class ResourceListComponent implements OnInit {
     this.updateResourceList();
   }
 
+  // tslint:disable-next-line:member-ordering
+  assigned: boolean;
+  // tslint:disable-next-line:member-ordering
+  deassigned: boolean;
+
+  assi() {
+    this.assigned = true;
+
+    setTimeout(() => {
+      this.assigned = false;
+    }, 3000);
+  }
+
+  deassi() {
+    this.deassigned = true;
+
+    setTimeout(() => {
+      this.deassigned = false;
+    }, 3000);
+  }
+
   updateResourceList = () => {
+    // tslint:disable-next-line:prefer-const
     let subProcessId = this
       .selectedSubprocess[`level${this.selectedSubprocess.maxDepth}`].id;
-    let url = this.searchTerm.length?
+    // tslint:disable-next-line:whitespace
+    const url = this.searchTerm.length?
       `${environment.apiUrl}/v1/resource-items-by-subprocess-id/${subProcessId}` +
       `/like/${this.searchTerm}?` +
       'page=' + this.pagination.page + '&' +
@@ -69,9 +95,12 @@ export class ResourceListComponent implements OnInit {
       this.pagination.totalPages = Array(this.pagination.lastPage + 1)
         .fill(0).map((x, y) => x + y);
     });
-  };
+
+  }
+
 
   assign = (resource) => {
+    // tslint:disable-next-line:prefer-const
     let subProcessLevelId = this
       .selectedSubprocess[
         `level${this.selectedSubprocess.maxDepth}`
@@ -79,17 +108,18 @@ export class ResourceListComponent implements OnInit {
     return this.http.post(
       `${environment.apiUrl}/v1/subprocess-level-resources`,
       {
-        "fkTbAceRes": resource.resourceId,
-        "fkTbAceSubProLev": subProcessLevelId
+        'fkTbAceRes': resource.resourceId,
+        'fkTbAceSubProLev': subProcessLevelId
       }
     ).toPromise();
-  };
+
+  }
 
   deassign = (resource) => {
     return this.http
       .delete(
         `${environment.apiUrl}/v1/subprocess-level-resources/${resource.assignmentId}`
       ).toPromise();
-  };
+  }
 
 }
