@@ -18,29 +18,29 @@ export class EditResourceComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  resourceId = this.route.snapshot.params["resourceId"];
+  resourceId = this.route.snapshot.params['resourceId'];
 
   selectedSubprocess = this
     .cookieService
-    .getCookie("selectedSubprocess");
+    .getCookie('selectedSubprocess');
 
   resource = {
-    "name": null,
-    "loaPhysical": null,
-    "loaCognitive": null,
-    "lcNOperMachine": null,
-    "mcAMaintCosts": null,
-    "mcAMaintCostsPerc": null,
-    "rcInstSurface": null,
-    "rcCostsMMonth": null,
-    "idMacPurhValue": null,
-    "idMacSalesValue": null,
-    "idEcoUsefullLife": null,
-    "icInterRate": null,
-    "ecAEleConsumFun": null,
-    "ecAEleConsumSb": null,
-    "ecElePrice": null
-  }
+    'name': null,
+    'loaPhysical': null,
+    'loaCognitive': null,
+    'lcNOperMachine': null,
+    'mcAMaintCosts': null,
+    'mcAMaintCostsPerc': null,
+    'rcInstSurface': null,
+    'rcCostsMMonth': null,
+    'idMacPurhValue': null,
+    'idMacSalesValue': null,
+    'idEcoUsefullLife': null,
+    'icInterRate': null,
+    'ecAEleConsumFun': null,
+    'ecAEleConsumSb': null,
+    'ecElePrice': null
+  };
 
   resourceInitialState;
 
@@ -66,7 +66,13 @@ export class EditResourceComponent implements OnInit {
     );
   }
 
+  // tslint:disable-next-line:member-ordering
+  performed: boolean;
+
   save = () => {
+
+    this.performed = true;
+
     return this.http
       .put(
         `${environment.apiUrl}/v1/resources/${this.resourceId}`,
@@ -75,9 +81,12 @@ export class EditResourceComponent implements OnInit {
       .toPromise()
       .then(
         () => {
-          this.router.navigate(["resource-list"]);
+          setTimeout(() => {
+            this.performed = false;
+            this.router.navigate(['resource-list']);
+          }, 3000);
         }
-      )
+      );
   }
 
 }

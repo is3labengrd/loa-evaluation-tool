@@ -37,7 +37,7 @@ export class AddResourceComponent implements OnInit {
     'ecAEleConsumFun': null,
     'ecAEleConsumSb': null,
     'ecElePrice': null
-  }
+  };
 
   resource = Object.seal(
     Object.assign({}, this.resourceInitialState)

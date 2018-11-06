@@ -16,15 +16,15 @@
       <div class="row data">
         <span class="col-4 text-left">
           Resource name:
-          <input type="text" name="name" [(ngModel)]="resource.name">
+          <input type="text" name="name" [(ngModel)]="resource.name" required>
         </span>
         <span class="col-4 text-right">
           LoA Physical:
-          <input type="number" name="loaPhysical" [(ngModel)]="resource.loaPhysical">
+          <input type="number" name="loaPhysical" [(ngModel)]="resource.loaPhysical" min="1" max="7" required>
         </span>
         <span class="col-4 text-right">
           LoA Cognitive:
-          <input type="number" name="loaCognitive" [(ngModel)]="resource.loaCognitive">
+          <input type="number" name="loaCognitive" [(ngModel)]="resource.loaCognitive" min="1" max="7" required>
         </span>
       </div>
     </fieldset>
@@ -33,7 +33,7 @@
       <legend>Labour costs</legend>
       <div class="row data">
         <span class="col-6">Number of operators per machine:
-          <input type="number" class="float-right" name="lcNOperMachine" [(ngModel)]="resource.lcNOperMachine">
+          <input type="number" class="float-right" name="lcNOperMachine" [(ngModel)]="resource.lcNOperMachine" required>
         </span>
         <span class="col-6"></span>
       </div>
@@ -44,11 +44,11 @@
       <div class="row data">
         <span class="col-6">
           Annual maintenance costs (euro/a):
-          <input type="text" class="float-right" name="mcAMaintCosts" [(ngModel)]="resource.mcAMaintCosts">
+          <input type="text" class="float-right" name="mcAMaintCosts" [(ngModel)]="resource.mcAMaintCosts" step="0.01" required>
         </span>
         <span class="col-6">
           Annual maintenance costs (%):
-          <input type="number" class="float-right" name="mcAMaintCostsPerc" [(ngModel)]="resource.mcAMaintCostsPerc">
+          <input type="number" class="float-right" name="mcAMaintCostsPerc" [(ngModel)]="resource.mcAMaintCostsPerc" step="0.01" required>
         </span>
       </div>
     </fieldset>
@@ -58,11 +58,11 @@
       <div class="row data">
         <span class="col-6">
           Instalation surface (m<sup>2</sup>):
-          <input type="text" class="float-right" name="rcInstSurface" [(ngModel)]="resource.rcInstSurface">
+          <input type="text" class="float-right" name="rcInstSurface" [(ngModel)]="resource.rcInstSurface" step="0.01" required>
         </span>
         <span class="col-6">
           Cost per m<sup>2</sup> per month (euro/m<sup>2</sup>):
-          <input type="text" class="float-right" name="rcCostsMMonth" [(ngModel)]="resource.rcCostsMMonth">
+          <input type="text" class="float-right" name="rcCostsMMonth" [(ngModel)]="resource.rcCostsMMonth" step="0.01" required>
         </span>
       </div>
     </fieldset>
@@ -72,17 +72,17 @@
       <div class="row data">
         <span class="col-6">
           Machine purchase values (euro):
-          <input type="number" class="float-right" name="idMacPurhValue" [(ngModel)]="resource.idMacPurhValue">
+          <input type="number" class="float-right" name="idMacPurhValue" [(ngModel)]="resource.idMacPurhValue" step="0.01" required>
         </span>
         <span class="col-6">
           Machine sales value (euro):
-          <input type="number" class="float-right" name="idMacSalesValue" [(ngModel)]="resource.idMacSalesValue">
+          <input type="number" class="float-right" name="idMacSalesValue" [(ngModel)]="resource.idMacSalesValue" step="0.01" required>
         </span>
       </div>
       <div class="row">
         <span class="col-6">
           Economic useful life (a):
-          <input type="number" class="float-right" name="idEcoUsefullLife" [(ngModel)]="resource.idEcoUsefullLife">
+          <input type="number" class="float-right" name="idEcoUsefullLife" [(ngModel)]="resource.idEcoUsefullLife" step="0.01" required>
         </span>
         <span class="col-6"> </span>
       </div>
@@ -92,7 +92,7 @@
       <legend>Interest costs</legend>
       <div class="row data">
         <span class="col-6"> Interest rate (%):
-          <input type="text" class="float-right" name="icInterRate" [(ngModel)]="resource.icInterRate">
+          <input type="text" class="float-right" name="icInterRate" [(ngModel)]="resource.icInterRate" required>
         </span>
       </div>
     </fieldset>
@@ -102,26 +102,28 @@
       <div class="row energy">
         <span class="col-6">Annual electricity consumption - functioning (kWh)</span>
         <span class="col-6">
-          <input type="text" class="float-right" name="ecAEleConsumFun" [(ngModel)]="resource.ecAEleConsumFun">
+          <input type="text" class="float-right" name="ecAEleConsumFun" [(ngModel)]="resource.ecAEleConsumFun" step="0.001" required>
         </span>
       </div>
       <div class="row energy">
         <span class="col-6">Annual electricity consumption - stand by (kWh)</span>
         <span class="col-6">
-          <input type="text" class="float-right" name="ecAEleConsumSb" [(ngModel)]="resource.ecAEleConsumSb">
+          <input type="text" class="float-right" name="ecAEleConsumSb" [(ngModel)]="resource.ecAEleConsumSb" step="0.001" required>
         </span>
       </div>
       <div class="row data energy">
         <span class="col-6">Electricity price (euro/kWh)</span>
         <span class="col-6">
-          <input type="text" class="float-right" name="ecElePrice" [(ngModel)]="resource.ecElePrice">
+          <input type="text" class="float-right" name="ecElePrice" [(ngModel)]="resource.ecElePrice" step="0.001" required>
         </span>
       </div>
       <hr>
       <div class="btn-group d-flex justify-content-center">
-        <button class="btn btn-primary" (click)="cancel()">Cancel</button>
+        <input type="reset" class="btn btn-info">
         <button class="btn btn-secondary" [disabled]="resourceIsIncomplete()" (click)="save()">Save</button>
       </div>
     </fieldset>
   </form>
+
+  <span class="perform" [hidden]="!performed">Operation has been performed.</span>
 </div>
