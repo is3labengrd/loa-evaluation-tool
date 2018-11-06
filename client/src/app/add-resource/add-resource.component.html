@@ -1,5 +1,5 @@
 <div>
-  <nav aria-label="breadcrumb" >
+  <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/process-list"> Process list </a></li>
       <li class="breadcrumb-item"><a routerLink="/main-analysis"> Main analysis functionalities</a></li>
@@ -13,26 +13,27 @@
     <fieldset>
       <legend>General info</legend>
       <div class="row data">
-          <span class="col-4 text-left">
-            Resource name:
-            <input type="text" placeholder="Automated Tool Trolley">
-          </span>
+        <span class="col-4 text-left">
+          Resource name:
+          <input type="text" name="name" [(ngModel)]="resource.name">
+        </span>
         <span class="col-4 text-right">
-            LoA Physical:
-            <input type="number">
-          </span>
+          LoA Physical:
+          <input type="number" name="loaPhysical" [(ngModel)]="resource.loaPhysical">
+        </span>
         <span class="col-4 text-right">
-            LoA Cognitive:
-            <input type="number" >
-          </span>
+          LoA Cognitive:
+          <input type="number" name="loaCognitive" [(ngModel)]="resource.loaCognitive">
+        </span>
       </div>
     </fieldset>
 
     <fieldset>
       <legend>Labour costs</legend>
       <div class="row data">
-            <span class="col-6">Number of operators per machine:
-             <input type="number" class="float-right"> </span>
+        <span class="col-6">Number of operators per machine:
+          <input type="number" class="float-right" name="lcNOperMachine" [(ngModel)]="resource.lcNOperMachine">
+        </span>
         <span class="col-6"></span>
       </div>
     </fieldset>
@@ -42,11 +43,11 @@
       <div class="row data">
         <span class="col-6">
           Annual maintenance costs (euro/a):
-          <input type="text" class="float-right">
+          <input type="text" class="float-right" name="mcAMaintCosts" [(ngModel)]="resource.mcAMaintCosts">
         </span>
         <span class="col-6">
           Annual maintenance costs (%):
-          <input type="number" class="float-right">
+          <input type="number" class="float-right" name="mcAMaintCostsPerc" [(ngModel)]="resource.mcAMaintCostsPerc">
         </span>
       </div>
     </fieldset>
@@ -54,14 +55,14 @@
     <fieldset>
       <legend>Rooms costs</legend>
       <div class="row data">
-          <span class="col-6">
-            Instalation surface (m<sup>2</sup>):
-            <input type="text" class="float-right">
-          </span>
         <span class="col-6">
-            Cost per m<sup>2</sup> per month (euro/m<sup>2</sup>):
-            <input type="text" class="float-right">
-          </span>
+          Instalation surface (m<sup>2</sup>):
+          <input type="text" class="float-right" name="rcInstSurface" [(ngModel)]="resource.rcInstSurface">
+        </span>
+        <span class="col-6">
+          Cost per m<sup>2</sup> per month (euro/m<sup>2</sup>):
+          <input type="text" class="float-right" name="rcCostsMMonth" [(ngModel)]="resource.rcCostsMMonth">
+        </span>
       </div>
     </fieldset>
 
@@ -70,28 +71,28 @@
       <div class="row data">
         <span class="col-6">
           Machine purchase values (euro):
-          <input type="number" class="float-right">
+          <input type="number" class="float-right" name="idMacPurhValue" [(ngModel)]="resource.idMacPurhValue">
         </span>
         <span class="col-6">
-         Machine sales value (euro):
-         <input type="number" class="float-right">
+          Machine sales value (euro):
+          <input type="number" class="float-right" name="idMacSalesValue" [(ngModel)]="resource.idMacSalesValue">
         </span>
       </div>
       <div class="row">
-           <span class="col-6">
-                 Economic useful life (a):
-              <input type="number" class="float-right">
-              </span>
+        <span class="col-6">
+          Economic useful life (a):
+          <input type="number" class="float-right" name="idEcoUsefullLife" [(ngModel)]="resource.idEcoUsefullLife">
+        </span>
         <span class="col-6"> </span>
       </div>
     </fieldset>
 
     <fieldset>
-      <legend>Interes costs</legend>
+      <legend>Interest costs</legend>
       <div class="row data">
-            <span class="col-6"> Interest rate (%):
-            <input type="text" class="float-right"></span>
-        <span class="col-6"></span>
+        <span class="col-6"> Interest rate (%):
+          <input type="text" class="float-right" name="icInterRate" [(ngModel)]="resource.icInterRate">
+        </span>
       </div>
     </fieldset>
 
@@ -99,20 +100,26 @@
       <legend>Energy costs</legend>
       <div class="row energy">
         <span class="col-6">Annual electricity consumption - functioning (kWh)</span>
-        <span class="col-6"> <input type="text" class="float-right"> </span>
+        <span class="col-6">
+          <input type="text" class="float-right" name="ecAEleConsumFun" [(ngModel)]="resource.ecAEleConsumFun">
+        </span>
       </div>
       <div class="row energy">
         <span class="col-6">Annual electricity consumption - stand by (kWh)</span>
-        <span class="col-6"> <input type="text" class="float-right"> </span>
+        <span class="col-6">
+          <input type="text" class="float-right" name="ecAEleConsumSb" [(ngModel)]="resource.ecAEleConsumSb">
+        </span>
       </div>
       <div class="row data energy">
         <span class="col-6">Electricity price (euro/kWh)</span>
-        <span class="col-6"> <input type="text" class="float-right"> </span>
+        <span class="col-6">
+          <input type="text" class="float-right" name="ecElePrice" [(ngModel)]="resource.ecElePrice">
+        </span>
       </div>
       <hr>
-      <div class="btn-group d-flex justify-content-center" >
-        <button class="btn btn-primary">Cancel</button>
-        <button class="btn btn-secondary">Save</button>
+      <div class="btn-group d-flex justify-content-center">
+        <button class="btn btn-primary" (click)="cancel()">Cancel</button>
+        <button class="btn btn-secondary" [disabled]="resourceIsIncomplete()" (click)="save()">Save</button>
       </div>
     </fieldset>
   </form>
