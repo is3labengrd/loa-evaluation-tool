@@ -21,53 +21,6 @@
     </tr>
   </table>
 
-  <!-- <table class="table">
-    <caption>List Scenarios</caption>
-    <thead>
-      <th>Scenario number ^v</th>
-      <th>Total cost ^v</th>
-      <th>Cost per piece ^v</th>
-      <th>Physical LoA</th>
-      <th>Cognitive LoA</th>
-      <th>Actions</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>4571.33</td>
-        <td>4.52</td>
-        <td>2</td>
-        <td>2</td>
-        <td>Edit - Delete</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>33579.22</td>
-        <td>8.4</td>
-        <td>1</td>
-        <td>4</td>
-        <td>Edit - Delete</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>Add</td>
-      </tr>
-    </tbody>
-  </table> -->
-
-  <!-- <span>
-    <select name="" id="">
-      <option value="">10 items per page</option>
-    </select> &nbsp;
-    <select name="" id="">
-      <option value="">Page 1 of 1</option>
-    </select>
-  </span> -->
-
   <table class="table table-striped">
     <caption style="color: black"><strong>Cost-based Analysis Scenario</strong></caption>
     <thead class="thead-light">
@@ -78,10 +31,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let subScen of subSceList">
-        <td>{{subScen.subProc.fkTbAceSubProLev}}</td>
-        <td *ngFor="let sc1 of subScen.objList">{{sc1?.scenNumber1?.fkTbAceRes}}</td>
-        <td *ngFor="let sc2 of subScen.objList">{{sc2?.scenNumber2?.fkTbAceRes}}</td>
-        <td *ngFor="let sc3 of subScen.objList">{{sc3?.scenNumber3?.fkTbAceRes}}</td>
+        <td>{{subScen?.subProc?.subprocessLevel.name}}</td>
+        <td>{{subScen?.objList?.scenNumber1?.resource.name}}</td>
+        <td>{{subScen?.objList?.scenNumber2?.resource.name}}</td>
+        <td>{{subScen?.objList?.scenNumber3?.resource.name}}</td>
       </tr>
       <tr>
         <td>------</td>

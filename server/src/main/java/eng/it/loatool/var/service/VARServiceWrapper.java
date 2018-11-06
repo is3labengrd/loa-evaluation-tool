@@ -1,7 +1,6 @@
 package eng.it.loatool.var.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import eng.it.loatool.var.bean.MainProcess;
@@ -93,6 +92,16 @@ public class VARServiceWrapper {
 	public static void editResource (String json) throws IOException {
 
 		VARWorkUnitImpl.updateBody(json);
+
+	}
+
+	/*
+	 * 	 * @return Site Instance from VAR
+	 */
+
+	public static String getSite () throws IOException {
+
+		return VARWorkUnitImpl.getSiteIntance();
 
 	}
 

@@ -54,7 +54,7 @@
         <td>{{ resource.loaCognitive }}</td>
         <td>
           <ng-template [ngIf]="resource.assigned" [ngIfElse]="assignBlock">
-            <a routerLink="/edit-resource" class="btn btn-link">Edit</a>
+            <a routerLink="/edit-resource/{{resource.resourceId}}"  class="btn btn-link">Edit</a>
             -
             <button (click)="deassign(resource).then(updateResourceList); deassi();" class="btn btn-link">De-assign</button>
           </ng-template>

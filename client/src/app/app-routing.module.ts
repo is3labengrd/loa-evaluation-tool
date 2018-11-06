@@ -26,7 +26,7 @@ const ROUTES: Routes = [
   { path: 'main-analysis', component: MainAnalysisComponent},
   { path: 'hta-analysis', component: HTAAnalysisComponent },
   { path: 'add-resource', component: AddResourceComponent },
-  { path: 'edit-resource', component: EditResourceComponent },
+  { path: 'edit-resource/:resourceId', component: EditResourceComponent },
   { path: 'sub-scenarios', component: SubScenariosComponent },
   { path: 'scenarios', component: ScenariosComponent },
   { path: 'add-scenario', component: AddScenarioComponent },

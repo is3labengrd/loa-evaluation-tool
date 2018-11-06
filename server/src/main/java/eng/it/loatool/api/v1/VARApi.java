@@ -33,6 +33,11 @@ public class VARApi {
         VARServiceWrapper.editResource(json);
     }
 
+    @RequestMapping("/v1/var/SiteInfo")
+    public Object SiteInfo() throws IOException {
+        return VARServiceWrapper.getSite();
+    }
+
     @RequestMapping(value = "/v1/var/editProductPlanning", method = RequestMethod.PUT)
     public void editProductPlanning (@RequestBody String json) throws IOException {
 
