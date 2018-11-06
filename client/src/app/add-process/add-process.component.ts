@@ -49,7 +49,7 @@ ngOnInit() {
           this.mainProcess.push(main);
           this.fetchFromCAM(main);
       }
-    )
+    );
 }
 
 fetchFromCAM(mainP) {
@@ -66,9 +66,10 @@ fetchFromCAM(mainP) {
     );
 }
 
-findObj(obj: any, name: any){
+findObj(obj: any, name: any) {
+  // tslint:disable-next-line:prefer-const
   for (let k in obj) {
-    if (obj[k].name === name){
+    if (obj[k].name === name) {
       return obj[k];
      }
   }
@@ -90,6 +91,7 @@ addProSecOrdered() {
 
  const addProSecOrderedUrl = environment.apiUrl + '/v1/process-segment-list-elements';
 
+ // tslint:disable-next-line:max-line-length
  return this.http.post(addProSecOrderedUrl, {'fkTbAceProSeq': this.id , 'fkTbAceSubProLev1': this.pks[0], 'fkTbAceSubProLev2': this.pks[1], 'fkTbAceSubProLev3': this.pks[2]})
         .toPromise()
         .then((res: any) => {
@@ -100,18 +102,29 @@ addProSecOrdered() {
         );
 }
 
+  // tslint:disable-next-line:member-ordering
+  perform: boolean;
+
 addSubProcessL1(pkTbId) {
 
 const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
+// tslint:disable-next-line:max-line-length
 return this.http.post(subProcUrl, {'fkTbAceProSeq': pkTbId, 'name': this.lvl1selection.name, 'varProSeqId': this.lvl1selection.processSegmentId, 'proLevel': this.lvl1selection.level})
   .toPromise()
   .then((res: any) => {
     if (res.pkTbId != null) {
       this.pks.push(res.pkTbId);
+      // tslint:disable-next-line:prefer-const
       let response = this.addSubProcessL2(res.pkTbId);
       response.then((x) => {
-        alert('Process segment added');
-        this.router.navigate(['process-list']);
+        // alert('Process segment added');
+        this.perform = true;
+
+        setTimeout(() => {
+          this.perform = false;
+          this.router.navigate(['process-list']);
+        }, 3000);
+
         });
       }
     },
@@ -121,17 +134,19 @@ return this.http.post(subProcUrl, {'fkTbAceProSeq': pkTbId, 'name': this.lvl1sel
 
 addSubProcessL2(pkTbId) {
   const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
-if (this.lvl2selection != null){
+if (this.lvl2selection != null) {
+  // tslint:disable-next-line:max-line-length
   return this.http.post(subProcUrl, {'fkTbAceProSeq': pkTbId, 'name': this.lvl2selection.name, 'varProSeqId': this.lvl2selection.processSegmentId, 'proLevel': this.lvl2selection.level})
        .toPromise()
        .then((res: any) => {
         if (res.pkTbId != null) {
           this.pks.push(res.pkTbId);
+          // tslint:disable-next-line:prefer-const
           let promise2 = this.addSubProcessL3(res.pkTbId);
-          promise2.then((x) => {this.addProSecOrdered()});
+          promise2.then((x) => { this.addProSecOrdered(); });
           }
         },
-          (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status); })} else{
+          (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status); }); } else {
              this.addProSecOrdered();
              return Promise.resolve();
            }
@@ -140,7 +155,8 @@ if (this.lvl2selection != null){
 addSubProcessL3(pkTbId) {
 const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
 
-if (this.lvl3selection != null){
+if (this.lvl3selection != null) {
+  // tslint:disable-next-line:max-line-length
   return this.http.post(subProcUrl, {'fkTbAceProSeq': pkTbId, 'name': this.lvl3selection.name, 'varProSeqId': this.lvl3selection.processSegmentId, 'proLevel': this.lvl3selection.level})
          .toPromise()
          .then((res: any) => {
@@ -174,10 +190,12 @@ thirdDropDownChanged(val3: any) {
  this.lvl3selection = obj3[val3];
 }
 
-subProcessL1(mainProc){
+subProcessL1(mainProc) {
   this.subL1 = [];
+   // tslint:disable-next-line:prefer-const
    for (let entry of this.processSegmentList[0]) {
-     if (mainProc === entry.name){
+     if (mainProc === entry.name) {
+       // tslint:disable-next-line:prefer-const
        for (let sub of entry.subProcesses) {
           this.subL1.push(sub);
        }
@@ -186,12 +204,15 @@ subProcessL1(mainProc){
    return this.subL1;
 }
 
- subProcessL2(mainProc, subProcessL1){
+ subProcessL2(mainProc, subProcessL1) {
    this.subL2 = [];
+     // tslint:disable-next-line:prefer-const
      for (let entry of this.processSegmentList[0]) {
-       if (mainProc === entry.name){
+       if (mainProc === entry.name) {
+         // tslint:disable-next-line:prefer-const
          for (let sub of entry.subProcesses) {
-           if (subProcessL1 === sub.name){
+           if (subProcessL1 === sub.name) {
+             // tslint:disable-next-line:prefer-const
              for (let sub2 of sub.subProcesses) {
                this.subL2.push(sub2);
              }
@@ -202,14 +223,18 @@ subProcessL1(mainProc){
      return this.subL2;
 }
 
-subProcessL3(mainProc, subProcessL1, subProcessL2){
+subProcessL3(mainProc, subProcessL1, subProcessL2) {
  this.subL3 = [];
+   // tslint:disable-next-line:prefer-const
    for (let entry of this.processSegmentList[0]) {
-     if (mainProc === entry.name){
+     if (mainProc === entry.name) {
+       // tslint:disable-next-line:prefer-const
        for (let sub of entry.subProcesses) {
-         if (subProcessL1 === sub.name){
+         if (subProcessL1 === sub.name) {
+           // tslint:disable-next-line:prefer-const
            for (let sub2 of sub.subProcesses) {
-             if (subProcessL2 === sub2.name){
+             if (subProcessL2 === sub2.name) {
+               // tslint:disable-next-line:prefer-const
                for (let sub3 of sub2.subProcesses) {
                  this.subL3.push(sub3);
                }

@@ -526,35 +526,66 @@ checkMandatoryData() {
 
 
       subScenarioGET(){
+              let fkTbAceResID;
+              let fkTbAceSubProLevID;
               let subscenarios: Array<any> ;
-              var postObj = new PostObj();
-              postObj.fkTbAceSubProLev = this.getFkAceSubProLevId(this.cookie);
+
+              //var postObj = new PostObj();
+              var postObj = {
+                              subprocessLevel: {
+                                         pkTbId:{}
+                                  }
+                            };
+
+              postObj.subprocessLevel.pkTbId = this.getFkAceSubProLevId(this.cookie);
+              console.log(postObj);
               this.http
               .post(environment.apiUrl + '/v1/subscenarios/search',  postObj )
               .toPromise()
               .then((result:any) => {
                  subscenarios = result;
-
                  subscenarios.forEach((element:any)=>  {
+                    //console.log(element);
                     switch(element.scenarioNumber){
                     case 1:
-                        this.subscenario1=element;
+                        this.resourceInfo1=element.resource;
+                        this.firstDropDownChanged(element.resource.name);
                         this.subScenarioID1=element.pkTbId
                         this.selRes1ProcTime=element.processTime;
-                        this.resourceInfoGET(element.fkTbAceRes, 1);
+                        fkTbAceResID = element.resource.pkTbId;
+                        fkTbAceSubProLevID = element.subprocessLevel.pkTbId;
+                        delete element['resource'];
+                        delete element['subprocessLevel'];
+                        element.fkTbAceRes=fkTbAceResID;
+                        element.fkTbAceSubProLev=fkTbAceSubProLevID;
+                        this.subscenario1=element;
                         break;
                     case 2:
-                        this.subscenario2=element;
-                        this.subScenarioID2=element.pkTbId;
-                        this.selRes2ProcTime=element.processTime;
-                        this.resourceInfoGET(element.fkTbAceRes, 2);
-                        break;
+                       this.resourceInfo2=element.resource;
+                       this.secondDropDownChanged(element.resource.name);
+                       this.subScenarioID2=element.pkTbId
+                       this.selRes2ProcTime=element.processTime;
+                       fkTbAceResID = element.resource.pkTbId;
+                       fkTbAceSubProLevID = element.subprocessLevel.pkTbId;
+                       delete element['resource'];
+                       delete element['subprocessLevel'];
+                       element.fkTbAceRes=fkTbAceResID;
+                       element.fkTbAceSubProLev=fkTbAceSubProLevID;
+                       this.subscenario2=element;
+                       break;
                     case 3:
-                        this.subscenario3=element;
-                        this.subScenarioID3=element.pkTbId;
-                        this.selRes3ProcTime=element.processTime;
-                        this.resourceInfoGET(element.fkTbAceRes, 3);
-                        break;
+                       this.resourceInfo2=element.resource;
+                       this.thirdDropDownChanged(element.resource.name);
+                       this.subScenarioID3=element.pkTbId
+                       this.selRes3ProcTime=element.processTime;
+                       fkTbAceResID = element.resource.pkTbId;
+                       fkTbAceSubProLevID = element.subprocessLevel.pkTbId;
+                       delete element['resource'];
+                       delete element['subprocessLevel'];
+                       element.fkTbAceRes=fkTbAceResID;
+                       element.fkTbAceSubProLev=fkTbAceSubProLevID;
+                       this.subscenario3=element;
+                       break;
                   }
 
                  });
@@ -582,6 +613,16 @@ checkMandatoryData() {
                }
               },
               err => {})
+       }
+
+       cancelUserSatisfaction(){
+          this.subscenario1.usPhysicalLoa=null;
+          this.subscenario2.usPhysicalLoa=null;
+          this.subscenario3.usPhysicalLoa=null;
+
+          this.subscenario1.usCognitiveLoa=null;
+          this.subscenario2.usCognitiveLoa=null;
+          this.subscenario3.usCognitiveLoa=null;
        }
 
 
