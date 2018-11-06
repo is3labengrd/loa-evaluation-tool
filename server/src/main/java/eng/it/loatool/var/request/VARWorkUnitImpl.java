@@ -2,6 +2,8 @@ package eng.it.loatool.var.request;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eng.it.util.PropertyManager;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
@@ -48,6 +50,7 @@ public class VARWorkUnitImpl {
         String siteTemplate = "{" +
                 "\"assetName\": \"RWTH\"," +
                 "\"className\":\"Site\"," +
+                "\"modelName\": \"Site\"," +
                 "\"domainName\":\"\"," +
                 "\"orionConfigId\": \"\"," +
                 "\"attribute\":" +
@@ -96,6 +99,20 @@ public class VARWorkUnitImpl {
         else
             VARInstance.updateInstance(siteTemplate);
 
+
+
+    }
+
+    public static String getSiteIntance () throws IOException {
+        PropertyManager prop = new PropertyManager();
+        final String BASE_URL = prop.getPropValues("base.url");
+        final String uri = BASE_URL + "/assets/RWTH/attributes";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        String result = restTemplate.getForObject(uri, String.class);
+
+        return result;
 
 
     }

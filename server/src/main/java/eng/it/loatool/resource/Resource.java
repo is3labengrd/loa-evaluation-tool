@@ -33,7 +33,7 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
     private Double lcNOperMachine;
     private Double mcAMaintCosts;
     private Float mcAMaintCostsPerc;
-    private String rcInstSurface;
+    private Double rcInstSurface;
     private Double rcCostsMMonth;
     private Double idMacPurhValue;
     private Double idMacSalesValue;
@@ -47,7 +47,7 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
     public Resource() {}
 
-    public Resource(String name, Integer loaPhysical, Integer loaCognitive, Double lcNOperMachine, Double mcAMaintCosts, Float mcAMaintCostsPerc, String rcInstSurface, Double rcCostsMMonth, Double idMacPurhValue, Double idMacSalesValue, Integer idEcoUsefullLife, Float icInterRate, Integer ecAEleConsumFun, Integer ecAEleConsumSb, Double ecElePrice, Date createDate, Date updateDate) {
+    public Resource(String name, Integer loaPhysical, Integer loaCognitive, Double lcNOperMachine, Double mcAMaintCosts, Float mcAMaintCostsPerc, Double rcInstSurface, Double rcCostsMMonth, Double idMacPurhValue, Double idMacSalesValue, Integer idEcoUsefullLife, Float icInterRate, Integer ecAEleConsumFun, Integer ecAEleConsumSb, Double ecElePrice, Date createDate, Date updateDate) {
         this.name = name;
         this.loaPhysical = loaPhysical;
         this.loaCognitive = loaCognitive;
@@ -126,11 +126,11 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.mcAMaintCostsPerc = mcAMaintCostsPerc;
     }
 
-    @Column(name = "RC_INST_SURFACE", nullable = false, length = 45) public String getRcInstSurface() {
+    @Column(name = "RC_INST_SURFACE", nullable = false, length = 45) public Double getRcInstSurface() {
         return this.rcInstSurface;
     }
 
-    public void setRcInstSurface(String rcInstSurface) {
+    public void setRcInstSurface(Double rcInstSurface) {
         this.rcInstSurface = rcInstSurface;
     }
 

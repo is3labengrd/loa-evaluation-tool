@@ -32,96 +32,18 @@
     <th> Cognitive LoA: </th>
   </thead>
   <tbody>
-    <tr>
-      <td>Checking</td>
+    <tr *ngFor="let subScen of subSceList">
+      <td>{{subScen?.subProc?.subprocessLevel.name}}</td>
       <td>
-        SC1 <input type="radio" name="subProX"> Manual Tool Trolley <br>
-        SC2 <input type="radio" name="subProX"> Semi Automated Tool Trolley <br>
-        SC3 <input type="radio" name="subProX"> Automated Tool Trolley <br>
+        SC1 <input type="radio" name="subProX">{{subScen?.objList?.scenNumber1?.resource.name}}<br>
+        SC2 <input type="radio" name="subProX">{{subScen?.objList?.scenNumber2?.resource.name}}<br>
+        SC3 <input type="radio" name="subProX">{{subScen?.objList?.scenNumber3?.resource.name}}<br>
       </td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
-    <tr>
-        <td>Rear light adjustment</td>
-        <td>
-          SC1 <input type="radio" name="subProY"> Manual Screw<br>
-          SC2 <input type="radio" name="subProY"> AR Guidance Support Screw <br>
-          SC3 <input type="radio" name="subProY"> Robot to Screw <br>
-        </td>
-    </tr>
-    <tr>
-        <td>Rivet nut fastening</td>
-        <td>
-          SC1 <input type="radio" name="subProZ"> Manual Inspection <br>
-          SC2 <input type="radio" name="subProZ"> AR Guided Inspection <br>
-          SC3 <input type="radio" name="subProZ"> Camera <br>
-        </td>
-    </tr>
-    <tr>
-        <td>Add cover plates</td>
-        <td>
-          SC1 <input type="radio" name="subProX1"> Resource 1 <br>
-          SC2 <input type="radio" name="subProX1"> Resource 2 <br>
-          SC3 <input type="radio" name="subProX1"> Resource 3 <br>
-        </td>
-    </tr>
-    <tr>
-        <td>Install brake light module</td>
-        <td>
-          SC1 <input type="radio" name="subProY1"> Resource 1 <br>
-          SC2 <input type="radio" name="subProY1"> Resource 2 <br>
-          SC3 <input type="radio" name="subProY1"> Resource 3 <br>
-        </td>
-    </tr>
-    <tr>
-        <td>Mount screw</td>
-        <td>
-          SC1 <input type="radio" name="subProZ"> Resource 1 <br>
-          SC2 <input type="radio" name="subProZ"> Resource 2 <br>
-          SC3 <input type="radio" name="subProZ"> Resource 3 <br>
-        </td>
-    </tr>
-    <tr>
-        <td>Screw positioning</td>
-        <td>
-          SC1 <input type="radio" name="subProX2"> Resource 1 <br>
-          SC2 <input type="radio" name="subProX2"> Resource 2 <br>
-          SC3 <input type="radio" name="subProX2"> Resource 3 <br>
-        </td>
-    </tr>
-    <tr>
-      <td>Screw rear light</td>
-      <td>
-        SC1 <input type="radio" name="subProY2"> Resource 1 <br>
-        SC2 <input type="radio" name="subProY2"> Resource 2 <br>
-        SC3 <input type="radio" name="subProY2"> Resource 3 <br>
-      </td></tr>
-    <tr>
-      <td>Parts grasping</td>
-      <td>
-        SC1 <input type="radio" name="subProZ2"> Resource 1 <br>
-        SC2 <input type="radio" name="subProZ2"> Resource 2 <br>
-        SC3 <input type="radio" name="subProZ2"> Resource 3 <br>
-      </td>
-    </tr>
-    <tr>
-      <td>Initial trolley movement</td>
-      <td>
-        SC1 <input type="radio" name="subProZ2"> Resource 1 <br>
-        SC2 <input type="radio" name="subProZ2"> Resource 2 <br>
-        SC3 <input type="radio" name="subProZ2"> Resource 3 <br>
-      </td>
-    </tr>
-    <tr>
-      <td>Operation Start</td>
-      <td>
-        SC1 <input type="radio" name="subProZ2"> Resource 1 <br>
-        SC2 <input type="radio" name="subProZ2"> Resource 2 <br>
-        SC3 <input type="radio" name="subProZ2"> Resource 3 <br>
-      </td>
-    </tr>
+
     <tr>
       <td></td>
       <td> Total Cost: </td>
