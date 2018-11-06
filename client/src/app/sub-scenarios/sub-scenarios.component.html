@@ -10,7 +10,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="productInfo()">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="productInfo()" data-dismiss="modal" >Save changes</button>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="procSpecInfo()" >Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="procSpecInfo()" data-dismiss="modal" >Save changes</button>
       </div>
     </div>
   </div>
@@ -94,7 +94,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="createSubScenarios()">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="createSubScenarios()" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
@@ -199,19 +199,19 @@
           d <br>
         </td>
         <td>
-          {{procSpecInfoObj?.nshiptsDay}} <br>
-          {{procSpecInfoObj?.hoursShift}}<br>
-          {{procSpecInfoObj?.workingDaysYear}}
+          {{procSpecInfoObjGUI?.nshiptsDay}} <br>
+          {{procSpecInfoObjGUI?.hoursShift}}<br>
+          {{procSpecInfoObjGUI?.workingDaysYear}}
         </td>
         <td>
-          {{procSpecInfoObj?.nshiptsDay}} <br>
-          {{procSpecInfoObj?.hoursShift}}<br>
-          {{procSpecInfoObj?.workingDaysYear}}
+          {{procSpecInfoObjGUI?.nshiptsDay}} <br>
+          {{procSpecInfoObjGUI?.hoursShift}}<br>
+          {{procSpecInfoObjGUI?.workingDaysYear}}
         </td>
         <td>
-          {{procSpecInfoObj?.nshiptsDay}} <br>
-          {{procSpecInfoObj?.hoursShift}}<br>
-          {{procSpecInfoObj?.workingDaysYear}}
+          {{procSpecInfoObjGUI?.nshiptsDay}} <br>
+          {{procSpecInfoObjGUI?.hoursShift}}<br>
+          {{procSpecInfoObjGUI?.workingDaysYear}}
         </td>
       </tr>
       <tr>
@@ -225,9 +225,9 @@
         <td class="roto  align-middle" rowspan="2">Prod.</td>
         <td>Number of produced pieces</td>
         <td>units/h</td>
-        <td>{{nprodPiecePerHours}}</td>
-        <td>{{nprodPiecePerHours}}</td>
-        <td>{{nprodPiecePerHours}}</td>
+        <td>{{nprodPiecePerHoursGUI}}</td>
+        <td>{{nprodPiecePerHoursGUI}}</td>
+        <td>{{nprodPiecePerHoursGUI}}</td>
       </tr>
       <tr>
         <td>Number of produced pieces</td>
@@ -249,17 +249,17 @@
           l/h
         </td>
         <td>
-          {{procSpecInfoObj?.propWCPerHours}}<br>
+          {{procSpecInfoObjGUI?.propWCPerHours}}<br>
           {{resourceInfo1?.lcNOperMachine}}<br>
           {{subscenario1?.rateOfPart}}
         </td>
         <td>
-          {{procSpecInfoObj?.propWCPerHours}}<br>
+          {{procSpecInfoObjGUI?.propWCPerHours}}<br>
           {{resourceInfo2?.lcNOperMachine}}<br>
           {{subscenario3?.rateOfPart}}
         </td>
         <td>
-         {{procSpecInfoObj?.propWCPerHours}} <br>
+         {{procSpecInfoObjGUI?.propWCPerHours}} <br>
          {{resourceInfo3?.lcNOperMachine}} <br>
          {{subscenario3?.rateOfPart}}
         </td>
@@ -409,17 +409,17 @@
           %
         </td>
         <td>
-          {{resourceInfo1?.idMacPurhValu}} <br>
+          {{resourceInfo1?.idMacPurhValue}} <br>
           {{resourceInfo1?.idMacSalesValue}} <br>
           {{resourceInfo1?.icInterRate}}
         </td>
         <td>
-          {{resourceInfo2?.idMacPurhValu}}<br>
+          {{resourceInfo2?.idMacPurhValue}}<br>
           {{resourceInfo2?.idMacSalesValue}} <br>
           {{resourceInfo2?.icInterRate}}
         </td>
         <td>
-          {{resourceInfo3?.idMacPurhValu}}  <br>
+          {{resourceInfo3?.idMacPurhValue}}  <br>
           {{resourceInfo3?.idMacSalesValue}} <br>
           {{resourceInfo3?.icInterRate}}
         </td>
