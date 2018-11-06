@@ -14,6 +14,7 @@ import { CookieService } from '../cookie.service';
 export class SubScenariosComponent implements OnInit {
 
   nprodPiecePerHours: number;
+  nprodPiecePerHoursGUI: number;
   subscenario1 = new Subscenario("1");
   subscenario2 = new Subscenario("2");
   subscenario3 = new Subscenario("3");
@@ -32,6 +33,7 @@ export class SubScenariosComponent implements OnInit {
 
  procSpecInfoObj: any = { nshiptsDay: null, hoursShift: null, workingDaysYear: null, propWCPerHours: null, fkTbAceSubProLev: null};
 
+  procSpecInfoObjGUI: any;
   sub: { sub1: any, sub2: any, sub3: any } =
     { sub1: null, sub2: null, sub3: null };
 
@@ -76,10 +78,8 @@ export class SubScenariosComponent implements OnInit {
     this.productPlanningGET();
     this.procSpecInfoGET();
     this.subScenarioGET();
-   // this.getMainProc(1);
-    this.checkMandatoryData();
     this.getResource();
-
+    this.checkMandatoryData();
   }
 
   getResource() {
@@ -108,7 +108,7 @@ checkMandatoryData() {
     this.produtsPiece.nprodPiecePerHours = this.nprodPiecePerHours;
     this.produtsPiece.fkTbAceProSeq = this.cookie.mainProcessId;
 
-    console.log("PRODOTTO: "+this.productPlanningID);
+
 
     if (this.productPlanningID == null) {
      this.http.post(environment.apiUrl + '/v1/product-planning', this.produtsPiece)
@@ -123,15 +123,18 @@ checkMandatoryData() {
     }
 
 
-    this.checkMandatoryData();
+    //this.checkMandatoryData();
 
+    if(this.disableButton==true){
+       this.createSubScenarios();
+     }
 
   }
 
     procSpecInfo(): void {
 
 
-     this.checkMandatoryData();
+    // this.checkMandatoryData();
      this.procSpecInfoObj.fkTbAceSubProLev=this.getFkAceSubProLevId(this.cookie);
 
      if(this.procSpecInfoID==null){
@@ -148,7 +151,9 @@ checkMandatoryData() {
                         console.log('Done put'));
       }
 
-
+      if(this.disableButton==true){
+            this.createSubScenarios();
+      }
 
 
   }
@@ -174,7 +179,8 @@ checkMandatoryData() {
     this.updateAssemblyCostsTotal()
 
 
-
+    this.nprodPiecePerHoursGUI = this.nprodPiecePerHours;
+    this.procSpecInfoObjGUI = this.procSpecInfoObj;
 
     this.checkMandatoryData();
 
@@ -440,7 +446,7 @@ checkMandatoryData() {
   this.subscenario3.fkTbAceProSeq=this.cookie.mainProcessId;
   this.subscenario3.fkTbAceSubProLev=this.getFkAceSubProLevId(this.cookie);
 
-  console.log(this.subscenario1);
+
 
   if(this.subScenarioID1==null){
   this.http
@@ -499,13 +505,11 @@ checkMandatoryData() {
 
                  this.nprodPiecePerHours=result.nprodPiecePerHours;
                  this.productPlanningID=result.pkTbId;
-                 console.log("FOUND: "+this.productPlanningID);
 
              },
              err => {
-               //product not found
-               this.productPlanningID=null;
-               console.log("NOT FOUND: "+this.productPlanningID);
+                this.productPlanningID=null;
+
              })
       }
 
@@ -538,17 +542,20 @@ checkMandatoryData() {
                             };
 
               postObj.subprocessLevel.pkTbId = this.getFkAceSubProLevId(this.cookie);
-              console.log(postObj);
+
               this.http
               .post(environment.apiUrl + '/v1/subscenarios/search',  postObj )
               .toPromise()
               .then((result:any) => {
+                 this.nprodPiecePerHoursGUI = this.nprodPiecePerHours;
+                 this.procSpecInfoObjGUI = this.procSpecInfoObj;
                  subscenarios = result;
                  subscenarios.forEach((element:any)=>  {
                     //console.log(element);
                     switch(element.scenarioNumber){
                     case 1:
                         this.resourceInfo1=element.resource;
+                        this.selectedRes1=this.resourceInfo1.name;
                         this.firstDropDownChanged(element.resource.name);
                         this.subScenarioID1=element.pkTbId
                         this.selRes1ProcTime=element.processTime;
@@ -562,6 +569,7 @@ checkMandatoryData() {
                         break;
                     case 2:
                        this.resourceInfo2=element.resource;
+                       this.selectedRes2=this.resourceInfo2.name;
                        this.secondDropDownChanged(element.resource.name);
                        this.subScenarioID2=element.pkTbId
                        this.selRes2ProcTime=element.processTime;
@@ -574,7 +582,8 @@ checkMandatoryData() {
                        this.subscenario2=element;
                        break;
                     case 3:
-                       this.resourceInfo2=element.resource;
+                       this.resourceInfo3=element.resource;
+                       this.selectedRes3=this.resourceInfo3.name;
                        this.thirdDropDownChanged(element.resource.name);
                        this.subScenarioID3=element.pkTbId
                        this.selRes3ProcTime=element.processTime;
@@ -588,7 +597,10 @@ checkMandatoryData() {
                        break;
                   }
 
+
                  });
+               this.createSubScenarios();
+               this.disableButton=true;
               },
               err => { })
       }
