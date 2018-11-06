@@ -20,13 +20,25 @@ export class AddScenarioComponent implements OnInit {
   objlist:any={};
   subProc:any;
   scenNumber:any;
+  stepResult:Array<any> = [];
+  processSegmentList: Array<any> = [];
+  allProcessSegmentCAM: Array<any> = [];
+
 
   ngOnInit() {
+
     this.cookie = this._processListService.getCookie("selectedSubprocess");
-    var waitresponse = this.getScenariosList();
-    waitresponse.then((x)=>{
+
+    var waitCAMProcTree = this.fetchFromCAM();
+    waitCAMProcTree.then((x)=>{
+      this.findMissingSegments();
+      this.checkduplicate();
+    });
+
+    var waitScenarioList = this.getScenariosList();
+    waitScenarioList.then((x)=>{
         this.creteTable();
-        console.log(this.subSceList);
+        console.log(this.subSceList[0]);
         this.deleteDupicate();
     });
   }
@@ -71,5 +83,56 @@ export class AddScenarioComponent implements OnInit {
         }
       )
   }
+
+  test(){
+    console.log(this.stepResult);
+  }
+
+  fetchFromCAM() {
+
+    return this.http
+      .get(environment.apiUrl + '/v1/var/process-segments')
+      .toPromise()
+      .then(
+        (processSegments:any) => {
+          this.processSegmentList.push(processSegments);
+        }
+      );
+  }
+
+  findMissingSegments(){
+    for(let i in this.processSegmentList[0]){
+      if (this.processSegmentList[0][i].name === this.cookie.mainProcessName){
+        this.loop(this.processSegmentList[0][i].subProcesses);
+      }
+    }
+  }
+
+  loop(camList:any){
+    if (camList.length === 0){
+    	return;
+    }
+
+    for (let j in camList){
+      this.allProcessSegmentCAM.push(camList[j].name);
+      this.loop(camList[j].subProcesses);
+    }
+  }
+
+  checkduplicate(){
+    var tmpList = [];
+    var tmpList2 = [];
+
+    for(let i in this.subSceList){
+        tmpList.push(this.subSceList[i].subProc.subprocessLevel.name);
+      }
+
+    for(let i in this.allProcessSegmentCAM){
+        if(!tmpList.includes(this.allProcessSegmentCAM[i])){
+            tmpList2.push(this.allProcessSegmentCAM[i]);
+        }
+      }
+      this.allProcessSegmentCAM = tmpList2;
+    }
 
 }

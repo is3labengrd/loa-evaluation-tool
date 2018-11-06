@@ -11,11 +11,11 @@
       <td>Main process:</td>
       <td style="border-right: 1px solid">{{cookie.mainProcessName}}</td>
       <td>Number of lower level sub-processes:</td>
-      <td>{{cookie.totalNumberSubprocs}}</td>
+      <td>{{cookie.subLevels}}</td>
     </tr>
     <tr>
       <td>Level of sub processes:</td>
-      <td style="border-right: 1px solid">{{cookie.subLevels}}</td>
+      <td style="border-right: 1px solid">{{cookie.totalNumberSubprocs}}</td>
       <td></td>
       <td></td>
     </tr>
@@ -35,6 +35,12 @@
         <td>{{subScen?.objList?.scenNumber1?.resource.name}}</td>
         <td>{{subScen?.objList?.scenNumber2?.resource.name}}</td>
         <td>{{subScen?.objList?.scenNumber3?.resource.name}}</td>
+      </tr>
+      <tr *ngFor="let procMissing of allProcessSegmentCAM">
+        <td>{{procMissing}}</td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
       <tr>
         <td>------</td>
