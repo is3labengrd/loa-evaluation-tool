@@ -54,7 +54,7 @@
         <td>{{ resource.loaCognitive }}</td>
         <td>
           <ng-template [ngIf]="resource.assigned" [ngIfElse]="assignBlock">
-            <a routerLink="/edit-resource">Edit</a>
+            <a routerLink="/edit-resource/{{resource.resourceId}}">Edit</a>
             -
             <a (click)="deassign(resource).then(updateResourceList);">De-assign</a>
           </ng-template>
