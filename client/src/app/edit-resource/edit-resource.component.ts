@@ -84,7 +84,7 @@ export class EditResourceComponent implements OnInit {
           setTimeout(() => {
             this.performed = false;
             this.router.navigate(['resource-list']);
-          }, 3000);
+          }, 2000);
         }
       );
   }
