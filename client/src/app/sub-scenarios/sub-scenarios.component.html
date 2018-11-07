@@ -199,19 +199,19 @@
           d <br>
         </td>
         <td>
-          {{procSpecInfoObjGUI?.nshiptsDay}} <br>
-          {{procSpecInfoObjGUI?.hoursShift}}<br>
-          {{procSpecInfoObjGUI?.workingDaysYear}}
+          {{procSpecInfoObjGUI1?.nshiptsDay}} <br>
+          {{procSpecInfoObjGUI1?.hoursShift}}<br>
+          {{procSpecInfoObjGUI1?.workingDaysYear}}
         </td>
         <td>
-          {{procSpecInfoObjGUI?.nshiptsDay}} <br>
-          {{procSpecInfoObjGUI?.hoursShift}}<br>
-          {{procSpecInfoObjGUI?.workingDaysYear}}
+          {{procSpecInfoObjGUI2?.nshiptsDay}} <br>
+          {{procSpecInfoObjGUI2?.hoursShift}}<br>
+          {{procSpecInfoObjGUI2?.workingDaysYear}}
         </td>
         <td>
-          {{procSpecInfoObjGUI?.nshiptsDay}} <br>
-          {{procSpecInfoObjGUI?.hoursShift}}<br>
-          {{procSpecInfoObjGUI?.workingDaysYear}}
+          {{procSpecInfoObjGUI3?.nshiptsDay}} <br>
+          {{procSpecInfoObjGUI3?.hoursShift}}<br>
+          {{procSpecInfoObjGUI3?.workingDaysYear}}
         </td>
       </tr>
       <tr>
@@ -225,9 +225,9 @@
         <td class="roto  align-middle" rowspan="2">Prod.</td>
         <td>Number of produced pieces</td>
         <td>units/h</td>
-        <td>{{nprodPiecePerHoursGUI}}</td>
-        <td>{{nprodPiecePerHoursGUI}}</td>
-        <td>{{nprodPiecePerHoursGUI}}</td>
+        <td>{{nprodPiecePerHoursGUI1}}</td>
+        <td>{{nprodPiecePerHoursGUI2}}</td>
+        <td>{{nprodPiecePerHoursGUI3}}</td>
       </tr>
       <tr>
         <td>Number of produced pieces</td>
@@ -249,17 +249,17 @@
           l/h
         </td>
         <td>
-          {{procSpecInfoObjGUI?.propWCPerHours}}<br>
+          {{procSpecInfoObjGUI1?.propWCPerHours}}<br>
           {{resourceInfo1?.lcNOperMachine}}<br>
           {{subscenario1?.rateOfPart}}
         </td>
         <td>
-          {{procSpecInfoObjGUI?.propWCPerHours}}<br>
+          {{procSpecInfoObjGUI2?.propWCPerHours}}<br>
           {{resourceInfo2?.lcNOperMachine}}<br>
-          {{subscenario3?.rateOfPart}}
+          {{subscenario2?.rateOfPart}}
         </td>
         <td>
-         {{procSpecInfoObjGUI?.propWCPerHours}} <br>
+         {{procSpecInfoObjGUI3?.propWCPerHours}} <br>
          {{resourceInfo3?.lcNOperMachine}} <br>
          {{subscenario3?.rateOfPart}}
         </td>
@@ -268,8 +268,8 @@
         <td>Labour costs</td>
         <td>l/units</td>
         <td>{{subscenario1?.labourCost}}</td>
-        <td>{{subscenario1?.labourCost}}</td>
-        <td>{{subscenario1?.labourCost}}</td>
+        <td>{{subscenario2?.labourCost}}</td>
+        <td>{{subscenario3?.labourCost}}</td>
       </tr>
       <tr>
         <td>
@@ -288,14 +288,14 @@
           {{resourceInfo1?.ecElePrice}}
         </td>
         <td>
-          {{resourceInfo1?.ecAEleConsumFun}}<br>
-          {{resourceInfo1?.ecAEleConsumSb}}<br>
-          {{resourceInfo1?.ecElePrice}}
+          {{resourceInfo2?.ecAEleConsumFun}}<br>
+          {{resourceInfo2?.ecAEleConsumSb}}<br>
+          {{resourceInfo2?.ecElePrice}}
         </td>
         <td>
-          {{resourceInfo1?.ecAEleConsumFun}}<br>
-          {{resourceInfo1?.ecAEleConsumSb}}<br>
-          {{resourceInfo1?.ecElePrice}}
+          {{resourceInfo3?.ecAEleConsumFun}}<br>
+          {{resourceInfo3?.ecAEleConsumSb}}<br>
+          {{resourceInfo3?.ecElePrice}}
         </td>
       </tr>
       <tr>
@@ -479,9 +479,10 @@
     </tbody>
   </table>
 
+
   <div  *ngIf="disableButton" class="btn-group d-flex justify-content-center">
     <button class="btn btn-primary" (click)="cancelScenariosValues()">Cancel</button>
-    <button class="btn btn-secondary" (click)="saveSubscenarios()">Save</button>
+    <button class="btn btn-secondary" (click)="saveSubscenarios()" data-toggle="modal"  data-target="#saveModal">Save</button>
   </div>
 
   <fieldset>
@@ -523,7 +524,27 @@
     </div>
     <span *ngIf="disableButton" class="btn-group d-flex justify-content-center">
       <button class="btn btn-primary" (click)="cancelUserSatisfaction()">Cancel</button>
-      <button class="btn btn-secondary" (click)="saveSubscenarios()" >Save LoA</button>
+      <button class="btn btn-secondary" (click)="saveSubscenarios()" data-toggle="modal"  data-target="#saveModal" >Save LoA</button>
     </span>
   </fieldset>
+</div>
+
+<!-- Modal Save operation -->
+<div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="saveModalLabel"><p class="text-success">Successful</p></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Sub Scenario Matrix has been saved.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

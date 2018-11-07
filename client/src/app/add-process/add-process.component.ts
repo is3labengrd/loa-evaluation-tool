@@ -109,7 +109,7 @@ addSubProcessL1(pkTbId) {
 
 const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
 // tslint:disable-next-line:max-line-length
-return this.http.post(subProcUrl, {'fkTbAceProSeq': pkTbId, 'name': this.lvl1selection.name, 'varProSeqId': this.lvl1selection.processSegmentId, 'proLevel': this.lvl1selection.level})
+return this.http.post(subProcUrl, {'fkTbAceProSeq': this.id, 'name': this.lvl1selection.name, 'varProSeqId': this.lvl1selection.processSegmentId, 'proLevel': this.lvl1selection.level})
   .toPromise()
   .then((res: any) => {
     if (res.pkTbId != null) {
@@ -136,7 +136,7 @@ addSubProcessL2(pkTbId) {
   const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
 if (this.lvl2selection != null) {
   // tslint:disable-next-line:max-line-length
-  return this.http.post(subProcUrl, {'fkTbAceProSeq': pkTbId, 'name': this.lvl2selection.name, 'varProSeqId': this.lvl2selection.processSegmentId, 'proLevel': this.lvl2selection.level})
+  return this.http.post(subProcUrl, {'fkTbAceProSeq': this.id, 'name': this.lvl2selection.name, 'varProSeqId': this.lvl2selection.processSegmentId, 'proLevel': this.lvl2selection.level})
        .toPromise()
        .then((res: any) => {
         if (res.pkTbId != null) {
@@ -157,7 +157,7 @@ const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
 
 if (this.lvl3selection != null) {
   // tslint:disable-next-line:max-line-length
-  return this.http.post(subProcUrl, {'fkTbAceProSeq': pkTbId, 'name': this.lvl3selection.name, 'varProSeqId': this.lvl3selection.processSegmentId, 'proLevel': this.lvl3selection.level})
+  return this.http.post(subProcUrl, {'fkTbAceProSeq': this.id, 'name': this.lvl3selection.name, 'varProSeqId': this.lvl3selection.processSegmentId, 'proLevel': this.lvl3selection.level})
          .toPromise()
          .then((res: any) => {
            if (res.pkTbId != null) {
