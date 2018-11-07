@@ -187,7 +187,7 @@ export class EditProcessComponent implements OnInit {
     addSubProcessL1(pkTbId) {
 
     const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
-    this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl1selection.name,"varProSeqId": this.lvl1selection.processSegmentId, "proLevel": this.lvl1selection.level})
+    this.http.post(subProcUrl, {"fkTbAceProSeq": this.cookie.mainProcessId,"name": this.lvl1selection.name,"varProSeqId": this.lvl1selection.processSegmentId, "proLevel": this.lvl1selection.level})
             .toPromise()
             .then((res:any) => {
               if (res.pkTbId != null) {
@@ -202,7 +202,7 @@ export class EditProcessComponent implements OnInit {
     const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
 
     if(this.lvl2selection != null){
-    this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl2selection.name,"varProSeqId": this.lvl2selection.processSegmentId, "proLevel": this.lvl2selection.level})
+    this.http.post(subProcUrl, {"fkTbAceProSeq": this.cookie.mainProcessId,"name": this.lvl2selection.name,"varProSeqId": this.lvl2selection.processSegmentId, "proLevel": this.lvl2selection.level})
            .toPromise()
            .then((res:any) => {
              if (res.pkTbId != null) {
@@ -219,7 +219,7 @@ export class EditProcessComponent implements OnInit {
     addSubProcessL3(pkTbId) {
     const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
     if(this.lvl3selection != null){
-    this.http.post(subProcUrl, {"fkTbAceProSeq": pkTbId,"name": this.lvl3selection.name,"varProSeqId": this.lvl3selection.processSegmentId, "proLevel": this.lvl3selection.level})
+    this.http.post(subProcUrl, {"fkTbAceProSeq": this.cookie.mainProcessId,"name": this.lvl3selection.name,"varProSeqId": this.lvl3selection.processSegmentId, "proLevel": this.lvl3selection.level})
            .toPromise()
            .then((res:any) => {
              this.pks.push(res.pkTbId);
