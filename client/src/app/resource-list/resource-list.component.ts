@@ -52,26 +52,6 @@ export class ResourceListComponent implements OnInit {
     this.updateResourceList();
   }
 
-  // tslint:disable-next-line:member-ordering
-  assigned: boolean;
-  // tslint:disable-next-line:member-ordering
-  deassigned: boolean;
-
-  assi() {
-    this.assigned = true;
-
-    setTimeout(() => {
-      this.assigned = false;
-    }, 1500);
-  }
-
-  deassi() {
-    this.deassigned = true;
-
-    setTimeout(() => {
-      this.deassigned = false;
-    }, 1500);
-  }
 
   updateResourceList = () => {
     // tslint:disable-next-line:prefer-const
