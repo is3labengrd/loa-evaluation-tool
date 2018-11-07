@@ -61,7 +61,7 @@ export class AddResourceComponent implements OnInit {
 
   save = () => {
 
-    this.performed = true;
+    // this.performed = true;
 
     return this.http
       .post(
@@ -72,7 +72,8 @@ export class AddResourceComponent implements OnInit {
       .then(
         () => {
           setTimeout(() => {
-            this.performed = false;
+            // this.performed = false;
+            alert('Operation has been performed.');
             this.router.navigate(['resource-list']);
           }, 1500);
         }
