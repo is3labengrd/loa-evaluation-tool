@@ -120,10 +120,24 @@
       <hr>
       <div class="btn-group d-flex justify-content-center">
         <input type="reset" class="btn btn-info">
-        <button class="btn btn-secondary" [disabled]="resourceIsIncomplete()" (click)="save()">Save</button>
+        <button class="btn btn-secondary" [disabled]="resourceIsIncomplete()" (click)="save()"
+        data-toggle="modal" data-target="#editModal">Save</button>
       </div>
     </fieldset>
   </form>
 
-  <span class="perform" [hidden]="!performed">Operation has been performed.</span>
+   <!-- Modal -->
+   <div class="modal fade" id="editModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          Operation has been performed.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="away();">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

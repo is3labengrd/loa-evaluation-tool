@@ -69,9 +69,12 @@ export class EditResourceComponent implements OnInit {
   // tslint:disable-next-line:member-ordering
   performed: boolean;
 
+  away() {
+    this.router.navigate(['resource-list']);
+  }
+
   save = () => {
 
-    this.performed = true;
 
     return this.http
       .put(
@@ -81,10 +84,6 @@ export class EditResourceComponent implements OnInit {
       .toPromise()
       .then(
         () => {
-          setTimeout(() => {
-            this.performed = false;
-            this.router.navigate(['resource-list']);
-          }, 1500);
         }
       );
   }

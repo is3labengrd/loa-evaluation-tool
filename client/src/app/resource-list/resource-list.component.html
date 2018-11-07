@@ -56,19 +56,44 @@
           <ng-template [ngIf]="resource.assigned" [ngIfElse]="assignBlock">
             <a routerLink="/edit-resource/{{resource.resourceId}}"  class="btn btn-link">Edit</a>
             -
-            <button (click)="deassign(resource).then(updateResourceList); deassi();" class="btn btn-link">De-assign</button>
+            <button (click)="deassign(resource).then(updateResourceList);"
+             data-toggle="modal" data-target="#deassignModal" class="btn btn-link" class="btn btn-link">De-assign</button>
           </ng-template>
           <ng-template #assignBlock>
-            <button (click)="assign(resource).then(updateResourceList); assi();" class="btn btn-link">Assign</button>
+            <button (click)="assign(resource).then(updateResourceList);"
+             data-toggle="modal" data-target="#assignModal" class="btn btn-link">Assign</button>
           </ng-template>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <div class="mt-3 mb-3">
-    <span class="assign" [hidden]="!assigned">Resource has been assigned.</span>
-    <span class="deassign" [hidden]="!deassigned">Resource has been de-assigned.</span>
+   <!-- assignModal -->
+   <div class="modal fade" id="assignModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          Resource has been assigned.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- deassignModal -->
+  <div class="modal fade" id="deassignModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          Resource has been de-assigned.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Pagination Menu -->
