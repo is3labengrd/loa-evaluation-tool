@@ -59,6 +59,10 @@ export class AddResourceComponent implements OnInit {
   // tslint:disable-next-line:member-ordering
   performed: boolean;
 
+  away() {
+    this.router.navigate(['resource-list']);
+  }
+
   save = () => {
 
     // this.performed = true;
@@ -71,11 +75,6 @@ export class AddResourceComponent implements OnInit {
       .toPromise()
       .then(
         () => {
-          setTimeout(() => {
-            // this.performed = false;
-            alert('Operation has been performed.');
-            this.router.navigate(['resource-list']);
-          }, 1500);
         }
       );
   }
