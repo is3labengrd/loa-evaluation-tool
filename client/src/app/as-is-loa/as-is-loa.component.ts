@@ -144,7 +144,5 @@ export class AsIsLOAComponent implements OnInit {
 
     this.getAnalysisData();
 
-    console.log(this.cookie);
-
   }
 }
