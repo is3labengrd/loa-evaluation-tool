@@ -1,5 +1,5 @@
 import { CookieService } from './../cookie.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -16,7 +16,8 @@ export class HTAAnalysisComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) { }
 
   selectedSubprocess = this.cookieService
@@ -240,7 +241,8 @@ export class HTAAnalysisComponent implements OnInit {
 
       setTimeout(() => {
         this.sucsess = false;
-      }, 3000);
+        this.router.navigate(['main-analysis']);
+      }, 1500);
 
       this.http
       .put(
