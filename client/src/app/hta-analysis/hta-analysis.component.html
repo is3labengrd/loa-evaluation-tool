@@ -132,14 +132,23 @@
       </table>
     </fieldset>
 
-    <div>
-      <span class='empty' [hidden]="!errorSpan">Number field must not be empty and must not be less than 1 and greater than 7.</span>
-      <span class='perform' [hidden]="!sucsess">Operation performed.</span>
+    <!-- saveModal -->
+   <div class="modal fade" id="saveModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          Operation performed.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="away()">OK</button>
+        </div>
+      </div>
     </div>
+  </div>
 
     <div class="btn-group" style="justify-content: center; width: 100%;">
       <button class="btn btn-secondary" (click)="loaInfoRequest.possibility=false">Cancel</button>
-      <button class="btn btn-primary" (click)="saveLoaInfo(minLoa.value, maxLoa.value)" >Save</button>
+      <button class="btn btn-primary" (click)="saveLoaInfo(minLoa.value, maxLoa.value)"  data-toggle="modal" data-target="#saveModal" >Save</button>
     </div>
   </form>
 </div>

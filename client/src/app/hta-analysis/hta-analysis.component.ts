@@ -220,29 +220,11 @@ export class HTAAnalysisComponent implements OnInit {
       );
   }
 
-  // tslint:disable-next-line:member-ordering
-  errorSpan: boolean;
-  // tslint:disable-next-line:member-ordering
-  sucsess: boolean;
+  away() {
+    this.router.navigate(['main-analysis']);
+  }
 
   saveLoaInfo(min, max) {
-
-    if (min === '' || max === '' || min < 1 || min > 7 || max < 1 || max > 7) {
-      this.errorSpan = true;
-      this.sucsess = false;
-
-      setTimeout(() => {
-        this.errorSpan = false;
-      }, 5000);
-
-    } else {
-      this.errorSpan = false;
-      this.sucsess = true;
-
-      setTimeout(() => {
-        this.sucsess = false;
-        this.router.navigate(['main-analysis']);
-      }, 1500);
 
       this.http
       .put(
@@ -253,7 +235,3 @@ export class HTAAnalysisComponent implements OnInit {
       }
     }
 
-
-
-
-}
