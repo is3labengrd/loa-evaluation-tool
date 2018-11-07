@@ -62,7 +62,7 @@ export class ResourceListComponent implements OnInit {
 
     setTimeout(() => {
       this.assigned = false;
-    }, 2000);
+    }, 1500);
   }
 
   deassi() {
@@ -70,7 +70,7 @@ export class ResourceListComponent implements OnInit {
 
     setTimeout(() => {
       this.deassigned = false;
-    }, 2000);
+    }, 1500);
   }
 
   updateResourceList = () => {
