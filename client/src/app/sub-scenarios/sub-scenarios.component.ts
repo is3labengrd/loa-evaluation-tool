@@ -14,7 +14,11 @@ import { CookieService } from '../cookie.service';
 export class SubScenariosComponent implements OnInit {
 
   nprodPiecePerHours: number;
-  nprodPiecePerHoursGUI: number;
+  nprodPiecePerHoursGUI1: number;
+  nprodPiecePerHoursGUI2: number;
+  nprodPiecePerHoursGUI3: number;
+
+
   subscenario1 = new Subscenario("1");
   subscenario2 = new Subscenario("2");
   subscenario3 = new Subscenario("3");
@@ -31,9 +35,15 @@ export class SubScenariosComponent implements OnInit {
   subScenarioID2: number = null;
   subScenarioID3: number = null;
 
- procSpecInfoObj: any = { nshiptsDay: null, hoursShift: null, workingDaysYear: null, propWCPerHours: null, fkTbAceSubProLev: null};
+  procSpecInfoObj: any = { nshiptsDay: null, hoursShift: null, workingDaysYear: null, propWCPerHours: null, fkTbAceSubProLev: null};
 
-  procSpecInfoObjGUI: any;
+  procSpecInfoObjGUI1: any;
+  procSpecInfoObjGUI2: any;
+  procSpecInfoObjGUI3: any;
+
+
+  perform: boolean;
+
   sub: { sub1: any, sub2: any, sub3: any } =
     { sub1: null, sub2: null, sub3: null };
 
@@ -67,6 +77,10 @@ export class SubScenariosComponent implements OnInit {
   hoursPerYear: number;
   productsNumYear: number;
 
+  isSubScenario1Present: boolean = false;
+  isSubScenario2Present: boolean = false;
+  isSubScenario3Present: boolean = false;
+
 
   constructor(private http: HttpClient, private _processListService: CookieService) { }
 
@@ -80,6 +94,7 @@ export class SubScenariosComponent implements OnInit {
     this.subScenarioGET();
     this.getResource();
     this.checkMandatoryData();
+
   }
 
   getResource() {
@@ -160,9 +175,41 @@ checkMandatoryData() {
 
   createSubScenarios(): void {
 
-    this.subscenario1.processTime=this.selRes1ProcTime;
-    this.subscenario2.processTime=this.selRes2ProcTime;
-    this.subscenario3.processTime=this.selRes3ProcTime;
+    if(this.subscenario1.fkTbAceRes!=null)
+        this.isSubScenario1Present=true;
+
+    if(this.subscenario2.fkTbAceRes!=null)
+        this.isSubScenario2Present=true;
+
+    if(this.subscenario3.fkTbAceRes!=null)
+       this.isSubScenario3Present=true;
+
+    if(this.isSubScenario1Present==true)
+      this.subscenario1.processTime=this.selRes1ProcTime;
+
+    if(this.isSubScenario2Present==true)
+      this.subscenario2.processTime=this.selRes2ProcTime;
+
+    if(this.isSubScenario3Present==true)
+      this.subscenario3.processTime=this.selRes3ProcTime;
+
+    if(this.isSubScenario1Present==true)
+      this.nprodPiecePerHoursGUI1 = this.nprodPiecePerHours;
+
+    if(this.isSubScenario2Present==true)
+      this.nprodPiecePerHoursGUI2 = this.nprodPiecePerHours;
+
+    if(this.isSubScenario3Present==true)
+      this.nprodPiecePerHoursGUI3 = this.nprodPiecePerHours;
+
+    if(this.isSubScenario1Present==true)
+    this.procSpecInfoObjGUI1 = this.procSpecInfoObj;
+
+    if(this.isSubScenario2Present==true)
+    this.procSpecInfoObjGUI2 = this.procSpecInfoObj;
+
+    if(this.isSubScenario3Present==true)
+    this.procSpecInfoObjGUI3 = this.procSpecInfoObj;
 
     this.updateHoursPerYear();
     this.updateNumbersNumYear();
@@ -179,8 +226,7 @@ checkMandatoryData() {
     this.updateAssemblyCostsTotal()
 
 
-    this.nprodPiecePerHoursGUI = this.nprodPiecePerHours;
-    this.procSpecInfoObjGUI = this.procSpecInfoObj;
+
 
     this.checkMandatoryData();
 
@@ -275,28 +321,49 @@ checkMandatoryData() {
 
   updateHoursPerYear(): void {
 
-    //TODO: add checks if these values are not null
+    if(this.isSubScenario1Present==true)
     this.subscenario1.hoursPerYears = this.procSpecInfoObj.nshiptsDay * this.procSpecInfoObj.hoursShift * this.procSpecInfoObj.workingDaysYear;
+
+    if(this.isSubScenario2Present==true)
     this.subscenario2.hoursPerYears = this.procSpecInfoObj.nshiptsDay * this.procSpecInfoObj.hoursShift * this.procSpecInfoObj.workingDaysYear;
+
+    if(this.isSubScenario3Present==true)
     this.subscenario3.hoursPerYears = this.procSpecInfoObj.nshiptsDay * this.procSpecInfoObj.hoursShift * this.procSpecInfoObj.workingDaysYear;
   }
 
   updateNumbersNumYear(): void {
+
+    if(this.isSubScenario1Present==true)
     this.subscenario1.nprodPieces = this.subscenario1.hoursPerYears * this.nprodPiecePerHours;
+
+    if(this.isSubScenario2Present==true)
     this.subscenario2.nprodPieces = this.subscenario2.hoursPerYears * this.nprodPiecePerHours;
+
+    if(this.isSubScenario3Present==true)
     this.subscenario3.nprodPieces = this.subscenario3.hoursPerYears * this.nprodPiecePerHours;
   }
 
   updateRateParticipationPerHour(): void {
+
+    if(this.isSubScenario1Present==true)
     this.subscenario1.rateOfPart = this.roundValue((this.nprodPiecePerHours * this.selRes1ProcTime) / 3600);
+
+    if(this.isSubScenario2Present==true)
     this.subscenario2.rateOfPart = this.roundValue((this.nprodPiecePerHours * this.selRes2ProcTime) / 3600);
+
+    if(this.isSubScenario3Present==true)
     this.subscenario3.rateOfPart = this.roundValue((this.nprodPiecePerHours * this.selRes3ProcTime) / 3600);
   }
 
   updateLabourCost(): void {
 
+    if(this.isSubScenario1Present==true)
     this.subscenario1.labourCost = this.roundValue(this.procSpecInfoObj.propWCPerHours * this.resourceInfo1.lcNOperMachine * this.subscenario1.rateOfPart / this.procSpecInfoObj.workingDaysYear);
+
+    if(this.isSubScenario2Present==true)
     this.subscenario2.labourCost = this.roundValue(this.procSpecInfoObj.propWCPerHours * this.resourceInfo2.lcNOperMachine * this.subscenario2.rateOfPart / this.procSpecInfoObj.workingDaysYear);
+
+    if(this.isSubScenario3Present==true)
     this.subscenario3.labourCost = this.roundValue(this.procSpecInfoObj.propWCPerHours * this.resourceInfo3.lcNOperMachine * this.subscenario3.rateOfPart / this.procSpecInfoObj.workingDaysYear);
 
   }
@@ -304,39 +371,54 @@ checkMandatoryData() {
   updateEnergyCosts(): void {
 
     //TODO check if the calculation of energyCosts if correct: the results is always the same in all scenarios
+    if(this.isSubScenario1Present==true)
     this.subscenario1.energyCost = this.roundValue((this.resourceInfo1.ecAEleConsumFun * this.resourceInfo1.ecElePrice * this.selRes1ProcTime) / 3600 + ((3600 - this.selRes1ProcTime * this.nprodPiecePerHours) / (this.nprodPiecePerHours * 3600)) * this.resourceInfo1.ecAEleConsumSb * this.resourceInfo1.ecElePrice);
+
+    if(this.isSubScenario2Present==true)
     this.subscenario2.energyCost = this.roundValue((this.resourceInfo2.ecAEleConsumFun * this.resourceInfo2.ecElePrice * this.selRes2ProcTime) / 3600 + ((3600 - this.selRes2ProcTime * this.nprodPiecePerHours) / (this.nprodPiecePerHours * 3600)) * this.resourceInfo2.ecAEleConsumSb * this.resourceInfo2.ecElePrice);
+
+    if(this.isSubScenario3Present==true)
     this.subscenario3.energyCost = this.roundValue((this.resourceInfo3.ecAEleConsumFun * this.resourceInfo3.ecElePrice * this.selRes3ProcTime) / 3600 + ((3600 - this.selRes3ProcTime * this.nprodPiecePerHours) / (this.nprodPiecePerHours * 3600)) * this.resourceInfo3.ecAEleConsumSb * this.resourceInfo3.ecElePrice);
     }
 
   updateMaintenanceCosts(): void {
+
+    if(this.isSubScenario1Present==true){
     if (this.resourceInfo1.mcAMaintCosts == null) {
       this.subscenario1.maintCost = this.resourceInfo1.mcAMaintCostsPerc * this.resourceInfo1.idMacPurhValue;
     } else {
       this.subscenario1.maintCost = this.resourceInfo1.mcAMaintCosts;
     }
+    }
 
+    if(this.isSubScenario2Present==true){
     if (this.resourceInfo2.mcAMaintCosts == null) {
       this.subscenario2.maintCost = this.resourceInfo2.mcAMaintCostsPerc * this.resourceInfo2.idMacPurhValue;
     } else {
       this.subscenario2.maintCost = this.resourceInfo2.mcAMaintCosts;
     }
+    }
 
-
+    if(this.isSubScenario3Present==true){
     if (this.resourceInfo3.mcAMaintCosts == null) {
       this.subscenario3.maintCost = this.resourceInfo3.mcAMaintCostsPerc * this.resourceInfo3.idMacPurhValue;
     } else {
       this.subscenario3.maintCost = this.resourceInfo3.mcAMaintCosts;
     }
-
+    }
 
 
   }
 
   updateAnnualSpaceCosts(): void {
 
+    if(this.isSubScenario1Present==true)
     this.subscenario1.annualSpaceCost = this.resourceInfo1.rcCostsMMonth * 12 * this.resourceInfo1.rcInstSurface;
+
+    if(this.isSubScenario2Present==true)
     this.subscenario2.annualSpaceCost = this.resourceInfo2.rcCostsMMonth * 12 * this.resourceInfo2.rcInstSurface;
+
+    if(this.isSubScenario3Present==true)
     this.subscenario3.annualSpaceCost = this.resourceInfo3.rcCostsMMonth * 12 * this.resourceInfo3.rcInstSurface;
 
   }
@@ -344,59 +426,100 @@ checkMandatoryData() {
   updateImputedDepreciation(): void {
     var num1, num2, num3;
 
+    if(this.isSubScenario1Present==true)
     num1 = (this.resourceInfo1.idMacPurhValue - this.resourceInfo1.idMacSalesValue) / this.resourceInfo1.idEcoUsefullLife;
+
+    if(this.isSubScenario2Present==true)
     num2 = (this.resourceInfo2.idMacPurhValue - this.resourceInfo2.idMacSalesValue) / this.resourceInfo2.idEcoUsefullLife;
+
+    if(this.isSubScenario3Present==true)
     num3 = (this.resourceInfo3.idMacPurhValue - this.resourceInfo3.idMacSalesValue) / this.resourceInfo3.idEcoUsefullLife;
 
+    if(this.isSubScenario1Present==true){
     if (!isNaN(num1)) {
       this.subscenario1.inputedDepreciation = this.roundValue(num1);
     } else {
       this.subscenario1.inputedDepreciation = 0;
     }
+    }
 
+    if(this.isSubScenario2Present==true){
     if (!isNaN(num2)) {
       this.subscenario2.inputedDepreciation = this.roundValue(num2);
     } else {
       this.subscenario2.inputedDepreciation = 0;
     }
+    }
 
+    if(this.isSubScenario3Present==true){
     if (!isNaN(num3)) {
       this.subscenario3.inputedDepreciation = this.roundValue(num3);
     } else {
       this.subscenario3.inputedDepreciation = 0;
     }
+    }
 
   }
 
   updateAccruedInterestCosts(): void {
+
+    if(this.isSubScenario1Present==true)
     this.subscenario1.accruedIntCosts = this.roundValue(((this.resourceInfo1.idMacPurhValue + this.resourceInfo1.idMacSalesValue) / 2) * this.resourceInfo1.icInterRate);
+
+    if(this.isSubScenario2Present==true)
     this.subscenario2.accruedIntCosts = this.roundValue(((this.resourceInfo2.idMacPurhValue + this.resourceInfo2.idMacSalesValue) / 2) * this.resourceInfo2.icInterRate);
+
+    if(this.isSubScenario3Present==true)
     this.subscenario3.accruedIntCosts = this.roundValue(((this.resourceInfo3.idMacPurhValue + this.resourceInfo3.idMacSalesValue) / 2) * this.resourceInfo3.icInterRate);
  }
 
   updateVariableCostsTotal(): void {
+
+    if(this.isSubScenario1Present==true)
     this.subscenario1.varCostTotal = this.roundValue(this.subscenario1.labourCost * this.subscenario1.energyCost);
+
+    if(this.isSubScenario2Present==true)
     this.subscenario2.varCostTotal = this.roundValue(this.subscenario2.labourCost * this.subscenario2.energyCost);
+
+    if(this.isSubScenario3Present==true)
     this.subscenario3.varCostTotal = this.roundValue(this.subscenario3.labourCost * this.subscenario3.energyCost);
 
    }
 
   updateFixedCostsTotal(): void {
+
+    if(this.isSubScenario1Present==true)
     this.subscenario1.fixedCostTotal = this.roundValue((this.subscenario1.maintCost + this.subscenario1.annualSpaceCost + this.subscenario1.inputedDepreciation + this.subscenario1.inputedDepreciation) / this.subscenario1.nprodPieces);
+
+    if(this.isSubScenario2Present==true)
     this.subscenario2.fixedCostTotal = this.roundValue((this.subscenario2.maintCost + this.subscenario2.annualSpaceCost + this.subscenario2.inputedDepreciation + this.subscenario2.inputedDepreciation) / this.subscenario2.nprodPieces);
+
+    if(this.isSubScenario3Present==true)
     this.subscenario3.fixedCostTotal = this.roundValue((this.subscenario3.maintCost + this.subscenario3.annualSpaceCost + this.subscenario3.inputedDepreciation + this.subscenario3.inputedDepreciation) / this.subscenario3.nprodPieces);
   }
 
   updateAssemblyCostsPerPiece(): void {
+
+    if(this.isSubScenario1Present==true)
     this.subscenario1.assemblyCostPerPiece = this.roundValue(this.subscenario1.varCostTotal + this.subscenario1.fixedCostTotal);
+
+    if(this.isSubScenario2Present==true)
     this.subscenario2.assemblyCostPerPiece = this.roundValue(this.subscenario2.varCostTotal + this.subscenario2.fixedCostTotal);
+
+    if(this.isSubScenario3Present==true)
     this.subscenario3.assemblyCostPerPiece = this.roundValue(this.subscenario3.varCostTotal + this.subscenario3.fixedCostTotal);
 
   }
 
   updateAssemblyCostsTotal(): void {
+
+    if(this.isSubScenario1Present==true)
     this.subscenario1.assemblyCosts = this.roundValue(this.subscenario1.assemblyCostPerPiece + this.subscenario1.nprodPieces);
+
+    if(this.isSubScenario2Present==true)
     this.subscenario2.assemblyCosts = this.roundValue(this.subscenario2.assemblyCostPerPiece + this.subscenario2.nprodPieces);
+
+    if(this.isSubScenario3Present==true)
     this.subscenario3.assemblyCosts = this.roundValue(this.subscenario3.assemblyCostPerPiece + this.subscenario3.nprodPieces);
    }
 
@@ -408,6 +531,9 @@ checkMandatoryData() {
   setAll = (obj, val) => Object.keys(obj).forEach(k => obj[k] = val);
 
   cancelScenariosValues(): void {
+    this.nprodPiecePerHoursGUI1=null;
+    this.nprodPiecePerHoursGUI2=null;
+    this.nprodPiecePerHoursGUI3=null;
     this.setAll(this.procSpecInfoObj, null);
     this.nprodPiecePerHours=null;
     this.selRes1ProcTime=null;
@@ -437,63 +563,78 @@ checkMandatoryData() {
 
   saveSubscenarios(): void{
 
+  if(this.isSubScenario1Present==true){
   this.subscenario1.fkTbAceProSeq=this.cookie.mainProcessId;
   this.subscenario1.fkTbAceSubProLev=this.getFkAceSubProLevId(this.cookie);
+  }
 
+  if(this.isSubScenario2Present==true){
   this.subscenario2.fkTbAceProSeq=this.cookie.mainProcessId;
   this.subscenario2.fkTbAceSubProLev=this.getFkAceSubProLevId(this.cookie);
+  }
 
+  if(this.isSubScenario3Present==true){
   this.subscenario3.fkTbAceProSeq=this.cookie.mainProcessId;
   this.subscenario3.fkTbAceSubProLev=this.getFkAceSubProLevId(this.cookie);
+  }
 
 
-
+  if(this.isSubScenario1Present==true){
   if(this.subScenarioID1==null){
   this.http
         .post(environment.apiUrl + '/v1/subscenarios', this.subscenario1)
         .toPromise().then((res:any) => {
             this.subScenarioID1=res.pkTbId;
+            this.perform=true;
           });
     }else{
-    //delete this.subscenario1.createDate;
-    //delete this.subscenario1.updateDate;
-    //console.log(this.subscenario1);
     this.http
             .put(environment.apiUrl + '/v1/subscenarios/'+this.subScenarioID1, this.subscenario1)
             .toPromise().then((res:any) => {
                this.subScenarioID1=res.pkTbId;
+               this.perform=true;
               });
     }
+    }
 
+    if(this.isSubScenario2Present==true){
     if(this.subScenarioID2==null){
     this.http
       .post(environment.apiUrl + '/v1/subscenarios', this.subscenario2)
       .toPromise().then((res:any) => {
            this.subScenarioID2=res.pkTbId;
+           this.perform=true;
         });
     }else{
      this.http
           .put(environment.apiUrl + '/v1/subscenarios/'+this.subScenarioID2, this.subscenario2)
           .toPromise().then((res:any) => {
                this.subScenarioID2=res.pkTbId;
+               this.perform=true;
             });
     }
+    }
 
+    if(this.isSubScenario3Present==true){
     if(this.subScenarioID3==null){
     this.http
       .post(environment.apiUrl + '/v1/subscenarios', this.subscenario3)
       .toPromise().then((res:any) => {
            this.subScenarioID3=res.pkTbId;
+           this.perform=true;
          });
      }else{
       this.http
            .put(environment.apiUrl + '/v1/subscenarios/'+this.subScenarioID3, this.subscenario3)
            .toPromise().then((res:any) => {
               this.subScenarioID3=res.pkTbId;
+              this.perform=true;
           });
      }
-  }
+     }
 
+
+    }
 
 
     productPlanningGET() {
@@ -547,13 +688,13 @@ checkMandatoryData() {
               .post(environment.apiUrl + '/v1/subscenarios/search',  postObj )
               .toPromise()
               .then((result:any) => {
-                 this.nprodPiecePerHoursGUI = this.nprodPiecePerHours;
-                 this.procSpecInfoObjGUI = this.procSpecInfoObj;
                  subscenarios = result;
                  subscenarios.forEach((element:any)=>  {
                     //console.log(element);
                     switch(element.scenarioNumber){
                     case 1:
+                        this.nprodPiecePerHoursGUI1 = this.nprodPiecePerHours;
+                        this.procSpecInfoObjGUI1 = this.procSpecInfoObj;
                         this.resourceInfo1=element.resource;
                         this.selectedRes1=this.resourceInfo1.name;
                         this.firstDropDownChanged(element.resource.name);
@@ -566,8 +707,11 @@ checkMandatoryData() {
                         element.fkTbAceRes=fkTbAceResID;
                         element.fkTbAceSubProLev=fkTbAceSubProLevID;
                         this.subscenario1=element;
+                        this.isSubScenario1Present=true;
                         break;
                     case 2:
+                       this.nprodPiecePerHoursGUI2 = this.nprodPiecePerHours;
+                       this.procSpecInfoObjGUI2 = this.procSpecInfoObj;
                        this.resourceInfo2=element.resource;
                        this.selectedRes2=this.resourceInfo2.name;
                        this.secondDropDownChanged(element.resource.name);
@@ -580,8 +724,11 @@ checkMandatoryData() {
                        element.fkTbAceRes=fkTbAceResID;
                        element.fkTbAceSubProLev=fkTbAceSubProLevID;
                        this.subscenario2=element;
+                       this.isSubScenario2Present=true;
                        break;
                     case 3:
+                       this.nprodPiecePerHoursGUI3 = this.nprodPiecePerHours;
+                       this.procSpecInfoObjGUI3 = this.procSpecInfoObj;
                        this.resourceInfo3=element.resource;
                        this.selectedRes3=this.resourceInfo3.name;
                        this.thirdDropDownChanged(element.resource.name);
@@ -594,6 +741,7 @@ checkMandatoryData() {
                        element.fkTbAceRes=fkTbAceResID;
                        element.fkTbAceSubProLev=fkTbAceSubProLevID;
                        this.subscenario3=element;
+                       this.isSubScenario3Present=true;
                        break;
                   }
 
@@ -605,6 +753,7 @@ checkMandatoryData() {
               err => { })
       }
 
+      //this method is not used
       resourceInfoGET(primaryKey, scenarioNumber) {
       this.http.get(environment.apiUrl + '/v1/resources/'+ primaryKey)
               .toPromise()
