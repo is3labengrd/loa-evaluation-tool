@@ -19,25 +19,25 @@ export class AddResourceComponent implements OnInit {
 
   selectedSubprocess = this
     .cookieService
-    .getCookie("selectedSubprocess");
+    .getCookie('selectedSubprocess');
 
   resourceInitialState = {
-    "name": null,
-    "loaPhysical": null,
-    "loaCognitive": null,
-    "lcNOperMachine": null,
-    "mcAMaintCosts": null,
-    "mcAMaintCostsPerc": null,
-    "rcInstSurface": null,
-    "rcCostsMMonth": null,
-    "idMacPurhValue": null,
-    "idMacSalesValue": null,
-    "idEcoUsefullLife": null,
-    "icInterRate": null,
-    "ecAEleConsumFun": null,
-    "ecAEleConsumSb": null,
-    "ecElePrice": null
-  }
+    'name': null,
+    'loaPhysical': null,
+    'loaCognitive': null,
+    'lcNOperMachine': null,
+    'mcAMaintCosts': null,
+    'mcAMaintCostsPerc': null,
+    'rcInstSurface': null,
+    'rcCostsMMonth': null,
+    'idMacPurhValue': null,
+    'idMacSalesValue': null,
+    'idEcoUsefullLife': null,
+    'icInterRate': null,
+    'ecAEleConsumFun': null,
+    'ecAEleConsumSb': null,
+    'ecElePrice': null
+  };
 
   resource = Object.seal(
     Object.assign({}, this.resourceInitialState)
@@ -56,7 +56,13 @@ export class AddResourceComponent implements OnInit {
     );
   }
 
+  // tslint:disable-next-line:member-ordering
+  performed: boolean;
+
   save = () => {
+
+    this.performed = true;
+
     return this.http
       .post(
         `${environment.apiUrl}/v1/resources`,
@@ -65,9 +71,12 @@ export class AddResourceComponent implements OnInit {
       .toPromise()
       .then(
         () => {
-          this.router.navigate(["resource-list"]);
+          setTimeout(() => {
+            this.performed = false;
+            this.router.navigate(['resource-list']);
+          }, 3000);
         }
-      )
+      );
   }
 
 }

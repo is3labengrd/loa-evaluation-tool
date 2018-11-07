@@ -16,7 +16,7 @@
     </tr>
     <tr>
       <td>Number of lower level sub-processes:</td>
-      <td style="border-right: 1px solid">{{cookie.totalNumberSubprocs}}</td>
+      <td style="border-right: 1px solid">{{cookie.subLevels}}</td>
       <td></td>
       <td></td>
     </tr>
@@ -32,37 +32,60 @@
     <th> Cognitive LoA: </th>
   </thead>
   <tbody>
-    <tr *ngFor="let subScen of subSceList">
+    <tr *ngFor="let subScen of subSceList; let i = index">
       <td>{{subScen?.subProc?.subprocessLevel.name}}</td>
       <td>
-        SC1 <input type="radio" name="subProX">{{subScen?.objList?.scenNumber1?.resource.name}}<br>
-        SC2 <input type="radio" name="subProX">{{subScen?.objList?.scenNumber2?.resource.name}}<br>
-        SC3 <input type="radio" name="subProX">{{subScen?.objList?.scenNumber3?.resource.name}}<br>
+        SC1 <input *ngIf="subScen?.objList?.scenNumber1?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber1?.resource.name+i}} value="{{subScen?.objList?.scenNumber1?.resource.name}}">{{subScen?.objList?.scenNumber1?.resource.name}}<br>
+        SC2 <input *ngIf="subScen?.objList?.scenNumber2?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber2?.resource.name+i}} value="{{subScen?.objList?.scenNumber2?.resource.name}}">{{subScen?.objList?.scenNumber2?.resource.name}}<br>
+        SC3 <input *ngIf="subScen?.objList?.scenNumber3?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber3?.resource.name+i}} value="{{subScen?.objList?.scenNumber3?.resource.name}}">{{subScen?.objList?.scenNumber3?.resource.name}}<br>
       </td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td align="center">
+        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber1?.resource.name">{{subScen?.objList?.scenNumber1?.assemCostTotal}}</ng-container><br>
+        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber2?.resource.name">{{subScen?.objList?.scenNumber2?.assemCostTotal}}</ng-container><br>
+        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber3?.resource.name">{{subScen?.objList?.scenNumber3?.assemCostTotal}}</ng-container>
+      </td>
+      <td align="center">
+        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber1?.resource.name">{{subScen?.objList?.scenNumber1?.usPhysicalLoa}}</ng-container><br>
+        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber2?.resource.name">{{subScen?.objList?.scenNumber2?.usPhysicalLoa}}</ng-container><br>
+        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber3?.resource.name">{{subScen?.objList?.scenNumber3?.usPhysicalLoa}}</ng-container>
+      </td>
+      <td align="center">
+        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber1?.resource.name">{{subScen?.objList?.scenNumber1?.usCognitiveLoa}}</ng-container> <br>
+        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber2?.resource.name">{{subScen?.objList?.scenNumber2?.usCognitiveLoa}}</ng-container> <br>
+        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber3?.resource.name">{{subScen?.objList?.scenNumber3?.usCognitiveLoa}}</ng-container>
+      </td>
+    </tr>
+
+    <tr *ngFor="let procMissing of allProcessSegmentCAM">
+      <td>{{procMissing}}</td>
+      <td>
+        SC1 <br>
+        SC2 <br>
+        SC3
+      </td>
+      <td align="center">0</td>
+      <td align="center">0</td>
+      <td align="center">0</td>
     </tr>
 
     <tr>
       <td></td>
-      <td> Total Cost: </td>
-      <td> 0 </td>
-      <td> Physical LoA: </td>
-      <td> 0 </td>
+      <td align="center"> Total Cost: </td>
+      <td align="center"> 0 </td>
+      <td align="center"> Physical LoA: </td>
+      <td align="center"> 0 </td>
     </tr>
     <tr>
       <td></td>
-      <td> Cost per Piece: </td>
-      <td> 0 </td>
-      <td> Cognitive LoA: </td>
-      <td> 0 </td>
+      <td align="center"> Cost per Piece: </td>
+      <td align="center"> 0 </td>
+      <td align="center"> Cognitive LoA: </td>
+      <td align="center"> 0 </td>
     </tr>
   </tbody>
 </table>
-
 <div class="btn-group d-flex justify-content-center border-top" style="padding-top: 15px; margin-bottom: 20px;">
-  <button class="btn btn-primary"> Cancel </button>
+  <button class="btn btn-primary" (click)="test()"> Cancel </button>
   <button cancel="btn btn-secondary"> Calculate </button>
   <button cancel="btn btn-secondary"> Save </button>
 </div>
