@@ -43,7 +43,7 @@
       <div class="row data">
         <span class="col-6">
           Annual maintenance costs (euro/a):
-          <input type="text" name="mcAMaintCosts" [(ngModel)]="resource.mcAMaintCosts" class="float-right" min="0" step="0.01" required>
+          <input type="number" class="float-right" name="mcAMaintCosts" [(ngModel)]="resource.mcAMaintCosts">
         </span>
         <span class="col-6">
           Annual maintenance costs (%):
@@ -60,9 +60,13 @@
             <input type="number" name="rcInstSurface" [(ngModel)]="resource.rcInstSurface" class="float-right" min="0" step="0.01" required>
           </span>
         <span class="col-6">
-            Cost per m<sup>2</sup> per month (euro/m<sup>2</sup>):
-            <input type="number" name="rcCostsMMonth" [(ngModel)]="resource.rcCostsMMonth" class="float-right" min="0" step="0.01" required>
-          </span>
+          Instalation surface (m<sup>2</sup>):
+          <input type="number" class="float-right" name="rcInstSurface" [(ngModel)]="resource.rcInstSurface">
+        </span>
+        <span class="col-6">
+          Cost per m<sup>2</sup> per month (euro/m<sup>2</sup>):
+          <input type="number" class="float-right" name="rcCostsMMonth" [(ngModel)]="resource.rcCostsMMonth">
+        </span>
       </div>
     </fieldset>
 
@@ -90,9 +94,9 @@
     <fieldset>
       <legend>Interest costs</legend>
       <div class="row data">
-            <span class="col-6"> Interest rate (%):
-            <input type="number" name="icInterRate" [(ngModel)]="resource.icInterRate" class="float-right" min="0" step="0.01" required></span>
-        <span class="col-6"></span>
+        <span class="col-6"> Interest rate (%):
+          <input type="number" class="float-right" name="icInterRate" [(ngModel)]="resource.icInterRate">
+        </span>
       </div>
     </fieldset>
 
@@ -100,15 +104,21 @@
       <legend>Energy costs</legend>
       <div class="row energy">
         <span class="col-6">Annual electricity consumption - functioning (kWh)</span>
-        <span class="col-6"> <input type="number" name="ecAEleConsumFun" [(ngModel)]="resource.ecAEleConsumFun" class="float-right" min="0" step="0.001" required > </span>
+        <span class="col-6">
+          <input type="number" class="float-right" name="ecAEleConsumFun" [(ngModel)]="resource.ecAEleConsumFun">
+        </span>
       </div>
       <div class="row energy">
         <span class="col-6">Annual electricity consumption - stand by (kWh)</span>
-        <span class="col-6"> <input type="number" name="ecAEleConsumSb" [(ngModel)]="resource.ecAEleConsumSb" class="float-right" min="0" step="0.001" required> </span>
+        <span class="col-6">
+          <input type="number" class="float-right" name="ecAEleConsumSb" [(ngModel)]="resource.ecAEleConsumSb">
+        </span>
       </div>
       <div class="row data energy">
         <span class="col-6">Electricity price (euro/kWh)</span>
-        <span class="col-6"> <input type="number" name="ecElePrice" [(ngModel)]="resource.ecElePrice" class="float-right" min="0" step="0.001" required> </span>
+        <span class="col-6">
+          <input type="number" class="float-right" name="ecElePrice" [(ngModel)]="resource.ecElePrice">
+        </span>
       </div>
       <hr>
       <div class="btn-group d-flex justify-content-center" >
