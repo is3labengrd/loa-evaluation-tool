@@ -28,7 +28,7 @@
       <tr>
         <td>Level 1:</td>
         <td>
-          <select [(ngModel)]="selectedModule1" (ngModelChange)="firstDropDownChanged($event)">
+          <select [(ngModel)]="selectedModule1" (ngModelChange)="firstDropDownChanged($event)" style="width: 280px;">
               <option *ngFor="let module1 of _values1[0]" [value]="module1.name">{{module1.name}}</option>
             </select>
         </td>
@@ -36,7 +36,7 @@
       <tr>
         <td>Level 2:</td>
         <td>
-          <select *ngIf="(_values2.length > 0)" [(ngModel)]="selectedModule2" (ngModelChange)="secondDropDownChanged($event)">
+          <select *ngIf="(_values2.length > 0)" [(ngModel)]="selectedModule2" (ngModelChange)="secondDropDownChanged($event)" style="width: 280px;">
               <option *ngFor="let module2 of _values2" [value]="module2.name">{{module2.name}}</option>
             </select>
         </td>
@@ -44,7 +44,7 @@
       <tr>
         <td>Level 3:</td>
         <td>
-          <select *ngIf="(_values3.length > 0)" [(ngModel)]="selectedModule3" (ngModelChange)="thirdDropDownChanged($event)">
+          <select *ngIf="(_values3.length > 0)" [(ngModel)]="selectedModule3" (ngModelChange)="thirdDropDownChanged($event)" style="width: 280px;">
              <option *ngFor="let module3 of _values3" [value]="module3.name">{{module3.name}}</option>
             </select>
         </td>
