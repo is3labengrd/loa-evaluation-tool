@@ -27,26 +27,35 @@
     <tbody>
       <tr>
         <td>Level 1:</td>
-        <td>
+        <td *ngIf="!disable">
           <select [(ngModel)]="selectedModule1" (ngModelChange)="firstDropDownChanged($event)" style="width: 280px;">
               <option *ngFor="let module1 of _values1[0]" [value]="module1.name">{{module1.name}}</option>
             </select>
         </td>
+        <td *ngIf="disable">
+          {{selectedModule1}}
+        </td>
       </tr>
       <tr>
         <td>Level 2:</td>
-        <td>
+        <td *ngIf="!disable">
           <select *ngIf="(_values2.length > 0)" [(ngModel)]="selectedModule2" (ngModelChange)="secondDropDownChanged($event)" style="width: 280px;">
               <option *ngFor="let module2 of _values2" [value]="module2.name">{{module2.name}}</option>
             </select>
         </td>
+        <td *ngIf="disable">
+          {{selectedModule2}}
+        </td>
       </tr>
       <tr>
         <td>Level 3:</td>
-        <td>
+        <td *ngIf="!disable">
           <select *ngIf="(_values3.length > 0)" [(ngModel)]="selectedModule3" (ngModelChange)="thirdDropDownChanged($event)" style="width: 280px;">
              <option *ngFor="let module3 of _values3" [value]="module3.name">{{module3.name}}</option>
             </select>
+        </td>
+        <td *ngIf="disable">
+          {{selectedModule3}}
         </td>
       </tr>
     </tbody>
@@ -54,7 +63,7 @@
 
   <br>
 
-  <div class="btn-group"  role="group" >
+  <div *ngIf="!disable" class="btn-group"  role="group" >
       <button type="button" class="btn btn-secondary" (click)="refresh()">Cancel</button>
       <button type="button" class="btn btn-primary" (click)="save()">Save</button>
     </div>

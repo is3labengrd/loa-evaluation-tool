@@ -39,13 +39,15 @@ export class EditProcessComponent implements OnInit {
   SegmentList:Array<any> = [];
   pks:Array<any> = [];
   cookie: any;
+  disable:boolean;
 
   constructor(private http: HttpClient, public router: Router, private route:ActivatedRoute,private _processListService: CookieService) {}
 
   ngOnInit() {
+      this.disable = false;
+
       this.id  = this.route.snapshot.params['id'];
       this.cookie = this._processListService.getCookie("selectedSubprocess");
-
       var promise2 = this.getSegmentList()
       promise2.then((x) => {
         this.http
@@ -55,10 +57,47 @@ export class EditProcessComponent implements OnInit {
             (main:any) => {
                 this.fetchFromCAM(main);
                 this.mainProcess.push(main);
+                this.getResourceList();
             }
           )
       });
+
+
     }
+
+   getResourceList(){
+      return this.http
+        .get(environment.apiUrl + '/v1/subprocess-level-resources')
+        .toPromise()
+        .then(
+          (res:any) => {
+           if(this.SegmentList[0].subProcessLevel3 != null){
+              for(let i in res){
+                if(res[i].subprocessLevel.pkTbId === this.SegmentList[0].subProcessLevel3.pkTbId){
+                  this.disable = true;
+                }
+              }
+            }else{
+              if(this.SegmentList[0].subProcessLevel2 != null){
+                 for(let i in res){
+                   if(res[i].subprocessLevel.pkTbId === this.SegmentList[0].subProcessLevel2.pkTbId){
+                     this.disable = true;
+                   }
+                 }
+            }else{
+              if(this.SegmentList[0].subProcessLevel1 != null){
+                 for(let i in res){
+                   if(res[i].subprocessLevel.pkTbId === this.SegmentList[0].subProcessLevel1.pkTbId){
+                     this.disable = true;
+                }
+              }
+            }
+          }
+        }
+      }
+    )
+  }
+
 
     getSegmentList() {
       return this.http
