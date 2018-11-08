@@ -91,13 +91,20 @@ export class SubScenariosComponent implements OnInit {
     this.cookie = this._processListService.getCookie("selectedSubprocess");
     this.productPlanningGET();
     this.procSpecInfoGET();
-    this.subScenarioGET();
-    this.getResource();
+
+
+
+    var promise2 = this.getResource();
+    promise2.then((x) => {
+       this.subScenarioGET();
+     });
+
+
     this.checkMandatoryData();
   }
 
   getResource() {
-    this.http
+    return this.http
       .get(environment.apiUrl + '/v1/resources')
       .toPromise()
       .then(
@@ -233,7 +240,6 @@ checkMandatoryData() {
   firstDropDownChanged(val: any) {
     this.firstdropdown = this.findObj(this.resourcesList[0], val);
     this.resourceInfo1 = this.firstdropdown;
-
     this.subscenario1.fkTbAceRes = this.firstdropdown.pkTbId;
 
     // console.log(this.selRes1ProcTime);
@@ -242,7 +248,6 @@ checkMandatoryData() {
   secondDropDownChanged(val: any) {
    this.seconddropdown = this.findObj(this.resourcesList[0], val);
    this.resourceInfo2 = this.seconddropdown;
-
    this.subscenario2.fkTbAceRes=this.seconddropdown.pkTbId;
 
   }
