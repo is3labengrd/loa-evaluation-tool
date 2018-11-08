@@ -93,23 +93,22 @@ public class VARProcessSegmentImpl {
 		return processSegmentId;
 	}
 
-	public static int countLowerLevel(String procList) throws IOException {
+	public static List<String> countLowerLevel(List<String> children, String procList, int counter) throws IOException {
 
-		List<String> List = new ArrayList<String>();
+		List<String> subList = new ArrayList<String>();
 
-		ObjectMapper objectMapper = new ObjectMapper();
-		JsonNode jsonNode = objectMapper.readTree(procList);
-		for(JsonNode addSpace : jsonNode.get("results").get("bindings")){
-			if(!List.contains(addSpace.get("isChildren").get("value").asText()))
-				List.add(addSpace.get("isChildren").get("value").asText());
-			if(!List.contains(addSpace.get("isFather").get("value").asText()))
-				List.add(addSpace.get("isFather").get("value").asText());
+		if (children.isEmpty()){
+			return subList;
 		}
 
-		return List.size()-1;
+		for(String child : children){
+			counter+=1;
+			subList.add(stringParser(child));
+			countLowerLevel(findChildren(child, procList),procList,counter);
+		}
 
+		return subList;
 	}
-
 
 
 	public static List<MainProcess> main() throws IOException {
@@ -117,14 +116,21 @@ public class VARProcessSegmentImpl {
 		String procList = getIsMadeOf();
 		List<String> fathers = findMain(procList);
 		List<MainProcess> mainProcesses = new ArrayList<MainProcess>();
+		int count = 0;
 
 		for(String father: fathers){
+
 			MainProcess mainP = new MainProcess();
 			mainP.setName(stringParser(father));
 			mainP.setProcessSegmentId(getProcessSegmentId(VARProcessSegment.getProcessSegmentAttribute(father)));
 			List<SubProcesses> subList = loop(findChildren(father, procList),procList,0);
 
-			mainP.setSubProcLowerLevel(countLowerLevel(procList));
+			for (String countLowLev : findChildren(father, procList)){
+				count += countLowerLevel(findChildren(countLowLev, procList), procList,0).size();
+
+			}
+
+			mainP.setSubProcLowerLevel(count);
 			mainP.setSubProcesses(subList);
 
 			mainProcesses.add(mainP);
