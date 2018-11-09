@@ -12,7 +12,7 @@ grunt.loadNpmTasks('grunt-war');
                 files: [
                     {
                         expand: true,
-                        cwd: 'dist',
+                        cwd: 'dist/LoAEvaluationTool',
                         src: ['**'],
                         dest: ''
                     }
