@@ -61,6 +61,8 @@ export class EditProcessComponent implements OnInit {
             }
           )
       });
+
+
     }
 
    getResourceList(){
@@ -69,14 +71,32 @@ export class EditProcessComponent implements OnInit {
         .toPromise()
         .then(
           (res:any) => {
-            for(let i in res){
-              if(res[i].subprocessLevel.fkTbAceProSeq === this.SegmentList[0].subProcessLevel1.pkTbId){
-                this.disable = true;
+           if(this.SegmentList[0].subProcessLevel3 != null){
+              for(let i in res){
+                if(res[i].subprocessLevel.pkTbId === this.SegmentList[0].subProcessLevel3.pkTbId){
+                  this.disable = true;
+                }
+              }
+            }else{
+              if(this.SegmentList[0].subProcessLevel2 != null){
+                 for(let i in res){
+                   if(res[i].subprocessLevel.pkTbId === this.SegmentList[0].subProcessLevel2.pkTbId){
+                     this.disable = true;
+                   }
+                 }
+            }else{
+              if(this.SegmentList[0].subProcessLevel1 != null){
+                 for(let i in res){
+                   if(res[i].subprocessLevel.pkTbId === this.SegmentList[0].subProcessLevel1.pkTbId){
+                     this.disable = true;
+                }
               }
             }
           }
-        )
-    }
+        }
+      }
+    )
+  }
 
 
     getSegmentList() {
