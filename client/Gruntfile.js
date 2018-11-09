@@ -6,7 +6,7 @@ grunt.loadNpmTasks('grunt-war');
         war: {
             target: {
                 options: {
-                    war_dist_folder: 'C:/Users/Domenico/IdeaProjects/loa-evaluation-tool/client/dist', /* Folder where to generate the WAR. */
+                    war_dist_folder: 'dist', /* Folder where to generate the WAR. */
                     war_name: 'LoAEvaluationTool'                    /* The name fo the WAR file (.war will be the extension) */
                 },
                 files: [
