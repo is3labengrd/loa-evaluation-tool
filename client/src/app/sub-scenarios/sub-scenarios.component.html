@@ -6,9 +6,13 @@
         <h5 class="modal-title">Product planing</h5>
       </div>
       <div class="modal-body">
-        <div>Number of produced pieces per hour: <input type="number" id="nprodPiecePerHours"
-                                                        [(ngModel)]="nprodPiecePerHours" min="0"
-                                                        value="nprodPiecePerHours"></div>
+        <div>Number of produced pieces per hour: 
+          <input type="number" id="nprodPiecePerHours"
+            [(ngModel)]="nprodPiecePerHours" min="0"
+            style="width: 100px;" 
+            oninput="this.value=(parseInt(this.value)||0)"
+            value="nprodPiecePerHours">
+        </div>
         <br>
       </div>
       <div class="modal-footer">
@@ -27,19 +31,25 @@
         <h5 class="modal-title">Add process specific information</h5>
       </div>
       <div class="modal-body">
-        <div>Number of shifts per day: <input type="number" [(ngModel)]="procSpecInfoObj.nshiptsDay" name="nshiptsDay"
-                                              class="float-right" min="0" value="procSpecInfoObj?.nshiptsDay"></div>
+        <div>Number of shifts per day:
+          <input type="number" [(ngModel)]="procSpecInfoObj.nshiptsDay" name="nshiptsDay" style="width: 100px;"
+           class="float-right" min="0" value="procSpecInfoObj?.nshiptsDay" oninput="this.value=(parseInt(this.value)||0)">
+        </div>
         <br>
-        <div>Hours per shift: <input type="number" [(ngModel)]="procSpecInfoObj.hoursShift" name="hoursShift"
-                                     class="float-right" min="0" value="procSpecInfoObj?.hoursShift"></div>
+        <div>Hours per shift:
+          <input type="number" [(ngModel)]="procSpecInfoObj.hoursShift" name="hoursShift"  style="width: 100px;"
+            class="float-right" min="0" value="procSpecInfoObj?.hoursShift" oninput="this.value=(parseInt(this.value)||0)">
+        </div>
         <br>
-        <div>Working days per year: <input type="number" [(ngModel)]="procSpecInfoObj.workingDaysYear"
-                                           name="workingDaysYear" class="float-right" min="0"
-                                           value="procSpecInfoObj?.workingDaysYear"></div>
+        <div>Working days per year:
+          <input type="number" [(ngModel)]="procSpecInfoObj.workingDaysYear" name="workingDaysYear"  style="width: 100px;"
+           class="float-right" min="0" value="procSpecInfoObj?.workingDaysYear" oninput="this.value=(parseInt(this.value)||0)">
+        </div>
         <br>
-        <div>Proportional wage costs per hour: <input type="number" [(ngModel)]="procSpecInfoObj.propWCPerHours"
-                                                      name="propWCPerHours" class="float-right" min="0"
-                                                      value="procSpecInfoObj?.propWCPerHours"></div>
+        <div>Proportional wage costs per hour:
+          <input type="number" [(ngModel)]="procSpecInfoObj.propWCPerHours" name="propWCPerHours" style="width: 100px;"
+           class="float-right" min="0" value="procSpecInfoObj?.propWCPerHours" oninput="this.value=(parseInt(this.value)||0)">
+          </div>
         <br>
       </div>
       <div class="modal-footer">
@@ -99,9 +109,18 @@
           </tr>
           <tr>
             <td>Process time</td>
-            <td><input type="number" [(ngModel)]="selRes1ProcTime" id="selRes1ProcTime" min="1" max="7"></td>
-            <td><input type="number" [(ngModel)]="selRes2ProcTime" id="selRes2ProcTime" min="1" max="7"></td>
-            <td><input type="number" [(ngModel)]="selRes3ProcTime" id="selRes3ProcTime" min="1" max="7"></td>
+            <td>
+              <input type="number" [(ngModel)]="selRes1ProcTime" id="selRes1ProcTime" min="1" max="7"
+               oninput="this.value=(parseInt(this.value)||0)" style="width: 100px;">
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="selRes2ProcTime" id="selRes2ProcTime" min="1" max="7"
+               oninput="this.value=(parseInt(this.value)||0)" style="width: 100px;">
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="selRes3ProcTime" id="selRes3ProcTime" min="1" max="7"
+               oninput="this.value=(parseInt(this.value)||0)" style="width: 100px;">
+            </td>
           </tr>
           </tbody>
         </table>
@@ -511,6 +530,7 @@
     </button>
   </div>
 
+  <!-- User satisfaction -->
   <fieldset>
     <legend>User Satisfaction Information</legend>
     <div class="d-flex align-items-center">
@@ -534,22 +554,34 @@
         <tr>
           <td>Best LoA physical</td>
           <td>-</td>
-          <td><input type="number" [(ngModel)]="subscenario1.usPhysicalLoa" name="bestP1" min="1" max="7"
-                     value={{subscenario1?.usPhysicalLoa}}></td>
-          <td><input type="number" [(ngModel)]="subscenario2.usPhysicalLoa" name="bestP2" min="1" max="7"
-                     value={{subscenario2?.usPhysicalLoa}}></td>
-          <td><input type="number" [(ngModel)]="subscenario3.usPhysicalLoa" name="bestP3" min="1" max="7"
-                     value={{subscenario3?.usPhysicalLoa}}></td>
+          <td>
+            <input type="number" [(ngModel)]="subscenario1.usPhysicalLoa" name="bestP1" min="1" max="7"
+              value={{subscenario1?.usPhysicalLoa}} oninput="this.value=(parseInt(this.value)||0)">
+          </td>
+          <td>
+            <input type="number" [(ngModel)]="subscenario2.usPhysicalLoa" name="bestP2" min="1" max="7"
+              value={{subscenario2?.usPhysicalLoa}} oninput="this.value=(parseInt(this.value)||0)">
+          </td>
+          <td>
+            <input type="number" [(ngModel)]="subscenario3.usPhysicalLoa" name="bestP3" min="1" max="7"
+              value={{subscenario3?.usPhysicalLoa}} oninput="this.value=(parseInt(this.value)||0)">
+          </td>
         </tr>
         <tr>
           <td>Best LoA cognitive</td>
           <td>-</td>
-          <td><input type="number" [(ngModel)]="subscenario1.usCognitiveLoa" name="bestC1" min="1" max="7"
-                     value={{subscenario1?.usCognitiveLoa}}></td>
-          <td><input type="number" [(ngModel)]="subscenario2.usCognitiveLoa" name="bestC2" min="1" max="7"
-                     value={{subscenario2?.usCognitiveLoa}}></td>
-          <td><input type="number" [(ngModel)]="subscenario3.usCognitiveLoa" name="bestC3" min="1" max="7"
-                     value={{subscenario3?.usCognitiveLoa}}></td>
+          <td>
+            <input type="number" [(ngModel)]="subscenario1.usCognitiveLoa" name="bestC1" min="1" max="7"
+              value={{subscenario1?.usCognitiveLoa}} oninput="this.value=(parseInt(this.value)||0)">
+          </td>
+          <td>
+            <input type="number" [(ngModel)]="subscenario2.usCognitiveLoa" name="bestC2" min="1" max="7"
+              value={{subscenario2?.usCognitiveLoa}} oninput="this.value=(parseInt(this.value)||0)">
+          </td>
+          <td>
+            <input type="number" [(ngModel)]="subscenario3.usCognitiveLoa" name="bestC3" min="1" max="7"
+              value={{subscenario3?.usCognitiveLoa}} oninput="this.value=(parseInt(this.value)||0)">
+          </td>
         </tr>
         </tbody>
       </table>

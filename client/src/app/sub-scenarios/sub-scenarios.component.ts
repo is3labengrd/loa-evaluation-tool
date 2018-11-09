@@ -18,7 +18,7 @@ export class SubScenariosComponent implements OnInit {
   nprodPiecePerHoursGUI2: number;
   nprodPiecePerHoursGUI3: number;
 
-  isProductAndProcessInfoFilled: boolean = false;
+  isProductAndProcessInfoFilled = false;
 
 
   subscenario1 = new Subscenario("1");
@@ -119,12 +119,14 @@ export class SubScenariosComponent implements OnInit {
   }
 
 checkMandatoryData() {
-    if (this.nprodPiecePerHours != null && this.procSpecInfoObj.nshiptsDay != null && this.procSpecInfoObj.hoursShift != null && this.procSpecInfoObj.workingDaysYear != null && this.procSpecInfoObj.propWCPerHours != null) {
+    if (this.nprodPiecePerHours != null && this.procSpecInfoObj.nshiptsDay != null &&
+        this.procSpecInfoObj.hoursShift != null && this.procSpecInfoObj.workingDaysYear != null
+        && this.procSpecInfoObj.propWCPerHours != null) {
       this.disableButton = true;
-      this.isProductAndProcessInfoFilled=true;
+      this.isProductAndProcessInfoFilled = true;
     } else {
       this.disableButton = false;
-      this.isProductAndProcessInfoFilled=false;
+      this.isProductAndProcessInfoFilled = false;
     }
   }
 
