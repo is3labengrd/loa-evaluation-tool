@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Router, ActivatedRoute} from '@angular/router';
 import {CookieService} from '../cookie.service';
+import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
+import { allowSanitizationBypass } from '@angular/core/src/sanitization/bypass';
 
 @Component({
 selector: 'app-add-process',
@@ -83,6 +85,10 @@ refresh(): void {
   this.lvl3selection = null;
 }
 
+away() {
+  this.router.navigate(['process-list']);
+}
+
 addProcess() {
         this.addSubProcessL1(this.id);
 }
@@ -102,8 +108,6 @@ addProSecOrdered() {
         );
 }
 
-  // tslint:disable-next-line:member-ordering
-  perform: boolean;
 
 addSubProcessL1(pkTbId) {
 
@@ -117,13 +121,6 @@ return this.http.post(subProcUrl, {'fkTbAceProSeq': this.id, 'name': this.lvl1se
       // tslint:disable-next-line:prefer-const
       let response = this.addSubProcessL2(res.pkTbId);
       response.then((x) => {
-        // alert('Process segment added');
-        this.perform = true;
-
-        setTimeout(() => {
-          this.perform = false;
-          this.router.navigate(['process-list']);
-        }, 3000);
 
         });
       }
@@ -247,3 +244,4 @@ subProcessL3(mainProc, subProcessL1, subProcessL2) {
    return this.subL3;
 }
 }
+

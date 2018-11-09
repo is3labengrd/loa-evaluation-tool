@@ -55,9 +55,25 @@
   </tbody>
 </table>
 
-<div class="mt-4 mb-4 performed" [hidden]="!perform">Operation has been performed.</div>
 
 <div class="btn-group" role="group" >
   <button type="button" class="btn btn-secondary"  (click)="refresh()">Cancel</button>
-  <button type="button" class="btn btn-primary" (click)="addProcess()">Save</button>
+  <button type="button" class="btn btn-primary" (click)="addProcess()" data-toggle="modal" data-target="#addModal" >Save</button>
 </div>
+
+<!-- addModal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel"><p class="text-success">Successful</p></h5>
+      </div>
+      <div class="modal-body">
+        Operation performed.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="away()">OK</button>
+      </div>
+    </div>
+  </div>
+</div> 

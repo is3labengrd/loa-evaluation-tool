@@ -65,5 +65,22 @@
 
   <div *ngIf="!disable" class="btn-group"  role="group" >
       <button type="button" class="btn btn-secondary" (click)="refresh()">Cancel</button>
-      <button type="button" class="btn btn-primary" (click)="save()">Save</button>
-    </div>
+      <button type="button" class="btn btn-primary" (click)="save()" data-toggle="modal" data-target="#editModal">Save</button>
+  </div>
+
+   <!-- editModal -->
+   <div class="modal fade" id="editModal" tabindex="-1" role="dialog"  aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel"><p class="text-success">Successful</p></h5>
+          </div>
+          <div class="modal-body">
+            Operation performed.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="away()">OK</button>
+          </div>
+        </div>
+      </div>
+    </div> 
