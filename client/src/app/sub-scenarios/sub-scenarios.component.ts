@@ -18,6 +18,8 @@ export class SubScenariosComponent implements OnInit {
   nprodPiecePerHoursGUI2: number;
   nprodPiecePerHoursGUI3: number;
 
+  isProductAndProcessInfoFilled: boolean = false;
+
 
   subscenario1 = new Subscenario("1");
   subscenario2 = new Subscenario("2");
@@ -89,13 +91,14 @@ export class SubScenariosComponent implements OnInit {
 
   ngOnInit() {
     this.cookie = this._processListService.getCookie("selectedSubprocess");
-    this.productPlanningGET();
-    this.procSpecInfoGET();
 
+    var promise1 = this.productPlanningGET();
+    promise1.then((x) => {
+           this.procSpecInfoGET();
+    });
 
-
-    var promise2 = this.getResource();
-    promise2.then((x) => {
+    var promise3 = this.getResource();
+    promise3.then((x) => {
        this.subScenarioGET();
      });
 
@@ -116,11 +119,12 @@ export class SubScenariosComponent implements OnInit {
   }
 
 checkMandatoryData() {
-    //console.log(this.ProcTime.selRes1ProcTime)
     if (this.nprodPiecePerHours != null && this.procSpecInfoObj.nshiptsDay != null && this.procSpecInfoObj.hoursShift != null && this.procSpecInfoObj.workingDaysYear != null && this.procSpecInfoObj.propWCPerHours != null) {
       this.disableButton = true;
+      this.isProductAndProcessInfoFilled=true;
     } else {
       this.disableButton = false;
+      this.isProductAndProcessInfoFilled=false;
     }
   }
 
@@ -144,12 +148,13 @@ checkMandatoryData() {
     }
 
 
-    //this.checkMandatoryData();
+
 
     if(this.disableButton==true){
        this.createSubScenarios();
      }
 
+     this.checkMandatoryData();
   }
 
     procSpecInfo(): void {
@@ -176,7 +181,7 @@ checkMandatoryData() {
             this.createSubScenarios();
       }
 
-
+      this.checkMandatoryData();
   }
 
   createSubScenarios(): void {
@@ -649,6 +654,7 @@ checkMandatoryData() {
 
                  this.nprodPiecePerHours=result.nprodPiecePerHours;
                  this.productPlanningID=result.pkTbId;
+                 this.checkMandatoryData();
 
              },
              err => {
@@ -658,13 +664,14 @@ checkMandatoryData() {
       }
 
       procSpecInfoGET(){
-          this.http
+         return this.http
                 .get(environment.apiUrl + '/v1/process-specific-info-by-subprocess-id/'+this.getFkAceSubProLevId(this.cookie))
                 .toPromise()
                 .then(
                 (result:any) => {
                      this.procSpecInfoObj=result;
                      this.procSpecInfoID=result.pkTbId;
+                     this.checkMandatoryData();
                 },
                   err => {
                   this.procSpecInfoID=null;
@@ -686,7 +693,6 @@ checkMandatoryData() {
                             };
 
               postObj.subprocessLevel.pkTbId = this.getFkAceSubProLevId(this.cookie);
-
               this.http
               .post(environment.apiUrl + '/v1/subscenarios/search',  postObj )
               .toPromise()
@@ -711,6 +717,7 @@ checkMandatoryData() {
                         element.fkTbAceSubProLev=fkTbAceSubProLevID;
                         this.subscenario1=element;
                         this.isSubScenario1Present=true;
+
                         break;
                     case 2:
                        this.nprodPiecePerHoursGUI2 = this.nprodPiecePerHours;
@@ -790,10 +797,7 @@ checkMandatoryData() {
        }
 
 
-
-
-
-}
+  }
 
 function Subscenario(scenarioNumber)  {
   this.scenarioNumber = scenarioNumber;
