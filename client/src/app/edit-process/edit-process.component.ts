@@ -355,4 +355,8 @@ export class EditProcessComponent implements OnInit {
        }
        return this.subL3;
     }
+
+    away() {
+      this.router.navigate(['process-list']);
+    }
 }
