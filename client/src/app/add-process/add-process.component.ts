@@ -30,6 +30,7 @@ id: number;
 lowerLevel: any;
 pks: Array<any> = [];
 cookie: any;
+processAdded: Array<any> = [];
 
 constructor(
   private http: HttpClient,
@@ -90,7 +91,52 @@ away() {
 }
 
 addProcess() {
-        this.addSubProcessL1(this.id);
+
+  var enablePost = false;
+
+  var promise = this.checkAlreadyAddedProcSegm();
+  promise.then((x) => {
+    for(let i in this.processAdded[0]){
+     if(this.processAdded[0][i].mainProcess.pkTbId === this.cookie.mainProcessId){
+        if(this.lvl3selection === undefined || this.lvl3selection === null){
+          if(this.lvl2selection === undefined || this.lvl2selection === null){
+            if(this.lvl1selection === undefined || this.lvl1selection === null){
+              break;
+            }else{
+              if(this.processAdded[0][i].subProcessLevel1 !=null){
+                if (this.lvl1selection.name === this.processAdded[0][i].subProcessLevel1.name){
+                  enablePost = true;
+                  alert("This process segment already exist!");
+                  break;
+                }
+              }
+            }
+          }
+          else{
+            if(this.processAdded[0][i].subProcessLevel1 !=null && this.processAdded[0][i].subProcessLevel2 !=null){
+              if (this.lvl1selection.name === this.processAdded[0][i].subProcessLevel1.name && this.lvl2selection.name === this.processAdded[0][i].subProcessLevel2.name){
+                enablePost = true;
+                alert("This process segment already exist!");
+                break;
+              }
+            }
+          }
+        }else{
+          if(this.processAdded[0][i].subProcessLevel1 !=null && this.processAdded[0][i].subProcessLevel2 !=null && this.processAdded[0][i].subProcessLevel3 !=null){
+            if (this.lvl1selection.name === this.processAdded[0][i].subProcessLevel1.name && this.lvl2selection.name === this.processAdded[0][i].subProcessLevel2.name && this.lvl3selection.name === this.processAdded[0][i].subProcessLevel3.name){
+              enablePost = true;
+              alert("This process segment already exist!");
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    if(!enablePost){
+      this.addSubProcessL1(this.id);
+    }
+  });
 }
 
 addProSecOrdered() {
@@ -243,5 +289,16 @@ subProcessL3(mainProc, subProcessL1, subProcessL2) {
    }
    return this.subL3;
 }
-}
 
+  checkAlreadyAddedProcSegm() {
+
+    return this.http
+      .get(environment.apiUrl + '/v1/process-segment-list-elements')
+      .toPromise()
+      .then(
+        (res: any) => {
+          this.processAdded.push(res);
+        }
+      );
+  }
+}
