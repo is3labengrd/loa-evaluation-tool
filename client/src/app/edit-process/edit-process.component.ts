@@ -47,9 +47,11 @@ export class EditProcessComponent implements OnInit {
 
   ngOnInit() {
       this.disable = false;
-
       this.id  = this.route.snapshot.params['id'];
       this.cookie = this._processListService.getCookie("selectedSubprocess");
+
+      this.getCriMatrix(this.findsubprocid());
+
       var promise2 = this.getSegmentList()
       promise2.then((x) => {
         this.http
@@ -63,8 +65,23 @@ export class EditProcessComponent implements OnInit {
             }
           )
       });
+    }
 
-
+    findsubprocid(): string{
+      if(this.cookie.level3 != null){
+        return this.cookie.level3.id.toString();
+      }else{
+        if(this.cookie.level2 != null){
+          return this.cookie.level2.id.toString();
+        }
+        else{
+          if(this.cookie.level1 != null){
+            return this.cookie.level1.id.toString();
+          }else{
+            return"";
+          }
+        }
+      }
     }
 
    getResourceList(){
@@ -99,6 +116,14 @@ export class EditProcessComponent implements OnInit {
       }
     )
   }
+
+  getCriMatrix(id){
+         this.http.get(environment.apiUrl + '/v1/criteria-matrices-by-subprocess-id/'+id)
+         .toPromise()
+         .then(
+          (data) => {this.disable = true;},
+          (err) => {});
+ }
 
 
     getSegmentList() {
