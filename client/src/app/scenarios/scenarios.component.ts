@@ -96,7 +96,9 @@ export class ScenariosComponent implements OnInit {
   findMissingSegments(){
     for(let i in this.processSegmentList[0]){
       if (this.processSegmentList[0][i].name === this.cookie.mainProcessName){
-        this.loop(this.processSegmentList[0][i].subProcesses);
+        for (let j in this.processSegmentList[0][i].subProcesses){
+          this.loop(this.processSegmentList[0][i].subProcesses[j].subProcesses);
+        }
       }
     }
   }

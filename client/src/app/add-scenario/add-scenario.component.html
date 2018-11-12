@@ -35,24 +35,24 @@
     <tr *ngFor="let subScen of subSceList; let i = index">
       <td>{{subScen?.subProc?.subprocessLevel.name}}</td>
       <td>
-        SC1 <input *ngIf="subScen?.objList?.scenNumber1?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber1?.resource.name+i}} value="{{subScen?.objList?.scenNumber1?.resource.name}}">{{subScen?.objList?.scenNumber1?.resource.name}}<br>
-        SC2 <input *ngIf="subScen?.objList?.scenNumber2?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber2?.resource.name+i}} value="{{subScen?.objList?.scenNumber2?.resource.name}}">{{subScen?.objList?.scenNumber2?.resource.name}}<br>
-        SC3 <input *ngIf="subScen?.objList?.scenNumber3?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber3?.resource.name+i}} value="{{subScen?.objList?.scenNumber3?.resource.name}}">{{subScen?.objList?.scenNumber3?.resource.name}}<br>
+        SC1 <input *ngIf="subScen?.objList?.scenNumber1?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber1?.resource.name+i}} id={{subScen?.objList?.scenNumber1?.resource.name+i}} value="{{subScen?.objList?.scenNumber1?.assemCostTotal}}-{{i}}-0">{{subScen?.objList?.scenNumber1?.resource.name}}<br>
+        SC2 <input *ngIf="subScen?.objList?.scenNumber2?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber2?.resource.name+i}} id={{subScen?.objList?.scenNumber2?.resource.name+i}} value="{{subScen?.objList?.scenNumber2?.assemCostTotal}}-{{i}}-1">{{subScen?.objList?.scenNumber2?.resource.name}}<br>
+        SC3 <input *ngIf="subScen?.objList?.scenNumber3?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber3?.resource.name+i}} id={{subScen?.objList?.scenNumber3?.resource.name+i}} value="{{subScen?.objList?.scenNumber3?.assemCostTotal}}-{{i}}-2">{{subScen?.objList?.scenNumber3?.resource.name}}<br>
       </td>
       <td align="center">
-        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber1?.resource.name">{{subScen?.objList?.scenNumber1?.assemCostTotal}}</ng-container><br>
-        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber2?.resource.name">{{subScen?.objList?.scenNumber2?.assemCostTotal}}</ng-container><br>
-        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber3?.resource.name">{{subScen?.objList?.scenNumber3?.assemCostTotal}}</ng-container>
+        {{subSceList[i]?.objList?.scenNumber1?.assemCostTotal}}<br>
+        {{subSceList[i]?.objList?.scenNumber2?.assemCostTotal}}<br>
+        {{subSceList[i]?.objList?.scenNumber3?.assemCostTotal}}<br>
       </td>
       <td align="center">
-        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber1?.resource.name">{{subScen?.objList?.scenNumber1?.usPhysicalLoa}}</ng-container><br>
-        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber2?.resource.name">{{subScen?.objList?.scenNumber2?.usPhysicalLoa}}</ng-container><br>
-        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber3?.resource.name">{{subScen?.objList?.scenNumber3?.usPhysicalLoa}}</ng-container>
+        {{subSceList[i]?.objList?.scenNumber1?.resource.loaPhysical}}<br>
+        {{subSceList[i]?.objList?.scenNumber2?.resource.loaPhysical}}<br>
+        {{subSceList[i]?.objList?.scenNumber3?.resource.loaPhysical}}
       </td>
       <td align="center">
-        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber1?.resource.name">{{subScen?.objList?.scenNumber1?.usCognitiveLoa}}</ng-container> <br>
-        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber2?.resource.name">{{subScen?.objList?.scenNumber2?.usCognitiveLoa}}</ng-container> <br>
-        <ng-container *ngIf="stepResult[i] === subScen?.objList?.scenNumber3?.resource.name">{{subScen?.objList?.scenNumber3?.usCognitiveLoa}}</ng-container>
+        {{subSceList[i]?.objList?.scenNumber1?.resource.loaCognitive}}<br>
+        {{subSceList[i]?.objList?.scenNumber2?.resource.loaCognitive}}<br>
+        {{subSceList[i]?.objList?.scenNumber3?.resource.loaCognitive}}
       </td>
     </tr>
 
@@ -85,7 +85,7 @@
   </tbody>
 </table>
 <div class="btn-group d-flex justify-content-center border-top" style="padding-top: 15px; margin-bottom: 20px;">
-  <button class="btn btn-primary" (click)="test()"> Cancel </button>
-  <button cancel="btn btn-secondary"> Calculate </button>
+  <button class="btn btn-primary" (click)="cancel()"> Cancel </button>
+  <button cancel="btn btn-secondary" (click)="calculate()"> Calculate </button>
   <button cancel="btn btn-secondary"> Save </button>
 </div>

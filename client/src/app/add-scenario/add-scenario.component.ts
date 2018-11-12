@@ -84,8 +84,64 @@ export class AddScenarioComponent implements OnInit {
       )
   }
 
-  test(){
+  calculate(){
     console.log(this.stepResult);
+    var valueList = [];
+    var objlist= {};
+    var calculatedList = [];
+
+    for (var i=0; i<this.stepResult.length; i++){
+        if (!(i in this.stepResult)){
+          valueList.push("");
+        }else{
+          objlist= {};
+          var fields = this.stepResult[i].split('-');
+          objlist['optC'] = parseInt(fields[0]);
+          if(this.subSceList[parseInt(fields[1])].objList.scenNumber1 != undefined && parseInt(fields[2]) === 0){
+            objlist['phy'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.loaPhysical;
+            objlist['cog'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.loaCognitive;
+          }
+          if(this.subSceList[parseInt(fields[1])].objList.scenNumber2 != undefined && parseInt(fields[2]) === 1){
+            objlist['phy'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.loaPhysical;
+            objlist['cog'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.loaCognitive;
+          }
+          if(this.subSceList[parseInt(fields[1])].objList.scenNumber3 != undefined && parseInt(fields[2]) === 2){
+            objlist['phy'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.loaPhysical;
+            objlist['cog'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.loaCognitive;
+          }
+          objlist['procTime'] = this.subSceList[parseInt(fields[1])].subProc.processTime;
+          valueList.push(objlist);
+      }
+    }
+
+    if(valueList.length < this.subSceList.length){
+      var add = this.subSceList.length-valueList.length;
+      for (var j=0; j<add; j++){
+        valueList.push("");
+      }
+    }
+
+    console.log(valueList)
+    var countAvg = 0;
+    var phyLoa = 0;
+    var cogLoa = 0;
+    for (var k=0; k<valueList.length; k++){
+      if(valueList[k] != ""){
+        countAvg+=1;
+        phyLoa += valueList[k].phy;
+        cogLoa += valueList[k].cog;
+      }
+    }
+    /*var ciao = phyLoa/parseFloat(countAvg);
+    console.log(ciao)*/
+    console.log(cogLoa/countAvg)
+
+    console.log(countAvg)
+
+  }
+
+  cancel(){
+    this.stepResult = [];
   }
 
   fetchFromCAM() {
@@ -103,7 +159,9 @@ export class AddScenarioComponent implements OnInit {
   findMissingSegments(){
     for(let i in this.processSegmentList[0]){
       if (this.processSegmentList[0][i].name === this.cookie.mainProcessName){
-        this.loop(this.processSegmentList[0][i].subProcesses);
+        for (let j in this.processSegmentList[0][i].subProcesses){
+          this.loop(this.processSegmentList[0][i].subProcesses[j].subProcesses);
+        }
       }
     }
   }
