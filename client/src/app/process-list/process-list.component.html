@@ -28,7 +28,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let process of processSegmentList">
-      <td> <a routerLink="{{ process?.editRoute }}"> {{ process?.name }} </a> </td>
+      <td>
+        <a *ngIf="process?.editRoute; else noEdit" routerLink="{{ process?.editRoute }}"> {{ process?.name }} </a>
+        <ng-template #noEdit> {{ process?.name }} </ng-template>
+      </td>
       <td> {{ process?.sublevels }} </td>
       <td> {{ process?.sub1 }} </td>
       <td> {{ process?.sub2 }} </td>
