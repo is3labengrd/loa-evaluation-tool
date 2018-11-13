@@ -1,23 +1,36 @@
 package eng.it.loatool.var.service;
 
-import java.io.IOException;
 import java.util.List;
 
 import eng.it.loatool.var.bean.MainProcess;
-import eng.it.loatool.var.request.*;
+import eng.it.loatool.var.request.VARGetAssetImpl;
+import eng.it.loatool.var.request.VARProcessSegmentImpl;
+import eng.it.loatool.var.request.VARProcessSpecificInformationImpl;
+import eng.it.loatool.var.request.VARProductDefinitionImpl;
+import eng.it.loatool.var.request.VARProportionalWageCost;
+import eng.it.loatool.var.request.VARWorkUnitImpl;
 
 public class VARServiceWrapper {
 
-	
+	private static VARFailureInformer varFailureInformer = new VARFailureInformer();
+
 	/**
 	  * Wrap the Processes Segment List recovered from the VAR
 	  * @return Process hierarchy as json string
 	  */
 
-	 public static List<MainProcess> getProcessesSegmentList () throws IOException {
-		 	return VARProcessSegmentImpl.main();
+	 public static List<MainProcess> getProcessesSegmentList () throws Exception {
+	     return (List<MainProcess>) varFailureInformer.filter(
+             () -> {
+                 try {
+                     return VARProcessSegmentImpl.main();
+                 } catch (Throwable e) {
+                     throw new RuntimeException();
+                 }
+             }
+         );
 	 }
-	 
+
 	 /**
 	  * Wrap the Processes Segment List recovered from the VAR
 	  * @return
@@ -55,10 +68,17 @@ public class VARServiceWrapper {
 	 * @return void
 	 */
 
-	public static void addResource (String json) throws IOException {
-
-		VARWorkUnitImpl.createBody(json);
-
+	public static void addResource (String json) throws Exception {
+        varFailureInformer.filter(
+            () -> {
+                try {
+                    VARWorkUnitImpl.createBody(json);
+                    return null;
+                } catch (Throwable e) {
+                    throw new RuntimeException();
+                }
+            }
+        );
 	}
 
 	/**
@@ -89,20 +109,33 @@ public class VARServiceWrapper {
 	 * @return void
 	 */
 
-	public static void editResource (String json) throws IOException {
-
-		VARWorkUnitImpl.updateBody(json);
-
+	public static void editResource (String json) throws Exception {
+        varFailureInformer.filter(
+            () -> {
+                try {
+                    VARWorkUnitImpl.updateBody(json);
+                    return null;
+                } catch (Throwable e) {
+                    throw new RuntimeException();
+                }
+            }
+        );
 	}
 
 	/*
 	 * 	 * @return Site Instance from VAR
 	 */
 
-	public static String getSite () throws IOException {
-
-		return VARWorkUnitImpl.getSiteIntance();
-
+	public static String getSite () throws Exception {
+        return (String) varFailureInformer.filter(
+            () -> {
+                try {
+                    return VARWorkUnitImpl.getSiteIntance();
+                } catch (Throwable e) {
+                    throw new RuntimeException();
+                }
+            }
+        );
 	}
 
 
@@ -118,10 +151,17 @@ public class VARServiceWrapper {
 	 * @return void
 	 */
 
-	public static void editProductPlanning (String json) throws IOException {
-
-		VARProductDefinitionImpl.createBody(json);
-
+	public static void editProductPlanning (String json) throws Exception {
+        varFailureInformer.filter(
+            () -> {
+                try {
+                    VARProductDefinitionImpl.createBody(json);
+                    return null;
+                } catch (Throwable e) {
+                    throw new RuntimeException();
+                }
+            }
+        );
 	}
 
 	/**
@@ -137,10 +177,17 @@ public class VARServiceWrapper {
 	 * @return void
 	 */
 
-	public static void editProcessSpecificInformation (String json) throws IOException {
-
-		VARProcessSpecificInformationImpl.createBody(json);
-
+	public static void editProcessSpecificInformation (String json) throws Exception {
+        varFailureInformer.filter(
+            () -> {
+                try {
+                    VARProcessSpecificInformationImpl.createBody(json);
+                    return null;
+                } catch (Throwable e) {
+                    throw new RuntimeException();
+                }
+            }
+        );
 	}
 
     /**
@@ -157,10 +204,17 @@ public class VARServiceWrapper {
      * @return void
      */
 
-	public static void editProportionalWageCost (String json) throws IOException {
-
-		VARProportionalWageCost.createBody(json);
-
+	public static void editProportionalWageCost (String json) throws Exception {
+        varFailureInformer.filter(
+            () -> {
+                try {
+                    VARProportionalWageCost.createBody(json);
+                    return null;
+                } catch (Throwable e) {
+                    throw new RuntimeException();
+                }
+            }
+        );
 	}
 
 	/**
@@ -169,10 +223,16 @@ public class VARServiceWrapper {
 	 * return Product Planning Instance
 	 */
 
-	public static String getProductPlanningIntance(String InstanceName) throws IOException {
-
-		return VARGetAssetImpl.getProductPlanningIntance(InstanceName);
-
+	public static String getProductPlanningIntance(String InstanceName) throws Exception {
+        return (String) varFailureInformer.filter(
+            () -> {
+                try {
+                    return VARGetAssetImpl.getProductPlanningIntance(InstanceName);
+                } catch (Throwable e) {
+                    throw new RuntimeException();
+                }
+            }
+        );
 	}
 
 }

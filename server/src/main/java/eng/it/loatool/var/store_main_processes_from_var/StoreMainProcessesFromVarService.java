@@ -1,6 +1,5 @@
 package eng.it.loatool.var.store_main_processes_from_var;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,7 @@ import eng.it.loatool.var.service.VARServiceWrapper;
 @Service
 public class StoreMainProcessesFromVarService {
 
-    public void storeMainProcessesFromVar() throws IOException {
+    public void storeMainProcessesFromVar() throws Exception {
         List<MainProcess> mainProcesses = VARServiceWrapper.getProcessesSegmentList();
         for (MainProcess mainProcess: mainProcesses) {
             ProcessSegment processSegment = varToNativeProcessSegmentTransformer
