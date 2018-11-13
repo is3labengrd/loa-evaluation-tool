@@ -13,6 +13,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import eng.it.loatool.PkTbPrimaryKeyOwner;
 
 /**
@@ -47,7 +50,7 @@ public class Scenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
     private Double assCostsPerUnits;
     private Double totalAssCosts;
     private Date createDate;
-    private Date udpateDate;
+    private Date updateDate;
 
     public Scenario() {}
 
@@ -57,10 +60,10 @@ public class Scenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.fkTbAceRes = fkTbAceRes;
         this.scenarioNumber = scenarioNumber;
         this.createDate = createDate;
-        this.udpateDate = udpateDate;
+        this.updateDate = updateDate;
     }
 
-    public Scenario(int fkTbAceProSeq, int fkTbAceSubProLev, int fkTbAceRes, int scenarioNumber, Double optionCost, Double totalCost, Double costPerPiece, Integer weightedPhysicalLoa, Integer weightedCognitiveLoa, Integer totalProcessTime, Integer hoursYear, Double labourCost, Double maintCost, Double annualSpaceCost, Double inputedDepreciation, Double accruedInterestCost, Double energyCost, Double varCostsPerUnit, Double macCost, Integer totWeightedPhysicalLoa, Integer totWeightedCognitiveLoa, Integer prodUnitsPerYears, Double assCostsPerUnits, Double totalAssCosts, Date createDate, Date udpateDate) {
+    public Scenario(int fkTbAceProSeq, int fkTbAceSubProLev, int fkTbAceRes, int scenarioNumber, Double optionCost, Double totalCost, Double costPerPiece, Integer weightedPhysicalLoa, Integer weightedCognitiveLoa, Integer totalProcessTime, Integer hoursYear, Double labourCost, Double maintCost, Double annualSpaceCost, Double inputedDepreciation, Double accruedInterestCost, Double energyCost, Double varCostsPerUnit, Double macCost, Integer totWeightedPhysicalLoa, Integer totWeightedCognitiveLoa, Integer prodUnitsPerYears, Double assCostsPerUnits, Double totalAssCosts, Date createDate, Date updateDate) {
         this.fkTbAceProSeq = fkTbAceProSeq;
         this.fkTbAceSubProLev = fkTbAceSubProLev;
         this.fkTbAceRes = fkTbAceRes;
@@ -86,15 +89,17 @@ public class Scenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.assCostsPerUnits = assCostsPerUnits;
         this.totalAssCosts = totalAssCosts;
         this.createDate = createDate;
-        this.udpateDate = udpateDate;
+        this.updateDate = updateDate;
     }
 
+    @Override
     @Id @GeneratedValue(strategy = IDENTITY)
 
     @Column(name = "PK_TB_ID", unique = true, nullable = false) public Integer getPkTbId() {
         return this.pkTbId;
     }
 
+    @Override
     public void setPkTbId(Integer pkTbId) {
         this.pkTbId = pkTbId;
     }
@@ -291,7 +296,10 @@ public class Scenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.totalAssCosts = totalAssCosts;
     }
 
-    @Temporal(TemporalType.TIMESTAMP) @Column(name = "CREATE_DATE", nullable = false, length = 19) public Date getCreateDate() {
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATE_DATE", updatable = false, nullable = false, length = 19)
+    public Date getCreateDate() {
         return this.createDate;
     }
 
@@ -299,12 +307,15 @@ public class Scenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.createDate = createDate;
     }
 
-    @Temporal(TemporalType.TIMESTAMP) @Column(name = "UDPATE_DATE", nullable = false, length = 19) public Date getUdpateDate() {
-        return this.udpateDate;
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "UDPATE_DATE", nullable = false, length = 19)
+    public Date getUpdateDate() {
+        return this.updateDate;
     }
 
-    public void setUdpateDate(Date udpateDate) {
-        this.udpateDate = udpateDate;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
 }
