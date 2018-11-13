@@ -224,6 +224,9 @@ export class HTAAnalysisComponent implements OnInit {
     this.router.navigate(['main-analysis']);
   }
 
+  // tslint:disable-next-line:member-ordering
+  opSuc: boolean;
+
   saveLoaInfo(min, max) {
 
       this.http
@@ -231,7 +234,14 @@ export class HTAAnalysisComponent implements OnInit {
         environment.apiUrl + '/v1/process-loa-info/' + this.infoId,
         this.actualLoaInfoRequest
         )
-        .toPromise();
+        .toPromise()
+        .then(() => {
+          this.opSuc = true;
+        })
+        .catch((err) => {
+          this.opSuc = false;
+          console.log(err);
+        });
       }
     }
 
