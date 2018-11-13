@@ -17,7 +17,7 @@ export class ProcessListComponent implements OnInit {
   numberOfItems = 12;
   page = 0;
   lastPage = 0;
-  searchText = "";
+  searchText = '';
 
   private getPageIterator(maxNumberOfPages) {
     return () => {
@@ -27,11 +27,11 @@ export class ProcessListComponent implements OnInit {
           value: i.toString(),
           done: (i++ == maxNumberOfPages)
         })
-      }
-    }
+      };
+    };
   }
 
-  pageIterable:any = (function *(){}());
+  pageIterable: any = (function *(){}());
 
   constructor(
     private http: HttpClient,
@@ -45,7 +45,7 @@ export class ProcessListComponent implements OnInit {
       .toPromise()
       .then(
         () => { this.populateProcessSegmentList(); }
-      )
+      );
   }
 
   private populateProcessSegmentList() {
@@ -58,12 +58,12 @@ export class ProcessListComponent implements OnInit {
       url = environment.apiUrl +
         `/v1/process-segment-list-elements-like/${this.searchText}?` +
         'page=' + this.page + '&' +
-        'size=' + this.numberOfItems
+        'size=' + this.numberOfItems;
     } else {
       url = environment.apiUrl +
         '/v1/process-segment-list-elements?' +
         'page=' + this.page + '&' +
-        'size=' + this.numberOfItems
+        'size=' + this.numberOfItems;
     }
     this.http
       .get(url)
@@ -91,15 +91,15 @@ export class ProcessListComponent implements OnInit {
         currentListElement.sub3 = listElement.subProcessLevel3 ? listElement.subProcessLevel3.name : "-";
         currentListElement.editRoute = `/edit-process/${listElement.pkTbId}`;
         if (
-          currentListElement.sub1 == "-" &&
-          currentListElement.sub2 == "-" &&
-          currentListElement.sub3 == "-"
+          currentListElement.sub1 == '-' &&
+          currentListElement.sub2 == '-' &&
+          currentListElement.sub3 == '-'
         ) {
           currentListElement.route = `/add-process/${id}`;
-          currentListElement.actions = "Add";
+          currentListElement.actions = 'Add';
         } else {
-          currentListElement.route = "/main-analysis";
-          currentListElement.actions = "Analysis";
+          currentListElement.route = '/main-analysis';
+          currentListElement.actions = 'Analysis';
         }
         currentListElement.rawElementReference = listElement;
         accumulator.push(currentListElement);
@@ -125,12 +125,12 @@ export class ProcessListComponent implements OnInit {
     actualSubProcessInfo['totalNumberSubprocs'] = data.mainProcess.subprocessLevels.length;
     actualSubProcessInfo['maxDepth'] = 0;
     for (var i = 1; i <= subProcessData.sublevels; i++) {
-      if (!("undefined" === typeof (subProcessData.rawElementReference['subProcessLevel' + i])) && subProcessData.rawElementReference['subProcessLevel' + i] != null) {
+      if (!('undefined' === typeof (subProcessData.rawElementReference['subProcessLevel' + i])) && subProcessData.rawElementReference['subProcessLevel' + i] != null) {
         actualSubProcessInfo['level' + i] = new SubProcess(subProcessData.rawElementReference['subProcessLevel' + i].pkTbId, subProcessData.rawElementReference['subProcessLevel' + i].name);
         actualSubProcessInfo['maxDepth'] = i;
       }
     }
-    this._processListService.setCookie("selectedSubprocess", JSON.stringify(actualSubProcessInfo), 1, "");
+    this._processListService.setCookie('selectedSubprocess', JSON.stringify(actualSubProcessInfo), 1, '');
   }
 
 }
