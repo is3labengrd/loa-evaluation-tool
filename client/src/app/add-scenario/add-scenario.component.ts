@@ -310,7 +310,6 @@ export class AddScenarioComponent implements OnInit {
     // tslint:disable-next-line:member-ordering
     status: any;
 
-    save() {
     save(){
 
       this.bodyPost = {};
