@@ -7,11 +7,11 @@
 </div>
 <div >
   <h1 class="float-left">Process Segments List</h1>
-  <span class="float-right">
+  <div class="float-right">
     <i class="fas fa-search"></i>&nbsp;
     <input type="search" name="search" style="margin-top: 10px" placeholder="process name" [(ngModel)]="searchText">
     <a (click)="populateProcessSegmentList();"> Search </a>
-  </span>
+  </div>
 </div>
 
 <!-- tabela -->
@@ -42,11 +42,11 @@
 <div class="row">
   <div class="col-md-5 col-sm-12">
     <select name="numberOfItems" [(ngModel)]="numberOfItems" (ngModelChange)="page=0; populateProcessSegmentList();">
-      <option value="3">3 subprocesses</option>
-      <option value="5">5 subprocesses</option>
-      <option value="6">6 subprocesses</option>
-      <option value="10">10 subprocesses</option>
-      <option value="12">12 subprocesses</option>
+      <option value="3">3 items per page</option>
+      <option value="5">5 items per page</option>
+      <option value="6">6 items per page</option>
+      <option value="10">10 items per page</option>
+      <option value="12">12 items per page</option>
     </select> &nbsp;
     <select name="pageRange" [(ngModel)]="page" (ngModelChange)="populateProcessSegmentList();">
       <option *ngFor="let page of pageIterable">{{page}}</option>
