@@ -29,8 +29,8 @@ const ROUTES: Routes = [
   { path: 'edit-resource/:resourceId', component: EditResourceComponent },
   { path: 'sub-scenarios', component: SubScenariosComponent },
   { path: 'scenarios', component: ScenariosComponent },
-  { path: 'add-scenario', component: AddScenarioComponent },
-  { path: 'edit-scenario', component: EditScenarioComponent }
+  { path: 'add-scenario/:id', component: AddScenarioComponent },
+  { path: 'edit-scenario/:id', component: EditScenarioComponent }
 
 ];
 
