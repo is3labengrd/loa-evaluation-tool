@@ -303,16 +303,24 @@ export class AddScenarioComponent implements OnInit {
 
     }
 
-    save(){
+    // tslint:disable-next-line:member-ordering
+    opSuc: boolean;
+    // tslint:disable-next-line:member-ordering
+    status: any;
+
+    save() {
       this.findsubProc();
       const addProSecOrderedUrl = environment.apiUrl + '/v1/scenarios';
 
       return this.http.post(addProSecOrderedUrl, this.bodyPost)
              .toPromise()
              .then((res: any) => {
-                    alert('Scenarios added!');
+                    this.opSuc = true;
                     this.router.navigate(['scenarios']);
                     },
-                   (err) => alert('Something went wrong. \nStatus: ' +  err.error.status));
+                   (err) => {
+                     this.opSuc = false;
+                     this.status = err.error.status;
+                   });
     }
 }
