@@ -29,7 +29,13 @@
   <tbody>
     <tr *ngFor="let process of processSegmentList">
       <td>
-        <a *ngIf="process?.editRoute; else noEdit" routerLink="{{ process?.editRoute }}"> {{ process?.name }} </a>
+        <a
+          *ngIf="process?.editRoute; else noEdit"
+          routerLink="{{ process?.editRoute }}"
+          (click)="saveAnalysisData(process.rawElementReference, process)"
+        >
+          {{ process?.name }}
+        </a>
         <ng-template #noEdit> {{ process?.name }} </ng-template>
       </td>
       <td> {{ process?.sublevels }} </td>
