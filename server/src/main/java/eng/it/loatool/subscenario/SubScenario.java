@@ -60,14 +60,13 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
     private Double accruedIntCosts;
     private Double varCostTotal;
     private Double fixedCostTotal;
-    private Double assemCostPerPieces;
-    private Double assemCostTotal;
+    private Boolean resRecal;
     private Date createDate;
     private Date updateDate;
 
     public SubScenario() {}
 
-    public SubScenario(Integer fkTbAceProSeq, Integer fkTbAceSubProLev, Integer fkTbAceRes, Integer scenarioNumber, Integer processTime, Date createDate, Date updateDate) {
+    public SubScenario(Integer fkTbAceProSeq, Integer fkTbAceSubProLev, Integer fkTbAceRes, Integer scenarioNumber, Integer processTime, Boolean resRecal, Date createDate, Date updateDate) {
         this.fkTbAceProSeq = fkTbAceProSeq;
         this.fkTbAceSubProLev = fkTbAceSubProLev;
         this.fkTbAceRes = fkTbAceRes;
@@ -77,7 +76,7 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.updateDate = updateDate;
     }
 
-    public SubScenario(int fkTbAceProSeq, int fkTbAceSubProLev, int fkTbAceRes, int scenarioNumber, int processTime, Double assemblyCostPerPiece, Double assemblyCosts, Integer usPhysicalLoa, Integer usCognitiveLoa, Integer hoursPerYears, Double NProdPieces, Double labourCost, Double energyCost, Double maintCost, Double annualSpaceCost, Double inputedDepreciation, Double rateOfPart, Double accruedIntCosts, Double varCostTotal, Double fixedCostTotal, Double assemCostPerPieces, Double assemCostTotal, Date createDate, Date updateDate) {
+    public SubScenario(int fkTbAceProSeq, int fkTbAceSubProLev, int fkTbAceRes, int scenarioNumber, int processTime, Double assemblyCostPerPiece, Double assemblyCosts, Integer usPhysicalLoa, Integer usCognitiveLoa, Integer hoursPerYears, Double NProdPieces, Double labourCost, Double energyCost, Double maintCost, Double annualSpaceCost, Double inputedDepreciation, Double rateOfPart, Double accruedIntCosts, Double varCostTotal, Double fixedCostTotal, Date createDate, Date updateDate) {
         this.fkTbAceProSeq = fkTbAceProSeq;
         this.fkTbAceSubProLev = fkTbAceSubProLev;
         this.fkTbAceRes = fkTbAceRes;
@@ -98,8 +97,6 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.accruedIntCosts = accruedIntCosts;
         this.varCostTotal = varCostTotal;
         this.fixedCostTotal = fixedCostTotal;
-        this.assemCostPerPieces = assemCostPerPieces;
-        this.assemCostTotal = assemCostTotal;
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
@@ -300,20 +297,13 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.fixedCostTotal = fixedCostTotal;
     }
 
-    @Column(name = "ASSEM_COST_PER_PIECES", precision = 22, scale = 0) public Double getAssemCostPerPieces() {
-        return this.assemCostPerPieces;
+    @Column(name = "RES_RECAL")
+    public Boolean getResRecal() {
+        return this.resRecal;
     }
 
-    public void setAssemCostPerPieces(Double assemCostPerPieces) {
-        this.assemCostPerPieces = assemCostPerPieces;
-    }
-
-    @Column(name = "ASSEM_COST_TOTAL", precision = 22, scale = 0) public Double getAssemCostTotal() {
-        return this.assemCostTotal;
-    }
-
-    public void setAssemCostTotal(Double assemCostTotal) {
-        this.assemCostTotal = assemCostTotal;
+    public void setResRecal(Boolean resRecal) {
+        this.resRecal = resRecal;
     }
 
     @CreationTimestamp

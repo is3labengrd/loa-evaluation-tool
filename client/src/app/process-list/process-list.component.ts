@@ -96,7 +96,8 @@ export class ProcessListComponent implements OnInit {
           currentListElement.sub3 == '-'
         ) {
           currentListElement.route = `/add-process/${id}`;
-          currentListElement.actions = 'Add';
+          currentListElement.actions = "Add";
+          currentListElement.editRoute = null;
         } else {
           currentListElement.route = '/main-analysis';
           currentListElement.actions = 'Analysis';
