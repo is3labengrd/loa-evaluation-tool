@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs';
@@ -22,6 +22,8 @@ export class ScenariosComponent implements OnInit {
   scenNumber:any;
   processSegmentList: Array<any> = [];
   allProcessSegmentCAM: Array<any> = [];
+  scenarios:any={};
+  showAddEdit:any={};
 
   ngOnInit() {
     this.cookie = this._processListService.getCookie("selectedSubprocess");
@@ -35,8 +37,8 @@ export class ScenariosComponent implements OnInit {
     var waitScenarioList = this.getScenariosList();
     waitScenarioList.then((x)=>{
         this.creteTable();
-        console.log(this.subSceList[0]);
         this.deleteDupicate();
+        this.getScenarios();
     });
   }
 
@@ -128,6 +130,50 @@ export class ScenariosComponent implements OnInit {
         }
       }
       this.allProcessSegmentCAM = tmpList2;
+    }
+
+    getScenarios() {
+
+      return this.http
+        .get(environment.apiUrl + '/v1/scenarios')
+        .toPromise()
+        .then(
+          (res:any) => {
+
+            var pkSubProc;
+            if(this.cookie.level3 != null){
+              pkSubProc = this.cookie.level3.id;
+            }else{
+              if(this.cookie.level2 != null){
+                pkSubProc = this.cookie.level2.id;
+              }else{
+                pkSubProc = this.cookie.level1.id;
+              }
+            }
+            for (let i in res){
+              if(res[i].fkTbAceProSeq === this.cookie.mainProcessId  && res[i].fkTbAceSubProLev === pkSubProc){
+                if(res[i].scenarioNumber === 1){
+                  this.scenarios['scen1'] = res[i];
+                  this.showAddEdit['show1'] = true;
+                }else{
+                  this.showAddEdit['show1'] = false;
+                }
+                if(res[i].scenarioNumber === 2){
+                  this.scenarios['scen2'] = res[i];
+                  this.showAddEdit['show2'] = true;
+                }else{
+                  this.showAddEdit['show2'] = false;
+                }
+                if(res[i].scenarioNumber === 3){
+                  this.scenarios['scen3'] = res[i];
+                  this.showAddEdit['show3'] = true;
+                }
+                else{
+                  this.showAddEdit['show3'] = false;
+                }
+              }
+            }
+          });
     }
 
 }
