@@ -8,9 +8,9 @@
 <div >
   <h1 class="float-left">Process Segments List</h1>
   <div class="float-right">
-    <i class="fas fa-search"></i>&nbsp;
-    <input type="search" name="search" style="margin-top: 10px" placeholder="process name" [(ngModel)]="searchText">
-    <a (click)="populateProcessSegmentList();"> Search </a>
+      <i class="fas fa-search"></i>&nbsp;
+      <input type="search" name="search" style="margin-top: 10px" placeholder="process name" [(ngModel)]="searchText">
+      <button (click)="populateProcessSegmentList();" class="btn btn-primary btn-sm" style="margin-top: -5px;"> Search </button>
   </div>
 </div>
 
@@ -52,7 +52,7 @@
       <option value="12">12 items per page</option>
     </select> &nbsp;
     <select name="pageRange" [(ngModel)]="page" (ngModelChange)="populateProcessSegmentList();">
-      <option *ngFor="let page of pageIterable">{{page}}</option>
+      <option *ngFor="let page of pageIterable">{{ page }}</option>
     </select>
   </div>
   <div class="col-md-7 col-sm-12">
