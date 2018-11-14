@@ -44,7 +44,7 @@ public class ScenarioResourcesApi {
         @RequestBody ScenarioResource body
     ) {
         return ResponseEntityTransformer.transform(
-                generalCRUDService.update(scenarioResourceRepository, id, body)
+            generalCRUDService.update(scenarioResourceRepository, id, body)
         );
     }
 
