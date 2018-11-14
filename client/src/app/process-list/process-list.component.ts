@@ -18,6 +18,7 @@ export class ProcessListComponent implements OnInit {
   page = 0;
   lastPage = 0;
   searchText = '';
+  syncingWithVAR = false;
 
   private getPageIterator(maxNumberOfPages) {
     return () => {
@@ -40,11 +41,15 @@ export class ProcessListComponent implements OnInit {
 
   ngOnInit() {
     this.populateProcessSegmentList();
+    this.syncingWithVAR = true;
     this.http
       .post(environment.apiUrl + '/v1/var/populate-process-segments', {})
       .toPromise()
       .then(
-        () => { this.populateProcessSegmentList(); }
+        () => {
+          this.syncingWithVAR = false;
+          this.populateProcessSegmentList();
+        }
       );
   }
 

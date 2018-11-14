@@ -47,6 +47,11 @@
   </tbody>
 </table>
 
+<ng-template [ngIf]="syncingWithVAR">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  <br>
+</ng-template>
+
 <!-- selekt i paginacija -->
 <div class="row">
   <div class="col-md-5 col-sm-12">
