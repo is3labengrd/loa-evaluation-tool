@@ -63,9 +63,10 @@ export class AddResourceComponent implements OnInit {
     this.router.navigate(['resource-list']);
   }
 
-  save = () => {
+  // tslint:disable-next-line:member-ordering
+  opSuc: boolean;
 
-    // this.performed = true;
+  save = () => {
 
     return this.http
       .post(
@@ -73,10 +74,12 @@ export class AddResourceComponent implements OnInit {
         this.resource
       )
       .toPromise()
-      .then(
-        () => {
-        }
-      );
+      .then(() => {
+        this.opSuc = true;
+      })
+      .catch((err) => {
+        this.opSuc = false;
+      });
   }
 
 }

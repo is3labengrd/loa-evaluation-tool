@@ -15,7 +15,7 @@
     </tr>
     <tr>
       <td>Level of sub processes:</td>
-      <td style="border-right: 1px solid">{{cookie.totalNumberSubprocs}}</td>
+      <td style="border-right: 1px solid">{{cookie.maxDepth}}</td>
       <td></td>
       <td></td>
     </tr>
@@ -56,81 +56,81 @@
       </tr>
       <tr>
         <td>Physical LoA</td>
-        <td>2</td>
-        <td>1</td>
-        <td></td>
+        <td> {{scenarios?.scen1?.weightedPhysicalLoa}}</td>
+        <td> {{scenarios?.scen2?.weightedPhysicalLoa}} </td>
+        <td> {{scenarios?.scen3?.weightedPhysicalLoa}} </td>
       </tr>
       <tr>
         <td>Cognitive LoA</td>
-        <td>4</td>
-        <td>3</td>
-        <td></td>
+        <td> {{scenarios?.scen1?.weightedCognitiveLoa}} </td>
+        <td> {{scenarios?.scen2?.weightedCognitiveLoa}} </td>
+        <td> {{scenarios?.scen3?.weightedCognitiveLoa}} </td>
       </tr>
       <tr>
         <td>Process time</td>
-        <td>320</td>
-        <td>213</td>
-        <td></td>
+        <td> {{scenarios?.scen1?.totalProcessTime}} </td>
+        <td> {{scenarios?.scen2?.totalProcessTime}} </td>
+        <td> {{scenarios?.scen3?.totalProcessTime}} </td>
       </tr>
       <tr>
         <td>Hours per year</td>
-        <td>2000</td>
-        <td>1000</td>
-        <td></td>
+        <td> {{scenarios?.scen1?.hoursYear}} </td>
+        <td> {{scenarios?.scen2?.hoursYear}} </td>
+        <td> {{scenarios?.scen3?.hoursYear}} </td>
       </tr>
       <tr>
         <td>Produced units per year</td>
-        <td>235</td>
-        <td>456</td>
-        <td></td>
+        <td> {{scenarios?.scen1?.prodUnitsPerYears}} </td>
+        <td> {{scenarios?.scen2?.prodUnitsPerYears}} </td>
+        <td> {{scenarios?.scen3?.prodUnitsPerYears}} </td>
       </tr>
       <tr>
         <td>Labour costs</td>
-        <td>3.33</td>
-        <td>23</td>
-        <td></td>
+        <td> {{scenarios?.scen1?.labourCost}} </td>
+        <td> {{scenarios?.scen2?.labourCost}} </td>
+        <td> {{scenarios?.scen3?.labourCost}} </td>
       </tr>
       <tr>
         <td>Energy costs</td>
-        <td>4000</td>
-        <td>5000</td>
-        <td></td>
+        <td> {{scenarios?.scen1?.energyCost}} </td>
+        <td> {{scenarios?.scen2?.energyCost}} </td>
+        <td> {{scenarios?.scen3?.energyCost}} </td>
       </tr>
       <tr>
         <td>Maintenance costs</td>
-        <td>2710</td>
-        <td>5674</td>
-        <td></td>
+        <td> {{scenarios?.scen1?.maintCost}} </td>
+        <td> {{scenarios?.scen2?.maintCost}} </td>
+        <td> {{scenarios?.scen3?.maintCost}} </td>
       </tr>
       <tr>
         <td>Annual space costs</td>
-        <td>960</td>
-        <td>675</td>
-        <td></td>
+        <td> {{scenarios?.scen1?.annualSpaceCost}} </td>
+        <td> {{scenarios?.scen2?.annualSpaceCost}} </td>
+        <td> {{scenarios?.scen3?.annualSpaceCost}} </td>
       </tr>
       <tr>
         <td>Imputed deprecation</td>
-        <td>12444</td>
-        <td>32423</td>
-        <td></td>
+        <td> {{scenarios?.scen1?.inputedDepreciation}} </td>
+        <td> {{scenarios?.scen2?.inputedDepreciation}} </td>
+        <td> {{scenarios?.scen3?.inputedDepreciation}} </td>
       </tr>
       <tr>
         <td> Accured interes costs </td>
-        <td> 123200 </td>
-        <td> 22000 </td>
-        <td>  </td>
+        <td> {{scenarios?.scen1?.accruedInterestCost}} </td>
+        <td> {{scenarios?.scen2?.accruedInterestCost}} </td>
+        <td> {{scenarios?.scen3?.accruedInterestCost}} </td>
       </tr>
       <tr>
         <td> Variable costs per unit </td>
-        <td> 9055.1 </td>
-        <td> 675.2 </td>
-        <td>  </td>
+        <td> {{scenarios?.scen1?.varCostsPerUnit}} </td>
+        <td> {{scenarios?.scen2?.varCostsPerUnit}} </td>
+        <td> {{scenarios?.scen3?.varCostsPerUnit}} </td>
       </tr>
       <tr>
         <td> Fixed costs per unit </td>
-        <td> 44.86 </td>
-        <td> 33.2 </td>
-        <td>  </td>
+        <td> {{scenarios?.scen1?.costPerPiece}} </td>
+        <td> {{scenarios?.scen2?.costPerPiece}} </td>
+        <td> {{scenarios?.scen3?.costPerPiece}} </td>
       </tr>
       <tr>
         <td> ------ </td>
@@ -140,21 +140,27 @@
       </tr>
       <tr>
         <td> Assembly costs per piece </td>
-        <td> 4.17 </td>
-        <td> 5.3</td>
-        <td>  </td>
+        <td> {{scenarios?.scen1?.assCostsPerUnits}} </td>
+        <td> {{scenarios?.scen2?.assCostsPerUnits}} </td>
+        <td> {{scenarios?.scen3?.assCostsPerUnits}} </td>
       </tr>
       <tr>
         <td> Assembly costs (total) </td>
-        <td> 41524.32 </td>
-        <td> 55673.13 </td>
-        <td>  </td>
+        <td> {{scenarios?.scen1?.totalAssCosts}} </td>
+        <td> {{scenarios?.scen2?.totalAssCosts}} </td>
+        <td> {{scenarios?.scen3?.totalAssCosts}} </td>
       </tr>
       <tr>
         <td></td>
-        <td> <a routerLink="/edit-scenario">Edit</a> </td>
-        <td> <a routerLink="/edit-scenario">Edit</a> </td>
-        <td> <a routerLink="/add-scenario">Add</a> </td>
+
+        <td *ngIf="showAddEdit.show1"> <a routerLink="/edit-scenario/1">Edit</a> </td>
+        <td *ngIf="!showAddEdit.show1"> <a routerLink="/add-scenario/1">Add</a> </td>
+
+        <td *ngIf="showAddEdit.show2"> <a routerLink="/edit-scenario/2">Edit</a> </td>
+        <td *ngIf="!showAddEdit.show2"> <a routerLink="/add-scenario/2">Add</a> </td>
+
+        <td *ngIf="showAddEdit.show3"> <a routerLink="/edit-scenario/3">Edit</a> </td>
+        <td *ngIf="!showAddEdit.show3"> <a routerLink="/add-scenario/3">Add</a> </td>
       </tr>
     </tbody>
   </table>

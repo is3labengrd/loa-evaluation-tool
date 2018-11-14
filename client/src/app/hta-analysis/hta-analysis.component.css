@@ -123,3 +123,8 @@ input[type=number] {
   background-color: greenyellow;
   color: black;
 }
+
+.selectLoa {
+  width: 100%;
+  max-width: 200px;
+}

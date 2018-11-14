@@ -15,6 +15,7 @@ export class AddScenarioComponent implements OnInit {
 
   constructor(private http: HttpClient,
               public router: Router,
+              private route: ActivatedRoute,
               private _processListService: CookieService) { }
 
   resSubSceList:Array<any> = [];
@@ -35,10 +36,12 @@ export class AddScenarioComponent implements OnInit {
   avgPhy:any;
   avgCog:any;
   totalProcessTime:any;
+  id:any;
 
   ngOnInit() {
 
     this.cookie = this._processListService.getCookie("selectedSubprocess");
+    this.id  = this.route.snapshot.params['id'];
 
     var waitCAMProcTree = this.fetchFromCAM();
     waitCAMProcTree.then((x)=>{
@@ -198,7 +201,6 @@ export class AddScenarioComponent implements OnInit {
     }
     this.TotalCost = (optCost).toFixed(2);
     this.totalProcessTime = (procTime).toFixed(2);
-
 }
 
   cancel(){
@@ -208,6 +210,7 @@ export class AddScenarioComponent implements OnInit {
     this.cogLoaTotal = 0;
     this.TotalCost = 0;
     this.CostperPiece = 0;
+    this.bodyPost = {};
   }
 
   fetchFromCAM() {
@@ -272,12 +275,12 @@ export class AddScenarioComponent implements OnInit {
       }
 
       for (let i in this.resSubSceList[0]){
-        if(this.resSubSceList[0][i].subprocessLevel.pkTbId === pkSubProc){
 
+        if(this.resSubSceList[0][i].subprocessLevel.pkTbId === pkSubProc){
           this.bodyPost['fkTbAceProSeq'] = this.resSubSceList[0][i].fkTbAceProSeq;
           this.bodyPost['fkTbAceSubProLev'] = this.resSubSceList[0][i].subprocessLevel.pkTbId;
           this.bodyPost['fkTbAceRes'] = this.resSubSceList[0][i].resource.pkTbId;
-          this.bodyPost['scenarioNumber'] = this.resSubSceList[0][i].scenarioNumber;
+          this.bodyPost['scenarioNumber'] = parseInt(this.id);
           this.bodyPost['optionCost'] = this.resSubSceList[0][i].assemblyCosts;
           this.bodyPost['totalCost'] = this.TotalCost;
           this.bodyPost['costPerPiece'] = this.CostperPiece;
@@ -300,19 +303,28 @@ export class AddScenarioComponent implements OnInit {
           this.bodyPost['totalAssCosts'] = this.resSubSceList[0][i].assemblyCosts;
         }
       }
-
     }
 
+    // tslint:disable-next-line:member-ordering
+    opSuc: boolean;
+    // tslint:disable-next-line:member-ordering
+    status: any;
+
     save(){
+
+      this.bodyPost = {};
       this.findsubProc();
       const addProSecOrderedUrl = environment.apiUrl + '/v1/scenarios';
 
       return this.http.post(addProSecOrderedUrl, this.bodyPost)
              .toPromise()
              .then((res: any) => {
-                    alert('Scenarios added!');
+                    this.opSuc = true;
                     this.router.navigate(['scenarios']);
                     },
-                   (err) => alert('Something went wrong. \nStatus: ' +  err.error.status));
+                   (err) => {
+                     this.opSuc = false;
+                     this.status = err.error.status;
+                   });
     }
 }

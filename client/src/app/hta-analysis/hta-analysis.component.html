@@ -113,13 +113,13 @@
             </label>
           </td>
           <td>
-            <select name="physical-loa" [(ngModel)]="loaInfoRequest.fkTbAcePhyLoa" [disabled]="!loaInfoRequest.possibility">
-              <option *ngFor="let loa of physicalLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}}</option>
+            <select name="physical-loa" [(ngModel)]="loaInfoRequest.fkTbAcePhyLoa" [disabled]="!loaInfoRequest.possibility" class="selectLoa">
+              <option *ngFor="let loa of physicalLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}} - {{ loa.loa }}</option>
             </select>
           </td>
           <td>
-            <select name="cognitive-loa" [(ngModel)]="loaInfoRequest.fkTbAceCogLoa" [disabled]="!loaInfoRequest.possibility">
-              <option *ngFor="let loa of cognitiveLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}}</option>
+            <select name="cognitive-loa" [(ngModel)]="loaInfoRequest.fkTbAceCogLoa" [disabled]="!loaInfoRequest.possibility" class="selectLoa">
+              <option *ngFor="let loa of cognitiveLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}} - {{ loa.loa }}</option>
             </select>
           </td>
           <td>
@@ -137,10 +137,14 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="saveModalLabel"><p class="text-success">Successful</p></h5>
+          <h5 class="modal-title" id="saveModalLabel">
+            <p class="text-success" *ngIf="opSuc">Successful</p>
+            <p class="text-danger" *ngIf="!opSuc">Error</p>
+          </h5>
         </div>
         <div class="modal-body">
-          Operation performed.
+          <span *ngIf="opSuc">Operation performed.</span>
+          <span *ngIf="!opSuc">Operation failed.</span>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="away()">OK</button>

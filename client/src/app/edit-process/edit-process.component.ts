@@ -211,6 +211,8 @@ export class EditProcessComponent implements OnInit {
       this.lvl3selection = null;
     }
 
+    opSuc: boolean;
+
     save() {
       this.checkEdit1 = [];
       this.checkEdit2 = [];
@@ -246,7 +248,8 @@ export class EditProcessComponent implements OnInit {
                       if(this.processAdded[0][i].subProcessLevel1 !=null){
                         if (this.lvl1selection.name === this.processAdded[0][i].subProcessLevel1.name){
                           enablePost = true;
-                          alert("This process segment already exist!");
+                          // alert("This process segment already exist!");
+                          this.opSuc = false;
                           break;
                         }
                       }
@@ -256,7 +259,8 @@ export class EditProcessComponent implements OnInit {
                     if(this.processAdded[0][i].subProcessLevel1 !=null && this.processAdded[0][i].subProcessLevel2 !=null){
                       if (this.lvl1selection.name === this.processAdded[0][i].subProcessLevel1.name && this.lvl2selection.name === this.processAdded[0][i].subProcessLevel2.name){
                         enablePost = true;
-                        alert("This process segment already exist!");
+                        // alert("This process segment already exist!");
+                        this.opSuc = false;
                         break;
                       }
                     }
@@ -265,7 +269,8 @@ export class EditProcessComponent implements OnInit {
                   if(this.processAdded[0][i].subProcessLevel1 !=null && this.processAdded[0][i].subProcessLevel2 !=null && this.processAdded[0][i].subProcessLevel3 !=null){
                     if (this.lvl1selection.name === this.processAdded[0][i].subProcessLevel1.name && this.lvl2selection.name === this.processAdded[0][i].subProcessLevel2.name && this.lvl3selection.name === this.processAdded[0][i].subProcessLevel3.name){
                       enablePost = true;
-                      alert("This process segment already exist!");
+                      // alert("This process segment already exist!");
+                      this.opSuc = false;
                       break;
                     }
                   }
@@ -280,7 +285,8 @@ export class EditProcessComponent implements OnInit {
 
                 this.addSubProcessL1(this.SegmentList[0].mainProcess.pkTbId);
                 this.router.navigate(['process-list']);
-                alert("Process edited successfully");
+                // alert("Process edited successfully");
+                this.opSuc = true;
             }
           });
         }
