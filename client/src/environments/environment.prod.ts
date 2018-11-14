@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  hostUrl: 'http://localhost:8080/LoAEvaluationTool',
+  hostUrl: 'LoAEvaluationTool',
   apiUrl: 'http://localhost:8080/LoAService'
 };
