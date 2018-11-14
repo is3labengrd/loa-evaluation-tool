@@ -113,13 +113,13 @@
             </label>
           </td>
           <td>
-            <select name="physical-loa" [(ngModel)]="loaInfoRequest.fkTbAcePhyLoa" [disabled]="!loaInfoRequest.possibility">
-              <option *ngFor="let loa of physicalLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}}</option>
+            <select name="physical-loa" [(ngModel)]="loaInfoRequest.fkTbAcePhyLoa" [disabled]="!loaInfoRequest.possibility" class="selectLoa">
+              <option *ngFor="let loa of physicalLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}} - {{ loa.loa }}</option>
             </select>
           </td>
           <td>
-            <select name="cognitive-loa" [(ngModel)]="loaInfoRequest.fkTbAceCogLoa" [disabled]="!loaInfoRequest.possibility">
-              <option *ngFor="let loa of cognitiveLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}}</option>
+            <select name="cognitive-loa" [(ngModel)]="loaInfoRequest.fkTbAceCogLoa" [disabled]="!loaInfoRequest.possibility" class="selectLoa">
+              <option *ngFor="let loa of cognitiveLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}} - {{ loa.loa }}</option>
             </select>
           </td>
           <td>
