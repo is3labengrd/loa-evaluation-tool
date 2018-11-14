@@ -16,6 +16,8 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import eng.it.loatool.PkTbPrimaryKeyOwner;
 
 /**
@@ -25,7 +27,7 @@ import eng.it.loatool.PkTbPrimaryKeyOwner;
 @Table(name = "TB_ACE_SCENARIOS", catalog = "loa_evaluation_tool")
 public class Scenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
-    private Integer pkTbId;
+    @JsonProperty private Integer pkTbId;
     private Double totalCost;
     private Double costPerPiece;
     private Integer totalProcessTime;
