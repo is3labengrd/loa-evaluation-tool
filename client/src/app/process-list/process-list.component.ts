@@ -49,6 +49,12 @@ export class ProcessListComponent implements OnInit {
           this.syncingWithVAR = false;
           this.populateProcessSegmentList();
         }
+      )
+      .catch(
+        (err) => {
+          this.syncingWithVAR = false;
+          // Vladislave, stavi ovde popup koji informise korisnika da VAR ne radi ;)
+        }
       );
   }
 
