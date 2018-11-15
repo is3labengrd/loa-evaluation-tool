@@ -10,10 +10,8 @@ import { environment } from './../environments/environment';
 export class AppComponent {
   title = 'LoA-tool';
   baseImg = environment.hostUrl ?
-    '/' + environment.hostUrl + '/assets/'
-  :
-    '/assets/'
-    ;
+    '/' + environment.hostUrl + '/assets/':
+    '/assets/';
 
 
 }
