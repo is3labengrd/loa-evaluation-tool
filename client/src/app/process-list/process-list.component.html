@@ -63,7 +63,7 @@
       <option value="12">12 items per page</option>
     </select> &nbsp;
     <select name="pageRange" [(ngModel)]="page" (ngModelChange)="populateProcessSegmentList();">
-      <option *ngFor="let page of pageIterable">{{ page }}</option>
+      <option *ngFor="let page of pageIterable">Page {{ +page+1 }}</option>
     </select>
   </div>
   <div class="col-md-7 col-sm-12">
@@ -77,4 +77,5 @@
     </nav>
   </div>
 </div>
+
 
