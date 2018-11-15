@@ -15,6 +15,7 @@ import eng.it.loatool.api.ResponseEntityTransformer;
 import eng.it.loatool.resource.GetResourceListItemService;
 import eng.it.loatool.resource.Resource;
 import eng.it.loatool.resource.ResourceRepository;
+import eng.it.loatool.resource.UpdateResourceService;
 
 @Controller
 public class ResourcesApi {
@@ -73,10 +74,11 @@ public class ResourcesApi {
         @RequestBody Resource body
     ) {
         return ResponseEntityTransformer.transform(
-            generalCRUDService.update(resourceRepository, id, body)
+            updateResourceService.update(id, body)
         );
     }
 
+    @Autowired private UpdateResourceService updateResourceService;
     @Autowired private GetResourceListItemService getResourceListItemService;
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private ResourceRepository resourceRepository;

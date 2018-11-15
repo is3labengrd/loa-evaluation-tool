@@ -328,4 +328,9 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.updateDate = updateDate;
     }
 
+    @Override
+    public String toString() {
+        return "SubScenario [pkTbId=" + pkTbId + ", fkTbAceProSeq=" + fkTbAceProSeq + ", fkTbAceSubProLev=" + fkTbAceSubProLev + ", subprocessLevel=" + subprocessLevel + ", fkTbAceRes=" + fkTbAceRes + ", resource=" + resource + ", scenarioNumber=" + scenarioNumber + ", processTime=" + processTime + ", assemblyCostPerPiece=" + assemblyCostPerPiece + ", assemblyCosts=" + assemblyCosts + ", usPhysicalLoa=" + usPhysicalLoa + ", usCognitiveLoa=" + usCognitiveLoa + ", hoursPerYears=" + hoursPerYears + ", NProdPieces=" + NProdPieces + ", labourCost=" + labourCost + ", energyCost=" + energyCost + ", maintCost=" + maintCost + ", annualSpaceCost=" + annualSpaceCost + ", inputedDepreciation=" + inputedDepreciation + ", rateOfPart=" + rateOfPart + ", accruedIntCosts=" + accruedIntCosts + ", varCostTotal=" + varCostTotal + ", fixedCostTotal=" + fixedCostTotal + ", resRecal=" + resRecal + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
+    }
+
 }
