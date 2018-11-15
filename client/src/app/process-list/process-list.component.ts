@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { CookieService } from '../cookie.service';
+import { $ } from 'protractor';
 
 
 @Component({
@@ -31,7 +32,11 @@ export class ProcessListComponent implements OnInit {
     };
   }
 
-  pageIterable: any = (function *(){}());
+  // tslint:disable-next-line:member-ordering
+  pageIterable: any = (function * () {}());
+
+  // tslint:disable-next-line:member-ordering
+  modal = document.getElementById('errorModal');
 
   constructor(
     private http: HttpClient,
@@ -53,7 +58,7 @@ export class ProcessListComponent implements OnInit {
       .catch(
         (err) => {
           this.syncingWithVAR = false;
-          // Vladislave, stavi ovde popup koji informise korisnika da VAR ne radi ;)
+          alert('CAM is not working.');
         }
       );
   }
