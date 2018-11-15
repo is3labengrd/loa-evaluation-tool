@@ -42,8 +42,8 @@ public class Scenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
     private Double macCost;
     private Date createDate;
     private Date udpateDate;
-    private int fkTbAceProSeq;
-    private int scenarioNumber;
+    private Integer fkTbAceProSeq;
+    private Integer scenarioNumber;
     private Double totWeightedPhysicalLoa;
     private Double totWeightedCognitiveLoa;
     private Integer prodUnitsPerYears;
@@ -53,14 +53,14 @@ public class Scenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
     public Scenario() {}
 
-    public Scenario(Date createDate, Date udpateDate, int fkTbAceProSeq, int scenarioNumber) {
+    public Scenario(Date createDate, Date udpateDate, Integer fkTbAceProSeq, Integer scenarioNumber) {
         this.createDate = createDate;
         this.udpateDate = udpateDate;
         this.fkTbAceProSeq = fkTbAceProSeq;
         this.scenarioNumber = scenarioNumber;
     }
 
-    public Scenario(Double totalCost, Double costPerPiece, Integer totalProcessTime, Integer hoursYear, Double labourCost, Double maintCost, Double annualSpaceCost, Double inputedDepreciation, Double accruedInterestCost, Double energyCost, Double varCostsPerUnit, Double macCost, Date createDate, Date udpateDate, int fkTbAceProSeq, int scenarioNumber, Double totWeightedPhysicalLoa, Double totWeightedCognitiveLoa, Integer prodUnitsPerYears, Double assCostsPerUnits, Double totalAssCosts, Boolean resRecal) {
+    public Scenario(Double totalCost, Double costPerPiece, Integer totalProcessTime, Integer hoursYear, Double labourCost, Double maintCost, Double annualSpaceCost, Double inputedDepreciation, Double accruedInterestCost, Double energyCost, Double varCostsPerUnit, Double macCost, Date createDate, Date udpateDate, Integer fkTbAceProSeq, Integer scenarioNumber, Double totWeightedPhysicalLoa, Double totWeightedCognitiveLoa, Integer prodUnitsPerYears, Double assCostsPerUnits, Double totalAssCosts, Boolean resRecal) {
         this.totalCost = totalCost;
         this.costPerPiece = costPerPiece;
         this.totalProcessTime = totalProcessTime;
@@ -208,20 +208,20 @@ public class Scenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
     }
 
     @Column(name = "FK_TB_ACE_PRO_SEQ", nullable = false)
-    public int getFkTbAceProSeq() {
+    public Integer getFkTbAceProSeq() {
         return this.fkTbAceProSeq;
     }
 
-    public void setFkTbAceProSeq(int fkTbAceProSeq) {
+    public void setFkTbAceProSeq(Integer fkTbAceProSeq) {
         this.fkTbAceProSeq = fkTbAceProSeq;
     }
 
     @Column(name = "SCENARIO_NUMBER", nullable = false)
-    public int getScenarioNumber() {
+    public Integer getScenarioNumber() {
         return this.scenarioNumber;
     }
 
-    public void setScenarioNumber(int scenarioNumber) {
+    public void setScenarioNumber(Integer scenarioNumber) {
         this.scenarioNumber = scenarioNumber;
     }
 

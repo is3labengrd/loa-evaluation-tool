@@ -134,4 +134,9 @@ public class SubProcessLevelResource implements java.io.Serializable, PkTbPrimar
         this.updateDate = updateDate;
     }
 
+    @Override
+    public String toString() {
+        return "SubProcessLevelResource [pkTbId=" + pkTbId + ", resource=" + resource + ", fkTbAceRes=" + fkTbAceRes + ", subprocessLevel=" + subprocessLevel + ", fkTbAceSubProLev=" + fkTbAceSubProLev + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
+    }
+
 }

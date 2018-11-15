@@ -32,22 +32,22 @@ public class ScenarioResource implements java.io.Serializable, PkTbPrimaryKeyOwn
 
     @JsonProperty private Integer pkTbId;
 
-    private int fkTbAceSubProLev;
+    private Integer fkTbAceSubProLev;
     private SubProcessLevel subprocessLevel;
 
-    private int fkTbAceRes;
+    private Integer fkTbAceRes;
     private Resource resource;
 
     private Date createDate;
     private Date updateDate;
-    private int fkTbAceScenarios;
-    private double optionalCost;
-    private double weightedPhysicalLoa;
-    private double weightedCognitiveLoa;
+    private Integer fkTbAceScenarios;
+    private Double optionalCost;
+    private Double weightedPhysicalLoa;
+    private Double weightedCognitiveLoa;
 
     public ScenarioResource() {}
 
-    public ScenarioResource(int fkTbAceSubProLev, int fkTbAceRes, Date createDate, Date updateDate, int fkTbAceScenarios, double optionalCost, double weightedPhysicalLoa, double weightedCognitiveLoa) {
+    public ScenarioResource(Integer fkTbAceSubProLev, Integer fkTbAceRes, Date createDate, Date updateDate, Integer fkTbAceScenarios, Double optionalCost, Double weightedPhysicalLoa, Double weightedCognitiveLoa) {
         this.fkTbAceSubProLev = fkTbAceSubProLev;
         this.fkTbAceRes = fkTbAceRes;
         this.createDate = createDate;
@@ -73,16 +73,16 @@ public class ScenarioResource implements java.io.Serializable, PkTbPrimaryKeyOwn
     }
 
     @Column(name = "FK_TB_ACE_SUB_PRO_LEV", nullable = false)
-    public int getFkTbAceSubProLev() {
+    public Integer getFkTbAceSubProLev() {
         return this.fkTbAceSubProLev;
     }
 
-    public void setFkTbAceSubProLev(int fkTbAceSubProLev) {
+    public void setFkTbAceSubProLev(Integer fkTbAceSubProLev) {
         this.fkTbAceSubProLev = fkTbAceSubProLev;
     }
 
     @Column(name = "FK_TB_ACE_RES", nullable = false)
-    public int getFkTbAceRes() {
+    public Integer getFkTbAceRes() {
         return this.fkTbAceRes;
     }
 
@@ -104,43 +104,43 @@ public class ScenarioResource implements java.io.Serializable, PkTbPrimaryKeyOwn
         this.resource = resource;
     }
 
-    public void setFkTbAceRes(int fkTbAceRes) {
+    public void setFkTbAceRes(Integer fkTbAceRes) {
         this.fkTbAceRes = fkTbAceRes;
     }
 
     @Column(name = "FK_TB_ACE_SCENARIOS", nullable = false)
-    public int getFkTbAceScenarios() {
+    public Integer getFkTbAceScenarios() {
         return this.fkTbAceScenarios;
     }
 
-    public void setFkTbAceScenarios(int fkTbAceScenarios) {
+    public void setFkTbAceScenarios(Integer fkTbAceScenarios) {
         this.fkTbAceScenarios = fkTbAceScenarios;
     }
 
     @Column(name = "OPTIONAL_COST", nullable = false, precision = 22, scale = 0)
-    public double getOptionalCost() {
+    public Double getOptionalCost() {
         return this.optionalCost;
     }
 
-    public void setOptionalCost(double optionalCost) {
+    public void setOptionalCost(Double optionalCost) {
         this.optionalCost = optionalCost;
     }
 
     @Column(name = "WEIGHTED_PHYSICAL_LOA", nullable = false, precision = 22, scale = 0)
-    public double getWeightedPhysicalLoa() {
+    public Double getWeightedPhysicalLoa() {
         return this.weightedPhysicalLoa;
     }
 
-    public void setWeightedPhysicalLoa(double weightedPhysicalLoa) {
+    public void setWeightedPhysicalLoa(Double weightedPhysicalLoa) {
         this.weightedPhysicalLoa = weightedPhysicalLoa;
     }
 
     @Column(name = "WEIGHTED_COGNITIVE_LOA", nullable = false, precision = 22, scale = 0)
-    public double getWeightedCognitiveLoa() {
+    public Double getWeightedCognitiveLoa() {
         return this.weightedCognitiveLoa;
     }
 
-    public void setWeightedCognitiveLoa(double weightedCognitiveLoa) {
+    public void setWeightedCognitiveLoa(Double weightedCognitiveLoa) {
         this.weightedCognitiveLoa = weightedCognitiveLoa;
     }
 
@@ -165,6 +165,11 @@ public class ScenarioResource implements java.io.Serializable, PkTbPrimaryKeyOwn
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    @Override
+    public String toString() {
+        return "ScenarioResource [pkTbId=" + pkTbId + ", fkTbAceSubProLev=" + fkTbAceSubProLev + ", subprocessLevel=" + subprocessLevel + ", fkTbAceRes=" + fkTbAceRes + ", resource=" + resource + ", createDate=" + createDate + ", updateDate=" + updateDate + ", fkTbAceScenarios=" + fkTbAceScenarios + ", optionalCost=" + optionalCost + ", weightedPhysicalLoa=" + weightedPhysicalLoa + ", weightedCognitiveLoa=" + weightedCognitiveLoa + "]";
     }
 
 }
