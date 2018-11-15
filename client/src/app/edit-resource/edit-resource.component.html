@@ -10,19 +10,19 @@
 
   <h1 class="text-center">Edit Resource</h1>
 
-  <form id="editRes" action="">
+  <form id="editRes">
     <fieldset>
       <legend>General info</legend>
       <div class="row data">
-        <span class="col-4 text-left">
+        <span class="col-6">
           Resource name:
-          <input type="text" name="name" [(ngModel)]="resource.name" required>
+          <input type="text" class="float-right" name="name" [(ngModel)]="resource.name" required>
         </span>
-        <span class="col-4 text-right">
+        <span class="col-3 text-right">
           LoA Physical:
           <input type="number" name="loaPhysical" [(ngModel)]="resource.loaPhysical" min="1" max="7" required>
         </span>
-        <span class="col-4 text-right">
+        <span class="col-3 text-right">
           LoA Cognitive:
           <input type="number" name="loaCognitive" [(ngModel)]="resource.loaCognitive" min="1" max="7" required>
         </span>
