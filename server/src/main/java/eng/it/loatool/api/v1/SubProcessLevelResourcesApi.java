@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
+import eng.it.loatool.subprocess_level_resource.DeleteSubProcessLevelResourceService;
 import eng.it.loatool.subprocess_level_resource.GetSubProcessLevelResourcebySubProcessIdService;
 import eng.it.loatool.subprocess_level_resource.PersistSubProcessLevelResourceService;
 import eng.it.loatool.subprocess_level_resource.SubProcessLevelResource;
@@ -63,12 +64,13 @@ public class SubProcessLevelResourcesApi {
         @PathVariable("id") Integer id
     ) {
         return ResponseEntityTransformer.transform(
-            generalCRUDService.delete(subProcessLevelResourceRepository, id)
+            deleteSubProcessLevelResourceService.delete(id)
         );
     }
 
     @Autowired private GetSubProcessLevelResourcebySubProcessIdService getSubProcessLevelResourcebySubProcessIdService;
     @Autowired private PersistSubProcessLevelResourceService persistSubProcessLevelResourceService;
+    @Autowired private DeleteSubProcessLevelResourceService deleteSubProcessLevelResourceService;
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private SubProcessLevelResourceRepository subProcessLevelResourceRepository;
 
