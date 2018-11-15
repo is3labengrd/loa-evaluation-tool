@@ -95,7 +95,7 @@
   </tbody>
   </table><br>
 
-  <form action="">
+  <form >
     <fieldset>
       <legend style="width: auto;">LoA information</legend>
       <table class="table table-borderless table-responsive">
@@ -123,10 +123,12 @@
             </select>
           </td>
           <td>
-            <input type="number" name="minBestLoa" #minLoa max="7" min="1" [(ngModel)]="loaInfoRequest.bestRangeMin" [disabled]="!loaInfoRequest.possibility" required>
+            <input type="number" name="minBestLoa" #minLoa max="7" min="1" [(ngModel)]="loaInfoRequest.bestRangeMin"
+             [disabled]="!loaInfoRequest.possibility" oninput="this.value=(parseInt(this.value)||0)" onkeydown="return false" required>
           </td>
           <td>
-            <input type="number" name="maxBestLoa" #maxLoa max="7" min="1" [(ngModel)]="loaInfoRequest.bestRangeMax" [disabled]="!loaInfoRequest.possibility" required>
+            <input type="number" name="maxBestLoa" #maxLoa max="7" min="1" [(ngModel)]="loaInfoRequest.bestRangeMax"
+             [disabled]="!loaInfoRequest.possibility" oninput="this.value=(parseInt(this.value)||0)" onkeydown="return false" required>
           </td>
         </tr>
       </table>
