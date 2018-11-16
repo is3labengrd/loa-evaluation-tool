@@ -19,11 +19,11 @@
           </span>
         <span class="col-3 text-right">
             LoA Physical:
-            <input type="number" name="loaPhysical" [(ngModel)]="resource.loaPhysical" min="1" max="7" required >
+            <input type="number" name="loaPhysical" [(ngModel)]="resource.loaPhysical" min="1" max="7" onkeydown="return false" required>
           </span>
         <span class="col-3 text-right">
             LoA Cognitive:
-            <input type="number" name="loaCognitive" [(ngModel)]="resource.loaCognitive" min="1" max="7" required > 
+            <input type="number" name="loaCognitive" [(ngModel)]="resource.loaCognitive" min="1" max="7" onkeydown="return false" required> 
           </span>
        
       </div>
