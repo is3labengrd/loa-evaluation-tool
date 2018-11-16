@@ -128,3 +128,9 @@ input[type=number] {
   width: 100%;
   max-width: 200px;
 }
+
+.shorten {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

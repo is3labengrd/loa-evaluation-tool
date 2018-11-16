@@ -19,3 +19,9 @@
   background-color: red;
   color: whitesmoke;
 }
+
+.shorten {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -11,9 +11,15 @@
   <table id="table1" cellpadding="10">
     <tr>
       <td>Main process:</td>
-      <td style="border-right: 1px solid">{{selectedSubprocess?.mainProcessName}}</td>
-      <td>Sub process level 1: {{selectedSubprocess?.level1?.name}}</td>
-      <td>Sub process level 2: {{selectedSubprocess?.level2?.name}}</td>
+      <td style="border-right: 1px solid" class="shorten" data-toggle="tooltip" data-placement="top" title="{{selectedSubprocess?.mainProcessName}}">
+        {{selectedSubprocess?.mainProcessName}}
+      </td>
+      <td class="shorten" data-toggle="tooltip" data-placement="top" title="{{selectedSubprocess?.level1?.name}}">
+        Sub process level 1: {{selectedSubprocess?.level1?.name}}
+      </td>
+      <td class="shorten" data-toggle="tooltip" data-placement="top" title="{{selectedSubprocess?.level2?.name}}">
+        Sub process level 2: {{selectedSubprocess?.level2?.name}}
+      </td>
     </tr>
     <tr>
       <td>Level of sub processes:</td>
