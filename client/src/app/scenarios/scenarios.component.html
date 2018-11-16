@@ -30,17 +30,11 @@
       <th>Resource scenario 3</th>
     </thead>
     <tbody>
-      <tr *ngFor="let subScen of subSceList">
-        <td>{{subScen?.subProc?.subprocessLevel.name}}</td>
-        <td>{{subScen?.objList?.scenNumber1?.resource.name}}</td>
-        <td>{{subScen?.objList?.scenNumber2?.resource.name}}</td>
-        <td>{{subScen?.objList?.scenNumber3?.resource.name}}</td>
-      </tr>
-      <tr *ngFor="let procMissing of allProcessSegmentCAM">
-        <td>{{procMissing}}</td>
-        <td></td>
-        <td></td>
-        <td></td>
+      <tr *ngFor="let scen of resourceTable">
+        <td>{{scen?.name}}</td>
+        <td>{{scen?.res1}}</td>
+        <td>{{scen?.res2}}</td>
+        <td>{{scen?.res3}}</td>
       </tr>
       <tr>
         <td>------</td>
@@ -56,15 +50,15 @@
       </tr>
       <tr>
         <td>Physical LoA</td>
-        <td> {{scenarios?.scen1?.weightedPhysicalLoa}}</td>
-        <td> {{scenarios?.scen2?.weightedPhysicalLoa}} </td>
-        <td> {{scenarios?.scen3?.weightedPhysicalLoa}} </td>
+        <td> {{scenarios?.scen1?.totWeightedPhysicalLoa}}</td>
+        <td> {{scenarios?.scen2?.totWeightedPhysicalLoa}} </td>
+        <td> {{scenarios?.scen3?.totWeightedPhysicalLoa}} </td>
       </tr>
       <tr>
         <td>Cognitive LoA</td>
-        <td> {{scenarios?.scen1?.weightedCognitiveLoa}} </td>
-        <td> {{scenarios?.scen2?.weightedCognitiveLoa}} </td>
-        <td> {{scenarios?.scen3?.weightedCognitiveLoa}} </td>
+        <td> {{scenarios?.scen1?.totWeightedCognitiveLoa}} </td>
+        <td> {{scenarios?.scen2?.totWeightedCognitiveLoa}} </td>
+        <td> {{scenarios?.scen3?.totWeightedCognitiveLoa}} </td>
       </tr>
       <tr>
         <td>Process time</td>
