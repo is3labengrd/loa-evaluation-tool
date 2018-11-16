@@ -35,3 +35,9 @@ fieldset legend {
 input[type="number"] {
   width: 50px;
 }
+
+.shorten {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
