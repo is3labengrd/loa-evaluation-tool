@@ -29,12 +29,13 @@
     </tr>
   </table>
 
+  <!-- Title and search -->
   <div>
-    <h1>Process List Resources</h1>
-    <span class="float-right"> <i class="fas fa-search"></i> &nbsp;
+    <h1 class="float-left">Process List Resources</h1>
+    <div class="float-right"> <i class="fas fa-search"></i> &nbsp;
       <input type="search" [(ngModel)]="searchTerm" style="margin-top: 10px" placeholder="resource name">
-      <span (click)="updateResourceList()">Search</span>
-    </span>
+      <button (click)="updateResourceList()"  class="btn btn-primary btn-sm" style="margin-top: -5px;"> Search </button>
+    </div>
   </div>
 
   <!-- main table -->
