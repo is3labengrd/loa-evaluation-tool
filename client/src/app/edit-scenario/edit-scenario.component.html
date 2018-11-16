@@ -22,65 +22,65 @@
       </tr>
     </table>
 
-  <table class="table">
-    <caption style="caption-side: top; text-align: center; font-size: 30px; color:black;"><h1>Edit Scenario</h1></caption>
-    <thead>
-      <th> Sub Process Name: </th>
-      <th> Sub Scenarios: </th>
-      <th> Optional Cost: </th>
-      <th> Physical LoA: </th>
-      <th> Cognitive LoA: </th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let subScen of subSceList; let i = index">
-        <td>{{subScen?.subProc?.subprocessLevel.name}}</td>
-        <td>
-          SC1 <input *ngIf="subScen?.objList?.scenNumber1?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber1?.resource.name+i}} id={{subScen?.objList?.scenNumber1?.resource.name+i}} value="{{subScen?.objList?.scenNumber1?.assemblyCosts}}-{{i}}-0">{{subScen?.objList?.scenNumber1?.resource.name}}<br>
-          SC2 <input *ngIf="subScen?.objList?.scenNumber2?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber2?.resource.name+i}} id={{subScen?.objList?.scenNumber2?.resource.name+i}} value="{{subScen?.objList?.scenNumber2?.assemblyCosts}}-{{i}}-1">{{subScen?.objList?.scenNumber2?.resource.name}}<br>
-          SC3 <input *ngIf="subScen?.objList?.scenNumber3?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber3?.resource.name+i}} id={{subScen?.objList?.scenNumber3?.resource.name+i}} value="{{subScen?.objList?.scenNumber3?.assemblyCosts}}-{{i}}-2">{{subScen?.objList?.scenNumber3?.resource.name}}<br>
-        </td>
-        <td align="center">
-          <br>
-          {{showedList[i]?.optC}}<br>
-        </td>
-        <td align="center">
-          <br>
-          {{showedList[i]?.phy}}<br>
-        </td>
-        <td align="center">
-          <br>
-          {{showedList[i]?.cog}}<br>
-        </td>
-      </tr>
+    <table class="table">
+      <caption style="caption-side: top; text-align: center; font-size: 30px; color:black;"><h1>Edit Scenario</h1></caption>
+      <thead>
+        <th> Sub Process Name: </th>
+        <th> Sub Scenarios: </th>
+        <th> Optional Cost: </th>
+        <th> Physical LoA: </th>
+        <th> Cognitive LoA: </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let subScen of subSceList; let i = index">
+          <td>{{subScen?.subProc?.subprocessLevel.name}}</td>
+          <td>
+            SC1 <input *ngIf="subScen?.objList?.scenNumber1?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber1?.resource.name+i}} id={{subScen?.objList?.scenNumber1?.resource.name+i}} value="{{subScen?.objList?.scenNumber1?.assemblyCosts}}-{{i}}-0">{{subScen?.objList?.scenNumber1?.resource.name}}<br>
+            SC2 <input *ngIf="subScen?.objList?.scenNumber2?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber2?.resource.name+i}} id={{subScen?.objList?.scenNumber2?.resource.name+i}} value="{{subScen?.objList?.scenNumber2?.assemblyCosts}}-{{i}}-1">{{subScen?.objList?.scenNumber2?.resource.name}}<br>
+            SC3 <input *ngIf="subScen?.objList?.scenNumber3?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber3?.resource.name+i}} id={{subScen?.objList?.scenNumber3?.resource.name+i}} value="{{subScen?.objList?.scenNumber3?.assemblyCosts}}-{{i}}-2">{{subScen?.objList?.scenNumber3?.resource.name}}<br>
+          </td>
+          <td align="center">
+            <br>
+            {{showedList[i]?.optC}}<br>
+          </td>
+          <td align="center">
+            <br>
+            {{showedList[i]?.phy}}<br>
+          </td>
+          <td align="center">
+            <br>
+            {{showedList[i]?.cog}}<br>
+          </td>
+        </tr>
 
-      <tr *ngFor="let procMissing of allProcessSegmentCAM">
-        <td>{{procMissing}}</td>
-        <td>
-          SC1 <br>
-          SC2 <br>
-          SC3
-        </td>
-        <td align="center"> <br> 0 <br> </td>
-        <td align="center"> <br> 0 <br> </td>
-        <td align="center"> <br> 0 <br> </td>
-      </tr>
+        <tr *ngFor="let procMissing of allProcessSegmentCAM">
+          <td>{{procMissing}}</td>
+          <td>
+            SC1 <br>
+            SC2 <br>
+            SC3
+          </td>
+          <td align="center"> <br> 0 <br> </td>
+          <td align="center"> <br> 0 <br> </td>
+          <td align="center"> <br> 0 <br> </td>
+        </tr>
 
-      <tr>
-        <td></td>
-        <td align="center"> Total Cost: </td>
-        <td align="center"> {{TotalCost}} </td>
-        <td align="center"> Physical LoA: </td>
-        <td align="center"> {{phyLoaTotal}} </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td align="center"> Cost per Piece: </td>
-        <td align="center"> {{CostperPiece}} </td>
-        <td align="center"> Cognitive LoA: </td>
-        <td align="center"> {{cogLoaTotal}} </td>
-      </tr>
-    </tbody>
-  </table>
+        <tr>
+          <td></td>
+          <td align="center"> Total Cost: </td>
+          <td align="center"> {{TotalCost}} </td>
+          <td align="center"> Physical LoA: </td>
+          <td align="center"> {{phyLoaTotal}} </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td align="center"> Cost per Piece: </td>
+          <td align="center"> {{CostperPiece}} </td>
+          <td align="center"> Cognitive LoA: </td>
+          <td align="center"> {{cogLoaTotal}} </td>
+        </tr>
+      </tbody>
+    </table>
   <div class="btn-group d-flex justify-content-center border-top" style="padding-top: 15px; margin-bottom: 20px;">
     <button class="btn btn-primary" (click)="cancel()"> Cancel </button>
     <button cancel="btn btn-secondary" (click)="calculate()"> Calculate </button>
