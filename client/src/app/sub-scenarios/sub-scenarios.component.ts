@@ -94,13 +94,17 @@ export class SubScenariosComponent implements OnInit {
 
     var promise1 = this.productPlanningGET();
     promise1.then((x) => {
-           this.procSpecInfoGET();
+         var promise2 = this.procSpecInfoGET();
+         promise2.then((x) => {
+            var promise3 = this.getResource();
+                promise3.then((x) => {
+                   this.subScenarioGET();
+                 });
+         });
+
     });
 
-    var promise3 = this.getResource();
-    promise3.then((x) => {
-       this.subScenarioGET();
-     });
+
 
 
     this.checkMandatoryData();
