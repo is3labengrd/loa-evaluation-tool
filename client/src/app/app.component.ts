@@ -9,7 +9,7 @@ import { environment } from './../environments/environment';
 
 export class AppComponent {
   title = 'LoA-tool';
-  baseImg = environment.hostUrl ?
+  baseImg = environment.production == true ?
     '/' + environment.hostUrl + '/assets/':
     '/assets/';
 
