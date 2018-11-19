@@ -31,6 +31,7 @@ export class AddProcessComponent implements OnInit {
   pks: Array<any> = [];
   cookie: any;
   processAdded: Array<any> = [];
+  syncingWithVAR = false;
 
   constructor(
     private http: HttpClient,
@@ -43,6 +44,8 @@ export class AddProcessComponent implements OnInit {
   ngOnInit() {
     this.cookie = this._processListService.getCookie('selectedSubprocess');
     this.id  = this.route.snapshot.params['id'];
+
+    this.syncingWithVAR = true;
 
     return this.http
     .get(environment.apiUrl + '/v1/process-segments/' + this.id)
@@ -62,6 +65,7 @@ export class AddProcessComponent implements OnInit {
     .toPromise()
     .then(
       (processSegments: Array<any>) => {
+        this.syncingWithVAR = false;
         this.processSegmentList.push(processSegments);
         this._values1.push(this.subProcessL1(mainP.name));
         this.lowerLevel = this.findObj(this.processSegmentList[0], this.mainProcess[0].name);
@@ -86,7 +90,7 @@ export class AddProcessComponent implements OnInit {
     this.lvl2selection = null;
     this.lvl3selection = null;
 
-     this.http
+    this.http
     .get(environment.apiUrl + '/v1/process-segments/' + this.id)
     .toPromise()
     .then(
