@@ -63,7 +63,7 @@ export class SubScenariosComponent implements OnInit {
 
 
   disableButton: boolean;
-  resources: any;
+  resources: Array<any> = [];
   selectedRes1: any;
   selectedRes2: any;
   selectedRes3: any;
@@ -111,16 +111,18 @@ export class SubScenariosComponent implements OnInit {
   }
 
   getResource() {
-    return this.http
-      .get(environment.apiUrl + '/v1/resources')
-      .toPromise()
-      .then(
-        (res: any) => {
-          this.resources = res;
-          this.resourcesList.push(res);
-        }
-      )
-  }
+     return this.http
+           .get(environment.apiUrl + '/v1/subprocess-level-resources-by-subprocess-id/'+this.getFkAceSubProLevId(this.cookie))
+           .toPromise()
+           .then(
+             (res: any) => {
+              res.forEach((element:any)=>  {
+                    this.resources.push(element.resource);
+                    this.resourcesList.push(element.resource);
+               });
+              }
+           )
+   }
 
 checkMandatoryData() {
     if (this.nprodPiecePerHours != null && this.procSpecInfoObj.nshiptsDay != null &&
@@ -249,7 +251,7 @@ checkMandatoryData() {
   }
 
   firstDropDownChanged(val: any) {
-    this.firstdropdown = this.findObj(this.resourcesList[0], val);
+    this.firstdropdown = this.findObj(this.resourcesList, val);
     this.resourceInfo1 = this.firstdropdown;
     this.subscenario1.fkTbAceRes = this.firstdropdown.pkTbId;
 
@@ -257,14 +259,14 @@ checkMandatoryData() {
   }
 
   secondDropDownChanged(val: any) {
-   this.seconddropdown = this.findObj(this.resourcesList[0], val);
+   this.seconddropdown = this.findObj(this.resourcesList, val);
    this.resourceInfo2 = this.seconddropdown;
    this.subscenario2.fkTbAceRes=this.seconddropdown.pkTbId;
 
   }
 
   thirdDropDownChanged(val: any) {
-    this.thirddropdown = this.findObj(this.resourcesList[0], val);
+    this.thirddropdown = this.findObj(this.resourcesList, val);
     this.resourceInfo3 = this.thirddropdown;
     this.subscenario3.fkTbAceRes=this.thirddropdown.pkTbId;
 
