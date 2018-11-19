@@ -375,7 +375,6 @@ export class AddScenarioComponent implements OnInit {
 
     createScenarioBody(){
 
-      console.log(this.tmpPost)
       this.bodyPost['fkTbAceProSeq'] = this.tmpPost.fkTbAceProSeq;
       this.bodyPost['scenarioNumber'] = parseInt(this.id);
       this.bodyPost['optionCost'] = this.tmpPost.optionCost;
@@ -407,17 +406,17 @@ export class AddScenarioComponent implements OnInit {
     status: any;
 
     save(){
-
       this.bodyPost = {};
-      console.log(this.bodyPost);
       this.createScenarioBody();
-
       const addProSecOrderedUrl = environment.apiUrl + '/v1/scenarios';
 
       return this.http.post(addProSecOrderedUrl, this.bodyPost)
       .toPromise()
       .then((res: any) => {
+        this.opSuc = true;
+
         var bodyPostScenRes = {};
+        var tmp = 0;
         for(let i in this.showedList){
           bodyPostScenRes = {};
           bodyPostScenRes['fkTbAceSubProLev'] = this.showedList[i].fkTbAceSubProLev;
@@ -426,11 +425,14 @@ export class AddScenarioComponent implements OnInit {
           bodyPostScenRes['optionalCost'] = this.showedList[i].optC;
           bodyPostScenRes['weightedPhysicalLoa'] = this.showedList[i].phy;
           bodyPostScenRes['weightedCognitiveLoa'] = this.showedList[i].cog;
-          this.saveScenRes(bodyPostScenRes);
+          tmp+=1;
+          if(tmp.toString() === this.showedList.length.toString()){
+            this.saveScenRes(bodyPostScenRes,true);
+          }
+          else{
+            this.saveScenRes(bodyPostScenRes,false);
+          }
         }
-
-        this.opSuc = true;
-        this.router.navigate(['scenarios']);
       },
       (err) => {
         this.opSuc = false;
@@ -438,16 +440,26 @@ export class AddScenarioComponent implements OnInit {
       });
     }
 
-    saveScenRes(bodyPost){
+    saveScenRes(bodyPost,last){
 
       const addProSecOrderedUrl = environment.apiUrl + '/v1/scenario-resources';
 
       return this.http.post(addProSecOrderedUrl, bodyPost)
       .toPromise()
-      .then((res: any) => {},
+      .then((res: any) => {
+        if(last){
+          this.opSuc = true;
+        }
+      },
       (err) => {
         this.opSuc = false;
         this.status = err.error.status;
       });
+    }
+
+    away() {
+      if(this.opSuc){
+        this.router.navigate(['scenarios']);
+      }
     }
   }
