@@ -61,6 +61,11 @@
     </tbody>
   </table>
 
+  <ng-template [ngIf]="syncingWithVAR">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <br>
+  </ng-template>
+
   <br>
 
   <div *ngIf="!disable" class="btn-group"  role="group" >
@@ -87,4 +92,4 @@
           </div>
         </div>
       </div>
-    </div> 
+    </div>
