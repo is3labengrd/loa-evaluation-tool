@@ -40,6 +40,7 @@ export class EditScenarioComponent implements OnInit {
     tmpPost:any;
     scenarios:any={};
     scenResList: Array<any> = [];
+    resToBeRemoved: Array<any> = [];
 
 
     ngOnInit() {
@@ -54,17 +55,16 @@ export class EditScenarioComponent implements OnInit {
 
       waitGetScen.then((x)=>{
         waitScenarioRESList.then((x)=>{
-            waitCAMProcTree.then((x)=>{
-              
-                this.findMissingSegments();
-                this.checkduplicate();
-              });
-
-            waitScenarioList.then((x)=>{
-                this.creteTable();
-                this.deleteDupicate();
-              });
+          waitCAMProcTree.then((x)=>{
+            this.findMissingSegments();
+            this.checkduplicate();
           });
+
+          waitScenarioList.then((x)=>{
+            this.creteTable();
+            this.deleteDupicate();
+          });
+        });
       });
 
     }
@@ -97,6 +97,7 @@ export class EditScenarioComponent implements OnInit {
         return !this[a.subProc.subprocessLevel.pkTbId] && (this[a.subProc.subprocessLevel.pkTbId] = true);
       }, Object.create(null));
       this.subSceList = result;
+      this.findSelection();
     }
 
     getScenariosList() {
@@ -386,7 +387,6 @@ export class EditScenarioComponent implements OnInit {
 
     createScenarioBody(){
 
-      console.log(this.tmpPost)
       this.bodyPost['fkTbAceProSeq'] = this.tmpPost.fkTbAceProSeq;
       this.bodyPost['scenarioNumber'] = parseInt(this.id);
       this.bodyPost['optionCost'] = this.tmpPost.optionCost;
@@ -419,17 +419,21 @@ export class EditScenarioComponent implements OnInit {
 
     save(){
 
+      for (let i in this.resToBeRemoved){
+        this.deleteScenatio (this.resToBeRemoved[i].pkTbId)
+      }
       this.bodyPost = {};
-      console.log(this.bodyPost);
       this.createScenarioBody();
 
-      const addProSecOrderedUrl = environment.apiUrl + '/v1/scenarios';
+      const addProSecOrderedUrl = environment.apiUrl + '/v1/scenarios/'+this.scenarios.scen.pkTbId;
 
-      return this.http.post(addProSecOrderedUrl, this.bodyPost)
+      return this.http.put(addProSecOrderedUrl, this.bodyPost)
       .toPromise()
       .then((res: any) => {
         var bodyPostScenRes = {};
+        var tmp = 0;
         for(let i in this.showedList){
+          this.opSuc = true;
           bodyPostScenRes = {};
           bodyPostScenRes['fkTbAceSubProLev'] = this.showedList[i].fkTbAceSubProLev;
           bodyPostScenRes['fkTbAceRes'] = this.showedList[i].fkTbAceRes;
@@ -437,25 +441,32 @@ export class EditScenarioComponent implements OnInit {
           bodyPostScenRes['optionalCost'] = this.showedList[i].optC;
           bodyPostScenRes['weightedPhysicalLoa'] = this.showedList[i].phy;
           bodyPostScenRes['weightedCognitiveLoa'] = this.showedList[i].cog;
-          this.saveScenRes(bodyPostScenRes);
+          tmp+=1;
+          if(tmp.toString() === this.showedList.length.toString()){
+            this.saveScenRes(bodyPostScenRes,true);
+          }
+          else{
+            this.saveScenRes(bodyPostScenRes,false);
+          }
         }
 
-        this.opSuc = true;
-        this.router.navigate(['scenarios']);
       },
       (err) => {
-        this.opSuc = false;
         this.status = err.error.status;
       });
     }
 
-    saveScenRes(bodyPost){
+    saveScenRes(bodyPost,last){
 
       const addProSecOrderedUrl = environment.apiUrl + '/v1/scenario-resources';
 
       return this.http.post(addProSecOrderedUrl, bodyPost)
       .toPromise()
-      .then((res: any) => {},
+      .then((res: any) => {
+        if(last){
+          this.opSuc = true;
+        }
+      },
       (err) => {
         this.opSuc = false;
         this.status = err.error.status;
@@ -487,5 +498,51 @@ export class EditScenarioComponent implements OnInit {
           (res:any) => {
             this.scenResList.push(res);
           });
+        }
+
+        findSelection(){
+          this.resToBeRemoved = [];
+
+          for (let i in this.scenResList[0]){
+            if(this.scenResList[0][i].fkTbAceScenarios === this.scenarios.scen.pkTbId){
+              this.resToBeRemoved.push(this.scenResList[0][i])
+            }
+          }
+
+          for (let k in this.subSceList){
+            for (let j in this.resToBeRemoved){
+              if(this.resToBeRemoved[j].subprocessLevel.name === this.subSceList[k].subProc.subprocessLevel.name){
+                if(this.subSceList[j].objList.scenNumber1 != null){
+                  if(this.subSceList[j].objList.scenNumber1.resource.name === this.resToBeRemoved[k].resource.name){
+                    this.stepResult.push(this.subSceList[j].objList.scenNumber1.assemblyCosts+"-"+k+"-"+"0");
+                  }
+                }
+
+                if(this.subSceList[j].objList.scenNumber2 != null){
+                  if(this.subSceList[j].objList.scenNumber2.resource.name === this.resToBeRemoved[k].resource.name){
+                    this.stepResult.push(this.subSceList[j].objList.scenNumber2.assemblyCosts+"-"+k+"-"+"1");
+                  }
+                }
+
+                if(this.subSceList[j].objList.scenNumber3 != null){
+                  if(this.subSceList[j].objList.scenNumber3.resource.name === this.resToBeRemoved[k].resource.name){
+                    this.stepResult.push(this.subSceList[j].objList.scenNumber3.assemblyCosts+"-"+k+"-"+"2");
+                  }
+                }
+              }
+            }
+          }
+          this.calculate();
+        }
+
+        deleteScenatio (pkTbId:string){
+          const scenarioUrl = environment.apiUrl + '/v1/scenario-resources/'+pkTbId;
+          this.http.delete(scenarioUrl).subscribe();
+        }
+
+        away() {
+          if(this.opSuc){
+            this.router.navigate(['scenarios']);
+          }
         }
       }
