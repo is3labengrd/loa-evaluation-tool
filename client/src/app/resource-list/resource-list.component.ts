@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Http } from '@angular/http';
 
 import { CookieService } from '../cookie.service';
 
@@ -55,8 +54,7 @@ export class ResourceListComponent implements OnInit {
 
   updateResourceList = () => {
     // tslint:disable-next-line:prefer-const
-    let subProcessId = this
-      .selectedSubprocess[`level${this.selectedSubprocess.maxDepth}`].id;
+    let subProcessId = this.selectedSubprocess[`level${this.selectedSubprocess.maxDepth}`].id;
     // tslint:disable-next-line:whitespace
     const url = this.searchTerm.length?
       `${environment.apiUrl}/v1/resource-items-by-subprocess-id/${subProcessId}` +
@@ -66,8 +64,8 @@ export class ResourceListComponent implements OnInit {
     :
       `${environment.apiUrl}/v1/resource-items-by-subprocess-id/${subProcessId}?` +
       'page=' + this.pagination.page + '&' +
-      'size=' + this.pagination.size
-    ;
+      'size=' + this.pagination.size;
+
     this.http.get(url)
     .subscribe((resources: any) => {
       this.resources = resources.content;

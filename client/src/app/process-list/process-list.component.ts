@@ -58,7 +58,8 @@ export class ProcessListComponent implements OnInit {
       .catch(
         (err) => {
           this.syncingWithVAR = false;
-          alert('CAM is not working.');
+          // alert('CAM is not working.');
+          console.log('CAM is not working');
         }
       );
   }
@@ -90,6 +91,7 @@ export class ProcessListComponent implements OnInit {
           this.lastPage = processSegmentListElements.totalPages - 1;
           this.rawProcessSegmentList = processSegmentListElements.content;
           this.adaptProcessSegmentList();
+          console.log(this.pageIterable);
         }
       );
   }

@@ -63,14 +63,31 @@
           <ng-template [ngIf]="resource.assigned" [ngIfElse]="assignBlock">
             <a routerLink="/edit-resource/{{resource.resourceId}}"  class="btn btn-link">Edit</a>
             -
-            <button (click)="deassign(resource).then(updateResourceList);"
-             data-toggle="modal" data-target="#deassignModal" class="btn btn-link" class="btn btn-link">De-assign</button>
+            <button  data-toggle="modal" data-target="#deassignModal" class="btn btn-link" class="btn btn-link">De-assign</button>
           </ng-template>
           <ng-template #assignBlock>
             <button (click)="assign(resource).then(updateResourceList);"
              data-toggle="modal" data-target="#assignModal" class="btn btn-link">Assign</button>
           </ng-template>
         </td>
+        <!-- deassignModal -->
+          <div class="modal fade" id="deassignModal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addModalLabel"><p class="text-warning">Warning</p></h5>
+                </div>
+                <div class="modal-body">
+                  You are about to disassociate a Resource to a Process Segment,
+                  this will result in data loss if the Resource is used in the Scenario calculation: sure you want to continue?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deassign(resource).then(updateResourceList);" >Yes</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
+              </div>
+            </div>
+          </div> <!-- deassign modal -->
       </tr>
     </tbody>
   </table>
@@ -84,23 +101,6 @@
         </div>
         <div class="modal-body">
           Resource has been assigned.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- deassignModal -->
-  <div class="modal fade" id="deassignModal" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addModalLabel"><p class="text-success">Successful</p></h5>
-        </div>
-        <div class="modal-body">
-          Resource has been de-assigned.
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
