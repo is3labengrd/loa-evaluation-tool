@@ -251,7 +251,7 @@ checkMandatoryData() {
   }
 
   firstDropDownChanged(val: any) {
-    this.firstdropdown = this.findObj(this.resourcesList[0], val);
+    this.firstdropdown = this.findObj(this.resourcesList, val);
     this.resourceInfo1 = this.firstdropdown;
     this.subscenario1.fkTbAceRes = this.firstdropdown.pkTbId;
 
@@ -259,14 +259,14 @@ checkMandatoryData() {
   }
 
   secondDropDownChanged(val: any) {
-   this.seconddropdown = this.findObj(this.resourcesList[0], val);
+   this.seconddropdown = this.findObj(this.resourcesList, val);
    this.resourceInfo2 = this.seconddropdown;
    this.subscenario2.fkTbAceRes=this.seconddropdown.pkTbId;
 
   }
 
   thirdDropDownChanged(val: any) {
-    this.thirddropdown = this.findObj(this.resourcesList[0], val);
+    this.thirddropdown = this.findObj(this.resourcesList, val);
     this.resourceInfo3 = this.thirddropdown;
     this.subscenario3.fkTbAceRes=this.thirddropdown.pkTbId;
 
