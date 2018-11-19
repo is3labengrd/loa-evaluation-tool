@@ -63,7 +63,7 @@ export class SubScenariosComponent implements OnInit {
 
 
   disableButton: boolean;
-  resources: any;
+  resources: Array<any> = [];
   selectedRes1: any;
   selectedRes2: any;
   selectedRes3: any;
@@ -111,16 +111,18 @@ export class SubScenariosComponent implements OnInit {
   }
 
   getResource() {
-    return this.http
-      .get(environment.apiUrl + '/v1/resources')
-      .toPromise()
-      .then(
-        (res: any) => {
-          this.resources = res;
-          this.resourcesList.push(res);
-        }
-      )
-  }
+     return this.http
+           .get(environment.apiUrl + '/v1/subprocess-level-resources-by-subprocess-id/'+this.getFkAceSubProLevId(this.cookie))
+           .toPromise()
+           .then(
+             (res: any) => {
+              res.forEach((element:any)=>  {
+                    this.resources.push(element.resource);
+                    this.resourcesList.push(element.resource);
+               });
+              }
+           )
+   }
 
 checkMandatoryData() {
     if (this.nprodPiecePerHours != null && this.procSpecInfoObj.nshiptsDay != null &&
