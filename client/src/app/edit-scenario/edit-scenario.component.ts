@@ -147,6 +147,8 @@ export class EditScenarioComponent implements OnInit {
             objlist['totalAssCosts'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.assemblyCosts;
             objlist['fkTbAceSubProLev'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber1.subprocessLevel.pkTbId);
             objlist['fkTbAceRes'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.pkTbId;
+            objlist['numberSelected'] = 1;
+
           }
           if(this.subSceList[parseInt(fields[1])].objList.scenNumber2 != undefined && parseInt(fields[2]) === 1){
             objlist['phy'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.loaPhysical;
@@ -169,6 +171,7 @@ export class EditScenarioComponent implements OnInit {
             objlist['totalAssCosts'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.assemblyCosts;
             objlist['fkTbAceSubProLev'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber2.subprocessLevel.pkTbId);
             objlist['fkTbAceRes'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.pkTbId;
+            objlist['numberSelected'] = 2;
 
           }
           if(this.subSceList[parseInt(fields[1])].objList.scenNumber3 != undefined && parseInt(fields[2]) === 2){
@@ -192,6 +195,7 @@ export class EditScenarioComponent implements OnInit {
             objlist['totalAssCosts'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCosts;
             objlist['fkTbAceSubProLev'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.pkTbId);
             objlist['fkTbAceRes'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.pkTbId;
+            objlist['numberSelected'] = 3;
 
           }
           objlist['procTime'] = this.subSceList[parseInt(fields[1])].subProc.processTime;
@@ -292,12 +296,14 @@ export class EditScenarioComponent implements OnInit {
           objlist['cog'] = valueList[j].cog * valueList[j].procTime + this.avgCog;
           objlist['fkTbAceRes'] = valueList[j].fkTbAceRes;
           objlist['fkTbAceSubProLev'] = valueList[j].fkTbAceSubProLev;
+          objlist['numberSelected'] = valueList[j].numberSelected;
         }else{
           objlist['optC'] = "-";
           objlist['phy'] = "-";
           objlist['cog'] = "-";
           objlist['fkTbAceRes'] = "-";
           objlist['fkTbAceSubProLev'] = "-";
+          objlist['numberSelected'] = "-";
         }
 
         calculatedList.push(objlist);
@@ -441,6 +447,7 @@ export class EditScenarioComponent implements OnInit {
           bodyPostScenRes['optionalCost'] = this.showedList[i].optC;
           bodyPostScenRes['weightedPhysicalLoa'] = this.showedList[i].phy;
           bodyPostScenRes['weightedCognitiveLoa'] = this.showedList[i].cog;
+          bodyPostScenRes['numberSelected'] = this.showedList[i].numberSelected;
           tmp+=1;
           if(tmp.toString() === this.showedList.length.toString()){
             this.saveScenRes(bodyPostScenRes,true);
@@ -509,23 +516,23 @@ export class EditScenarioComponent implements OnInit {
             }
           }
 
-          for (let k in this.subSceList){
-            for (let j in this.resToBeRemoved){
+          for (let j in this.resToBeRemoved){
+            for (let k in this.subSceList){
               if(this.resToBeRemoved[j].subprocessLevel.name === this.subSceList[k].subProc.subprocessLevel.name){
                 if(this.subSceList[j].objList.scenNumber1 != null){
-                  if(this.subSceList[j].objList.scenNumber1.resource.name === this.resToBeRemoved[k].resource.name){
+                  if(this.subSceList[j].objList.scenNumber1.resource.name === this.resToBeRemoved[k].resource.name && this.resToBeRemoved[k].numberSelected === 1){
                     this.stepResult.push(this.subSceList[j].objList.scenNumber1.assemblyCosts+"-"+k+"-"+"0");
                   }
                 }
 
                 if(this.subSceList[j].objList.scenNumber2 != null){
-                  if(this.subSceList[j].objList.scenNumber2.resource.name === this.resToBeRemoved[k].resource.name){
+                  if(this.subSceList[j].objList.scenNumber2.resource.name === this.resToBeRemoved[k].resource.name && this.resToBeRemoved[k].numberSelected === 2){
                     this.stepResult.push(this.subSceList[j].objList.scenNumber2.assemblyCosts+"-"+k+"-"+"1");
                   }
                 }
 
                 if(this.subSceList[j].objList.scenNumber3 != null){
-                  if(this.subSceList[j].objList.scenNumber3.resource.name === this.resToBeRemoved[k].resource.name){
+                  if(this.subSceList[j].objList.scenNumber3.resource.name === this.resToBeRemoved[k].resource.name && this.resToBeRemoved[k].numberSelected === 3){
                     this.stepResult.push(this.subSceList[j].objList.scenNumber3.assemblyCosts+"-"+k+"-"+"2");
                   }
                 }
