@@ -390,25 +390,25 @@ export class EditScenarioComponent implements OnInit {
       this.bodyPost['fkTbAceProSeq'] = this.tmpPost.fkTbAceProSeq;
       this.bodyPost['scenarioNumber'] = parseInt(this.id);
       this.bodyPost['optionCost'] = this.tmpPost.optionCost;
-      this.bodyPost['totalCost'] = this.TotalCost;
-      this.bodyPost['costPerPiece'] = this.CostperPiece;
+      this.bodyPost['totalCost'] = (parseFloat(this.TotalCost)).toFixed(2);
+      this.bodyPost['costPerPiece'] = (parseFloat(this.CostperPiece)).toFixed(2);
       this.bodyPost['weightedPhysicalLoa'] = parseInt(this.avgPhy);
       this.bodyPost['weightedCognitiveLoa'] = parseInt(this.avgCog);
       this.bodyPost['totalProcessTime'] = parseInt(this.totalProcessTime);
       this.bodyPost['hoursYear'] = parseInt(this.tmpPost.hoursYear);
-      this.bodyPost['labourCost'] = this.tmpPost.labourCost;
-      this.bodyPost['maintCost'] = this.tmpPost.maintCost;
-      this.bodyPost['annualSpaceCost'] = this.tmpPost.annualSpaceCost;
-      this.bodyPost['inputedDepreciation'] = this.tmpPost.inputedDepreciation;
-      this.bodyPost['accruedInterestCost'] = this.tmpPost.accruedInterestCost;
-      this.bodyPost['energyCost'] = this.tmpPost.energyCost;
-      this.bodyPost['varCostsPerUnit'] = this.tmpPost.varCostsPerUnit;
-      this.bodyPost['macCost'] = this.tmpPost.macCost;
-      this.bodyPost['totWeightedPhysicalLoa'] = parseInt(this.phyLoaTotal);
-      this.bodyPost['totWeightedCognitiveLoa'] = parseInt(this.cogLoaTotal);
+      this.bodyPost['labourCost'] = (parseFloat(this.tmpPost.labourCost)).toFixed(2);
+      this.bodyPost['maintCost'] = (parseFloat(this.tmpPost.maintCost)).toFixed(2);
+      this.bodyPost['annualSpaceCost'] = (parseFloat(this.tmpPost.annualSpaceCost)).toFixed(2);
+      this.bodyPost['inputedDepreciation'] = (parseFloat(this.tmpPost.inputedDepreciation)).toFixed(2);
+      this.bodyPost['accruedInterestCost'] = (parseFloat(this.tmpPost.accruedInterestCost)).toFixed(2);
+      this.bodyPost['energyCost'] = (parseFloat(this.tmpPost.energyCost)).toFixed(2);
+      this.bodyPost['varCostsPerUnit'] = (parseFloat(this.tmpPost.varCostsPerUnit)).toFixed(2);
+      this.bodyPost['macCost'] = (parseFloat(this.tmpPost.macCost)).toFixed(2);
+      this.bodyPost['totWeightedPhysicalLoa'] = (parseFloat(this.phyLoaTotal)).toFixed(2);
+      this.bodyPost['totWeightedCognitiveLoa'] = (parseFloat(this.cogLoaTotal)).toFixed(2);
       this.bodyPost['prodUnitsPerYears'] = parseInt(this.tmpPost.prodUnitsPerYears);
-      this.bodyPost['assCostsPerUnits'] = this.tmpPost.assCostsPerUnits;
-      this.bodyPost['totalAssCosts'] = this.tmpPost.totalAssCosts;
+      this.bodyPost['assCostsPerUnits'] = (parseFloat(this.tmpPost.assCostsPerUnits)).toFixed(2);
+      this.bodyPost['totalAssCosts'] = (parseFloat(this.tmpPost.totalAssCosts)).toFixed(2);
 
     }
 

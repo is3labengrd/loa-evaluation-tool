@@ -50,81 +50,81 @@
       </tr>
       <tr>
         <td>Physical LoA</td>
-        <td> {{scenarios?.scen1?.totWeightedPhysicalLoa}}</td>
-        <td> {{scenarios?.scen2?.totWeightedPhysicalLoa}} </td>
-        <td> {{scenarios?.scen3?.totWeightedPhysicalLoa}} </td>
+        <td> {{scenarios?.scen1?.totWeightedPhysicalLoa.toString().replace(".", ",")}}</td>
+        <td> {{scenarios?.scen2?.totWeightedPhysicalLoa.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.totWeightedPhysicalLoa.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td>Cognitive LoA</td>
-        <td> {{scenarios?.scen1?.totWeightedCognitiveLoa}} </td>
-        <td> {{scenarios?.scen2?.totWeightedCognitiveLoa}} </td>
-        <td> {{scenarios?.scen3?.totWeightedCognitiveLoa}} </td>
+        <td> {{scenarios?.scen1?.totWeightedCognitiveLoa.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen2?.totWeightedCognitiveLoa.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.totWeightedCognitiveLoa.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td>Process time</td>
-        <td> {{scenarios?.scen1?.totalProcessTime}} </td>
-        <td> {{scenarios?.scen2?.totalProcessTime}} </td>
-        <td> {{scenarios?.scen3?.totalProcessTime}} </td>
+        <td> {{scenarios?.scen1?.totalProcessTime.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen2?.totalProcessTime.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.totalProcessTime.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td>Hours per year</td>
-        <td> {{scenarios?.scen1?.hoursYear}} </td>
-        <td> {{scenarios?.scen2?.hoursYear}} </td>
-        <td> {{scenarios?.scen3?.hoursYear}} </td>
+        <td> {{scenarios?.scen1?.hoursYear.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen2?.hoursYear.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.hoursYear.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td>Produced units per year</td>
-        <td> {{scenarios?.scen1?.prodUnitsPerYears}} </td>
-        <td> {{scenarios?.scen2?.prodUnitsPerYears}} </td>
-        <td> {{scenarios?.scen3?.prodUnitsPerYears}} </td>
+        <td> {{scenarios?.scen1?.prodUnitsPerYears.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen2?.prodUnitsPerYears.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.prodUnitsPerYears.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td>Labour costs</td>
-        <td> {{scenarios?.scen1?.labourCost}} </td>
-        <td> {{scenarios?.scen2?.labourCost}} </td>
-        <td> {{scenarios?.scen3?.labourCost}} </td>
+        <td> {{scenarios?.scen1?.labourCost.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen2?.labourCost.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.labourCost.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td>Energy costs</td>
-        <td> {{scenarios?.scen1?.energyCost}} </td>
-        <td> {{scenarios?.scen2?.energyCost}} </td>
-        <td> {{scenarios?.scen3?.energyCost}} </td>
+        <td> {{scenarios?.scen1?.energyCost.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen2?.energyCost.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.energyCost.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td>Maintenance costs</td>
-        <td> {{scenarios?.scen1?.maintCost}} </td>
-        <td> {{scenarios?.scen2?.maintCost}} </td>
-        <td> {{scenarios?.scen3?.maintCost}} </td>
+        <td> {{scenarios?.scen1?.maintCost.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen2?.maintCost.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.maintCost.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td>Annual space costs</td>
-        <td> {{scenarios?.scen1?.annualSpaceCost}} </td>
-        <td> {{scenarios?.scen2?.annualSpaceCost}} </td>
-        <td> {{scenarios?.scen3?.annualSpaceCost}} </td>
+        <td> {{scenarios?.scen1?.annualSpaceCost.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen2?.annualSpaceCost.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.annualSpaceCost.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td>Imputed deprecation</td>
-        <td> {{scenarios?.scen1?.inputedDepreciation}} </td>
-        <td> {{scenarios?.scen2?.inputedDepreciation}} </td>
-        <td> {{scenarios?.scen3?.inputedDepreciation}} </td>
+        <td> {{scenarios?.scen1?.inputedDepreciation.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen2?.inputedDepreciation.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.inputedDepreciation.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td> Accured interes costs </td>
-        <td> {{scenarios?.scen1?.accruedInterestCost}} </td>
-        <td> {{scenarios?.scen2?.accruedInterestCost}} </td>
-        <td> {{scenarios?.scen3?.accruedInterestCost}} </td>
+        <td> {{scenarios?.scen1?.accruedInterestCost.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen2?.accruedInterestCost.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.accruedInterestCost.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td> Variable costs per unit </td>
-        <td> {{scenarios?.scen1?.varCostsPerUnit}} </td>
-        <td> {{scenarios?.scen2?.varCostsPerUnit}} </td>
-        <td> {{scenarios?.scen3?.varCostsPerUnit}} </td>
+        <td> {{scenarios?.scen1?.varCostsPerUnit.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen2?.varCostsPerUnit.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.varCostsPerUnit.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td> Fixed costs per unit </td>
-        <td> {{scenarios?.scen1?.costPerPiece}} </td>
-        <td> {{scenarios?.scen2?.costPerPiece}} </td>
-        <td> {{scenarios?.scen3?.costPerPiece}} </td>
+        <td> {{scenarios?.scen1?.costPerPiece.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen2?.costPerPiece.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.costPerPiece.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td> ------ </td>
@@ -134,15 +134,15 @@
       </tr>
       <tr>
         <td> Assembly costs per piece </td>
-        <td> {{scenarios?.scen1?.assCostsPerUnits}} </td>
-        <td> {{scenarios?.scen2?.assCostsPerUnits}} </td>
-        <td> {{scenarios?.scen3?.assCostsPerUnits}} </td>
+        <td> {{scenarios?.scen1?.assCostsPerUnits.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen2?.assCostsPerUnits.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.assCostsPerUnits.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td> Assembly costs (total) </td>
-        <td> {{scenarios?.scen1?.totalAssCosts}} </td>
-        <td> {{scenarios?.scen2?.totalAssCosts}} </td>
-        <td> {{scenarios?.scen3?.totalAssCosts}} </td>
+        <td> {{scenarios?.scen1?.totalAssCosts.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen2?.totalAssCosts.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen3?.totalAssCosts.toString().replace(".", ",")}} </td>
       </tr>
       <tr>
         <td></td>
