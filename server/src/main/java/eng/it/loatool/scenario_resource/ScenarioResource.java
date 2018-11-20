@@ -44,6 +44,7 @@ public class ScenarioResource implements java.io.Serializable, PkTbPrimaryKeyOwn
     private Double optionalCost;
     private Double weightedPhysicalLoa;
     private Double weightedCognitiveLoa;
+    private Integer numberSelected;
 
     public ScenarioResource() {}
 
@@ -144,6 +145,14 @@ public class ScenarioResource implements java.io.Serializable, PkTbPrimaryKeyOwn
         this.weightedCognitiveLoa = weightedCognitiveLoa;
     }
 
+    @Column(name = "NUMBER_SELECTED", nullable = false)
+    public Integer getNumberSelected() {
+        return numberSelected;
+    }
+
+    public void setNumberSelected(Integer numberSelected) {
+        this.numberSelected = numberSelected;
+    }
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
