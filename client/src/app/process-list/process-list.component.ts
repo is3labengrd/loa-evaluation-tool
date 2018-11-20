@@ -91,7 +91,6 @@ export class ProcessListComponent implements OnInit {
           this.lastPage = processSegmentListElements.totalPages - 1;
           this.rawProcessSegmentList = processSegmentListElements.content;
           this.adaptProcessSegmentList();
-          console.log(this.pageIterable);
         }
       );
   }
@@ -113,12 +112,16 @@ export class ProcessListComponent implements OnInit {
           currentListElement.sub3 == '-'
         ) {
           currentListElement.route = `/add-process/${id}`;
-          currentListElement.actions = "Add";
+          currentListElement.action = "Add";
+          currentListElement.deleteAction = "Delete Process";
+          currentListElement.delete = () => {alert("not implemented");}
           currentListElement.editRoute = null;
           currentListElement.sublevels = listElement.mainProcess.nlowerLevelSubPro;
         } else {
           currentListElement.route = '/main-analysis';
-          currentListElement.actions = 'Analysis';
+          currentListElement.action = 'Analysis';
+          currentListElement.deleteAction = "Delete Segment";
+          currentListElement.delete = () => {alert("not implemented");}
           let subprocessCount = 0;
           for (let property in listElement) {
             if (property.match(/subProcessLevel\d/)) {
