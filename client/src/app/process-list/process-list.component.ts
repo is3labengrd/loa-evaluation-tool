@@ -107,13 +107,6 @@ export class ProcessListComponent implements OnInit {
         currentListElement.sub2 = listElement.subProcessLevel2 ? listElement.subProcessLevel2.name : "-";
         currentListElement.sub3 = listElement.subProcessLevel3 ? listElement.subProcessLevel3.name : "-";
         currentListElement.sublevels = " ";
-        for (let property in listElement) {
-          if (property.match(/subProcessLevel\d/)) {
-            if (listElement[property]) {
-              subprocessCount++
-            }
-          }
-        }
         currentListElement.sublevels = subprocessCount;
         currentListElement.editRoute = `/edit-process/${listElement.pkTbId}`;
         if (
@@ -124,9 +117,17 @@ export class ProcessListComponent implements OnInit {
           currentListElement.route = `/add-process/${id}`;
           currentListElement.actions = "Add";
           currentListElement.editRoute = null;
+          currentListElement.sublevels = listElement.mainProcess.nlowerLevelSubPro;
         } else {
           currentListElement.route = '/main-analysis';
           currentListElement.actions = 'Analysis';
+          for (let property in listElement) {
+            if (property.match(/subProcessLevel\d/)) {
+              if (listElement[property]) {
+                subprocessCount++
+              }
+            }
+          }
         }
         currentListElement.rawElementReference = listElement;
         accumulator.push(currentListElement);
