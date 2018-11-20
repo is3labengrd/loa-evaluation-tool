@@ -94,6 +94,7 @@ export class ResourceListComponent implements OnInit {
   }
 
   deassign = (resource) => {
+    console.log(resource);
     return this.http
       .delete(
         `${environment.apiUrl}/v1/subprocess-level-resources/${resource.assignmentId}`
