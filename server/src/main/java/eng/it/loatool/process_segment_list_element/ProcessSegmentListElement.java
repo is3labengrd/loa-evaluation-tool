@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -109,7 +110,7 @@ public class ProcessSegmentListElement implements java.io.Serializable, PkTbPrim
         this.fkTbAceProSeq = fkTbAceProSeq;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.REMOVE)
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name="FK_TB_ACE_SUB_PRO_LEV1", referencedColumnName="PK_TB_ID")
     public SubProcessLevel getSubProcessLevel1() {
@@ -129,7 +130,7 @@ public class ProcessSegmentListElement implements java.io.Serializable, PkTbPrim
         this.fkTbAceSubProLev1 = fkTbAceSubProLev1;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.REMOVE)
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "FK_TB_ACE_SUB_PRO_LEV2", referencedColumnName="PK_TB_ID")
     public SubProcessLevel getSubProcessLevel2() {
@@ -149,7 +150,7 @@ public class ProcessSegmentListElement implements java.io.Serializable, PkTbPrim
         this.fkTbAceSubProLev2 = fkTbAceSubProLev2;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.REMOVE)
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "FK_TB_ACE_SUB_PRO_LEV3", referencedColumnName="PK_TB_ID")
     public SubProcessLevel getSubProcessLevel3() {
@@ -169,7 +170,7 @@ public class ProcessSegmentListElement implements java.io.Serializable, PkTbPrim
         this.fkTbAceSubProLev3 = fkTbAceSubProLev3;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.REMOVE)
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "FK_TB_ACE_SUB_PRO_LEV4", referencedColumnName="PK_TB_ID")
     public SubProcessLevel getSubProcessLevel4() {
@@ -189,7 +190,7 @@ public class ProcessSegmentListElement implements java.io.Serializable, PkTbPrim
         this.fkTbAceSubProLev4 = fkTbAceSubProLev4;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.REMOVE)
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "FK_TB_ACE_SUB_PRO_LEV5", referencedColumnName="PK_TB_ID")
     public SubProcessLevel getSubProcessLevel5() {

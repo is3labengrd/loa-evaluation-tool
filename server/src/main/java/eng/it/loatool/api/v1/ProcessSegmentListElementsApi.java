@@ -3,6 +3,7 @@ package eng.it.loatool.api.v1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
+import eng.it.loatool.process_segment_list_element.DeleteProcessSegmentListElementService;
 import eng.it.loatool.process_segment_list_element.PersistProcessSegmentListElementService;
 import eng.it.loatool.process_segment_list_element.ProcessSegmentListElement;
 import eng.it.loatool.process_segment_list_element.ProcessSegmentListElementPaginationService;
@@ -65,9 +67,17 @@ public class ProcessSegmentListElementsApi {
         );
     }
 
+    @DeleteMapping("/v1/process-segment-list-elements/{id}")
+    public ResponseEntity<?> deleteProcessSegmentListElement(@PathVariable("id") Integer id) {
+        return ResponseEntityTransformer.transform(
+            deleteProcessSegmentListElementService.deleteProcessSegmentListElement(id)
+        );
+    }
+
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private PersistProcessSegmentListElementService persistProcessSegmentListElementService;
     @Autowired private ProcessSegmentListElementPaginationService processSegmentListElementPaginationService;
+    @Autowired private DeleteProcessSegmentListElementService deleteProcessSegmentListElementService;
     @Autowired private ProcessSegmentListElementRepository processSegmentListElementRepository;
 
 }

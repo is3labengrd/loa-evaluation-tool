@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -88,7 +89,7 @@ import eng.it.loatool.process_loa_info.ProcessLOAInformation;
         this.varProSeqId = varProSeqId;
     }
 
-    @OneToOne(mappedBy="subProcessLevel")
+    @OneToOne(mappedBy="subProcessLevel", cascade=CascadeType.REMOVE)
     public ProcessLOAInformation getLoaInfo() {
         return loaInfo;
     }
