@@ -45,7 +45,7 @@
       <td>
         <a routerLink="{{ process?.route }}" (click)="saveAnalysisData(process.rawElementReference, process)"> {{ process?.action }} </a>
         <br>
-        <a (click)="process?.delete()">{{ process?.deleteAction }}</a>
+        <a (click)="process?.delete().then(populateProcessSegmentList)">{{ process?.deleteAction }}</a>
       </td>
     </tr>
   </tbody>

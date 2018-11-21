@@ -38,6 +38,20 @@ export class ProcessListComponent implements OnInit {
   // tslint:disable-next-line:member-ordering
   modal = document.getElementById('errorModal');
 
+  private deleteProcess(processId) {
+    return this
+      .http
+      .delete(environment.apiUrl + '/v1/process-segments/' + processId)
+      .toPromise();
+  }
+
+  private deleteListElement(elementId) {
+    return this
+      .http
+      .delete(environment.apiUrl + '/v1/process-segment-list-elements/' + elementId)
+      .toPromise();
+  }
+
   constructor(
     private http: HttpClient,
     private _processListService: CookieService
@@ -64,11 +78,11 @@ export class ProcessListComponent implements OnInit {
       );
   }
 
-  private populateProcessSegmentList() {
+  populateProcessSegmentList = () => {
     this.initiateProcessSegmentListPopulationWithPagination();
   }
 
-  private initiateProcessSegmentListPopulationWithPagination() {
+  initiateProcessSegmentListPopulationWithPagination = () => {
     let url;
     if (this.searchText.length) {
       url = environment.apiUrl +
@@ -95,7 +109,7 @@ export class ProcessListComponent implements OnInit {
       );
   }
 
-  private adaptProcessSegmentList() {
+  adaptProcessSegmentList = () => {
     this.processSegmentList = this.rawProcessSegmentList.reduce(
       (accumulator: Array<any>, listElement) => {
         let currentListElement = Object.create(null);
@@ -114,14 +128,18 @@ export class ProcessListComponent implements OnInit {
           currentListElement.route = `/add-process/${id}`;
           currentListElement.action = "Add";
           currentListElement.deleteAction = "Delete Process";
-          currentListElement.delete = () => {alert("not implemented");}
+          currentListElement.delete = () => this.deleteProcess(
+            listElement.mainProcess.pkTbId
+          )
           currentListElement.editRoute = null;
-          currentListElement.sublevels = listElement.mainProcess.nlowerLevelSubPro;
+          currentListElement.sublevels = listElement.mainProcess ?
+            listElement.mainProcess.nlowerLevelSubPro:
+            "error";
         } else {
           currentListElement.route = '/main-analysis';
           currentListElement.action = 'Analysis';
           currentListElement.deleteAction = "Delete Segment";
-          currentListElement.delete = () => {alert("not implemented");}
+          currentListElement.delete = () => this.deleteListElement(listElement.pkTbId)
           let subprocessCount = 0;
           for (let property in listElement) {
             if (property.match(/subProcessLevel\d/)) {
@@ -148,7 +166,7 @@ export class ProcessListComponent implements OnInit {
     this.page = Math.min(this.lastPage, ++this.page);
   }
 
-  saveAnalysisData(data, subProcessData) {
+  saveAnalysisData = (data, subProcessData) => {
     var actualSubProcessInfo = {};
     actualSubProcessInfo['mainProcessName'] = subProcessData.name;
     actualSubProcessInfo['mainProcessId'] = subProcessData.rawElementReference.mainProcess.pkTbId;
