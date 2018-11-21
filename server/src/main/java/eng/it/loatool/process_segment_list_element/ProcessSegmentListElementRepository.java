@@ -38,4 +38,11 @@ public interface ProcessSegmentListElementRepository extends PagingAndSortingRep
     )
     Iterable<ProcessSegmentListElement> getProcessSegmentListElementsLike(@Param("namePiece") String namePiece);
 
+    @Query(
+        " from ProcessSegmentListElement p" +
+        " where" +
+        "   p.mainProcess.pkTbId = :mainProcessId"
+    )
+    Iterable<ProcessSegmentListElement> getProcessSegmentListElementsByProcessId(@Param("mainProcessId") Integer mainProcessId);
+
 }

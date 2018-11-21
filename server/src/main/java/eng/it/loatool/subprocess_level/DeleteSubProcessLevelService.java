@@ -8,9 +8,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.criteria_matrix.CriteriaMatrixRepository;
+import eng.it.loatool.process_specific_info.ProcessSpecificInfoRepository;
+import eng.it.loatool.scenario_resource.ScenarioResourceRepository;
+import eng.it.loatool.subprocess_level_resource.SubProcessLevelResourceRepository;
 
 @Service
 public class DeleteSubProcessLevelService {
+
+    @Transactional
+    public Optional<SubProcessLevel> delete(SubProcessLevel subProcessLevel) {
+        if (subProcessLevel == null) {
+            return Optional.empty();
+        }
+        return this.deleteById(subProcessLevel.getPkTbId());
+    }
 
     @Transactional
     public Optional<SubProcessLevel> deleteById(Integer id) {
@@ -19,24 +30,30 @@ public class DeleteSubProcessLevelService {
             .ifPresent((matrix) -> {
                 criteriaMatrixRepository.delete(matrix);
             });
-        return generalCRUDService.delete(subProcessLevelRepository, id);
-    }
-
-    @Transactional
-    public Optional<SubProcessLevel> delete(SubProcessLevel subProcessLevel) {
-        if (subProcessLevel == null) {
-            return Optional.empty();
-        }
-        criteriaMatrixRepository
-            .getCriteriaMatrixBySubprocessLevel(subProcessLevel.getPkTbId())
-            .ifPresent((matrix) -> {
-                criteriaMatrixRepository.delete(matrix);
+        processSpecificInfoRepository
+            .getProcessSpecificInfoBySubProcessId(id)
+            .ifPresent((info) -> {
+                processSpecificInfoRepository.delete(info);
             });
-        return generalCRUDService.delete(subProcessLevelRepository, subProcessLevel.getPkTbId());
+        scenarioResourceRepository
+            .getScenarioResourcebySubProcessId(id)
+            .forEach((scenarioResource) -> {
+                scenarioResourceRepository.delete(scenarioResource);
+            });
+        subProcessLevelResourceRepository
+            .getSubProcessLevelResourcebySubProcessId(id)
+            .forEach((subprocessResource) -> {
+                subProcessLevelResourceRepository
+                    .delete(subprocessResource);
+            });
+        return generalCRUDService.delete(subProcessLevelRepository, id);
     }
 
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private SubProcessLevelRepository subProcessLevelRepository;
     @Autowired private CriteriaMatrixRepository criteriaMatrixRepository;
+    @Autowired private ProcessSpecificInfoRepository processSpecificInfoRepository;
+    @Autowired private ScenarioResourceRepository scenarioResourceRepository;
+    @Autowired private SubProcessLevelResourceRepository subProcessLevelResourceRepository;
 
 }

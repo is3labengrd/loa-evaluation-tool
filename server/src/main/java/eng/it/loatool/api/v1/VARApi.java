@@ -63,6 +63,7 @@ public class VARApi {
     public void populateProcessSegments() throws Exception {
         StoreMainProcessesService.storeMainProcessesFromVar();
     }
+
     @Autowired private StoreMainProcessesFromVarService StoreMainProcessesService;
 
 }

@@ -38,13 +38,13 @@ public class ScenarioResource implements java.io.Serializable, PkTbPrimaryKeyOwn
     private Integer fkTbAceRes;
     private Resource resource;
 
-    private Date createDate;
-    private Date updateDate;
     private Integer fkTbAceScenarios;
     private Double optionalCost;
     private Double weightedPhysicalLoa;
     private Double weightedCognitiveLoa;
     private Integer numberSelected;
+    private Date createDate;
+    private Date updateDate;
 
     public ScenarioResource() {}
 
