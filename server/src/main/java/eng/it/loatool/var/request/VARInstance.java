@@ -10,7 +10,11 @@ public class VARInstance {
 
 
     public static void createInstance(String body) throws IOException {
-        final String BASE_URL = System.getenv("ENV_SAR_URL");
+    	String BASE_URL = System.getenv("ENV_SAR_URL");
+		if(BASE_URL==null){
+			PropertyManager prop = new PropertyManager();
+			BASE_URL = prop.getPropValues("base.url");
+		}
         final String uri = BASE_URL + "/v2/orion/assetbymodel";
 
         RestTemplate restTemplate = new RestTemplate();
@@ -26,7 +30,11 @@ public class VARInstance {
     }
 
     public static void updateInstance(String body) throws IOException {
-        final String BASE_URL = System.getenv("ENV_SAR_URL");
+    	String BASE_URL = System.getenv("ENV_SAR_URL");
+		if(BASE_URL==null){
+			PropertyManager prop = new PropertyManager();
+			BASE_URL = prop.getPropValues("base.url");
+		}
         final String uri = BASE_URL + "/orion/assetbymodel";
 
         RestTemplate restTemplate = new RestTemplate();
@@ -40,7 +48,11 @@ public class VARInstance {
     }
 
     public static String getInstance(String modelName) throws IOException {
-        final String BASE_URL = System.getenv("ENV_SAR_URL");
+    	String BASE_URL = System.getenv("ENV_SAR_URL");
+		if(BASE_URL==null){
+			PropertyManager prop = new PropertyManager();
+			BASE_URL = prop.getPropValues("base.url");
+		}
         final String uri = BASE_URL + "/models/" + modelName;
 
         RestTemplate restTemplate = new RestTemplate();

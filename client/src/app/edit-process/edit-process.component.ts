@@ -287,7 +287,7 @@ export class EditProcessComponent implements OnInit {
             }
 
             this.addSubProcessL1(this.SegmentList[0].mainProcess.pkTbId);
-            this.router.navigate(['process-list']);
+            //this.router.navigate(['process-list']);
             // alert("Process edited successfully");
             this.opSuc = true;
           }
