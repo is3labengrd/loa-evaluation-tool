@@ -4,6 +4,9 @@ import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CookieService } from '../cookie.service';
+//import * as $ from 'jquery';
+
+
 
 
 
@@ -14,6 +17,8 @@ import { CookieService } from '../cookie.service';
   styleUrls: ['./sub-scenarios.component.css']
 })
 export class SubScenariosComponent implements OnInit {
+
+
 
   resRecal: boolean = false;
 
@@ -95,7 +100,7 @@ export class SubScenariosComponent implements OnInit {
   cookie: any;
 
   ngOnInit() {
-
+    // $('#resourceValueChange').modal('show');
     this.cookie = this._processListService.getCookie("selectedSubprocess");
 
     var promise1 = this.productPlanningGET();
@@ -435,13 +440,13 @@ checkMandatoryData() {
   updateAnnualSpaceCosts(): void {
 
     if(this.isSubScenario1Present==true)
-    this.subscenario1.annualSpaceCost = this.resourceInfo1.rcCostsMMonth * 12 * this.resourceInfo1.rcInstSurface;
+    this.subscenario1.annualSpaceCost = this.roundValue(this.resourceInfo1.rcCostsMMonth * 12 * this.resourceInfo1.rcInstSurface);
 
     if(this.isSubScenario2Present==true)
-    this.subscenario2.annualSpaceCost = this.resourceInfo2.rcCostsMMonth * 12 * this.resourceInfo2.rcInstSurface;
+    this.subscenario2.annualSpaceCost = this.roundValue(this.resourceInfo2.rcCostsMMonth * 12 * this.resourceInfo2.rcInstSurface);
 
     if(this.isSubScenario3Present==true)
-    this.subscenario3.annualSpaceCost = this.resourceInfo3.rcCostsMMonth * 12 * this.resourceInfo3.rcInstSurface;
+    this.subscenario3.annualSpaceCost = this.roundValue(this.resourceInfo3.rcCostsMMonth * 12 * this.resourceInfo3.rcInstSurface);
 
   }
 
