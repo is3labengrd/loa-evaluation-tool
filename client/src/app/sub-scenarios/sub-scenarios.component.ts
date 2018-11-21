@@ -6,12 +6,16 @@ import { environment } from '../../environments/environment';
 import { CookieService } from '../cookie.service';
 
 
+
+
 @Component({
   selector: 'app-sub-scenarios',
   templateUrl: './sub-scenarios.component.html',
   styleUrls: ['./sub-scenarios.component.css']
 })
 export class SubScenariosComponent implements OnInit {
+
+  resRecal: boolean = false;
 
   nprodPiecePerHours: number;
   nprodPiecePerHoursGUI1: number;
@@ -42,6 +46,7 @@ export class SubScenariosComponent implements OnInit {
   procSpecInfoObjGUI1: any;
   procSpecInfoObjGUI2: any;
   procSpecInfoObjGUI3: any;
+
 
 
   perform: boolean;
@@ -90,6 +95,7 @@ export class SubScenariosComponent implements OnInit {
   cookie: any;
 
   ngOnInit() {
+
     this.cookie = this._processListService.getCookie("selectedSubprocess");
 
     var promise1 = this.productPlanningGET();
@@ -98,7 +104,12 @@ export class SubScenariosComponent implements OnInit {
          promise2.then((x) => {
             var promise3 = this.getResource();
                 promise3.then((x) => {
-                   this.subScenarioGET();
+                   var promise4 = this.subScenarioGET();
+                      promise4.then((x) => {
+                             this.saveSubscenarios();
+                             this.checkMandatoryData();
+
+                      });
                  });
          });
 
@@ -107,7 +118,8 @@ export class SubScenariosComponent implements OnInit {
 
 
 
-    this.checkMandatoryData();
+
+
   }
 
   getResource() {
@@ -142,7 +154,6 @@ checkMandatoryData() {
     this.produtsPiece.fkTbAceProSeq = this.cookie.mainProcessId;
 
 
-
     if (this.productPlanningID == null) {
      this.http.post(environment.apiUrl + '/v1/product-planning', this.produtsPiece)
                         .toPromise().then((res:any) => {
@@ -155,20 +166,17 @@ checkMandatoryData() {
                   console.log('Done put'));
     }
 
-
-
-
     if(this.disableButton==true){
        this.createSubScenarios();
      }
 
      this.checkMandatoryData();
+
   }
 
     procSpecInfo(): void {
 
-
-    // this.checkMandatoryData();
+     // this.checkMandatoryData();
      this.procSpecInfoObj.fkTbAceSubProLev=this.getFkAceSubProLevId(this.cookie);
 
      if(this.procSpecInfoID==null){
@@ -176,9 +184,6 @@ checkMandatoryData() {
                .toPromise().then((res:any) => {
                 this.procSpecInfoID=res.pkTbId;
                 });
-
-
-
       }else{
         this.http.put(environment.apiUrl + '/v1/process-specific-info/'+ this.procSpecInfoID, this.procSpecInfoObj)
                       .subscribe(res =>
@@ -190,6 +195,7 @@ checkMandatoryData() {
       }
 
       this.checkMandatoryData();
+
   }
 
   createSubScenarios(): void {
@@ -659,7 +665,6 @@ checkMandatoryData() {
             .toPromise()
             .then(
             (result:any) => {
-
                  this.nprodPiecePerHours=result.nprodPiecePerHours;
                  this.productPlanningID=result.pkTbId;
                  this.checkMandatoryData();
@@ -701,7 +706,7 @@ checkMandatoryData() {
                             };
 
               postObj.subprocessLevel.pkTbId = this.getFkAceSubProLevId(this.cookie);
-              this.http
+              return this.http
               .post(environment.apiUrl + '/v1/subscenarios/search',  postObj )
               .toPromise()
               .then((result:any) => {
@@ -726,6 +731,11 @@ checkMandatoryData() {
                         this.subscenario1=element;
                         this.isSubScenario1Present=true;
 
+                        if(element.resRecal!=null && element.resRecal==true){
+                          this.resRecal=true;
+                          this.subscenario1.resRecal=false;
+                        }
+
                         break;
                     case 2:
                        this.nprodPiecePerHoursGUI2 = this.nprodPiecePerHours;
@@ -743,6 +753,11 @@ checkMandatoryData() {
                        element.fkTbAceSubProLev=fkTbAceSubProLevID;
                        this.subscenario2=element;
                        this.isSubScenario2Present=true;
+
+                        if(element.resRecal!=null && element.resRecal==true){
+                           this.resRecal=true;
+                           this.subscenario2.resRecal=false;
+                        }
                        break;
                     case 3:
                        this.nprodPiecePerHoursGUI3 = this.nprodPiecePerHours;
@@ -760,6 +775,11 @@ checkMandatoryData() {
                        element.fkTbAceSubProLev=fkTbAceSubProLevID;
                        this.subscenario3=element;
                        this.isSubScenario3Present=true;
+
+                       if(element.resRecal!=null && element.resRecal==true){
+                         this.resRecal=true;
+                         this.subscenario3.resRecal=false;
+                       }
                        break;
                   }
 
@@ -803,6 +823,8 @@ checkMandatoryData() {
           this.subscenario2.usCognitiveLoa=null;
           this.subscenario3.usCognitiveLoa=null;
        }
+
+
 
 
   }

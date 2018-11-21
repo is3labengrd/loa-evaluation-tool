@@ -104,8 +104,7 @@ public class VARWorkUnitImpl {
     }
 
     public static String getSiteIntance () throws IOException {
-        PropertyManager prop = new PropertyManager();
-        final String BASE_URL = prop.getPropValues("base.url");
+        final String BASE_URL = System.getenv("ENV_SAR_URL");
         final String uri = BASE_URL + "/assets/RWTH/attributes";
 
         RestTemplate restTemplate = new RestTemplate();

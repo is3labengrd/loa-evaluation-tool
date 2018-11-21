@@ -8,8 +8,7 @@ import java.io.IOException;
 public class VARGetAssetImpl {
 
     public static String getProductPlanningIntance (String modelName) throws IOException {
-        PropertyManager prop = new PropertyManager();
-        final String BASE_URL = prop.getPropValues("base.url");
+        final String BASE_URL = System.getenv("ENV_SAR_URL");
         final String uri = BASE_URL + "/assets/"+ modelName+"/attributes/productionVolume";
 
         RestTemplate restTemplate = new RestTemplate();

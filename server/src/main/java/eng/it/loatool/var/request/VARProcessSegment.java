@@ -19,8 +19,7 @@ public class VARProcessSegment {
 	};
 		
 	public static String getProcessSegmentList() throws IOException {
-        PropertyManager prop = new PropertyManager();
-        final String BASE_URL = prop.getPropValues("base.url");
+		final String BASE_URL = System.getenv("ENV_SAR_URL");
 		final String uri = BASE_URL + "/SPARQLQuery";
 
 	    RestTemplate restTemplate = new RestTemplate();
@@ -33,8 +32,7 @@ public class VARProcessSegment {
 	}
 
 	public static String getIsMadeOf() throws IOException {
-		PropertyManager prop = new PropertyManager();
-		final String BASE_URL = prop.getPropValues("base.url");
+		final String BASE_URL = System.getenv("ENV_SAR_URL");
 		final String uri = BASE_URL + "/SPARQLQuery";
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -49,8 +47,7 @@ public class VARProcessSegment {
 	}
 	
 	public static String getProcessSegmentAttribute(String addressSpace) throws IOException {
-        PropertyManager prop = new PropertyManager();
-        final String BASE_URL = prop.getPropValues("base.url");
+		final String BASE_URL = System.getenv("ENV_SAR_URL");
 	    final String uri = BASE_URL + "/SPARQLQuery";
 	     
 	    RestTemplate restTemplate = new RestTemplate();
@@ -68,8 +65,7 @@ public class VARProcessSegment {
 	}
 
 	public static String getList() throws IOException {
-		PropertyManager prop = new PropertyManager();
-		final String BASE_URL = prop.getPropValues("base.url");
+		final String BASE_URL = System.getenv("ENV_SAR_URL");
 		final String uri = BASE_URL + "/assets?className=ProcessSegment&retrieveForChildren=true";
 
 		RestTemplate restTemplate = new RestTemplate();
