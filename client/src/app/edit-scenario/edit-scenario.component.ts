@@ -41,9 +41,10 @@ export class EditScenarioComponent implements OnInit {
     scenarios:any={};
     scenResList: Array<any> = [];
     resToBeRemoved: Array<any> = [];
-
+    enableSave:boolean;
 
     ngOnInit() {
+      this.enableSave = false;
 
       this.cookie = this._processListService.getCookie("selectedSubprocess");
       this.id  = this.route.snapshot.params['id'];
@@ -111,226 +112,245 @@ export class EditScenarioComponent implements OnInit {
       )
     }
 
-    calculate(){
-      var valueList = [];
-      var objlist= {};
-      var calculatedList = [];
-      var procTime = 0;
-      var optCost = 0;
-      var totAssemblyCostPerPiece = 0;
+      calculate(){
+        var valueList = [];
+        var objlist= {};
+        var calculatedList = [];
+        var procTime = 0;
+        var optCost = 0;
+        var totAssemblyCostPerPiece = 0;
 
-      for (var i=0; i<this.stepResult.length; i++){
-        if (!(i in this.stepResult)){
-          valueList.push("");
-        }else{
+        for (var i=0; i<this.stepResult.length; i++){
+          if (!(i in this.stepResult)){
+            valueList.push("");
+          }else{
+            objlist= {};
+            var fields = this.stepResult[i].split('-');
+            objlist['optC'] = parseInt(fields[0]);
+            if(this.subSceList[parseInt(fields[1])].objList.scenNumber1 != undefined && parseInt(fields[2]) === 0){
+              objlist['phy'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.loaPhysical;
+              objlist['cog'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.loaCognitive;
+              objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.assemblyCostPerPiece;
+              objlist['fkTbAceProSeq'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.fkTbAceProSeq;
+              objlist['scenarioNumber'] = parseInt(this.id);
+              objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.assemblyCosts;
+              objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber1.hoursPerYears);
+              objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.labourCost;
+              objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.maintCost;
+              objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.annualSpaceCost;
+              objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.inputedDepreciation;
+              objlist['accruedInterestCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.accruedIntCosts;
+              objlist['energyCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.energyCost;
+              objlist['varCostsPerUnit'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.varCostTotal;
+              objlist['macCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.mcAMaintCosts;
+              objlist['prodUnitsPerYears'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber1.nprodPieces);
+              objlist['assCostsPerUnits'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.assemblyCostPerPiece;
+              objlist['totalAssCosts'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.assemblyCosts;
+              objlist['fkTbAceSubProLev'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber1.subprocessLevel.pkTbId);
+              objlist['fkTbAceRes'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.pkTbId;
+              objlist['numberSelected'] = 1;
+              objlist['usCognitiveLoa'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.usCognitiveLoa;
+              objlist['usPhysicalLoa'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.usPhysicalLoa;
+
+
+            }
+            if(this.subSceList[parseInt(fields[1])].objList.scenNumber2 != undefined && parseInt(fields[2]) === 1){
+              objlist['phy'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.loaPhysical;
+              objlist['cog'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.loaCognitive;
+              objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.assemblyCostPerPiece;
+              objlist['fkTbAceProSeq'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.fkTbAceProSeq;
+              objlist['scenarioNumber'] = parseInt(this.id);
+              objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.assemblyCosts;
+              objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber2.hoursPerYears);
+              objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.labourCost;
+              objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.maintCost;
+              objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.annualSpaceCost;
+              objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.inputedDepreciation;
+              objlist['accruedInterestCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.accruedIntCosts;
+              objlist['energyCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.energyCost;
+              objlist['varCostsPerUnit'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.varCostTotal;
+              objlist['macCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.mcAMaintCosts;
+              objlist['prodUnitsPerYears'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber2.nprodPieces);
+              objlist['assCostsPerUnits'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.assemblyCostPerPiece;
+              objlist['totalAssCosts'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.assemblyCosts;
+              objlist['fkTbAceSubProLev'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber2.subprocessLevel.pkTbId);
+              objlist['fkTbAceRes'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.pkTbId;
+              objlist['numberSelected'] = 2;
+              objlist['usCognitiveLoa'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.usCognitiveLoa;
+              objlist['usPhysicalLoa'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.usPhysicalLoa;
+
+            }
+            if(this.subSceList[parseInt(fields[1])].objList.scenNumber3 != undefined && parseInt(fields[2]) === 2){
+              objlist['phy'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.loaPhysical;
+              objlist['cog'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.loaCognitive;
+              objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCostPerPiece;
+              objlist['fkTbAceProSeq'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.fkTbAceProSeq;
+              objlist['scenarioNumber'] = parseInt(this.id);
+              objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCosts;
+              objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber3.hoursPerYears);
+              objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.labourCost;
+              objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.maintCost;
+              objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.annualSpaceCost;
+              objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.inputedDepreciation;
+              objlist['accruedInterestCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.accruedIntCosts;
+              objlist['energyCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.energyCost;
+              objlist['varCostsPerUnit'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.varCostTotal;
+              objlist['macCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.mcAMaintCosts;
+              objlist['prodUnitsPerYears'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber3.nprodPieces);
+              objlist['assCostsPerUnits'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCostPerPiece;
+              objlist['totalAssCosts'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCosts;
+              objlist['fkTbAceSubProLev'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.pkTbId);
+              objlist['fkTbAceRes'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.pkTbId;
+              objlist['numberSelected'] = 3;
+              objlist['usCognitiveLoa'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.usCognitiveLoa;
+              objlist['usPhysicalLoa'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.usPhysicalLoa;
+
+            }
+            objlist['procTime'] = this.subSceList[parseInt(fields[1])].subProc.processTime;
+            valueList.push(objlist);
+          }
+        }
+
+        if(valueList.length < this.subSceList.length){
+          var add = this.subSceList.length-valueList.length;
+          for (var j=0; j<add; j++){
+            valueList.push("");
+          }
+        }
+
+        var countAvg = 0;
+        var phyLoa = 0;
+        var cogLoa = 0;
+        var costPerPiece = 0;
+        var fkTbAceProSeq = 0;
+        var scenarioNumber = 0;
+        var optionCost = 0;
+        var hoursYear = 0;
+        var labourCost = 0;
+        var maintCost = 0;
+        var annualSpaceCost = 0;
+        var inputedDepreciation = 0;
+        var accruedInterestCost = 0;
+        var energyCost = 0;
+        var varCostsPerUnit = 0;
+        var macCost = 0;
+        var prodUnitsPerYears = 0;
+        var assCostsPerUnits = 0;
+        var totalAssCosts = 0;
+        var phy = 0;
+        var cog = 0;
+        var poundphyLoa = 0;
+        var poundcogLoa = 0;
+
+        objlist = {};
+
+        for (var k=0; k<valueList.length; k++){
+          if(valueList[k] != ""){
+            countAvg+=1;
+
+            phy += valueList[k].phy;
+            cog += valueList[k].cog;
+            costPerPiece += valueList[k].costPerPiece;
+            fkTbAceProSeq = valueList[k].fkTbAceProSeq;
+            scenarioNumber = parseInt(this.id);
+            optionCost += valueList[k].optionCost;
+            hoursYear += valueList[k].hoursYear;
+            labourCost += valueList[k].labourCost;
+            maintCost += valueList[k].maintCost;
+            annualSpaceCost += valueList[k].annualSpaceCost;
+            inputedDepreciation += valueList[k].inputedDepreciation;
+            accruedInterestCost += valueList[k].accruedInterestCost;
+            energyCost += valueList[k].energyCost;
+            varCostsPerUnit += valueList[k].varCostsPerUnit;
+            macCost += valueList[k].macCost;
+            prodUnitsPerYears += valueList[k].prodUnitsPerYears;
+            assCostsPerUnits += valueList[k].assCostsPerUnits;
+            totalAssCosts += valueList[k].totalAssCosts;
+
+            phyLoa += valueList[k].phy;
+            cogLoa += valueList[k].cog;
+
+            poundphyLoa += valueList[k].phy*valueList[k].procTime;
+            poundcogLoa += valueList[k].cog*valueList[k].procTime;
+
+            procTime += valueList[k].procTime;
+            optCost += valueList[k].optC;
+            totAssemblyCostPerPiece += valueList[k].costPerPiece;
+          }
+        }
+
+        objlist['phy'] = phy/countAvg;
+        objlist['cog'] = cog/countAvg;
+        objlist['costPerPiece'] = costPerPiece/countAvg;
+        objlist['fkTbAceProSeq'] = fkTbAceProSeq;
+        objlist['scenarioNumber'] = scenarioNumber;
+        objlist['optionCost'] = optionCost/countAvg;
+        objlist['hoursYear'] = hoursYear/countAvg;
+        objlist['labourCost'] = labourCost/countAvg;
+        objlist['maintCost'] = maintCost/countAvg;
+        objlist['annualSpaceCost'] = annualSpaceCost/countAvg;
+        objlist['inputedDepreciation'] = inputedDepreciation/countAvg;
+        objlist['accruedInterestCost'] = accruedInterestCost/countAvg;
+        objlist['energyCost'] = energyCost/countAvg;
+        objlist['varCostsPerUnit'] = varCostsPerUnit/countAvg;
+        objlist['macCost'] = macCost/countAvg;
+        objlist['prodUnitsPerYears'] = prodUnitsPerYears/countAvg;
+        objlist['assCostsPerUnits'] = assCostsPerUnits/countAvg;
+        objlist['totalAssCosts'] = totalAssCosts/countAvg;
+
+        this.tmpPost = objlist;
+        this.avgPhy = phyLoa/countAvg;
+        this.avgCog = cogLoa/countAvg;
+
+        for (var j=0; j<valueList.length; j++){
           objlist= {};
-          var fields = this.stepResult[i].split('-');
-          objlist['optC'] = parseInt(fields[0]);
-          if(this.subSceList[parseInt(fields[1])].objList.scenNumber1 != undefined && parseInt(fields[2]) === 0){
-            objlist['phy'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.loaPhysical;
-            objlist['cog'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.loaCognitive;
-            objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.assemblyCostPerPiece;
-            objlist['fkTbAceProSeq'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.fkTbAceProSeq;
-            objlist['scenarioNumber'] = parseInt(this.id);
-            objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.assemblyCosts;
-            objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber1.hoursPerYears);
-            objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.labourCost;
-            objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.maintCost;
-            objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.annualSpaceCost;
-            objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.inputedDepreciation;
-            objlist['accruedInterestCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.accruedIntCosts;
-            objlist['energyCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.energyCost;
-            objlist['varCostsPerUnit'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.varCostTotal;
-            objlist['macCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.mcAMaintCosts;
-            objlist['prodUnitsPerYears'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber1.nprodPieces);
-            objlist['assCostsPerUnits'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.assemblyCostPerPiece;
-            objlist['totalAssCosts'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.assemblyCosts;
-            objlist['fkTbAceSubProLev'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber1.subprocessLevel.pkTbId);
-            objlist['fkTbAceRes'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.pkTbId;
-            objlist['numberSelected'] = 1;
-
+          if(valueList[j] != ""){
+            objlist['optC'] = (valueList[j].optC).toFixed(2);
+            objlist['phy'] = valueList[j].usPhysicalLoa;
+            objlist['cog'] = valueList[j].usCognitiveLoa;
+            objlist['poundPhy'] = valueList[j].phy * valueList[j].procTime ;
+            objlist['poundCog'] = valueList[j].cog * valueList[j].procTime ;
+            objlist['fkTbAceRes'] = valueList[j].fkTbAceRes;
+            objlist['fkTbAceSubProLev'] = valueList[j].fkTbAceSubProLev;
+            objlist['numberSelected'] = valueList[j].numberSelected;
+          }else{
+            objlist['optC'] = "-";
+            objlist['phy'] = "-";
+            objlist['cog'] = "-";
+            objlist['poundPhy'] = "-";
+            objlist['poundCog'] = "-";
+            objlist['fkTbAceRes'] = "-";
+            objlist['fkTbAceSubProLev'] = "-";
+            objlist['numberSelected'] = "-";
           }
-          if(this.subSceList[parseInt(fields[1])].objList.scenNumber2 != undefined && parseInt(fields[2]) === 1){
-            objlist['phy'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.loaPhysical;
-            objlist['cog'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.loaCognitive;
-            objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.assemblyCostPerPiece;
-            objlist['fkTbAceProSeq'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.fkTbAceProSeq;
-            objlist['scenarioNumber'] = parseInt(this.id);
-            objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.assemblyCosts;
-            objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber2.hoursPerYears);
-            objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.labourCost;
-            objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.maintCost;
-            objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.annualSpaceCost;
-            objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.inputedDepreciation;
-            objlist['accruedInterestCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.accruedIntCosts;
-            objlist['energyCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.energyCost;
-            objlist['varCostsPerUnit'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.varCostTotal;
-            objlist['macCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.mcAMaintCosts;
-            objlist['prodUnitsPerYears'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber2.nprodPieces);
-            objlist['assCostsPerUnits'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.assemblyCostPerPiece;
-            objlist['totalAssCosts'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.assemblyCosts;
-            objlist['fkTbAceSubProLev'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber2.subprocessLevel.pkTbId);
-            objlist['fkTbAceRes'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.pkTbId;
-            objlist['numberSelected'] = 2;
 
-          }
-          if(this.subSceList[parseInt(fields[1])].objList.scenNumber3 != undefined && parseInt(fields[2]) === 2){
-            objlist['phy'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.loaPhysical;
-            objlist['cog'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.loaCognitive;
-            objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCostPerPiece;
-            objlist['fkTbAceProSeq'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.fkTbAceProSeq;
-            objlist['scenarioNumber'] = parseInt(this.id);
-            objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCosts;
-            objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber3.hoursPerYears);
-            objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.labourCost;
-            objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.maintCost;
-            objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.annualSpaceCost;
-            objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.inputedDepreciation;
-            objlist['accruedInterestCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.accruedIntCosts;
-            objlist['energyCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.energyCost;
-            objlist['varCostsPerUnit'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.varCostTotal;
-            objlist['macCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.mcAMaintCosts;
-            objlist['prodUnitsPerYears'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber3.nprodPieces);
-            objlist['assCostsPerUnits'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCostPerPiece;
-            objlist['totalAssCosts'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCosts;
-            objlist['fkTbAceSubProLev'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.pkTbId);
-            objlist['fkTbAceRes'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.pkTbId;
-            objlist['numberSelected'] = 3;
-
-          }
-          objlist['procTime'] = this.subSceList[parseInt(fields[1])].subProc.processTime;
-          valueList.push(objlist);
+          calculatedList.push(objlist);
         }
-      }
 
-      if(valueList.length < this.subSceList.length){
-        var add = this.subSceList.length-valueList.length;
-        for (var j=0; j<add; j++){
-          valueList.push("");
-        }
-      }
+        this.showedList = calculatedList;
 
-      var countAvg = 0;
-      var phyLoa = 0;
-      var cogLoa = 0;
-      var costPerPiece = 0;
-      var fkTbAceProSeq = 0;
-      var scenarioNumber = 0;
-      var optionCost = 0;
-      var hoursYear = 0;
-      var labourCost = 0;
-      var maintCost = 0;
-      var annualSpaceCost = 0;
-      var inputedDepreciation = 0;
-      var accruedInterestCost = 0;
-      var energyCost = 0;
-      var varCostsPerUnit = 0;
-      var macCost = 0;
-      var prodUnitsPerYears = 0;
-      var assCostsPerUnits = 0;
-      var totalAssCosts = 0;
-      var phy = 0;
-      var cog = 0;
-
-      objlist = {};
-
-      for (var k=0; k<valueList.length; k++){
-        if(valueList[k] != ""){
-          countAvg+=1;
-
-          phy += valueList[k].phy;
-          cog += valueList[k].cog;
-          costPerPiece += valueList[k].costPerPiece;
-          fkTbAceProSeq = valueList[k].fkTbAceProSeq;
-          scenarioNumber = parseInt(this.id);
-          optionCost += valueList[k].optionCost;
-          hoursYear += valueList[k].hoursYear;
-          labourCost += valueList[k].labourCost;
-          maintCost += valueList[k].maintCost;
-          annualSpaceCost += valueList[k].annualSpaceCost;
-          inputedDepreciation += valueList[k].inputedDepreciation;
-          accruedInterestCost += valueList[k].accruedInterestCost;
-          energyCost += valueList[k].energyCost;
-          varCostsPerUnit += valueList[k].varCostsPerUnit;
-          macCost += valueList[k].macCost;
-          prodUnitsPerYears += valueList[k].prodUnitsPerYears;
-          assCostsPerUnits += valueList[k].assCostsPerUnits;
-          totalAssCosts += valueList[k].totalAssCosts;
-
-          phyLoa += valueList[k].phy;
-          cogLoa += valueList[k].cog;
-          procTime += valueList[k].procTime;
-          optCost += valueList[k].optC;
-          totAssemblyCostPerPiece += valueList[k].costPerPiece;
-        }
-      }
-
-      objlist['phy'] = phy/countAvg;
-      objlist['cog'] = cog/countAvg;
-      objlist['costPerPiece'] = costPerPiece/countAvg;
-      objlist['fkTbAceProSeq'] = fkTbAceProSeq;
-      objlist['scenarioNumber'] = scenarioNumber;
-      objlist['optionCost'] = optionCost/countAvg;
-      objlist['hoursYear'] = hoursYear/countAvg;
-      objlist['labourCost'] = labourCost/countAvg;
-      objlist['maintCost'] = maintCost/countAvg;
-      objlist['annualSpaceCost'] = annualSpaceCost/countAvg;
-      objlist['inputedDepreciation'] = inputedDepreciation/countAvg;
-      objlist['accruedInterestCost'] = accruedInterestCost/countAvg;
-      objlist['energyCost'] = energyCost/countAvg;
-      objlist['varCostsPerUnit'] = varCostsPerUnit/countAvg;
-      objlist['macCost'] = macCost/countAvg;
-      objlist['prodUnitsPerYears'] = prodUnitsPerYears/countAvg;
-      objlist['assCostsPerUnits'] = assCostsPerUnits/countAvg;
-      objlist['totalAssCosts'] = totalAssCosts/countAvg;
-
-      this.tmpPost = objlist;
-      this.avgPhy = phyLoa/countAvg;
-      this.avgCog = cogLoa/countAvg;
-
-      for (var j=0; j<valueList.length; j++){
-        objlist= {};
-        if(valueList[j] != ""){
-          objlist['optC'] = (valueList[j].optC).toFixed(2);
-          objlist['phy'] = valueList[j].phy * valueList[j].procTime + this.avgPhy;
-          objlist['cog'] = valueList[j].cog * valueList[j].procTime + this.avgCog;
-          objlist['fkTbAceRes'] = valueList[j].fkTbAceRes;
-          objlist['fkTbAceSubProLev'] = valueList[j].fkTbAceSubProLev;
-          objlist['numberSelected'] = valueList[j].numberSelected;
+        if(optCost != 0){
+          this.phyLoaTotal = (poundphyLoa/procTime).toFixed(2);
         }else{
-          objlist['optC'] = "-";
-          objlist['phy'] = "-";
-          objlist['cog'] = "-";
-          objlist['fkTbAceRes'] = "-";
-          objlist['fkTbAceSubProLev'] = "-";
-          objlist['numberSelected'] = "-";
+          this.phyLoaTotal = 0;
         }
 
-        calculatedList.push(objlist);
-      }
+        if(optCost != 0){
+          this.cogLoaTotal = (poundcogLoa/procTime).toFixed(2);
+        }else{
+          this.cogLoaTotal = 0;
+        }
 
-      this.showedList = calculatedList;
+        if(totAssemblyCostPerPiece != 0){
+          this.CostperPiece = (costPerPiece).toFixed(2);
+        }else{
+          this.CostperPiece = 0;
+        }
+        this.TotalCost = (optCost).toFixed(2);
+        this.totalProcessTime = (procTime).toFixed(2);
+        this.enableSave = true;
 
-      if(optCost != 0){
-        this.phyLoaTotal = (this.avgPhy/procTime).toFixed(2);
-      }else{
-        this.phyLoaTotal = 0;
       }
-
-      if(optCost != 0){
-        this.cogLoaTotal = (this.avgCog/procTime).toFixed(2);
-      }else{
-        this.cogLoaTotal = 0;
-      }
-
-      if(totAssemblyCostPerPiece != 0){
-        this.CostperPiece = (optCost/totAssemblyCostPerPiece).toFixed(2);
-      }else{
-        this.CostperPiece = 0;
-      }
-      this.TotalCost = (optCost).toFixed(2);
-      this.totalProcessTime = (procTime).toFixed(2);
-    }
 
     cancel(){
       this.stepResult = [];
@@ -540,6 +560,7 @@ export class EditScenarioComponent implements OnInit {
             }
           }
           this.calculate();
+          this.enableSave = false;
         }
 
         deleteScenatio (pkTbId:string){
