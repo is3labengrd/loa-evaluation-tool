@@ -81,7 +81,7 @@
           <tr>
             <td>Select resource</td>
             <td>
-              <select [(ngModel)]="selectedRes1" (ngModelChange)="firstDropDownChanged($event)" required>
+              <select [(ngModel)]="selectedRes1" (ngModelChange)="firstDropDownChanged($event)">
                 <option *ngFor="let res1 of resources" [value]="res1.name">{{res1.name}}</option>
               </select>
             </td>
