@@ -234,13 +234,13 @@ checkMandatoryData() {
       this.nprodPiecePerHoursGUI3 = this.nprodPiecePerHours;
 
     if(this.isSubScenario1Present==true)
-    this.procSpecInfoObjGUI1 = this.procSpecInfoObj;
+    this.procSpecInfoObjGUI1 = Object.assign({}, this.procSpecInfoObj);
 
     if(this.isSubScenario2Present==true)
-    this.procSpecInfoObjGUI2 = this.procSpecInfoObj;
+    this.procSpecInfoObjGUI2 = Object.assign({}, this.procSpecInfoObj);
 
     if(this.isSubScenario3Present==true)
-    this.procSpecInfoObjGUI3 = this.procSpecInfoObj;
+    this.procSpecInfoObjGUI3 = Object.assign({}, this.procSpecInfoObj);
 
     this.updateHoursPerYear();
     this.updateNumbersNumYear();
@@ -263,23 +263,23 @@ checkMandatoryData() {
   }
 
   firstDropDownChanged(val: any) {
-    this.firstdropdown = this.findObj(this.resourcesList, val);
-    this.resourceInfo1 = this.firstdropdown;
+    this.firstdropdown = Object.assign({},this.findObj(this.resourcesList, val));
+    this.resourceInfo1 = Object.assign({}, this.firstdropdown);
     this.subscenario1.fkTbAceRes = this.firstdropdown.pkTbId;
 
     // console.log(this.selRes1ProcTime);
   }
 
   secondDropDownChanged(val: any) {
-   this.seconddropdown = this.findObj(this.resourcesList, val);
-   this.resourceInfo2 = this.seconddropdown;
+   this.seconddropdown = Object.assign({}, this.findObj(this.resourcesList, val));
+   this.resourceInfo2 = Object.assign({}, this.seconddropdown);
    this.subscenario2.fkTbAceRes=this.seconddropdown.pkTbId;
 
   }
 
   thirdDropDownChanged(val: any) {
-    this.thirddropdown = this.findObj(this.resourcesList, val);
-    this.resourceInfo3 = this.thirddropdown;
+    this.thirddropdown = Object.assign({},this.findObj(this.resourcesList, val));
+    this.resourceInfo3 = Object.assign({}, this.thirddropdown);
     this.subscenario3.fkTbAceRes=this.thirddropdown.pkTbId;
 
   }
@@ -562,18 +562,32 @@ checkMandatoryData() {
     this.nprodPiecePerHoursGUI1=null;
     this.nprodPiecePerHoursGUI2=null;
     this.nprodPiecePerHoursGUI3=null;
-    this.setAll(this.procSpecInfoObj, null);
-    this.nprodPiecePerHours=null;
+    this.procSpecInfoObjGUI1=null;
+    this.procSpecInfoObjGUI2=null;
+    this.procSpecInfoObjGUI3=null;
     this.selRes1ProcTime=null;
     this.selRes2ProcTime=null;
     this.selRes3ProcTime=null;
+    this.selectedRes1=null;
+    this.selectedRes2=null;
+    this.selectedRes3=null;
+
     this.setAll(this.subscenario1, null);
-    this.setAll(this.resourceInfo1, null);
     this.setAll(this.subscenario2, null);
-    this.setAll(this.resourceInfo2, null);
     this.setAll(this.subscenario3, null);
+
+    this.setAll(this.resourceInfo1, null);
+    this.setAll(this.resourceInfo2, null);
     this.setAll(this.resourceInfo3, null);
 
+    this.setAll(this.firstdropdown, null);
+    this.setAll(this.seconddropdown, null);
+    this.setAll(this.thirddropdown, null);
+
+
+
+
+    this.disableButton=false;
   }
 
  getFkAceSubProLevId(cookie): number {
@@ -718,13 +732,13 @@ checkMandatoryData() {
               .then((result:any) => {
                  subscenarios = result;
                  subscenarios.forEach((element:any)=>  {
-                    //console.log(element);
                     switch(element.scenarioNumber){
                     case 1:
                         this.nprodPiecePerHoursGUI1 = this.nprodPiecePerHours;
-                        this.procSpecInfoObjGUI1 = this.procSpecInfoObj;
+                        this.procSpecInfoObjGUI1 = Object.assign({}, this.procSpecInfoObj);
                         this.resourceInfo1=element.resource;
                         this.selectedRes1=this.resourceInfo1.name;
+                       // console.log(element.resource);
                         this.firstDropDownChanged(element.resource.name);
                         this.subScenarioID1=element.pkTbId
                         this.selRes1ProcTime=element.processTime;
@@ -745,7 +759,7 @@ checkMandatoryData() {
                         break;
                     case 2:
                        this.nprodPiecePerHoursGUI2 = this.nprodPiecePerHours;
-                       this.procSpecInfoObjGUI2 = this.procSpecInfoObj;
+                       this.procSpecInfoObjGUI2 = Object.assign({}, this.procSpecInfoObj);
                        this.resourceInfo2=element.resource;
                        this.selectedRes2=this.resourceInfo2.name;
                        this.secondDropDownChanged(element.resource.name);
@@ -767,7 +781,7 @@ checkMandatoryData() {
                        break;
                     case 3:
                        this.nprodPiecePerHoursGUI3 = this.nprodPiecePerHours;
-                       this.procSpecInfoObjGUI3 = this.procSpecInfoObj;
+                       this.procSpecInfoObjGUI3 = Object.assign({}, this.procSpecInfoObj);
                        this.resourceInfo3=element.resource;
                        this.selectedRes3=this.resourceInfo3.name;
                        this.thirdDropDownChanged(element.resource.name);
@@ -797,7 +811,7 @@ checkMandatoryData() {
               err => { })
       }
 
-      //this method is not used
+      //THIS METHOD IS NOT USED
       resourceInfoGET(primaryKey, scenarioNumber) {
       this.http.get(environment.apiUrl + '/v1/resources/'+ primaryKey)
               .toPromise()
