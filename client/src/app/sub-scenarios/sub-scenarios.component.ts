@@ -67,9 +67,9 @@ export class SubScenariosComponent implements OnInit {
   //     {selRes1ProcTime: null, selRes2ProcTime:null, selRes3ProcTime: null};
 
   //TODO: These three variables should be inserted into a object
-  selRes1ProcTime: number;
-  selRes2ProcTime: number;
-  selRes3ProcTime: number;
+  selRes1ProcTime: number = null;
+  selRes2ProcTime: number = null;
+  selRes3ProcTime: number = null;
 
 
   disableButton: boolean;
@@ -572,19 +572,26 @@ checkMandatoryData() {
     this.selectedRes2=null;
     this.selectedRes3=null;
 
+    if(this.subscenario1!=null)
     this.setAll(this.subscenario1, null);
+    if(this.subscenario2!=null)
     this.setAll(this.subscenario2, null);
+    if(this.subscenario3!=null)
     this.setAll(this.subscenario3, null);
 
+    if(this.resourceInfo1!=null)
     this.setAll(this.resourceInfo1, null);
+    if(this.resourceInfo2!=null)
     this.setAll(this.resourceInfo2, null);
+    if(this.resourceInfo3!=null)
     this.setAll(this.resourceInfo3, null);
 
+    if(this.firstdropdown!=null)
     this.setAll(this.firstdropdown, null);
+    if(this.seconddropdown!=null)
     this.setAll(this.seconddropdown, null);
+    if(this.thirddropdown!=null)
     this.setAll(this.thirddropdown, null);
-
-
 
 
     this.disableButton=false;
@@ -835,17 +842,65 @@ checkMandatoryData() {
        }
 
        cancelUserSatisfaction(){
-          this.subscenario1.usPhysicalLoa=null;
-          this.subscenario2.usPhysicalLoa=null;
-          this.subscenario3.usPhysicalLoa=null;
+          if(this.subscenario1!=null){
+            this.subscenario1.usPhysicalLoa=null;
+            this.subscenario1.usCognitiveLoa=null;
+          }
 
-          this.subscenario1.usCognitiveLoa=null;
-          this.subscenario2.usCognitiveLoa=null;
-          this.subscenario3.usCognitiveLoa=null;
+          if(this.subscenario2!=null){
+            this.subscenario2.usPhysicalLoa=null;
+            this.subscenario2.usCognitiveLoa=null;
+          }
+
+          if(this.subscenario3!=null){
+            this.subscenario3.usPhysicalLoa=null;
+            this.subscenario3.usCognitiveLoa=null;
+          }
+
+
        }
 
+       procSpecInfoIsIncomplete = () => {
+           if (this.procSpecInfoObj.nshiptsDay == null && this.procSpecInfoObj.hoursShift == null ||
+                  this.procSpecInfoObj.workingDaysYear == null || this.procSpecInfoObj.propWCPerHours == null){
+                  return true;
+           }else{
+              return false;
+           }
+         }
+
+       productInfoIsIncomplete = () => {
+          if(this.nprodPiecePerHours==null){
+              return true;
+          }else{
+              return false;
+          }
+        }
+
+       createSubScenariosIsIncomplete = () => {
+
+          var retDisabled=true;
+          var disabled1 = true;
+          var disabled2 = true;
+          var disabled3 = true;
+
+          if(this.firstdropdown!=null && this.selRes1ProcTime!=null){
+              disabled1 = false;
+          }
+
+          if(this.seconddropdown!=null && this.selRes2ProcTime!=null){
+              disabled2 = false;
+          }
+
+         if(this.thirddropdown!=null && this.selRes3ProcTime!=null){
+              disabled3 = false;
+          }
+
+          retDisabled=  disabled1 && disabled2 && disabled3;
 
 
+          return false;
+        }
 
   }
 
