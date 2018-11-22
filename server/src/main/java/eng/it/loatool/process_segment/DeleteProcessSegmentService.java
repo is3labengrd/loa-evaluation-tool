@@ -33,6 +33,7 @@ public class DeleteProcessSegmentService {
                         .deleteProcessSegmentListElement(element.getPkTbId());
                 }
                 processSegmentRepository.delete(processSegment);
+                processSegment.setSubprocessLevels(null);
             });
         return maybeProcessSegment;
     }
