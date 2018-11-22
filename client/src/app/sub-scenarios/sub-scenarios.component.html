@@ -17,7 +17,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="productInfo()" data-dismiss="modal">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="productInfo()" [disabled]="productInfoIsIncomplete()" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
@@ -54,7 +54,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="procSpecInfo()" data-dismiss="modal">Save changes
+        <button type="button" class="btn btn-primary" (click)="procSpecInfo()" [disabled]="procSpecInfoIsIncomplete()" data-dismiss="modal">Save changes
         </button>
       </div>
     </div>
@@ -127,7 +127,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="createSubScenarios()" data-dismiss="modal">Save changes
+        <button type="button" class="btn btn-primary" (click)="createSubScenarios()" [disabled]="createSubScenariosIsIncomplete()" data-dismiss="modal">Save changes
         </button>
       </div>
     </div>
