@@ -45,11 +45,30 @@
       <td>
         <a routerLink="{{ process?.route }}" (click)="saveAnalysisData(process.rawElementReference, process)"> {{ process?.action }} </a>
         <br>
-        <a (click)="process?.delete().then(populateProcessSegmentList)">{{ process?.deleteAction }}</a>
+        
+        <button class="btn btn-link" data-toggle="modal" data-target="#deleteModal">{{ process?.deleteAction }}</button>
+        <!-- deleteModal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"  aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel"><p class="text-warning">Warning</p></h5>
+              </div>
+              <div class="modal-body">
+                You have chosen to delete a Process: all data will be deleted. Do you wish to continue?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="process?.delete().then(populateProcessSegmentList)" >Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              </div>
+            </div>
+          </div>
+        </div> <!-- deleteModal -->
       </td>
     </tr>
   </tbody>
 </table>
+
 
 <ng-template [ngIf]="syncingWithVAR">
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>

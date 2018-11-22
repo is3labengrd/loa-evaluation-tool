@@ -67,9 +67,9 @@ export class SubScenariosComponent implements OnInit {
   //     {selRes1ProcTime: null, selRes2ProcTime:null, selRes3ProcTime: null};
 
   //TODO: These three variables should be inserted into a object
-  selRes1ProcTime: number;
-  selRes2ProcTime: number;
-  selRes3ProcTime: number;
+  selRes1ProcTime: number = null;
+  selRes2ProcTime: number = null;
+  selRes3ProcTime: number = null;
 
 
   disableButton: boolean;
@@ -234,13 +234,13 @@ checkMandatoryData() {
       this.nprodPiecePerHoursGUI3 = this.nprodPiecePerHours;
 
     if(this.isSubScenario1Present==true)
-    this.procSpecInfoObjGUI1 = this.procSpecInfoObj;
+    this.procSpecInfoObjGUI1 = Object.assign({}, this.procSpecInfoObj);
 
     if(this.isSubScenario2Present==true)
-    this.procSpecInfoObjGUI2 = this.procSpecInfoObj;
+    this.procSpecInfoObjGUI2 = Object.assign({}, this.procSpecInfoObj);
 
     if(this.isSubScenario3Present==true)
-    this.procSpecInfoObjGUI3 = this.procSpecInfoObj;
+    this.procSpecInfoObjGUI3 = Object.assign({}, this.procSpecInfoObj);
 
     this.updateHoursPerYear();
     this.updateNumbersNumYear();
@@ -263,23 +263,23 @@ checkMandatoryData() {
   }
 
   firstDropDownChanged(val: any) {
-    this.firstdropdown = this.findObj(this.resourcesList, val);
-    this.resourceInfo1 = this.firstdropdown;
+    this.firstdropdown = Object.assign({},this.findObj(this.resourcesList, val));
+    this.resourceInfo1 = Object.assign({}, this.firstdropdown);
     this.subscenario1.fkTbAceRes = this.firstdropdown.pkTbId;
 
     // console.log(this.selRes1ProcTime);
   }
 
   secondDropDownChanged(val: any) {
-   this.seconddropdown = this.findObj(this.resourcesList, val);
-   this.resourceInfo2 = this.seconddropdown;
+   this.seconddropdown = Object.assign({}, this.findObj(this.resourcesList, val));
+   this.resourceInfo2 = Object.assign({}, this.seconddropdown);
    this.subscenario2.fkTbAceRes=this.seconddropdown.pkTbId;
 
   }
 
   thirdDropDownChanged(val: any) {
-    this.thirddropdown = this.findObj(this.resourcesList, val);
-    this.resourceInfo3 = this.thirddropdown;
+    this.thirddropdown = Object.assign({},this.findObj(this.resourcesList, val));
+    this.resourceInfo3 = Object.assign({}, this.thirddropdown);
     this.subscenario3.fkTbAceRes=this.thirddropdown.pkTbId;
 
   }
@@ -562,18 +562,39 @@ checkMandatoryData() {
     this.nprodPiecePerHoursGUI1=null;
     this.nprodPiecePerHoursGUI2=null;
     this.nprodPiecePerHoursGUI3=null;
-    this.setAll(this.procSpecInfoObj, null);
-    this.nprodPiecePerHours=null;
+    this.procSpecInfoObjGUI1=null;
+    this.procSpecInfoObjGUI2=null;
+    this.procSpecInfoObjGUI3=null;
     this.selRes1ProcTime=null;
     this.selRes2ProcTime=null;
     this.selRes3ProcTime=null;
+    this.selectedRes1=null;
+    this.selectedRes2=null;
+    this.selectedRes3=null;
+
+    if(this.subscenario1!=null)
     this.setAll(this.subscenario1, null);
-    this.setAll(this.resourceInfo1, null);
+    if(this.subscenario2!=null)
     this.setAll(this.subscenario2, null);
-    this.setAll(this.resourceInfo2, null);
+    if(this.subscenario3!=null)
     this.setAll(this.subscenario3, null);
+
+    if(this.resourceInfo1!=null)
+    this.setAll(this.resourceInfo1, null);
+    if(this.resourceInfo2!=null)
+    this.setAll(this.resourceInfo2, null);
+    if(this.resourceInfo3!=null)
     this.setAll(this.resourceInfo3, null);
 
+    if(this.firstdropdown!=null)
+    this.setAll(this.firstdropdown, null);
+    if(this.seconddropdown!=null)
+    this.setAll(this.seconddropdown, null);
+    if(this.thirddropdown!=null)
+    this.setAll(this.thirddropdown, null);
+
+
+    this.disableButton=false;
   }
 
  getFkAceSubProLevId(cookie): number {
@@ -718,13 +739,13 @@ checkMandatoryData() {
               .then((result:any) => {
                  subscenarios = result;
                  subscenarios.forEach((element:any)=>  {
-                    //console.log(element);
                     switch(element.scenarioNumber){
                     case 1:
                         this.nprodPiecePerHoursGUI1 = this.nprodPiecePerHours;
-                        this.procSpecInfoObjGUI1 = this.procSpecInfoObj;
+                        this.procSpecInfoObjGUI1 = Object.assign({}, this.procSpecInfoObj);
                         this.resourceInfo1=element.resource;
                         this.selectedRes1=this.resourceInfo1.name;
+                       // console.log(element.resource);
                         this.firstDropDownChanged(element.resource.name);
                         this.subScenarioID1=element.pkTbId
                         this.selRes1ProcTime=element.processTime;
@@ -745,7 +766,7 @@ checkMandatoryData() {
                         break;
                     case 2:
                        this.nprodPiecePerHoursGUI2 = this.nprodPiecePerHours;
-                       this.procSpecInfoObjGUI2 = this.procSpecInfoObj;
+                       this.procSpecInfoObjGUI2 = Object.assign({}, this.procSpecInfoObj);
                        this.resourceInfo2=element.resource;
                        this.selectedRes2=this.resourceInfo2.name;
                        this.secondDropDownChanged(element.resource.name);
@@ -767,7 +788,7 @@ checkMandatoryData() {
                        break;
                     case 3:
                        this.nprodPiecePerHoursGUI3 = this.nprodPiecePerHours;
-                       this.procSpecInfoObjGUI3 = this.procSpecInfoObj;
+                       this.procSpecInfoObjGUI3 = Object.assign({}, this.procSpecInfoObj);
                        this.resourceInfo3=element.resource;
                        this.selectedRes3=this.resourceInfo3.name;
                        this.thirdDropDownChanged(element.resource.name);
@@ -797,7 +818,7 @@ checkMandatoryData() {
               err => { })
       }
 
-      //this method is not used
+      //THIS METHOD IS NOT USED
       resourceInfoGET(primaryKey, scenarioNumber) {
       this.http.get(environment.apiUrl + '/v1/resources/'+ primaryKey)
               .toPromise()
@@ -821,17 +842,65 @@ checkMandatoryData() {
        }
 
        cancelUserSatisfaction(){
-          this.subscenario1.usPhysicalLoa=null;
-          this.subscenario2.usPhysicalLoa=null;
-          this.subscenario3.usPhysicalLoa=null;
+          if(this.subscenario1!=null){
+            this.subscenario1.usPhysicalLoa=null;
+            this.subscenario1.usCognitiveLoa=null;
+          }
 
-          this.subscenario1.usCognitiveLoa=null;
-          this.subscenario2.usCognitiveLoa=null;
-          this.subscenario3.usCognitiveLoa=null;
+          if(this.subscenario2!=null){
+            this.subscenario2.usPhysicalLoa=null;
+            this.subscenario2.usCognitiveLoa=null;
+          }
+
+          if(this.subscenario3!=null){
+            this.subscenario3.usPhysicalLoa=null;
+            this.subscenario3.usCognitiveLoa=null;
+          }
+
+
        }
 
+       procSpecInfoIsIncomplete = () => {
+           if (this.procSpecInfoObj.nshiptsDay == null && this.procSpecInfoObj.hoursShift == null ||
+                  this.procSpecInfoObj.workingDaysYear == null || this.procSpecInfoObj.propWCPerHours == null){
+                  return true;
+           }else{
+              return false;
+           }
+         }
+
+       productInfoIsIncomplete = () => {
+          if(this.nprodPiecePerHours==null){
+              return true;
+          }else{
+              return false;
+          }
+        }
+
+       createSubScenariosIsIncomplete = () => {
+
+          var retDisabled=true;
+          var disabled1 = true;
+          var disabled2 = true;
+          var disabled3 = true;
+
+          if(this.firstdropdown!=null && this.selRes1ProcTime!=null){
+              disabled1 = false;
+          }
+
+          if(this.seconddropdown!=null && this.selRes2ProcTime!=null){
+              disabled2 = false;
+          }
+
+         if(this.thirddropdown!=null && this.selRes3ProcTime!=null){
+              disabled3 = false;
+          }
+
+          retDisabled=  disabled1 && disabled2 && disabled3;
 
 
+          return false;
+        }
 
   }
 

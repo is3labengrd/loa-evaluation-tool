@@ -11,13 +11,13 @@
             [(ngModel)]="nprodPiecePerHours" min="0"
             style="width: 100px;" 
             oninput="this.value=(parseInt(this.value)||0)"
-            value="nprodPiecePerHours">
+            value="nprodPiecePerHours" required>
         </div>
         <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="productInfo()" data-dismiss="modal">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="productInfo()" [disabled]="productInfoIsIncomplete()" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
@@ -33,28 +33,28 @@
       <div class="modal-body">
         <div>Number of shifts per day:
           <input type="number" [(ngModel)]="procSpecInfoObj.nshiptsDay" name="nshiptsDay" style="width: 100px;"
-           class="float-right" min="0" value="procSpecInfoObj?.nshiptsDay" oninput="this.value=(parseInt(this.value)||0)">
+           class="float-right" min="0" value="procSpecInfoObj?.nshiptsDay" oninput="this.value=(parseInt(this.value)||0)" required>
         </div>
         <br>
         <div>Hours per shift:
           <input type="number" [(ngModel)]="procSpecInfoObj.hoursShift" name="hoursShift"  style="width: 100px;"
-            class="float-right" min="0" value="procSpecInfoObj?.hoursShift" oninput="this.value=(parseInt(this.value)||0)">
+            class="float-right" min="0" value="procSpecInfoObj?.hoursShift" oninput="this.value=(parseInt(this.value)||0)" required>
         </div>
         <br>
         <div>Working days per year:
           <input type="number" [(ngModel)]="procSpecInfoObj.workingDaysYear" name="workingDaysYear"  style="width: 100px;"
-           class="float-right" min="0" value="procSpecInfoObj?.workingDaysYear" oninput="this.value=(parseInt(this.value)||0)">
+           class="float-right" min="0" value="procSpecInfoObj?.workingDaysYear" oninput="this.value=(parseInt(this.value)||0)" required>
         </div>
         <br>
         <div>Proportional wage costs per hour:
           <input type="number" [(ngModel)]="procSpecInfoObj.propWCPerHours" name="propWCPerHours" style="width: 100px;"
-           class="float-right" min="0" value="procSpecInfoObj?.propWCPerHours" oninput="this.value=(parseInt(this.value)||0)">
+           class="float-right" min="0" value="procSpecInfoObj?.propWCPerHours" step="0.01" oninput="this.value=(parseInt(this.value)||0)" required>
           </div>
         <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="procSpecInfo()" data-dismiss="modal">Save changes
+        <button type="button" class="btn btn-primary" (click)="procSpecInfo()" [disabled]="procSpecInfoIsIncomplete()" data-dismiss="modal">Save changes
         </button>
       </div>
     </div>
@@ -81,7 +81,7 @@
           <tr>
             <td>Select resource</td>
             <td>
-              <select [(ngModel)]="selectedRes1" (ngModelChange)="firstDropDownChanged($event)">
+              <select [(ngModel)]="selectedRes1" (ngModelChange)="firstDropDownChanged($event)" required>
                 <option *ngFor="let res1 of resources" [value]="res1.name">{{res1.name}}</option>
               </select>
             </td>
@@ -111,15 +111,15 @@
             <td>Process time</td>
             <td>
               <input type="number" [(ngModel)]="selRes1ProcTime" id="selRes1ProcTime" min="1" max="7"
-               oninput="this.value=(parseInt(this.value)||0)" style="width: 100px;">
+               oninput="this.value=(parseInt(this.value)||0)" style="width: 100px;" required>
             </td>
             <td>
               <input type="number" [(ngModel)]="selRes2ProcTime" id="selRes2ProcTime" min="1" max="7"
-               oninput="this.value=(parseInt(this.value)||0)" style="width: 100px;">
+               oninput="this.value=(parseInt(this.value)||0)" style="width: 100px;" required>
             </td>
             <td>
               <input type="number" [(ngModel)]="selRes3ProcTime" id="selRes3ProcTime" min="1" max="7"
-               oninput="this.value=(parseInt(this.value)||0)" style="width: 100px;">
+               oninput="this.value=(parseInt(this.value)||0)" style="width: 100px;" required>
             </td>
           </tr>
           </tbody>
@@ -127,7 +127,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="createSubScenarios()" data-dismiss="modal">Save changes
+        <button type="button" class="btn btn-primary" (click)="createSubScenarios()" [disabled]="createSubScenariosIsIncomplete()" data-dismiss="modal">Save changes
         </button>
       </div>
     </div>
