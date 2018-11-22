@@ -10,6 +10,7 @@ import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.process_segment_list_element.DeleteProcessSegmentListElementService;
 import eng.it.loatool.process_segment_list_element.ProcessSegmentListElement;
 import eng.it.loatool.process_segment_list_element.ProcessSegmentListElementRepository;
+import eng.it.loatool.scenario.ScenarioRepository;
 
 @Service
 public class DeleteProcessSegmentService {
@@ -18,24 +19,29 @@ public class DeleteProcessSegmentService {
     public Optional<ProcessSegment> deletebyId(Integer id) {
         Optional<ProcessSegment> maybeProcessSegment = generalCRUDService
             .getOne(processSegmentRepository, id);
-        Iterable<ProcessSegmentListElement> elements = processSegmentListElementRepository
-            .getProcessSegmentListElementsByProcessId(id);
-        elements
-            .forEach((element) -> {
-                deleteProcessSegmentListElementService
-                    .deleteProcessSegmentListElement(element.getPkTbId());
+        maybeProcessSegment
+            .ifPresent((processSegment) -> {
+                scenarioRepository
+                    .getScenariosbyProcessSegmentId(id)
+                    .forEach((scenario) -> {
+                        scenarioRepository.delete(scenario);
+                    });
+                Iterable<ProcessSegmentListElement> elements = processSegmentListElementRepository
+                    .getProcessSegmentListElementsByProcessId(id);
+                for (ProcessSegmentListElement element :elements) {
+                    deleteProcessSegmentListElementService
+                        .deleteProcessSegmentListElement(element.getPkTbId());
+                }
+                processSegmentRepository.delete(processSegment);
+                processSegment.setSubprocessLevels(null);
             });
-        Optional<ProcessSegment> result = generalCRUDService.delete(processSegmentRepository, id);
-        result
-            .ifPresent((process) -> {
-                process.setSubprocessLevels(null);
-            });
-        return result;
+        return maybeProcessSegment;
     }
 
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private ProcessSegmentRepository processSegmentRepository;
     @Autowired private DeleteProcessSegmentListElementService deleteProcessSegmentListElementService;
     @Autowired private ProcessSegmentListElementRepository processSegmentListElementRepository;
+    @Autowired private ScenarioRepository scenarioRepository;
 
 }
