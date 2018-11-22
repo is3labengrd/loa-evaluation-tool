@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CookieService } from '../cookie.service';
 //import * as $ from 'jquery';
-
+//import * as bootstrap from 'bootstrap';
 
 
 
@@ -18,7 +18,7 @@ import { CookieService } from '../cookie.service';
 })
 export class SubScenariosComponent implements OnInit {
 
-
+  enableProductAndProcessInfo: boolean;
 
   resRecal: boolean = false;
 
@@ -100,7 +100,9 @@ export class SubScenariosComponent implements OnInit {
   cookie: any;
 
   ngOnInit() {
-    // $('#resourceValueChange').modal('show');
+    this.enableProductAndProcessInfo=false;
+    //$('#resourceValueChange').modal('show');
+
     this.cookie = this._processListService.getCookie("selectedSubprocess");
 
     var promise1 = this.productPlanningGET();
@@ -112,6 +114,7 @@ export class SubScenariosComponent implements OnInit {
                    var promise4 = this.subScenarioGET();
                       promise4.then((x) => {
                              this.saveSubscenarios();
+                             this.enableProductAndProcessInfo = true;
                              this.checkMandatoryData();
 
                       });
@@ -119,11 +122,6 @@ export class SubScenariosComponent implements OnInit {
          });
 
     });
-
-
-
-
-
 
   }
 
@@ -188,6 +186,9 @@ checkMandatoryData() {
       this.http.post(environment.apiUrl + '/v1/process-specific-info', this.procSpecInfoObj)
                .toPromise().then((res:any) => {
                 this.procSpecInfoID=res.pkTbId;
+                },
+                err => {
+                this.procSpecInfoID=null;
                 });
       }else{
         this.http.put(environment.apiUrl + '/v1/process-specific-info/'+ this.procSpecInfoID, this.procSpecInfoObj)
