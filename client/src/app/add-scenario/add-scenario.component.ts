@@ -318,13 +318,13 @@ export class AddScenarioComponent implements OnInit {
         this.showedList = calculatedList;
 
         if(optCost != 0){
-          this.phyLoaTotal = (poundphyLoa/procTime).toFixed(2);
+          this.phyLoaTotal = Math.round(poundphyLoa/procTime);
         }else{
           this.phyLoaTotal = 0;
         }
 
         if(optCost != 0){
-          this.cogLoaTotal = (poundcogLoa/procTime).toFixed(2);
+          this.cogLoaTotal = Math.round(poundcogLoa/procTime);
         }else{
           this.cogLoaTotal = 0;
         }

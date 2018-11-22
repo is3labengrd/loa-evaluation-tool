@@ -330,13 +330,13 @@ export class EditScenarioComponent implements OnInit {
         this.showedList = calculatedList;
 
         if(optCost != 0){
-          this.phyLoaTotal = (poundphyLoa/procTime).toFixed(2);
+          this.phyLoaTotal = Math.round(poundphyLoa/procTime);
         }else{
           this.phyLoaTotal = 0;
         }
 
         if(optCost != 0){
-          this.cogLoaTotal = (poundcogLoa/procTime).toFixed(2);
+          this.cogLoaTotal = Math.round(poundcogLoa/procTime);
         }else{
           this.cogLoaTotal = 0;
         }
@@ -536,29 +536,30 @@ export class EditScenarioComponent implements OnInit {
             }
           }
 
-          for (let j in this.resToBeRemoved){
-            for (let k in this.subSceList){
+          for (let k in this.subSceList){
+            for (let j in this.resToBeRemoved){
               if(this.resToBeRemoved[j].subprocessLevel.name === this.subSceList[k].subProc.subprocessLevel.name){
-                if(this.subSceList[j].objList.scenNumber1 != null){
-                  if(this.subSceList[j].objList.scenNumber1.resource.name === this.resToBeRemoved[k].resource.name && this.resToBeRemoved[k].numberSelected === 1){
-                    this.stepResult.push(this.subSceList[j].objList.scenNumber1.assemblyCosts+"-"+k+"-"+"0");
+                if(this.subSceList[k].objList.scenNumber1 != null){
+                  if(this.subSceList[k].objList.scenNumber1.resource.name === this.resToBeRemoved[j].resource.name && this.resToBeRemoved[j].numberSelected === 1){
+                    this.stepResult.push(this.subSceList[k].objList.scenNumber1.assemblyCosts+"-"+k+"-"+"0");
                   }
                 }
 
-                if(this.subSceList[j].objList.scenNumber2 != null){
-                  if(this.subSceList[j].objList.scenNumber2.resource.name === this.resToBeRemoved[k].resource.name && this.resToBeRemoved[k].numberSelected === 2){
-                    this.stepResult.push(this.subSceList[j].objList.scenNumber2.assemblyCosts+"-"+k+"-"+"1");
+                if(this.subSceList[k].objList.scenNumber2 != null){
+                  if(this.subSceList[k].objList.scenNumber2.resource.name === this.resToBeRemoved[j].resource.name && this.resToBeRemoved[j].numberSelected === 2){
+                    this.stepResult.push(this.subSceList[k].objList.scenNumber2.assemblyCosts+"-"+k+"-"+"1");
                   }
                 }
 
-                if(this.subSceList[j].objList.scenNumber3 != null){
-                  if(this.subSceList[j].objList.scenNumber3.resource.name === this.resToBeRemoved[k].resource.name && this.resToBeRemoved[k].numberSelected === 3){
-                    this.stepResult.push(this.subSceList[j].objList.scenNumber3.assemblyCosts+"-"+k+"-"+"2");
+                if(this.subSceList[k].objList.scenNumber3 != null){
+                  if(this.subSceList[k].objList.scenNumber3.resource.name === this.resToBeRemoved[j].resource.name && this.resToBeRemoved[j].numberSelected === 3){
+                    this.stepResult.push(this.subSceList[k].objList.scenNumber3.assemblyCosts+"-"+k+"-"+"2");
                   }
                 }
               }
             }
           }
+
           this.calculate();
           this.enableSave = false;
         }

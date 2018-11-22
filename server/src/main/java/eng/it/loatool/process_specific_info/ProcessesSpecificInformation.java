@@ -58,7 +58,7 @@ public class ProcessesSpecificInformation implements java.io.Serializable, PkTbP
         this.pkTbId = pkTbId;
     }
 
-    @Column(name = "FK_TB_ACE_SUB_PRO_LEV", nullable = false)
+    @Column(name = "FK_TB_ACE_SUB_PRO_LEV", nullable = false, unique=true)
     public int getFkTbAceSubProLev() {
         return this.fkTbAceSubProLev;
     }

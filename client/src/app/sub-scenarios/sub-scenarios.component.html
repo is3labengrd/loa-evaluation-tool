@@ -170,10 +170,12 @@
 
   <div class="row linkovi text-center">
     <span class="col-4">
-      <a href="#" role="button" class="btn btn-primary" data-toggle="modal" data-target="#productInfo">Product info</a>
+      <a *ngIf="!enableProductAndProcessInfo" href="#"  role="button" class="btn btn-primary disabled" data-toggle="modal" data-target="#productInfo">Product info</a>
+      <a *ngIf="enableProductAndProcessInfo" href="#"  role="button" class="btn btn-primary" data-toggle="modal" data-target="#productInfo">Product info</a>
     </span>
     <span class="col-4">
-      <a href="#" role="button" class="btn btn-primary" data-toggle="modal" data-target="#addProcessInfo">Add process specific information</a>
+      <a *ngIf="!enableProductAndProcessInfo" href="#" role="button" class="btn btn-primary disabled" data-toggle="modal" data-target="#addProcessInfo">Add process specific information</a>
+      <a *ngIf="enableProductAndProcessInfo" href="#" role="button" class="btn btn-primary" data-toggle="modal" data-target="#addProcessInfo">Add process specific information</a>
     </span>
     <span class="col-4">
      <a *ngIf="isProductAndProcessInfoFilled" href="#" role="button" class="btn btn-success" data-toggle="modal"

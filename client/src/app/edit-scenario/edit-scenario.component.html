@@ -16,7 +16,7 @@
       </tr>
       <tr>
         <td>Number of lower level sub-processes:</td>
-        <td style="border-right: 1px solid">{{cookie.subLevels}}</td>
+        <td style="border-right: 1px solid">{{cookie.nLowerLevelSubProcs}}</td>
         <td></td>
         <td></td>
       </tr>
@@ -35,9 +35,9 @@
         <tr *ngFor="let subScen of subSceList; let i = index">
           <td>{{subScen?.subProc?.subprocessLevel.name}}</td>
           <td>
-            SC1 <input *ngIf="subScen?.objList?.scenNumber1?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber1?.resource.name+i}} id={{subScen?.objList?.scenNumber1?.resource.name+i}} value="{{subScen?.objList?.scenNumber1?.assemblyCosts}}-{{i}}-0">{{subScen?.objList?.scenNumber1?.resource.name}}<br>
-            SC2 <input *ngIf="subScen?.objList?.scenNumber2?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber2?.resource.name+i}} id={{subScen?.objList?.scenNumber2?.resource.name+i}} value="{{subScen?.objList?.scenNumber2?.assemblyCosts}}-{{i}}-1">{{subScen?.objList?.scenNumber2?.resource.name}}<br>
-            SC3 <input *ngIf="subScen?.objList?.scenNumber3?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber3?.resource.name+i}} id={{subScen?.objList?.scenNumber3?.resource.name+i}} value="{{subScen?.objList?.scenNumber3?.assemblyCosts}}-{{i}}-2">{{subScen?.objList?.scenNumber3?.resource.name}}<br>
+            SC1 <input *ngIf="subScen?.objList?.scenNumber1?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber1?.resource.name+i}} id={{subScen?.objList?.scenNumber1?.resource.name+i}} value="{{subScen?.objList?.scenNumber1?.assemblyCosts}}-{{i}}-0"><span style="display:inline-block; width: 15px;"></span>{{subScen?.objList?.scenNumber1?.resource.name}}<br>
+            SC2 <input *ngIf="subScen?.objList?.scenNumber2?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber2?.resource.name+i}} id={{subScen?.objList?.scenNumber2?.resource.name+i}} value="{{subScen?.objList?.scenNumber2?.assemblyCosts}}-{{i}}-1"><span style="display:inline-block; width: 15px;"></span>{{subScen?.objList?.scenNumber2?.resource.name}}<br>
+            SC3 <input *ngIf="subScen?.objList?.scenNumber3?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber3?.resource.name+i}} id={{subScen?.objList?.scenNumber3?.resource.name+i}} value="{{subScen?.objList?.scenNumber3?.assemblyCosts}}-{{i}}-2"><span style="display:inline-block; width: 15px;"></span>{{subScen?.objList?.scenNumber3?.resource.name}}<br>
           </td>
           <td align="center">
             <br>
