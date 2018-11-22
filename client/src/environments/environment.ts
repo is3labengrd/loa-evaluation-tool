@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080',
-  hostUrl: 'LoAEvaluationTool'
+  apiUrl: 'http://localhost:9090',
+  hostUrl: ''
 };
 
 /*
