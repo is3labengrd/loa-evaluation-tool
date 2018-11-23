@@ -170,6 +170,7 @@ export class ProcessListComponent implements OnInit {
     var actualSubProcessInfo = {};
     actualSubProcessInfo['mainProcessName'] = subProcessData.name;
     actualSubProcessInfo['mainProcessId'] = subProcessData.rawElementReference.mainProcess.pkTbId;
+    actualSubProcessInfo['nLowerLevelSubProcs'] = data.mainProcess.nlowerLevelSubPro;
     actualSubProcessInfo['subLevels'] = subProcessData.sublevels;
     actualSubProcessInfo['totalNumberSubprocs'] = data.mainProcess.subprocessLevels.length;
     actualSubProcessInfo['maxDepth'] = 0;

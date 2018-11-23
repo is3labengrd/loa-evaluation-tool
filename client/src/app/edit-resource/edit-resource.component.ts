@@ -84,8 +84,40 @@ export class EditResourceComponent implements OnInit {
       .toPromise()
       .then(
         () => {
+          this.saveVAR();
         }
       );
+  }
+
+  saveVAR = () => {
+    var varResObj = {
+                "assetName": this.resource.name,
+                "loAPhysical": this.resource.loaPhysical,
+                "loACognitive": this.resource.loaCognitive,
+                "numberOfOperators": this.resource.lcNOperMachine,
+                "annualMaintenanceCost": this.resource.mcAMaintCosts,
+                "installationSurface": this.resource.rcInstSurface,
+                "costPerSurfacePerMonth": this.resource.rcCostsMMonth,
+                "machinePurchaseValue": this.resource.idMacPurhValue,
+                "machineSalesValue": this.resource.idMacSalesValue,
+                "economicUsefulLife": this.resource.idEcoUsefullLife,
+                "annualElectricityConsumptionWhileWorking" : this.resource.ecAEleConsumFun,
+                "annualElectricityConsumptionStandBy" : this.resource.ecAEleConsumSb,
+                "equipmentId": "",
+                "equipmentLevel": "",
+                "interestRate": this.resource.icInterRate,
+                "electricityPrice": this.resource.ecElePrice
+              };
+
+
+    return this.http
+      .put(
+        `${environment.apiUrl}/v1/var/editResource`,
+        varResObj
+      )
+      .toPromise()
+      .then(() => {
+      })
   }
 
 }
