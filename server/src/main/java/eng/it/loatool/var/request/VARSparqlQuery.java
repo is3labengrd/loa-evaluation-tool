@@ -7,16 +7,16 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
-public class VARProcessSegment {
+public class VARSparqlQuery {
 
-	public static String prefix() {
+	private static String prefix() {
 
 		return "prefix b2mml: <http://www.mesa.org/xml/B2MML-V0600#>\r\n" + 
 				"prefix var:  <http://a4blue/ontologies/var.owl#>\r\n" + 
 				"prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n" + 
 				"PREFIX owl:  <http://www.w3.org/2002/07/owl#>\r\n" + 
 				"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>";
-	};
+	}
 		
 	public static String getProcessSegmentList() throws IOException {
 		String BASE_URL = System.getenv("ENV_SAR_URL");
@@ -33,6 +33,23 @@ public class VARProcessSegment {
 	    String result = restTemplate.postForObject(uri, request, String.class);
 	     
 	    return result;
+	}
+
+	public static String getWorkUnitList() throws IOException {
+		String BASE_URL = System.getenv("ENV_SAR_URL");
+		if(BASE_URL==null){
+			PropertyManager prop = new PropertyManager();
+			BASE_URL = prop.getPropValues("base.url");
+		}
+		final String uri = BASE_URL + "/SPARQLQuery";
+
+		RestTemplate restTemplate = new RestTemplate();
+		String request = prefix() + "SELECT * " +
+				"WHERE { ?list a b2mml:WorkUnit ." +
+				"}";
+		String result = restTemplate.postForObject(uri, request, String.class);
+
+		return result;
 	}
 
 	public static String getIsMadeOf() throws IOException {

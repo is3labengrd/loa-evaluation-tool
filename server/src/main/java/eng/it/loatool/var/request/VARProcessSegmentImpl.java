@@ -11,12 +11,12 @@ import java.util.List;
 
 public class VARProcessSegmentImpl {
 
-	public static String getIsMadeOf() throws IOException {
-		return VARProcessSegment.getIsMadeOf();
+	private static String getIsMadeOf() throws IOException {
+		return VARSparqlQuery.getIsMadeOf();
 	}
 
 
-	public static List<String> findMain(String procList) throws IOException {
+	private static List<String> findMain(String procList) throws IOException {
 
 		List<String> main = new ArrayList<String>();
 
@@ -40,7 +40,7 @@ public class VARProcessSegmentImpl {
 		return main;
 	}
 
-	public static List<String> findChildren(String father,String procList) throws IOException {
+	private static List<String> findChildren(String father,String procList) throws IOException {
 
 		List<String> ChildList = new ArrayList<String>();
 
@@ -65,7 +65,7 @@ public class VARProcessSegmentImpl {
 		for(String child : children){
 			SubProcesses subProc = new SubProcesses();
 			subProc.setName(stringParser(child));
-			subProc.setProcessSegmentId(getProcessSegmentId(VARProcessSegment.getProcessSegmentAttribute(child)));
+			subProc.setProcessSegmentId(getProcessSegmentId(VARSparqlQuery.getProcessSegmentAttribute(child)));
 			subProc.setLevel(counter);
 			subProc.setSubProcesses(loop(findChildren(child, procList),procList,counter));
 			subList.add(subProc);
@@ -75,12 +75,12 @@ public class VARProcessSegmentImpl {
 
 	}
 
-	public static String stringParser(String string) {
+	private static String stringParser(String string) {
 		String[] nameparts = string.split("#", 2);
 		return nameparts[1];
 	}
 
-	public static String getProcessSegmentId(String attrList) throws IOException {
+	private static String getProcessSegmentId(String attrList) throws IOException {
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		JsonNode jsonNode = objectMapper.readTree(attrList);
@@ -93,7 +93,7 @@ public class VARProcessSegmentImpl {
 		return processSegmentId;
 	}
 
-	public static List<String> countLowerLevel(List<String> children, String procList, int counter) throws IOException {
+	private static List<String> countLowerLevel(List<String> children, String procList, int counter) throws IOException {
 
 		List<String> subList = new ArrayList<String>();
 
@@ -122,7 +122,7 @@ public class VARProcessSegmentImpl {
 
 			MainProcess mainP = new MainProcess();
 			mainP.setName(stringParser(father));
-			mainP.setProcessSegmentId(getProcessSegmentId(VARProcessSegment.getProcessSegmentAttribute(father)));
+			mainP.setProcessSegmentId(getProcessSegmentId(VARSparqlQuery.getProcessSegmentAttribute(father)));
 			List<SubProcesses> subList = loop(findChildren(father, procList),procList,0);
 
 			for (String countLowLev : findChildren(father, procList)){
