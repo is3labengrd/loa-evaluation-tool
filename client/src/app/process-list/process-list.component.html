@@ -45,7 +45,8 @@
       <td>
         <div class="dropdown">
             <button class="btn btn-link dropdown-toggle" id="actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img src="../../assets/icon1.png">
+
+              <img [src]="baseImg + 'icon1.png'">
             </button>
             <div class="dropdown-menu" aria-labelledby="actions">
               <button routerLink="{{ process?.route }}" (click)="saveAnalysisData(process.rawElementReference, process)" class="dropdown-item">
