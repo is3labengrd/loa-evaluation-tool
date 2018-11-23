@@ -97,7 +97,7 @@ export class AddResourceComponent implements OnInit {
                 "economicUsefulLife": this.resource.idEcoUsefullLife,
                 "annualElectricityConsumptionWhileWorking" : this.resource.ecAEleConsumFun,
                 "annualElectricityConsumptionStandBy" : this.resource.ecAEleConsumSb,
-                "equipmentId": "",
+                "equipmentId": Math.random().toString(36).substring(2).slice(-2).toUpperCase() + Math.floor(Math.random() * 99),
                 "equipmentLevel": "",
                 "interestRate": this.resource.icInterRate,
                 "electricityPrice": this.resource.ecElePrice
