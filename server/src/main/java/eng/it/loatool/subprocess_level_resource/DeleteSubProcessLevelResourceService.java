@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import eng.it.loatool.GeneralCRUDService;
+import eng.it.loatool.scenario.ScenarioRepository;
 import eng.it.loatool.scenario_resource.ScenarioResource;
 import eng.it.loatool.scenario_resource.ScenarioResourceRepository;
 import eng.it.loatool.subscenario.SubScenario;
@@ -24,6 +25,7 @@ public class DeleteSubProcessLevelResourceService {
             scenarioResourceRepository
                 .findAll(scenarioResourceCriteria)
                 .forEach((innerScenarioResource) -> {
+                    scenarioRepository.deleteById(innerScenarioResource.getFkTbAceScenarios());
                     scenarioResourceRepository.delete(innerScenarioResource);
                 });
             Example<SubScenario> subScenarioCriteria = buildSubScenarioSearchCritera(subprocessLevelResource);
@@ -60,5 +62,6 @@ public class DeleteSubProcessLevelResourceService {
     @Autowired private SubProcessLevelResourceRepository subProcessLevelResourceRepository;
     @Autowired private ScenarioResourceRepository scenarioResourceRepository;
     @Autowired private SubScenarioRepository subScenarioRepository;
+    @Autowired private ScenarioRepository scenarioRepository;
 
 }
