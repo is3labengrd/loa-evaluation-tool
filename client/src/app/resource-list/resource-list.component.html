@@ -56,13 +56,19 @@
     </thead>
     <tbody>
       <tr *ngFor="let resource of resources">
-        <td>{{ resource.name }}</td>
+        <td>
+          <a
+            routerLink="/edit-resource/{{resource.resourceId}}"
+            class="btn btn-link"
+          >
+            {{ resource.name }}
+          </a>
+          </td>
         <td>{{ resource.loaPhysical }}</td>
         <td>{{ resource.loaCognitive }}</td>
         <td>
           <ng-template [ngIf]="resource.assigned" [ngIfElse]="assignBlock">
-            <a routerLink="/edit-resource/{{resource.resourceId}}"  class="btn btn-link">Edit</a>
-            -
+
             <button  data-toggle="modal" data-target="#deassignModal" class="btn btn-link" class="btn btn-link">De-assign</button>
             <!-- deassignModal -->
             <div class="modal fade" id="deassignModal" tabindex="-1" role="dialog"  aria-hidden="true">
@@ -88,7 +94,7 @@
              data-toggle="modal" data-target="#assignModal" class="btn btn-link">Assign</button>
           </ng-template>
         </td>
-        
+
       </tr>
     </tbody>
   </table>
