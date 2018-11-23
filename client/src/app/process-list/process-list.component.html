@@ -43,19 +43,19 @@
       <td> {{ process?.sub2 }} </td>
       <td> {{ process?.sub3 }} </td>
       <td>
-        <a routerLink="{{ process?.route }}" (click)="saveAnalysisData(process.rawElementReference, process)"> {{ process?.action }} </a>
-        <br>
-        
-        <button class="btn btn-link" data-toggle="modal" data-target="#deleteModal">{{ process?.deleteAction }}</button>
+        <div class="btn-group">
+          <button routerLink="{{ process?.route }}" (click)="saveAnalysisData(process.rawElementReference, process)" class="btn btn-link"> {{ process?.action }} </button>
+          <button class="btn btn-link" data-toggle="modal" data-target="#deleteModal">{{ process?.deleteAction }}</button>
+        </div>
         <!-- deleteModal -->
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"  aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel"><p class="text-warning">Warning</p></h5>
+                <h5 class="modal-title" id="deleteModalLabel"><p class="text-warning">Warning</p></h5>
               </div>
               <div class="modal-body">
-                You have chosen to delete a Process: all data will be deleted. Do you wish to continue?
+                You have chosen to {{ process?.deleteAction }}: all data will be deleted. Do you wish to continue?
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="process?.delete().then(populateProcessSegmentList)" >Yes</button>
