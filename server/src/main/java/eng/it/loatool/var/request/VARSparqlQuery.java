@@ -6,6 +6,8 @@ import eng.it.util.PropertyManager;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VARSparqlQuery {
 
@@ -35,7 +37,10 @@ public class VARSparqlQuery {
 	    return result;
 	}
 
-	public static String getWorkUnitList() throws IOException {
+	public static List<String> getWorkUnitList() throws IOException {
+
+		List<String> wu = new ArrayList<String>();
+
 		String BASE_URL = System.getenv("ENV_SAR_URL");
 		if(BASE_URL==null){
 			PropertyManager prop = new PropertyManager();
@@ -44,12 +49,27 @@ public class VARSparqlQuery {
 		final String uri = BASE_URL + "/SPARQLQuery";
 
 		RestTemplate restTemplate = new RestTemplate();
-		String request = prefix() + "SELECT * " +
+		String WorkUnit = prefix() + "SELECT * " +
 				"WHERE { ?list a b2mml:WorkUnit ." +
 				"}";
-		String result = restTemplate.postForObject(uri, request, String.class);
 
-		return result;
+		String Tool = prefix() + "SELECT * " +
+				"WHERE { ?list a b2mml:Tool ." +
+				"}";
+
+		String Robot = prefix() + "SELECT * " +
+				"WHERE { ?list a b2mml:Robot ." +
+				"}";
+
+		String result1 = restTemplate.postForObject(uri, WorkUnit, String.class);
+		String result2 = restTemplate.postForObject(uri, Tool, String.class);
+		String result3 = restTemplate.postForObject(uri, Robot, String.class);
+
+		wu.add(result1);
+		wu.add(result2);
+		wu.add(result3);
+
+		return wu;
 	}
 
 	public static String getIsMadeOf() throws IOException {

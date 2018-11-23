@@ -39,7 +39,7 @@ public class VARWorkUnitImpl {
                 "{\"name\": \"annualElectricityConsumptionWhileWorking\",\"value\":"+ jsonNode.get("annualElectricityConsumptionWhileWorking") +",\"type\":\"java.lang.Integer\"}," +
                 "{\"name\": \"annualElectricityConsumptionStandBy\",\"value\":"+ jsonNode.get("annualElectricityConsumptionStandBy") +",\"type\":\"java.lang.Integer\"}," +
                 "{\"name\": \"equipmentId\",\"value\":"+ jsonNode.get("equipmentId") +",\"type\":\"java.lang.String\"}," +
-                "{\"name\": \"equipmentLevel\",\"value\":\"work unit\",\"type\":\"java.lang.String\"}" +
+                "{\"name\": \"equipmentLevel\",\"value\":\"WORKUNIT\",\"type\":\"java.lang.String\"}" +
                 "]" +
                 "}";
         return workUnitTemplate;
@@ -129,10 +129,12 @@ public class VARWorkUnitImpl {
 
         List<String> individuals = new ArrayList<String>();
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(VARSparqlQuery.getWorkUnitList());
+        for(String cl : VARSparqlQuery.getWorkUnitList()){
+        JsonNode jsonNode = objectMapper.readTree(cl);
 
-        for(JsonNode name : jsonNode.get("results").get("bindings")){
-            individuals.add(stringParser(name.get("list").get("value").asText()));
+            for(JsonNode name : jsonNode.get("results").get("bindings")){
+                individuals.add(stringParser(name.get("list").get("value").asText()));
+            }
         }
         return individuals;
 
