@@ -2,15 +2,19 @@ package eng.it.loatool.var.request;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eng.it.loatool.var.bean.Attrs;
+import eng.it.loatool.var.bean.Individual;
 import eng.it.util.PropertyManager;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class VARWorkUnitImpl {
 
-    public static String workUnitTemplate (String json) throws IOException {
+    private static String workUnitTemplate (String json) throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -41,7 +45,7 @@ public class VARWorkUnitImpl {
         return workUnitTemplate;
     }
 
-    public static String siteTemplate (String json) throws IOException {
+    private static String siteTemplate (String json) throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -120,6 +124,69 @@ public class VARWorkUnitImpl {
 
     }
 
+    private static List<String> getIndividuals () throws IOException {
+
+
+        List<String> individuals = new ArrayList<String>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(VARSparqlQuery.getWorkUnitList());
+
+        for(JsonNode name : jsonNode.get("results").get("bindings")){
+            individuals.add(stringParser(name.get("list").get("value").asText()));
+        }
+        return individuals;
+
+
+    }
+
+    private static String stringParser(String string) {
+        String[] nameparts = string.split("#", 2);
+        return nameparts[1];
+    }
+
+    private static String findAttributes (String name) throws IOException {
+        String BASE_URL = System.getenv("ENV_SAR_URL");
+        if(BASE_URL==null){
+            PropertyManager prop = new PropertyManager();
+            BASE_URL = prop.getPropValues("base.url");
+        }
+        final String uri = BASE_URL + "/assets/"+name+"/attributes";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        String result = restTemplate.getForObject(uri, String.class);
+
+        return result;
+
+
+    }
+
+    public static List<Individual> resourceList () throws IOException {
+
+        List<Individual> resourceList = new ArrayList<Individual>();
+
+        for (String name : getIndividuals ()){
+            Individual res = new Individual();
+            res.setName(name);
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = objectMapper.readTree(findAttributes(name));
+            List<Attrs> attributes = new ArrayList<Attrs>();
+
+            if(!jsonNode.isNull()) {
+                for (JsonNode attrs : jsonNode) {
+                    Attrs el = new Attrs();
+                    el.setName(attrs.get("normalizedName").asText());
+                    el.setValue(attrs.get("propertyValue").asText());
+                    attributes.add(el);
+                }
+            }
+            res.setAttr(attributes);
+            resourceList.add(res);
+
+        }
+        return resourceList;
+
+    }
 
 
 }

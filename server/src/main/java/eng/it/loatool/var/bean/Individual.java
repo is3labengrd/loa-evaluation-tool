@@ -2,7 +2,7 @@ package eng.it.loatool.var.bean;
 
 import java.util.List;
 
-public class Processes {
+public class Individual {
 	private String name;
 	private List<Attrs> attr;
 	

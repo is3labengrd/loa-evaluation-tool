@@ -879,27 +879,18 @@ checkMandatoryData() {
 
        createSubScenariosIsIncomplete = () => {
 
-          var retDisabled=true;
-          var disabled1 = true;
-          var disabled2 = true;
-          var disabled3 = true;
+          var retDisabled = true;
 
-          if(this.firstdropdown!=null && this.selRes1ProcTime!=null){
-              disabled1 = false;
+          if(this.firstdropdown == null && this.seconddropdown==null && this.thirddropdown==null){
+                return retDisabled;
           }
 
-          if(this.seconddropdown!=null && this.selRes2ProcTime!=null){
-              disabled2 = false;
-          }
+         if((this.firstdropdown!=null && this.selRes1ProcTime==null) || this.seconddropdown!=null && this.selRes2ProcTime==null
+           || this.thirddropdown!=null && this.selRes3ProcTime==null ){
+             retDisabled=false;
+           }
 
-         if(this.thirddropdown!=null && this.selRes3ProcTime!=null){
-              disabled3 = false;
-          }
-
-          retDisabled=  disabled1 && disabled2 && disabled3;
-
-
-          return false;
+          return !retDisabled;
         }
 
   }
