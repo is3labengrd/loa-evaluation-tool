@@ -43,16 +43,25 @@
       <td> {{ process?.sub2 }} </td>
       <td> {{ process?.sub3 }} </td>
       <td>
-        <div class="btn-group">
-          <button routerLink="{{ process?.route }}" (click)="saveAnalysisData(process.rawElementReference, process)" class="btn btn-link"> {{ process?.action }} </button>
-          <button class="btn btn-link" data-toggle="modal" [attr.data-target]="'#process' + processIndex">{{ process?.deleteAction }}</button>
-        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" id="actions" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
+              Pick action
+            </button>
+            <div class="dropdown-menu" aria-labelledby="actions">
+              <button routerLink="{{ process?.route }}" (click)="saveAnalysisData(process.rawElementReference, process)" class="dropdown-item">
+                 {{ process?.action }}
+              </button>
+              <button class="dropdown-item" data-toggle="modal"  [attr.data-target]="'#process' + processIndex">
+                {{ process?.deleteAction }}
+              </button>
+            </div>
+          </div>
         <!-- deleteModal -->
         <div class="modal fade" [attr.id]="'process' + processIndex" tabindex="-1" role="dialog"  aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel"><p class="text-warning">Warning</p></h5>
+                <h5 class="modal-title" ><p class="text-warning">Warning</p></h5>
               </div>
               <div class="modal-body">
                 You have chosen to {{ process?.deleteAction }}: all data will be deleted. Do you wish to continue?
