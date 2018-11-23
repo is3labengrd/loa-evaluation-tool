@@ -27,7 +27,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let process of processSegmentList">
+    <tr *ngFor="let process of processSegmentList; index as processIndex">
       <td>
         <a
           *ngIf="process?.editRoute; else noEdit"
@@ -45,10 +45,10 @@
       <td>
         <div class="btn-group">
           <button routerLink="{{ process?.route }}" (click)="saveAnalysisData(process.rawElementReference, process)" class="btn btn-link"> {{ process?.action }} </button>
-          <button class="btn btn-link" data-toggle="modal" data-target="#deleteModal">{{ process?.deleteAction }}</button>
+          <button class="btn btn-link" data-toggle="modal" [attr.data-target]="'#process' + processIndex">{{ process?.deleteAction }}</button>
         </div>
         <!-- deleteModal -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal fade" [attr.id]="'process' + processIndex" tabindex="-1" role="dialog"  aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
