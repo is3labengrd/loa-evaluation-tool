@@ -2,6 +2,7 @@ package eng.it.loatool.var.service;
 
 import java.util.List;
 
+import eng.it.loatool.var.bean.Individual;
 import eng.it.loatool.var.bean.MainProcess;
 import eng.it.loatool.var.request.VARGetAssetImpl;
 import eng.it.loatool.var.request.VARProcessSegmentImpl;
@@ -15,7 +16,7 @@ public class VARServiceWrapper {
 	private static VARFailureInformer varFailureInformer = new VARFailureInformer();
 
 	/**
-	  * Wrap the Processes Segment List recovered from the VAR
+	  * Wrap the Individual Segment List recovered from the VAR
 	  * @return Process hierarchy as json string
 	  */
 
@@ -32,7 +33,7 @@ public class VARServiceWrapper {
 	 }
 
 	 /**
-	  * Wrap the Processes Segment List recovered from the VAR
+	  * Wrap the Individual Segment List recovered from the VAR
 	  * @return
 	  */
 	 /*
@@ -127,15 +128,31 @@ public class VARServiceWrapper {
 	 */
 
 	public static String getSite () throws Exception {
-        return (String) varFailureInformer.filter(
-            () -> {
-                try {
-                    return VARWorkUnitImpl.getSiteIntance();
-                } catch (Throwable e) {
-                    throw new RuntimeException();
-                }
-            }
-        );
+		return (String) varFailureInformer.filter(
+				() -> {
+					try {
+						return VARWorkUnitImpl.getSiteIntance();
+					} catch (Throwable e) {
+						throw new RuntimeException();
+					}
+				}
+		);
+	}
+
+	/*
+	 * 	 * @return ResourceList from VAR
+	 */
+
+	public static List<Individual> getResources () throws Exception {
+		return (List<Individual>) varFailureInformer.filter(
+				() -> {
+					try {
+						return VARWorkUnitImpl.resourceList();
+					} catch (Throwable e) {
+						throw new RuntimeException();
+					}
+				}
+		);
 	}
 
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GetProductPlanningByProcessSegmentId {
 
-    public Optional getOne(int processSegmentId) {
+    public Optional<ProductPlanning> getOne(int processSegmentId) {
         return productPlanningRepository.getByProcessSegmentId(processSegmentId);
     }
 
