@@ -13,6 +13,13 @@ public class ResponseEntityTransformer {
         return ResponseEntity.notFound().build();
     }
 
+    public static <T> ResponseEntity<T> transform(Optional<T> optional, ResponseEntity notPresentResponse) {
+        if (optional.isPresent()) {
+            return ResponseEntity.ok(optional.get());
+        }
+        return notPresentResponse;
+    }
+
     public static <T> ResponseEntity<T> transform(Iterable<T> iterable) {
         if (iterable.iterator().hasNext()) {
             return (ResponseEntity<T>) ResponseEntity.ok(iterable);
