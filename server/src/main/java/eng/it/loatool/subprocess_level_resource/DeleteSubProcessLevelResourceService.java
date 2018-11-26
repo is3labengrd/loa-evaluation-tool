@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import eng.it.loatool.GeneralCRUDService;
+import eng.it.loatool.resource.Resource;
 import eng.it.loatool.scenario.ScenarioRepository;
 import eng.it.loatool.scenario_resource.ScenarioResource;
 import eng.it.loatool.scenario_resource.ScenarioResourceRepository;
+import eng.it.loatool.subprocess_level.SubProcessLevel;
 import eng.it.loatool.subscenario.SubScenario;
 import eng.it.loatool.subscenario.SubScenarioRepository;
 
@@ -52,8 +54,12 @@ public class DeleteSubProcessLevelResourceService {
         SubProcessLevelResource subprocessLevelResource
     ) {
         SubScenario subScenario = new SubScenario();
-        subScenario.setFkTbAceRes(subprocessLevelResource.getResource().getPkTbId());
-        subScenario.setFkTbAceSubProLev(subprocessLevelResource.getSubprocessLevel().getPkTbId());
+        SubProcessLevel subprocessLevel = new SubProcessLevel();
+        subprocessLevel.setPkTbId(subprocessLevelResource.getSubprocessLevel().getPkTbId());
+        subScenario.setSubprocessLevel(subprocessLevel);
+        Resource resource = new Resource();
+        resource.setPkTbId(subprocessLevelResource.getResource().getPkTbId());
+        subScenario.setResource(resource);
         Example<SubScenario> example = Example.of(subScenario);
         return example;
     }
