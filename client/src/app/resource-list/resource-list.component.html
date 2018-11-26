@@ -68,8 +68,15 @@
         <td>{{ resource.loaCognitive }}</td>
         <td>
           <ng-template [ngIf]="resource.assigned" [ngIfElse]="assignBlock">
-
-            <button  data-toggle="modal" data-target="#deassignModal" class="btn btn-link" class="btn btn-link">De-assign</button>
+            <div class="dropdown">
+              <button class="btn btn-link dropdown-toggle" id="actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="assets/icon1.png" style="width: 27px;">
+              </button>
+              <div class="dropdown-menu" aria-labelledby="actions">
+                <button  data-toggle="modal" data-target="#deassignModal" class="btn btn-link" class="btn btn-link">De-assign</button>
+               
+              </div>
+            </div>
             <!-- deassignModal -->
             <div class="modal fade" id="deassignModal" tabindex="-1" role="dialog"  aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
@@ -90,8 +97,15 @@
             </div> <!-- deassign modal -->
           </ng-template>
           <ng-template #assignBlock>
-            <button (click)="assign(resource).then(updateResourceList);"
-             data-toggle="modal" data-target="#assignModal" class="btn btn-link">Assign</button>
+              <div class="dropdown">
+                  <button class="btn btn-link dropdown-toggle" id="actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="assets/icon1.png" style="width: 27px;">
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="actions">
+                    <button (click)="assign(resource).then(updateResourceList);"
+                    data-toggle="modal" data-target="#assignModal" class="btn btn-link">Assign</button>
+                  </div>
+              </div>
           </ng-template>
         </td>
 
