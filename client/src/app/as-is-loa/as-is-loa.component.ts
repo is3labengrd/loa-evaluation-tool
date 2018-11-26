@@ -132,10 +132,13 @@ export class AsIsLOAComponent implements OnInit {
             }
           ]
         },
-        title: {
-          display: false,
-          text: 'Moj chart',
-          position: 'top'
+        tooltips: {
+          callbacks: {
+            label: function (tooltipItem) {
+              console.log(tooltipItem)
+              return `Physical Loa: ${tooltipItem.xLabel}, Cognitive Loa: ${tooltipItem.yLabel}`
+            }
+          }
         }
       }
     });
