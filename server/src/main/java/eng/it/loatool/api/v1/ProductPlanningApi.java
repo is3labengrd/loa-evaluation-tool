@@ -1,6 +1,7 @@
 package eng.it.loatool.api.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,13 +43,14 @@ public class ProductPlanningApi {
         );
     }
 
-    
+
     @PostMapping("/v1/product-planning")
     public ResponseEntity<?> createProductPlanning(@RequestBody ProductPlanning body) {
         return ResponseEntityTransformer.transform(
         	productPlanningService.create(body)
         );
     }
+    private ResponseEntity createError = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
     @PutMapping("/v1/product-planning/{id}")
     public ResponseEntity<?> updateProductPlanning(
@@ -59,7 +61,7 @@ public class ProductPlanningApi {
             generalCRUDService.update(productPlanningRepository, id, body)
         );
     }
-    
+
     @Autowired private GetProductPlanningByProcessSegmentId getProductPlanningByProcessSegmentId;
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private ProductPlanningRepository productPlanningRepository;
