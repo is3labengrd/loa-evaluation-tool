@@ -15,7 +15,7 @@
 </div>
 
 <!-- Process Segments List -->
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered" id="mainTable">
   <thead>
     <tr>
       <th scope="col">Name (VAR Process name)</th>
@@ -45,7 +45,8 @@
       <td>
         <div class="dropdown">
             <button class="btn btn-link dropdown-toggle" id="actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img src="../../assets/icon1.png">
+             <img [src]="baseImg + 'icon1.png'" style="width: 27px;" >
+
             </button>
             <div class="dropdown-menu" aria-labelledby="actions">
               <button routerLink="{{ process?.route }}" (click)="saveAnalysisData(process.rawElementReference, process)" class="dropdown-item">

@@ -12,6 +12,10 @@ import { $ } from 'protractor';
 })
 export class ProcessListComponent implements OnInit {
 
+  baseImg = environment.production == true ?
+       '/' + environment.hostUrl + '/assets/':
+       '/assets/';
+
   rawProcessSegmentList: Array<any> = [];
   processSegmentList: Array<any> = Array(12);
   numberOfItems = 12;

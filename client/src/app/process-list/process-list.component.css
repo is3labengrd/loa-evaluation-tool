@@ -1,3 +1,12 @@
 .dropdown-toggle::after {
     display:none;
 }
+
+#mainTable thead th {
+    text-align: center;
+}
+
+#mainTable tbody td {
+    text-align: center;
+    vertical-align: middle;
+}

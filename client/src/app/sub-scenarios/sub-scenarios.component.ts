@@ -4,11 +4,10 @@ import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CookieService } from '../cookie.service';
+declare var $:any;
+
 //import * as $ from 'jquery';
 //import * as bootstrap from 'bootstrap';
-
-
-
 
 
 @Component({
@@ -97,11 +96,13 @@ export class SubScenariosComponent implements OnInit {
   constructor(private http: HttpClient, private _processListService: CookieService) { }
 
 
+
   cookie: any;
 
   ngOnInit() {
     this.enableProductAndProcessInfo=false;
-    //$('#resourceValueChange').modal('show');
+
+
 
     this.cookie = this._processListService.getCookie("selectedSubprocess");
 
@@ -113,9 +114,15 @@ export class SubScenariosComponent implements OnInit {
                 promise3.then((x) => {
                    var promise4 = this.subScenarioGET();
                       promise4.then((x) => {
+                             if(this.resRecal){
+                              $("#resourceValueChange").modal('show');
+                             }
+
                              this.saveSubscenarios();
                              this.enableProductAndProcessInfo = true;
                              this.checkMandatoryData();
+
+
 
                       });
                  });
@@ -254,11 +261,13 @@ checkMandatoryData() {
     this.updateVariableCostsTotal();
     this.updateFixedCostsTotal();
     this.updateAssemblyCostsPerPiece();
-    this.updateAssemblyCostsTotal()
+    this.updateAssemblyCostsTotal();
 
 
 
     this.checkMandatoryData();
+
+
 
   }
 
@@ -682,7 +691,6 @@ checkMandatoryData() {
      }
      }
 
-
     }
 
 
@@ -892,6 +900,34 @@ checkMandatoryData() {
 
           return !retDisabled;
         }
+
+        cancelDropDown = () => {
+            if(this.disableButton==true){
+            this.selectedRes1=null;
+            this.selectedRes2=null;
+            this.selectedRes3=null;
+
+            if(this.firstdropdown!=null)
+            this.setAll(this.firstdropdown, null);
+            if(this.seconddropdown!=null)
+            this.setAll(this.seconddropdown, null);
+            if(this.thirddropdown!=null)
+            this.setAll(this.thirddropdown, null);
+
+            if(this.resourceInfo1!=null){
+            this.setAll(this.resourceInfo1, null);
+            this.selRes1ProcTime=null;
+            }
+            if(this.resourceInfo2!=null){
+            this.selRes2ProcTime=null;
+            this.setAll(this.resourceInfo2, null);
+            }
+            if(this.resourceInfo3!=null){
+            this.setAll(this.resourceInfo3, null);
+            this.selRes3ProcTime=null;
+            }
+            }
+         }
 
   }
 
