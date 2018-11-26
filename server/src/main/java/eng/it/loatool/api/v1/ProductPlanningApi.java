@@ -14,6 +14,7 @@ import eng.it.loatool.api.ResponseEntityTransformer;
 import eng.it.loatool.product_planning.GetProductPlanningByProcessSegmentId;
 import eng.it.loatool.product_planning.ProductPlanning;
 import eng.it.loatool.product_planning.ProductPlanningRepository;
+import eng.it.loatool.product_planning.ProductPlanningService;
 
 @Controller
 public class ProductPlanningApi {
@@ -41,10 +42,11 @@ public class ProductPlanningApi {
         );
     }
 
+    
     @PostMapping("/v1/product-planning")
     public ResponseEntity<?> createProductPlanning(@RequestBody ProductPlanning body) {
         return ResponseEntityTransformer.transform(
-            generalCRUDService.create(productPlanningRepository, body)
+        	productPlanningService.create(body)
         );
     }
 
@@ -57,9 +59,10 @@ public class ProductPlanningApi {
             generalCRUDService.update(productPlanningRepository, id, body)
         );
     }
-
+    
     @Autowired private GetProductPlanningByProcessSegmentId getProductPlanningByProcessSegmentId;
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private ProductPlanningRepository productPlanningRepository;
+    @Autowired private ProductPlanningService productPlanningService;
 
 }
