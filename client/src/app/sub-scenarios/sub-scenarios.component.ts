@@ -146,6 +146,8 @@ export class SubScenariosComponent implements OnInit {
            )
    }
 
+
+
 checkMandatoryData() {
     if (this.nprodPiecePerHours != null && this.procSpecInfoObj.nshiptsDay != null &&
         this.procSpecInfoObj.hoursShift != null && this.procSpecInfoObj.workingDaysYear != null
@@ -736,10 +738,9 @@ checkMandatoryData() {
                      this.procSpecInfoObj=result;
                      this.procSpecInfoID=result.pkTbId;
                      this.checkMandatoryData();
-                },
-                  err => {
-                  this.procSpecInfoID=null;
-                })
+                }, (err) => {
+                 this.procSpecInfoID=null;
+                });
             }
 
 
