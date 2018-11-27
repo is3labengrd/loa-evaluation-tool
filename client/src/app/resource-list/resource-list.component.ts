@@ -52,7 +52,7 @@ export class ResourceListComponent implements OnInit {
     this.selectedSubprocess = this._processListService.getCookie('selectedSubprocess');
     this.updateResourceList();    this.syncingWithVAR = true;
     this.http
-      .post(environment.apiUrl + '/v1/var/populate-process-segments', {})
+      .post(environment.apiUrl + '/v1/var/populate-resources', {})
       .toPromise()
       .then(
         () => {
