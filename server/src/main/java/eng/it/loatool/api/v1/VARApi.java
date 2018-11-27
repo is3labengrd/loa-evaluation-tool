@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eng.it.loatool.var.service.VARServiceWrapper;
 import eng.it.loatool.var.store_main_processes_from_var.StoreMainProcessesFromVarService;
+import eng.it.loatool.var.store_resources_from_var.StoreResourcesFromVarService;
 
 @RestController
 public class VARApi {
@@ -61,9 +62,15 @@ public class VARApi {
 
     @PostMapping("/v1/var/populate-process-segments")
     public void populateProcessSegments() throws Exception {
-        StoreMainProcessesService.storeMainProcessesFromVar();
+        storeMainProcessesService.storeMainProcessesFromVar();
     }
 
-    @Autowired private StoreMainProcessesFromVarService StoreMainProcessesService;
+    @PostMapping("/v1/var/populate-resources")
+    public void populateResources() throws Exception {
+        storeResourcesFromVarService.execute();
+    }
+
+    @Autowired private StoreMainProcessesFromVarService storeMainProcessesService;
+    @Autowired private StoreResourcesFromVarService storeResourcesFromVarService;
 
 }
