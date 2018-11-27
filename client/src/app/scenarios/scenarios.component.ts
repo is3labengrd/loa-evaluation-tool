@@ -25,9 +25,11 @@ export class ScenariosComponent implements OnInit {
   scenario2:Array<any> = [];
   scenario3:Array<any> = [];
   resourceTable:Array<any> = [];
+  syncingWithVAR = false;
 
   ngOnInit() {
     this.cookie = this._processListService.getCookie("selectedSubprocess");
+    this.syncingWithVAR = true;
 
     var waitCAMProcTree = this.fetchFromCAM();
     var waitScenarioList = this.getScenariosList();
@@ -86,6 +88,7 @@ export class ScenariosComponent implements OnInit {
     .then(
       (processSegments:any) => {
         this.processSegmentList.push(processSegments);
+        this.syncingWithVAR = false;
       }
     );
   }
