@@ -25,3 +25,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.dropdown-toggle::after {
+  display:none;
+}
+
+#resourceList thead th {
+  text-align: center;
+}
+
+#resourceList tbody td {
+  text-align: center;
+  vertical-align: middle;
+}

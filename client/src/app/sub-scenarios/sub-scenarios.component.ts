@@ -6,8 +6,6 @@ import { environment } from '../../environments/environment';
 import { CookieService } from '../cookie.service';
 declare var $:any;
 
-//import * as $ from 'jquery';
-//import * as bootstrap from 'bootstrap';
 
 
 @Component({
@@ -16,6 +14,8 @@ declare var $:any;
   styleUrls: ['./sub-scenarios.component.css']
 })
 export class SubScenariosComponent implements OnInit {
+
+
 
   enableProductAndProcessInfo: boolean;
 
@@ -169,8 +169,7 @@ checkMandatoryData() {
                         .toPromise().then((res:any) => {
                           this.productPlanningID=res.pkTbId;
                         });
-
-    }else{
+     }else{
        this.http.put(environment.apiUrl + '/v1/product-planning/'+this.productPlanningID, this.produtsPiece)
                 .subscribe(res =>
                   console.log('Done put'));
@@ -201,6 +200,7 @@ checkMandatoryData() {
         this.http.put(environment.apiUrl + '/v1/process-specific-info/'+ this.procSpecInfoID, this.procSpecInfoObj)
                       .subscribe(res =>
                         console.log('Done put'));
+
       }
 
       if(this.disableButton==true){
@@ -619,6 +619,19 @@ checkMandatoryData() {
 
     }
 
+  getNameSubProLev(cookie): number {
+       if(!("undefined" === typeof(cookie['level3']))){
+              return cookie.level3.name;
+          }else{
+           if(!("undefined" === typeof(cookie['level2']))){
+           return cookie.level2.name;
+           }else{
+            return cookie.level1.name;
+            }
+          }
+
+      }
+
   saveSubscenarios(): void{
 
   if(this.isSubScenario1Present==true){
@@ -691,6 +704,9 @@ checkMandatoryData() {
      }
      }
 
+    this.saveVARProductPlanning();
+    this.saveVARProcessSpecificInformation();
+    this.saveVARProportionalWageCost();
     }
 
 
@@ -928,6 +944,48 @@ checkMandatoryData() {
             }
             }
          }
+
+         saveVARProductPlanning = () => {
+
+         var varProductPlanningObj = {
+                          "assetName": this.cookie.mainProcessName+"-"+this.cookie.mainProcessId,
+                          "productionVolume": this.produtsPiece.nprodPiecePerHours
+         };
+
+         return this.http.put(environment.apiUrl + '/v1/var/editProductPlanning', varProductPlanningObj)
+                                  .toPromise().then((res:any) => { });
+
+         }
+
+         saveVARProcessSpecificInformation = () => {
+
+         var varProcessSpecificInformationObj = {
+                                      "assetName": this.getNameSubProLev(this.cookie)+"-"+this.getFkAceSubProLevId(this.cookie),
+                                      "NumberOfShiftsPerDay": this.procSpecInfoObj.nshiptsDay,
+                                      "HoursPerShift": this.procSpecInfoObj.hoursShift,
+                                      "WorkingDaysPerYear": this.procSpecInfoObj.workingDaysYear
+                                   }
+
+         return this.http.put(environment.apiUrl + '/v1/var/editProcessSpecificInformation', varProcessSpecificInformationObj)
+                      .toPromise().then((res:any) => { });
+         }
+
+
+         saveVARProportionalWageCost = () => {
+
+                  //Todo Check the values
+                  var varProportionalWageCostObj = {
+                                                 "assetName": this.getNameSubProLev(this.cookie)+"-"+this.getFkAceSubProLevId(this.cookie),
+                                                 "valueString": this.procSpecInfoObj.propWCPerHours,
+                                                 "unitOfMeasure": "l/h",
+                                                 "propertyID": 0
+                                           }
+
+                  return this.http.put(environment.apiUrl + '/v1/var/editProportionalWageCost', varProportionalWageCostObj)
+                               .toPromise().then((res:any) => { });
+                  }
+
+
 
   }
 
