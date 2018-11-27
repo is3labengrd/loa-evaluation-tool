@@ -21,6 +21,11 @@
     </tr>
   </table>
 
+  <ng-template [ngIf]="syncingWithVAR">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <br>
+  </ng-template>
+
   <table class="table table-striped">
     <caption style="color: black"><strong>Cost-based Analysis Scenario</strong></caption>
     <thead class="thead-light">

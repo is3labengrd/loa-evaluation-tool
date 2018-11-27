@@ -145,13 +145,13 @@ public class VARServiceWrapper {
 
 	public static List<Individual> getResources () throws Exception {
 		return (List<Individual>) varFailureInformer.filter(
-				() -> {
-					try {
-						return VARWorkUnitImpl.resourceList();
-					} catch (Throwable e) {
-						throw new RuntimeException();
-					}
+			() -> {
+				try {
+					return VARWorkUnitImpl.resourceList();
+				} catch (Throwable e) {
+					throw new RuntimeException();
 				}
+			}
 		);
 	}
 

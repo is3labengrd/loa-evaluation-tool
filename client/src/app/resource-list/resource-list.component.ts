@@ -20,6 +20,8 @@ export class ResourceListComponent implements OnInit {
     totalPages: []
   };
 
+  syncingWithVAR = false;
+
   resetPage() {
     this.pagination.page = 0;
   }
@@ -48,7 +50,23 @@ export class ResourceListComponent implements OnInit {
 
   ngOnInit() {
     this.selectedSubprocess = this._processListService.getCookie('selectedSubprocess');
-    this.updateResourceList();
+    this.updateResourceList();    this.syncingWithVAR = true;
+    this.http
+      .post(environment.apiUrl + '/v1/var/populate-process-segments', {})
+      .toPromise()
+      .then(
+        () => {
+          this.syncingWithVAR = false;
+          this.updateResourceList();
+        }
+      )
+      .catch(
+        (err) => {
+          this.syncingWithVAR = false;
+          let camErrorTrigger:any = document.querySelector("#camErrorTrigger");
+          camErrorTrigger.click();
+        }
+      );
   }
 
 

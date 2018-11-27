@@ -1,5 +1,7 @@
 package eng.it.loatool.resource;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -47,5 +49,8 @@ public interface ResourceRepository extends PagingAndSortingRepository<Resource,
         @Param("subprocessLevelId") Integer subprocessLevelId,
         @Param("namePiece") String namePiece
     );
+
+    @Query("from Resource where name = :name")
+    public Optional<Resource> getResourceByName(@Param("name") String name);
 
 }
