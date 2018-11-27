@@ -619,6 +619,19 @@ checkMandatoryData() {
 
     }
 
+  getNameSubProLev(cookie): number {
+       if(!("undefined" === typeof(cookie['level3']))){
+              return cookie.level3.name;
+          }else{
+           if(!("undefined" === typeof(cookie['level2']))){
+           return cookie.level2.name;
+           }else{
+            return cookie.level1.name;
+            }
+          }
+
+      }
+
   saveSubscenarios(): void{
 
   if(this.isSubScenario1Present==true){
@@ -947,7 +960,7 @@ checkMandatoryData() {
          saveVARProcessSpecificInformation = () => {
 
          var varProcessSpecificInformationObj = {
-                                      "assetName": "subprocessId-"+this.getFkAceSubProLevId(this.cookie),
+                                      "assetName": this.getNameSubProLev(this.cookie)+"-"+this.getFkAceSubProLevId(this.cookie),
                                       "NumberOfShiftsPerDay": this.procSpecInfoObj.nshiptsDay,
                                       "HoursPerShift": this.procSpecInfoObj.hoursShift,
                                       "WorkingDaysPerYear": this.procSpecInfoObj.workingDaysYear
@@ -962,8 +975,8 @@ checkMandatoryData() {
 
                   //Todo Check the values
                   var varProportionalWageCostObj = {
-                                                 "assetName": "subprocessId-propWCPerHours-"+this.getFkAceSubProLevId(this.cookie),
-                                                 "valueString": this.procSpecInfoObj. propWCPerHours,
+                                                 "assetName": this.getNameSubProLev(this.cookie)+"-"+this.getFkAceSubProLevId(this.cookie),
+                                                 "valueString": this.procSpecInfoObj.propWCPerHours,
                                                  "unitOfMeasure": "l/h",
                                                  "propertyID": 0
                                            }
