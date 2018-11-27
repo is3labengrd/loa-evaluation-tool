@@ -21,8 +21,8 @@ export class EditResourceComponent implements OnInit {
   resourceId = this.route.snapshot.params['resourceId'];
 
   selectedSubprocess = this
-    .cookieService
-    .getCookie('selectedSubprocess');
+  .cookieService
+  .getCookie('selectedSubprocess');
 
   resource = {
     'name': null,
@@ -46,14 +46,14 @@ export class EditResourceComponent implements OnInit {
 
   ngOnInit() {
     this.http
-      .get(`${environment.apiUrl}/v1/resources/${this.resourceId}`)
-      .toPromise()
-      .then(
-        (resource) => {
-          this.resourceInitialState = resource;
-          Object.assign(this.resource, this.resourceInitialState);
-        }
-      );
+    .get(`${environment.apiUrl}/v1/resources/${this.resourceId}`)
+    .toPromise()
+    .then(
+      (resource) => {
+        this.resourceInitialState = resource;
+        Object.assign(this.resource, this.resourceInitialState);
+      }
+    );
   }
 
   cancel = () => {
@@ -74,50 +74,84 @@ export class EditResourceComponent implements OnInit {
   }
 
   save = () => {
-
+    this.editVAR();
 
     return this.http
-      .put(
-        `${environment.apiUrl}/v1/resources/${this.resourceId}`,
-        this.resource
-      )
-      .toPromise()
-      .then(
-        () => {
-          this.saveVAR();
-        }
-      );
+    .put(
+      `${environment.apiUrl}/v1/resources/${this.resourceId}`,
+      this.resource
+    )
+    .toPromise()
+    .then(
+      () => {
+      },
+      (err) => {}
+    );
   }
 
-  saveVAR = () => {
+  editVAR = () => {
     var varResObj = {
-                "assetName": this.resource.name,
-                "loAPhysical": this.resource.loaPhysical,
-                "loACognitive": this.resource.loaCognitive,
-                "numberOfOperators": this.resource.lcNOperMachine,
-                "annualMaintenanceCost": this.resource.mcAMaintCosts,
-                "installationSurface": this.resource.rcInstSurface,
-                "costPerSurfacePerMonth": this.resource.rcCostsMMonth,
-                "machinePurchaseValue": this.resource.idMacPurhValue,
-                "machineSalesValue": this.resource.idMacSalesValue,
-                "economicUsefulLife": this.resource.idEcoUsefullLife,
-                "annualElectricityConsumptionWhileWorking" : this.resource.ecAEleConsumFun,
-                "annualElectricityConsumptionStandBy" : this.resource.ecAEleConsumSb,
-                "equipmentId": "",
-                "equipmentLevel": "",
-                "interestRate": this.resource.icInterRate,
-                "electricityPrice": this.resource.ecElePrice
-              };
+      "assetName": this.resource.name,
+      "loAPhysical": this.resource.loaPhysical,
+      "loACognitive": this.resource.loaCognitive,
+      "numberOfOperators": this.resource.lcNOperMachine,
+      "annualMaintenanceCost": this.resource.mcAMaintCosts,
+      "installationSurface": this.resource.rcInstSurface,
+      "costPerSurfacePerMonth": this.resource.rcCostsMMonth,
+      "machinePurchaseValue": this.resource.idMacPurhValue,
+      "machineSalesValue": this.resource.idMacSalesValue,
+      "economicUsefulLife": this.resource.idEcoUsefullLife,
+      "annualElectricityConsumptionWhileWorking" : this.resource.ecAEleConsumFun,
+      "annualElectricityConsumptionStandBy" : this.resource.ecAEleConsumSb,
+      "equipmentId": Math.random().toString(36).substring(2).slice(-2).toUpperCase() + Math.floor(Math.random() * 99),
+      "equipmentLevel": "",
+      "interestRate": this.resource.icInterRate,
+      "electricityPrice": this.resource.ecElePrice
+    };
 
 
     return this.http
-      .put(
-        `${environment.apiUrl}/v1/var/editResource`,
-        varResObj
-      )
-      .toPromise()
-      .then(() => {
-      })
-  }
+    .put(
+      `${environment.apiUrl}/v1/var/editResource`,
+      varResObj
+    )
+    .toPromise()
+    .then(() => {
+    },
+    (err) => {this.saveVAR()}
+  );
+}
+
+saveVAR = () => {
+  var varResObj = {
+    "assetName": this.resource.name,
+    "loAPhysical": this.resource.loaPhysical,
+    "loACognitive": this.resource.loaCognitive,
+    "numberOfOperators": this.resource.lcNOperMachine,
+    "annualMaintenanceCost": this.resource.mcAMaintCosts,
+    "installationSurface": this.resource.rcInstSurface,
+    "costPerSurfacePerMonth": this.resource.rcCostsMMonth,
+    "machinePurchaseValue": this.resource.idMacPurhValue,
+    "machineSalesValue": this.resource.idMacSalesValue,
+    "economicUsefulLife": this.resource.idEcoUsefullLife,
+    "annualElectricityConsumptionWhileWorking" : this.resource.ecAEleConsumFun,
+    "annualElectricityConsumptionStandBy" : this.resource.ecAEleConsumSb,
+    "equipmentId": Math.random().toString(36).substring(2).slice(-2).toUpperCase() + Math.floor(Math.random() * 99),
+    "equipmentLevel": "",
+    "interestRate": this.resource.icInterRate,
+    "electricityPrice": this.resource.ecElePrice
+  };
+
+
+  this.http
+  .post(
+    `${environment.apiUrl}/v1/var/addResource`,
+    varResObj
+  )
+  .toPromise()
+  .then(() => {
+  },
+  (err) => {});
+}
 
 }

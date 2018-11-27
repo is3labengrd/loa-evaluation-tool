@@ -114,6 +114,11 @@
     </tbody>
   </table>
 
+  <ng-template [ngIf]="syncingWithVAR">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <br>
+  </ng-template>
+
    <!-- assignModal -->
    <div class="modal fade" id="assignModal" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -160,3 +165,27 @@
     <a class="btn btn-primary float-right" routerLink="/add-resource">Add Resource</a>
   </div>
 </div>
+
+<div class="modal fade" id="camErrorModal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel"><p class="text-danger">Error</p></h5>
+      </div>
+      <div class="modal-body">
+        An Error with CAM has occured. :(
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button
+  [hidden]="true"
+  type="button"
+  data-toggle="modal"
+  data-target="#camErrorModal"
+  id="camErrorTrigger"
+>
+</button>
