@@ -39,11 +39,13 @@ export class AddScenarioComponent implements OnInit {
     id:any;
     tmpPost:any;
     enableSave:boolean;
+    syncingWithVAR = false;
 
     ngOnInit() {
       this.enableSave = false;
       this.cookie = this._processListService.getCookie("selectedSubprocess");
       this.id  = this.route.snapshot.params['id'];
+      this.syncingWithVAR = true;
 
       var waitCAMProcTree = this.fetchFromCAM();
       waitCAMProcTree.then((x)=>{
@@ -358,6 +360,7 @@ export class AddScenarioComponent implements OnInit {
       .then(
         (processSegments:any) => {
           this.processSegmentList.push(processSegments);
+          this.syncingWithVAR = false;
         }
       );
     }

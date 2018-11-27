@@ -42,12 +42,14 @@ export class EditScenarioComponent implements OnInit {
     scenResList: Array<any> = [];
     resToBeRemoved: Array<any> = [];
     enableSave:boolean;
+    syncingWithVAR = false;
 
     ngOnInit() {
       this.enableSave = false;
 
       this.cookie = this._processListService.getCookie("selectedSubprocess");
       this.id  = this.route.snapshot.params['id'];
+      this.syncingWithVAR = true;
 
       var waitGetScen = this.getScenarios();
       var waitCAMProcTree = this.fetchFromCAM();
@@ -370,6 +372,7 @@ export class EditScenarioComponent implements OnInit {
       .then(
         (processSegments:any) => {
           this.processSegmentList.push(processSegments);
+          this.syncingWithVAR = false;
         }
       );
     }
