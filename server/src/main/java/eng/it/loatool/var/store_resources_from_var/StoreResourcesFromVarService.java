@@ -22,7 +22,7 @@ public class StoreResourcesFromVarService {
                     try {
                         Resource newResource = (new VarToNativeResourceTransformer())
                             .transform(individual);
-                        newResource.setPkTbId(resource.getPkTbId());
+                        resource.assimilate(newResource);
                         return resourceRepository.save(resource);
                     } catch (Throwable t) {
                         logger.error("Couldn't handle VAR resource.", t);

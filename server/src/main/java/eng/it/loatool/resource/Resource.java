@@ -69,6 +69,27 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.updateDate = updateDate;
     }
 
+    public void assimilate(Resource other) {
+        this.name = other.getName();
+        this.loaPhysical = other.getLoaPhysical();
+        this.loaCognitive = other.getLoaCognitive();
+        this.lcNOperMachine = other.getLcNOperMachine();
+        this.mcAMaintCosts = other.getMcAMaintCosts();
+        this.mcAMaintCostsPerc = other.getMcAMaintCostsPerc();
+        this.rcInstSurface = other.getRcInstSurface();
+        this.rcCostsMMonth = other.getRcCostsMMonth();
+        this.idMacPurhValue = other.getIdMacPurhValue();
+        this.idMacSalesValue = other.getIdMacSalesValue();
+        this.idEcoUsefullLife = other.getIdEcoUsefullLife();
+        this.icInterRate = other.getIcInterRate();
+        this.ecAEleConsumFun = other.getEcAEleConsumFun();
+        this.ecAEleConsumSb = other.getEcAEleConsumSb();
+        this.ecElePrice = other.getEcElePrice();
+        this.varRes = false;
+        this.createDate = other.getCreateDate();
+        this.updateDate = other.getUpdateDate();
+    }
+
     public Resource(String name, Integer loaPhysical, Integer loaCognitive, Double lcNOperMachine, Double mcAMaintCosts, Float mcAMaintCostsPerc, Double rcInstSurface, Double rcCostsMMonth, Double idMacPurhValue, Double idMacSalesValue, Integer idEcoUsefullLife, Float icInterRate, Integer ecAEleConsumFun, Integer ecAEleConsumSb, Double ecElePrice, Boolean varRes, Date createDate, Date updateDate) {
         this.name = name;
         this.loaPhysical = loaPhysical;
@@ -249,6 +270,11 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Resource [pkTbId=" + pkTbId + ", name=" + name + ", loaPhysical=" + loaPhysical + ", loaCognitive=" + loaCognitive + ", lcNOperMachine=" + lcNOperMachine + ", mcAMaintCosts=" + mcAMaintCosts + ", mcAMaintCostsPerc=" + mcAMaintCostsPerc + ", rcInstSurface=" + rcInstSurface + ", rcCostsMMonth=" + rcCostsMMonth + ", idMacPurhValue=" + idMacPurhValue + ", idMacSalesValue=" + idMacSalesValue + ", idEcoUsefullLife=" + idEcoUsefullLife + ", icInterRate=" + icInterRate + ", ecAEleConsumFun=" + ecAEleConsumFun + ", ecAEleConsumSb=" + ecAEleConsumSb + ", ecElePrice=" + ecElePrice + ", varRes=" + varRes + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
     }
 
 }
