@@ -28,6 +28,7 @@ public class VarToNativeResourceTransformer {
             zeroIfInvalidInteger(() -> Integer.valueOf(propertyValues.get("ecAEleConsumFun"))),
             zeroIfInvalidInteger(() -> Integer.valueOf(propertyValues.get("ecAEleConsumSb"))),
             zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("ecElePrice"))),
+            true,
             null,
             null
         );

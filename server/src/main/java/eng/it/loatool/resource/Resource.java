@@ -42,6 +42,7 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
     private Integer ecAEleConsumFun;
     private Integer ecAEleConsumSb;
     private Double ecElePrice;
+    private Boolean varRes;
     private Date createDate;
     private Date updateDate;
 
@@ -63,6 +64,28 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.ecAEleConsumFun = ecAEleConsumFun;
         this.ecAEleConsumSb = ecAEleConsumSb;
         this.ecElePrice = ecElePrice;
+        this.varRes = false;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
+
+    public Resource(String name, Integer loaPhysical, Integer loaCognitive, Double lcNOperMachine, Double mcAMaintCosts, Float mcAMaintCostsPerc, Double rcInstSurface, Double rcCostsMMonth, Double idMacPurhValue, Double idMacSalesValue, Integer idEcoUsefullLife, Float icInterRate, Integer ecAEleConsumFun, Integer ecAEleConsumSb, Double ecElePrice, Boolean varRes, Date createDate, Date updateDate) {
+        this.name = name;
+        this.loaPhysical = loaPhysical;
+        this.loaCognitive = loaCognitive;
+        this.lcNOperMachine = lcNOperMachine;
+        this.mcAMaintCosts = mcAMaintCosts;
+        this.mcAMaintCostsPerc = mcAMaintCostsPerc;
+        this.rcInstSurface = rcInstSurface;
+        this.rcCostsMMonth = rcCostsMMonth;
+        this.idMacPurhValue = idMacPurhValue;
+        this.idMacSalesValue = idMacSalesValue;
+        this.idEcoUsefullLife = idEcoUsefullLife;
+        this.icInterRate = icInterRate;
+        this.ecAEleConsumFun = ecAEleConsumFun;
+        this.ecAEleConsumSb = ecAEleConsumSb;
+        this.ecElePrice = ecElePrice;
+        this.varRes = varRes;
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
@@ -196,6 +219,14 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
     public void setEcElePrice(Double ecElePrice) {
         this.ecElePrice = ecElePrice;
+    }
+
+    @Column(name = "VAR_RES", nullable = false) public Boolean getVarRes() {
+        return varRes;
+    }
+
+    public void setVarRes(Boolean varRes) {
+        this.varRes = varRes;
     }
 
     @CreationTimestamp
