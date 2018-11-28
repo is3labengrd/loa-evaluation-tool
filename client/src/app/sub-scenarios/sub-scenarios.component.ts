@@ -70,6 +70,10 @@ export class SubScenariosComponent implements OnInit {
   selRes2ProcTime: number = null;
   selRes3ProcTime: number = null;
 
+  selRes1ProcTimeGUI: number = null;
+  selRes2ProcTimeGUI: number = null;
+  selRes3ProcTimeGUI: number = null;
+
 
   disableButton: boolean;
   resources: Array<any> = [];
@@ -138,7 +142,7 @@ export class SubScenariosComponent implements OnInit {
            .toPromise()
            .then(
              (res: any) => {
-              res.forEach((element:any)=>  {
+               res.forEach((element:any)=>  {
                     this.resources.push(element.resource);
                     this.resourcesList.push(element.resource);
                });
@@ -215,6 +219,21 @@ checkMandatoryData() {
 
   createSubScenarios(): void {
 
+    if(this.firstdropdown!=null){
+    this.resourceInfo1 = Object.assign({}, this.firstdropdown);
+    this.subscenario1.fkTbAceRes = this.firstdropdown.pkTbId;
+    }
+
+    if(this.seconddropdown!=null){
+    this.resourceInfo2 = Object.assign({}, this.seconddropdown);
+    this.subscenario2.fkTbAceRes=this.seconddropdown.pkTbId;
+    }
+
+    if(this.thirddropdown!=null){
+    this.resourceInfo3 = Object.assign({}, this.thirddropdown);
+    this.subscenario3.fkTbAceRes=this.thirddropdown.pkTbId;
+    }
+
     if(this.subscenario1.fkTbAceRes!=null)
         this.isSubScenario1Present=true;
 
@@ -224,14 +243,20 @@ checkMandatoryData() {
     if(this.subscenario3.fkTbAceRes!=null)
        this.isSubScenario3Present=true;
 
-    if(this.isSubScenario1Present==true)
+    if(this.isSubScenario1Present==true){
+      this.selRes1ProcTime=this.selRes1ProcTimeGUI;
       this.subscenario1.processTime=this.selRes1ProcTime;
+    }
 
-    if(this.isSubScenario2Present==true)
+    if(this.isSubScenario2Present==true){
+      this.selRes2ProcTime=this.selRes2ProcTimeGUI;
       this.subscenario2.processTime=this.selRes2ProcTime;
+    }
 
-    if(this.isSubScenario3Present==true)
+    if(this.isSubScenario3Present==true){
+      this.selRes3ProcTime=this.selRes3ProcTimeGUI;
       this.subscenario3.processTime=this.selRes3ProcTime;
+    }
 
     if(this.isSubScenario1Present==true)
       this.nprodPiecePerHoursGUI1 = this.nprodPiecePerHours;
@@ -275,24 +300,14 @@ checkMandatoryData() {
 
   firstDropDownChanged(val: any) {
     this.firstdropdown = Object.assign({},this.findObj(this.resourcesList, val));
-    this.resourceInfo1 = Object.assign({}, this.firstdropdown);
-    this.subscenario1.fkTbAceRes = this.firstdropdown.pkTbId;
-
-    // console.log(this.selRes1ProcTime);
-  }
+   }
 
   secondDropDownChanged(val: any) {
    this.seconddropdown = Object.assign({}, this.findObj(this.resourcesList, val));
-   this.resourceInfo2 = Object.assign({}, this.seconddropdown);
-   this.subscenario2.fkTbAceRes=this.seconddropdown.pkTbId;
-
   }
 
   thirdDropDownChanged(val: any) {
     this.thirddropdown = Object.assign({},this.findObj(this.resourcesList, val));
-    this.resourceInfo3 = Object.assign({}, this.thirddropdown);
-    this.subscenario3.fkTbAceRes=this.thirddropdown.pkTbId;
-
   }
 
   getMainProc(id) {
@@ -770,10 +785,9 @@ checkMandatoryData() {
                         this.procSpecInfoObjGUI1 = Object.assign({}, this.procSpecInfoObj);
                         this.resourceInfo1=element.resource;
                         this.selectedRes1=this.resourceInfo1.name;
-                       // console.log(element.resource);
                         this.firstDropDownChanged(element.resource.name);
-                        this.subScenarioID1=element.pkTbId
-                        this.selRes1ProcTime=element.processTime;
+                        this.subScenarioID1=element.pkTbId;
+                        this.selRes1ProcTimeGUI=element.processTime;
                         fkTbAceResID = element.resource.pkTbId;
                         fkTbAceSubProLevID = element.subprocessLevel.pkTbId;
                         delete element['resource'];
@@ -796,7 +810,7 @@ checkMandatoryData() {
                        this.selectedRes2=this.resourceInfo2.name;
                        this.secondDropDownChanged(element.resource.name);
                        this.subScenarioID2=element.pkTbId
-                       this.selRes2ProcTime=element.processTime;
+                       this.selRes2ProcTimeGUI=element.processTime;
                        fkTbAceResID = element.resource.pkTbId;
                        fkTbAceSubProLevID = element.subprocessLevel.pkTbId;
                        delete element['resource'];
@@ -818,7 +832,7 @@ checkMandatoryData() {
                        this.selectedRes3=this.resourceInfo3.name;
                        this.thirdDropDownChanged(element.resource.name);
                        this.subScenarioID3=element.pkTbId
-                       this.selRes3ProcTime=element.processTime;
+                       this.selRes3ProcTimeGUI=element.processTime;
                        fkTbAceResID = element.resource.pkTbId;
                        fkTbAceSubProLevID = element.subprocessLevel.pkTbId;
                        delete element['resource'];
@@ -910,8 +924,8 @@ checkMandatoryData() {
                 return retDisabled;
           }
 
-         if((this.firstdropdown!=null && this.selRes1ProcTime==null) || this.seconddropdown!=null && this.selRes2ProcTime==null
-           || this.thirddropdown!=null && this.selRes3ProcTime==null ){
+         if((this.firstdropdown!=null && this.selRes1ProcTimeGUI==null) || this.seconddropdown!=null && this.selRes2ProcTimeGUI==null
+           || this.thirddropdown!=null && this.selRes3ProcTimeGUI==null ){
              retDisabled=false;
            }
 
