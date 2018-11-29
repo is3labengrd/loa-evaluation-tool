@@ -31,6 +31,7 @@ public class VARWorkUnitImpl {
                 "{\"name\": \"loACognitive\",\"value\":"+ jsonNode.get("loACognitive") +",\"type\":\"java.lang.Integer\"}," +
                 "{\"name\": \"numberOfOperators\",\"value\":"+ jsonNode.get("numberOfOperators") +",\"type\":\"java.lang.Double\"}," +
                 "{\"name\": \"annualMaintenanceCost\",\"value\": "+ jsonNode.get("annualMaintenanceCost") +",\"type\":\"java.lang.Double\"}," +
+                "{\"name\": \"annualMaintenanceCostPercent\",\"value\": "+ jsonNode.get("annualMaintenanceCostPercent") +",\"type\":\"java.lang.Double\"}," +
                 "{\"name\": \"installationSurface\",\"value\": "+ jsonNode.get("installationSurface") +",\"type\":\"java.lang.Integer\"}," +
                 "{\"name\": \"costPerSurfacePerMonth\",\"value\":"+ jsonNode.get("costPerSurfacePerMonth") +",\"type\":\"java.lang.Double\"}," +
                 "{\"name\": \"machinePurchaseValue\",\"value\": "+ jsonNode.get("machinePurchaseValue") +",\"type\":\"java.lang.Double\"}," +
