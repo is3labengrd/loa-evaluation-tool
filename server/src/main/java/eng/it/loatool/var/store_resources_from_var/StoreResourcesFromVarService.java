@@ -20,9 +20,11 @@ public class StoreResourcesFromVarService {
                 .getResourceByName(individual.getName())
                 .map((resource) -> {
                     try {
-                        Resource newResource = (new VarToNativeResourceTransformer())
-                            .transform(individual);
-                        resource.assimilate(newResource);
+                        Resource newResource = (
+                            new VarToNativeResourceTransformer())
+                                .transform(individual
+                        );
+                        resource.assimilateVarInstance(newResource);
                         return resourceRepository.save(resource);
                     } catch (Throwable t) {
                         logger.error("Couldn't handle VAR resource.", t);

@@ -76,6 +76,7 @@ public class VARServiceWrapper {
                     VARWorkUnitImpl.createBody(json);
                     return null;
                 } catch (Throwable e) {
+                    e.printStackTrace();
                     throw new RuntimeException();
                 }
             }

@@ -14,27 +14,25 @@ public class VarToNativeResourceTransformer {
         });
         return new Resource(
             individual.getName(),
-            zeroIfInvalidInteger(() -> Integer.valueOf(propertyValues.get("loaPhysical"))),
-            zeroIfInvalidInteger(() -> Integer.valueOf(propertyValues.get("loaCognitive"))),
-            zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("lcNOperMachine"))),
-            zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("mcAMaintCosts"))),
-            zeroIfInvalidFloat(() -> Float.valueOf(propertyValues.get("mcAMaintCostsPerc"))),
-            zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("rcInstSurface"))),
-            zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("rcCostsMMonth"))),
-            zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("idMacPurhValue"))),
-            zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("idMacSalesValue"))),
-            zeroIfInvalidInteger(() -> Integer.valueOf(propertyValues.get("idEcoUsefullLife"))),
-            zeroIfInvalidFloat(() -> Float.valueOf(propertyValues.get("icInterRate"))),
-            zeroIfInvalidInteger(() -> Integer.valueOf(propertyValues.get("ecAEleConsumFun"))),
-            zeroIfInvalidInteger(() -> Integer.valueOf(propertyValues.get("ecAEleConsumSb"))),
-            zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("ecElePrice"))),
+            zeroIfInvalidInteger(() -> Integer.valueOf(propertyValues.get("loAPhysical"))),
+            zeroIfInvalidInteger(() -> Integer.valueOf(propertyValues.get("loACognitive"))),
+            zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("numberOfOperators"))),
+            zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("annualMaintenanceCost"))),
+            zeroIfInvalidFloat(() -> Float.valueOf(propertyValues.get("annualMaintenanceCostPercent"))),
+            zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("installationSurface"))),
+            zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("costPerSurfacePerMonth"))),
+            zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("machinePurchaseValue"))),
+            zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("machineSalesValue"))),
+            zeroIfInvalidInteger(() -> Integer.valueOf(propertyValues.get("economicUsefulLife"))),
+            zeroIfInvalidFloat(() -> Float.valueOf(propertyValues.get("interestRate"))),
+            zeroIfInvalidInteger(() -> Integer.valueOf(propertyValues.get("annualElectricityConsumptionWhileWorking"))),
+            zeroIfInvalidInteger(() -> Integer.valueOf(propertyValues.get("annualElectricityConsumptionStandBy"))),
+            zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("electricityPrice"))),
             true,
             null,
             null
         );
     }
-
-
 
     private Integer zeroIfInvalidInteger(Supplier<Integer> supplier) {
         Integer result;

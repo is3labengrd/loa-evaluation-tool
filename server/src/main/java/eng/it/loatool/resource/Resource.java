@@ -48,6 +48,27 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
     public Resource() {}
 
+    public Resource(String name, Integer loaPhysical, Integer loaCognitive, Double lcNOperMachine, Double mcAMaintCosts, Float mcAMaintCostsPerc, Double rcInstSurface, Double rcCostsMMonth, Double idMacPurhValue, Double idMacSalesValue, Integer idEcoUsefullLife, Float icInterRate, Integer ecAEleConsumFun, Integer ecAEleConsumSb, Double ecElePrice, Boolean varRes, Date createDate, Date updateDate) {
+        this.name = name;
+        this.loaPhysical = loaPhysical;
+        this.loaCognitive = loaCognitive;
+        this.lcNOperMachine = lcNOperMachine;
+        this.mcAMaintCosts = mcAMaintCosts;
+        this.mcAMaintCostsPerc = mcAMaintCostsPerc;
+        this.rcInstSurface = rcInstSurface;
+        this.rcCostsMMonth = rcCostsMMonth;
+        this.idMacPurhValue = idMacPurhValue;
+        this.idMacSalesValue = idMacSalesValue;
+        this.idEcoUsefullLife = idEcoUsefullLife;
+        this.icInterRate = icInterRate;
+        this.ecAEleConsumFun = ecAEleConsumFun;
+        this.ecAEleConsumSb = ecAEleConsumSb;
+        this.ecElePrice = ecElePrice;
+        this.varRes = varRes;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
+
     public Resource(String name, Integer loaPhysical, Integer loaCognitive, Double lcNOperMachine, Double mcAMaintCosts, Float mcAMaintCostsPerc, Double rcInstSurface, Double rcCostsMMonth, Double idMacPurhValue, Double idMacSalesValue, Integer idEcoUsefullLife, Float icInterRate, Integer ecAEleConsumFun, Integer ecAEleConsumSb, Double ecElePrice, Date createDate, Date updateDate) {
         this.name = name;
         this.loaPhysical = loaPhysical;
@@ -69,7 +90,7 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.updateDate = updateDate;
     }
 
-    public void assimilate(Resource other) {
+    public void assimilateVarInstance(Resource other) {
         this.name = other.getName();
         this.loaPhysical = other.getLoaPhysical();
         this.loaCognitive = other.getLoaCognitive();
@@ -85,30 +106,9 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.ecAEleConsumFun = other.getEcAEleConsumFun();
         this.ecAEleConsumSb = other.getEcAEleConsumSb();
         this.ecElePrice = other.getEcElePrice();
-        this.varRes = false;
+        this.setVarRes(other.getVarRes());
         this.createDate = other.getCreateDate();
         this.updateDate = other.getUpdateDate();
-    }
-
-    public Resource(String name, Integer loaPhysical, Integer loaCognitive, Double lcNOperMachine, Double mcAMaintCosts, Float mcAMaintCostsPerc, Double rcInstSurface, Double rcCostsMMonth, Double idMacPurhValue, Double idMacSalesValue, Integer idEcoUsefullLife, Float icInterRate, Integer ecAEleConsumFun, Integer ecAEleConsumSb, Double ecElePrice, Boolean varRes, Date createDate, Date updateDate) {
-        this.name = name;
-        this.loaPhysical = loaPhysical;
-        this.loaCognitive = loaCognitive;
-        this.lcNOperMachine = lcNOperMachine;
-        this.mcAMaintCosts = mcAMaintCosts;
-        this.mcAMaintCostsPerc = mcAMaintCostsPerc;
-        this.rcInstSurface = rcInstSurface;
-        this.rcCostsMMonth = rcCostsMMonth;
-        this.idMacPurhValue = idMacPurhValue;
-        this.idMacSalesValue = idMacSalesValue;
-        this.idEcoUsefullLife = idEcoUsefullLife;
-        this.icInterRate = icInterRate;
-        this.ecAEleConsumFun = ecAEleConsumFun;
-        this.ecAEleConsumSb = ecAEleConsumSb;
-        this.ecElePrice = ecElePrice;
-        this.varRes = varRes;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
     }
 
     @Override
@@ -243,11 +243,15 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
     }
 
     @Column(name = "VAR_RES", nullable = false) public Boolean getVarRes() {
-        return varRes;
+        if (this.varRes != null) {
+            return varRes;
+        } else {
+            return false;
+        }
     }
 
-    public void setVarRes(Boolean varRes) {
-        this.varRes = varRes;
+    private void setVarRes(Boolean varRes) {
+        if (this.varRes == null) this.varRes = varRes;
     }
 
     @CreationTimestamp
