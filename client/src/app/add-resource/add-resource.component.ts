@@ -103,6 +103,7 @@ export class AddResourceComponent implements OnInit {
       "equipmentId": Math.random().toString(36).substring(2).slice(-2).toUpperCase() + Math.floor(Math.random() * 99),
       "equipmentLevel": "",
       "interestRate": this.resource.icInterRate,
+      "annualMaintenanceCostPercent": this.resource.mcAMaintCostsPerc,
       "electricityPrice": this.resource.ecElePrice
     };
 
