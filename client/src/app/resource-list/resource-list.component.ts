@@ -63,7 +63,8 @@ export class ResourceListComponent implements OnInit {
       .catch(
         (err) => {
           this.syncingWithVAR = false;
-          let camErrorTrigger:any = document.querySelector("#camErrorTrigger");
+          // tslint:disable-next-line:prefer-const
+          let camErrorTrigger: any = document.querySelector('#camErrorTrigger');
           camErrorTrigger.click();
         }
       );
