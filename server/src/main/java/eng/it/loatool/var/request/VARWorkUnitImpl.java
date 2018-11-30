@@ -191,5 +191,16 @@ public class VARWorkUnitImpl {
 
     }
 
+    public static void delete(String name) throws IOException {
+        String BASE_URL = System.getenv("ENV_SAR_URL");
+        if(BASE_URL==null){
+            PropertyManager prop = new PropertyManager();
+            BASE_URL = prop.getPropValues("base.url");
+        }
+        final String uri = BASE_URL + "/assets/"+name;
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(uri);
+    }
+
 
 }
