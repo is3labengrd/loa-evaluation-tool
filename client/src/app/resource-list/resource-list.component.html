@@ -38,7 +38,6 @@
     </div>
   </form>
 
-
   <!-- main table -->
   <table id="resourceList" class="table table-striped table-bordered">
     <thead>
@@ -68,48 +67,53 @@
         <td>{{ resource.loaPhysical }}</td>
         <td>{{ resource.loaCognitive }}</td>
         <td>
-          <ng-template [ngIf]="resource.assigned" [ngIfElse]="assignBlock">
-            <div class="dropdown">
-              <button class="btn btn-link dropdown-toggle" id="actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="assets/icon1.png" style="width: 27px;">
-              </button>
-              <div class="dropdown-menu" aria-labelledby="actions">
+          <div class="dropdown">
+            <button class="btn btn-link dropdown-toggle" id="actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="assets/icon1.png" style="width: 27px;">
+            </button>
+            <div class="dropdown-menu" aria-labelledby="actions">
+              <ng-template [ngIf]="resource.assigned" [ngIfElse]="assignBlock">
                 <button  data-toggle="modal" data-target="#deassignModal" class="btn btn-link" class="btn btn-link">De-assign</button>
-               
-              </div>
+              </ng-template>
+              <ng-template #assignBlock>
+                <button
+                  (click)="assign(resource).then(updateResourceList);"
+                  data-toggle="modal"
+                  data-target="#assignModal"
+                  class="btn btn-link"
+                >
+                  Assign
+                </button>
+              </ng-template>
+              <button
+                (click)="delete(resource).then(populateResources).then(updateResourceList);"
+                class="btn btn-link"
+              >
+                Delete
+              </button>
             </div>
-            <!-- deassignModal -->
-            <div class="modal fade" id="deassignModal" tabindex="-1" role="dialog"  aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel"><p class="text-warning">Warning</p></h5>
-                  </div>
-                  <div class="modal-body">
-                    You are about to disassociate a Resource to a Process Segment,
-                    this will result in data loss if the Resource is used in the Scenario calculation: sure you want to continue?
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deassign(resource).then(updateResourceList);" >Yes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                  </div>
+          </div>
+
+          <!-- deassignModal -->
+          <div class="modal fade" id="deassignModal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addModalLabel"><p class="text-warning">Warning</p></h5>
+                </div>
+                <div class="modal-body">
+                  You are about to disassociate a Resource to a Process Segment,
+                  this will result in data loss if the Resource is used in the Scenario calculation: sure you want to continue?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deassign(resource).then(updateResourceList);" >Yes</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                 </div>
               </div>
-            </div> <!-- deassign modal -->
-          </ng-template>
-          <ng-template #assignBlock>
-              <div class="dropdown">
-                  <button class="btn btn-link dropdown-toggle" id="actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="assets/icon1.png" style="width: 27px;">
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="actions">
-                    <button (click)="assign(resource).then(updateResourceList);"
-                    data-toggle="modal" data-target="#assignModal" class="btn btn-link">Assign</button>
-                  </div>
-              </div>
-          </ng-template>
-        </td>
+            </div>
+          </div>
 
+        </td>
       </tr>
     </tbody>
   </table>
@@ -118,23 +122,6 @@
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     <br>
   </ng-template>
-
-   <!-- assignModal -->
-   <div class="modal fade" id="assignModal" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addModalLabel"><p class="text-success">Successful</p></h5>
-        </div>
-        <div class="modal-body">
-          Resource has been assigned.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Pagination Menu -->
   <div class="row">
@@ -145,8 +132,9 @@
         <option value="12">12 items per page</option>
       </select> &nbsp;
       <select name="pageNumber" [(ngModel)]="pagination.page" (change)="updateResourceList();">
-        <option *ngFor="let page of pagination.totalPages" value="{{page}}">Page {{ page + 1 }} of {{
-          pagination.totalPages.length }}</option>
+        <option *ngFor="let page of pagination.totalPages" value="{{page}}">
+          Page {{ page + 1 }} of {{ pagination.totalPages.length }}
+        </option>
       </select>
     </div>
     <div class="col-md-7 col-sm-12">
@@ -190,3 +178,20 @@
   id="camErrorTrigger"
 >
 </button>
+
+<!-- assignModal -->
+<div class="modal fade" id="assignModal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel"><p class="text-success">Successful</p></h5>
+      </div>
+      <div class="modal-body">
+        Resource has been assigned.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
