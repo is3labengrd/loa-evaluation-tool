@@ -3,6 +3,7 @@ package eng.it.loatool.api.v1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
+import eng.it.loatool.resource.DeleteResourceService;
 import eng.it.loatool.resource.GetResourceListItemService;
 import eng.it.loatool.resource.Resource;
 import eng.it.loatool.resource.ResourceRepository;
@@ -78,6 +80,15 @@ public class ResourcesApi {
         );
     }
 
+    @DeleteMapping("/v1/resources/{id}")
+    public ResponseEntity<?> deleteResource(
+        @PathVariable("id") Integer id
+    ) {
+        deleteResourceService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @Autowired private DeleteResourceService deleteResourceService;
     @Autowired private UpdateResourceService updateResourceService;
     @Autowired private GetResourceListItemService getResourceListItemService;
     @Autowired private GeneralCRUDService generalCRUDService;
