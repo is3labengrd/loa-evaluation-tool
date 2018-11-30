@@ -27,7 +27,7 @@
   </tr>
 </table>
 
-<h1 class="text-center">Criteria Matrix</h1>
+<h1 class="text-center">Cognitive Criteria Matrix</h1>
 
 <table id="table2"  class="table table-bordered text-center">
   <thead class="thead-light">
@@ -49,8 +49,8 @@
 </tbody>
 </table><br>
 
-<form >
-  <fieldset>
+  <form >
+  <!-- <fieldset>
     <legend style="width: auto;">Cognitive LoA information</legend>
     <table class="table table-borderless table-responsive">
       <thead>
@@ -86,7 +86,7 @@
         </td>
       </tr>
     </table>
-  </fieldset>
+  </fieldset> -->
 
   <!-- saveModal -->
  <div class="modal fade" id="saveModal" tabindex="-1" role="dialog"  aria-hidden="true">
@@ -110,6 +110,7 @@
 </div>
 
   <div class="btn-group" style="justify-content: center; width: 100%;">
+    <a class="btn btn-outline-primary" routerLink="/hta-analysis">Previous</a>
     <button class="btn btn-secondary" (click)="loaInfoRequest.possibility=false">Cancel</button>
     <button class="btn btn-primary" (click)="saveLoaInfo(minLoa.value, maxLoa.value)"  data-toggle="modal" data-target="#saveModal" >Save</button>
   </div>

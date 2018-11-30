@@ -27,7 +27,7 @@
     </tr>
   </table>
 
-  <h1 class="text-center">Criteria Matrix</h1>
+  <h1 class="text-center">Phisycal Criteria Matrix</h1>
 
   <table id="table2"  class="table table-bordered text-center">
     <thead class="thead-light">
@@ -101,6 +101,7 @@
   </tbody>
   </table><br>
 
+  
   <form >
     <fieldset>
       <legend style="width: auto;">Physical LoA information</legend>
@@ -164,7 +165,9 @@
     <div class="btn-group" style="justify-content: center; width: 100%;">
       <button class="btn btn-secondary" (click)="loaInfoRequest.possibility=false">Cancel</button>
       <button class="btn btn-primary" (click)="saveLoaInfo(minLoa.value, maxLoa.value)"  data-toggle="modal" data-target="#saveModal" >Save</button>
+      <a class="btn btn-outline-primary" routerLink="/criteria-matrix">Next</a>
     </div>
   </form>
+
 </div>
 
