@@ -21,8 +21,12 @@ import { EditScenarioComponent } from './edit-scenario/edit-scenario.component';
 import { MainAnalysisComponent } from './main-analysis/main-analysis.component';
 import { SubScenariosComponent } from './sub-scenarios/sub-scenarios.component';
 import { ScenariosComponent } from './scenarios/scenarios.component';
+<<<<<<< HEAD
 import { SubScenariosSortingComponent } from './sub-scenarios-sorting/sub-scenarios-sorting.component';
 
+=======
+import { CriteriaMatrixComponent } from './criteria-matrix/criteria-matrix.component';
+>>>>>>> 473579dc8954bfc17c49baf9ffde68cda00483fe
 
 @NgModule({
   declarations: [
@@ -41,6 +45,7 @@ import { SubScenariosSortingComponent } from './sub-scenarios-sorting/sub-scenar
     SubScenariosComponent,
     ScenariosComponent,
     SubScenariosSortingComponent,
+    CriteriaMatrixComponent,
   ],
   imports: [
     BrowserModule,
