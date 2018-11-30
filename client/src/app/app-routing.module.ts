@@ -14,6 +14,8 @@ import { SubScenariosComponent } from './sub-scenarios/sub-scenarios.component';
 import { ScenariosComponent } from './scenarios/scenarios.component';
 import { AddScenarioComponent } from './add-scenario/add-scenario.component';
 import { EditScenarioComponent } from './edit-scenario/edit-scenario.component';
+import { SubScenariosSortingComponent } from './sub-scenarios-sorting/sub-scenarios-sorting.component';
+
 
 
 const ROUTES: Routes = [
@@ -30,7 +32,9 @@ const ROUTES: Routes = [
   { path: 'sub-scenarios', component: SubScenariosComponent },
   { path: 'scenarios', component: ScenariosComponent },
   { path: 'add-scenario/:id', component: AddScenarioComponent },
-  { path: 'edit-scenario/:id', component: EditScenarioComponent }
+  { path: 'edit-scenario/:id', component: EditScenarioComponent },
+  { path: 'sub-scenarios-sorting', component: SubScenariosSortingComponent }
+
 
 ];
 
