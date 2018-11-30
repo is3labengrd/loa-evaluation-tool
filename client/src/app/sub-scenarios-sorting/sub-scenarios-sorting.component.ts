@@ -31,35 +31,22 @@ export class SubScenariosSortingComponent implements OnInit {
                             // data[0] = labels[0] (data for first bar - 'Standing costs') | data[1] = labels[1] (data for second bar - 'Running costs')
                             // put 0, if there is no data for the particular bar
                             datasets: [{
-                              label: 'LoA value',
-                              data: [6, 0, 0],
+                              label: 'Physical',
+                              data: [6, 6, 1],
                               backgroundColor: '#3366cc'
                             }, {
-                              label: 'LoA value',
-                              data: [4, 0, 0],
+                              label: 'Cognitive',
+                              data: [4, 2, 1],
                               backgroundColor: '#abbcff'
-                            }, {
-                               label: 'LoA value',
-                               data: [0, 4, 0],
-                               backgroundColor: '#3366cc'
-                            }, {
-                               label: 'LoA value',
-                               data: [0, 2, 0],
-                               backgroundColor: '#abbcff'
-                            }, {
-                               label: 'LoA value',
-                               data: [0, 0, 7],
-                               backgroundColor: '#3366cc'
-                             },{
-                               label: 'LoA value',
-                               data: [0, 0, 2],
-                               backgroundColor: '#abbcff'
-                             }]
+                            }]
                          },
                         options: {
                                      responsive: false,
                                      legend: {
-                                        position: 'right' // place legend on the right side of chart
+                                        position: 'right', // place legend on the right side of
+                                        labels: {
+                                            padding: 30
+                                        }
                                       },
                                      scales: {
                                         xAxes: [{
