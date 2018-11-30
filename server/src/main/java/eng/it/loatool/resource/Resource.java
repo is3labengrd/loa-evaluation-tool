@@ -242,16 +242,18 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.ecElePrice = ecElePrice;
     }
 
-    @Column(name = "VAR_RES", nullable = false) public Boolean getVarRes() {
-        if (this.varRes != null) {
-            return varRes;
-        } else {
-            return false;
-        }
+    @Column(name = "VAR_RES") public Boolean getVarRes() {
+        return this.varRes;
     }
 
     private void setVarRes(Boolean varRes) {
-        if (this.varRes == null) this.varRes = varRes;
+        if (this.varRes == null) {
+            if (varRes != null) {
+                this.varRes = varRes;
+            } else {
+                this.varRes = false;
+            }
+        }
     }
 
     @CreationTimestamp

@@ -11,4 +11,7 @@ public interface SubProcessLevelResourceRepository extends CrudRepository<SubPro
     @Query("from SubProcessLevelResource where subprocessLevel.pkTbId=:subprocessId")
     public Iterable<SubProcessLevelResource> getSubProcessLevelResourcebySubProcessId(@Param("subprocessId") Integer subprocessId);
 
+    @Query("from SubProcessLevelResource where resource.pkTbId=:resourceId")
+    public Iterable<SubProcessLevelResource> getSubProcessLevelResourcebyResourceId(@Param("resourceId") Integer resourceId);
+
 }

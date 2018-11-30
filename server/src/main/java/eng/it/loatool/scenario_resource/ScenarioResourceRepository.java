@@ -11,4 +11,7 @@ public interface ScenarioResourceRepository extends JpaRepository<ScenarioResour
     @Query("from ScenarioResource where fkTbAceSubProLev=:subprocessId")
     public Iterable<ScenarioResource> getScenarioResourcebySubProcessId(@Param("subprocessId") Integer subprocessId);
 
+    @Query("from ScenarioResource where fkTbAceRes=:resourceId")
+    public Iterable<ScenarioResource> getScenarioResourcesbyResourceId(@Param("resourceId") Integer resourceId);
+
 }

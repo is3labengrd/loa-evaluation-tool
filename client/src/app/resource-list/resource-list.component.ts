@@ -34,9 +34,7 @@ export class ResourceListComponent implements OnInit {
     this.pagination.page = Math.max(0, --this.pagination.page);
   }
 
-  // tslint:disable-next-line:member-ordering
   searchTerm = '';
-  // tslint:disable-next-line:member-ordering
   resources = [];
 
   constructor(
@@ -45,36 +43,42 @@ export class ResourceListComponent implements OnInit {
     private assaignService: AssaignService
   ) { }
 
-  // tslint:disable-next-line:member-ordering
   selectedSubprocess: any;
 
   ngOnInit() {
     this.selectedSubprocess = this._processListService.getCookie('selectedSubprocess');
-    this.updateResourceList();    this.syncingWithVAR = true;
-    this.http
-      .post(environment.apiUrl + '/v1/var/populate-resources', {})
-      .toPromise()
+    this.updateResourceList();
+    this.populateResources()
       .then(
         () => {
-          this.syncingWithVAR = false;
           this.updateResourceList();
         }
       )
       .catch(
         (err) => {
-          this.syncingWithVAR = false;
-          // tslint:disable-next-line:prefer-const
           let camErrorTrigger: any = document.querySelector('#camErrorTrigger');
           camErrorTrigger.click();
         }
       );
   }
 
+  populateResources = () => {
+    this.syncingWithVAR = true;
+    return this.http
+      .post(environment.apiUrl + '/v1/var/populate-resources', {})
+      .toPromise()
+      .then((data) => {
+        this.syncingWithVAR = false;
+        return data;
+      })
+      .catch((err) => {
+        this.syncingWithVAR = false;
+        throw err;
+      });
+  }
 
   updateResourceList = () => {
-    // tslint:disable-next-line:prefer-const
     let subProcessId = this.selectedSubprocess[`level${this.selectedSubprocess.maxDepth}`].id;
-    // tslint:disable-next-line:whitespace
     const url = this.searchTerm.length?
       `${environment.apiUrl}/v1/resource-items-by-subprocess-id/${subProcessId}` +
       `/like/${this.searchTerm}?` +
@@ -84,20 +88,17 @@ export class ResourceListComponent implements OnInit {
       `${environment.apiUrl}/v1/resource-items-by-subprocess-id/${subProcessId}?` +
       'page=' + this.pagination.page + '&' +
       'size=' + this.pagination.size;
-
     this.http.get(url)
-    .subscribe((resources: any) => {
-      this.resources = resources.content;
-      this.pagination.lastPage = resources.totalPages - 1;
-      this.pagination.totalPages = Array(this.pagination.lastPage + 1)
-        .fill(0).map((x, y) => x + y);
-    });
-
+      .subscribe((resources: any) => {
+        this.resources = resources.content;
+        this.pagination.lastPage = resources.totalPages - 1;
+        this.pagination.totalPages = Array(this.pagination.lastPage + 1)
+          .fill(0).map((x, y) => x + y);
+      });
   }
 
 
   assign = (resource) => {
-    // tslint:disable-next-line:prefer-const
     let subProcessLevelId = this
       .selectedSubprocess[
         `level${this.selectedSubprocess.maxDepth}`
@@ -113,10 +114,16 @@ export class ResourceListComponent implements OnInit {
   }
 
   deassign = (resource) => {
-    console.log(resource);
     return this.http
       .delete(
         `${environment.apiUrl}/v1/subprocess-level-resources/${resource.assignmentId}`
+      ).toPromise();
+  }
+
+  delete = (resource) => {
+    return this.http
+      .delete(
+        `${environment.apiUrl}/v1/resources/${resource.resourceId}`
       ).toPromise();
   }
 

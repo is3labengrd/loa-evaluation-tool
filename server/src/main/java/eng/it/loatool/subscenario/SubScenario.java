@@ -104,7 +104,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
     @Override
     @Id @GeneratedValue(strategy = IDENTITY)
 
-    @Column(name = "PK_TB_ID", unique = true, nullable = false) public Integer getPkTbId() {
+    @Column(name = "PK_TB_ID", unique = true, nullable = false)
+    public Integer getPkTbId() {
         return this.pkTbId;
     }
 
@@ -113,7 +114,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.pkTbId = pkTbId;
     }
 
-    @Column(name = "FK_TB_ACE_PRO_SEQ", nullable = false) public Integer getFkTbAceProSeq() {
+    @Column(name = "FK_TB_ACE_PRO_SEQ", nullable = false)
+    public Integer getFkTbAceProSeq() {
         return this.fkTbAceProSeq;
     }
 
@@ -161,7 +163,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.resource = resource;
     }
 
-    @Column(name = "SCENARIO_NUMBER", nullable = false) public Integer getScenarioNumber() {
+    @Column(name = "SCENARIO_NUMBER", nullable = false)
+    public Integer getScenarioNumber() {
         return this.scenarioNumber;
     }
 
@@ -169,7 +172,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.scenarioNumber = scenarioNumber;
     }
 
-    @Column(name = "PROCESS_TIME", nullable = false) public Integer getProcessTime() {
+    @Column(name = "PROCESS_TIME", nullable = false)
+    public Integer getProcessTime() {
         return this.processTime;
     }
 
@@ -177,7 +181,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.processTime = processTime;
     }
 
-    @Column(name = "ASSEMBLY_COST_PER_PIECE", precision = 22, scale = 0) public Double getAssemblyCostPerPiece() {
+    @Column(name = "ASSEMBLY_COST_PER_PIECE", precision = 22, scale = 0)
+    public Double getAssemblyCostPerPiece() {
         return this.assemblyCostPerPiece;
     }
 
@@ -185,7 +190,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.assemblyCostPerPiece = assemblyCostPerPiece;
     }
 
-    @Column(name = "ASSEMBLY_COSTS", precision = 22, scale = 0) public Double getAssemblyCosts() {
+    @Column(name = "ASSEMBLY_COSTS", precision = 22, scale = 0)
+    public Double getAssemblyCosts() {
         return this.assemblyCosts;
     }
 
@@ -193,7 +199,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.assemblyCosts = assemblyCosts;
     }
 
-    @Column(name = "US_PHYSICAL_LOA") public Integer getUsPhysicalLoa() {
+    @Column(name = "US_PHYSICAL_LOA")
+    public Integer getUsPhysicalLoa() {
         return this.usPhysicalLoa;
     }
 
@@ -201,7 +208,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.usPhysicalLoa = usPhysicalLoa;
     }
 
-    @Column(name = "US_COGNITIVE_LOA") public Integer getUsCognitiveLoa() {
+    @Column(name = "US_COGNITIVE_LOA")
+    public Integer getUsCognitiveLoa() {
         return this.usCognitiveLoa;
     }
 
@@ -209,7 +217,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.usCognitiveLoa = usCognitiveLoa;
     }
 
-    @Column(name = "HOURS_PER_YEARS") public Integer getHoursPerYears() {
+    @Column(name = "HOURS_PER_YEARS")
+    public Integer getHoursPerYears() {
         return this.hoursPerYears;
     }
 
@@ -217,7 +226,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.hoursPerYears = hoursPerYears;
     }
 
-    @Column(name = "N_PROD_PIECES", precision = 22, scale = 0) public Double getNProdPieces() {
+    @Column(name = "N_PROD_PIECES", precision = 22, scale = 0)
+    public Double getNProdPieces() {
         return this.NProdPieces;
     }
 
@@ -225,7 +235,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.NProdPieces = NProdPieces;
     }
 
-    @Column(name = "LABOUR_COST", precision = 22, scale = 0) public Double getLabourCost() {
+    @Column(name = "LABOUR_COST", precision = 22, scale = 0)
+    public Double getLabourCost() {
         return this.labourCost;
     }
 
@@ -233,7 +244,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.labourCost = labourCost;
     }
 
-    @Column(name = "ENERGY_COST", precision = 22, scale = 0) public Double getEnergyCost() {
+    @Column(name = "ENERGY_COST", precision = 22, scale = 0)
+    public Double getEnergyCost() {
         return this.energyCost;
     }
 
@@ -241,7 +253,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.energyCost = energyCost;
     }
 
-    @Column(name = "MAINT_COST", precision = 22, scale = 0) public Double getMaintCost() {
+    @Column(name = "MAINT_COST", precision = 22, scale = 0)
+    public Double getMaintCost() {
         return this.maintCost;
     }
 
@@ -249,7 +262,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.maintCost = maintCost;
     }
 
-    @Column(name = "ANNUAL_SPACE_COST", precision = 22, scale = 0) public Double getAnnualSpaceCost() {
+    @Column(name = "ANNUAL_SPACE_COST", precision = 22, scale = 0)
+    public Double getAnnualSpaceCost() {
         return this.annualSpaceCost;
     }
 
@@ -257,7 +271,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.annualSpaceCost = annualSpaceCost;
     }
 
-    @Column(name = "INPUTED_DEPRECIATION", precision = 22, scale = 0) public Double getInputedDepreciation() {
+    @Column(name = "INPUTED_DEPRECIATION", precision = 22, scale = 0)
+    public Double getInputedDepreciation() {
         return this.inputedDepreciation;
     }
 
@@ -265,7 +280,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.inputedDepreciation = inputedDepreciation;
     }
 
-    @Column(name = "RATE_OF_PART", precision = 22, scale = 0) public Double getRateOfPart() {
+    @Column(name = "RATE_OF_PART", precision = 22, scale = 0)
+    public Double getRateOfPart() {
         return this.rateOfPart;
     }
 
@@ -273,7 +289,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.rateOfPart = rateOfPart;
     }
 
-    @Column(name = "ACCRUED_INT_COSTS", precision = 22, scale = 0) public Double getAccruedIntCosts() {
+    @Column(name = "ACCRUED_INT_COSTS", precision = 22, scale = 0)
+    public Double getAccruedIntCosts() {
         return this.accruedIntCosts;
     }
 
@@ -281,7 +298,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.accruedIntCosts = accruedIntCosts;
     }
 
-    @Column(name = "VAR_COST_TOTAL", precision = 22, scale = 0) public Double getVarCostTotal() {
+    @Column(name = "VAR_COST_TOTAL", precision = 22, scale = 0)
+    public Double getVarCostTotal() {
         return this.varCostTotal;
     }
 
@@ -289,7 +307,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.varCostTotal = varCostTotal;
     }
 
-    @Column(name = "FIXED_COST_TOTAL", precision = 22, scale = 0) public Double getFixedCostTotal() {
+    @Column(name = "FIXED_COST_TOTAL", precision = 22, scale = 0)
+    public Double getFixedCostTotal() {
         return this.fixedCostTotal;
     }
 
