@@ -11,6 +11,7 @@ import eng.it.loatool.scenario_resource.ScenarioResourceRepository;
 import eng.it.loatool.subprocess_level_resource.SubProcessLevelResourceRepository;
 import eng.it.loatool.subscenario.SubScenario;
 import eng.it.loatool.subscenario.SubScenarioRepository;
+import eng.it.loatool.var.request.VARWorkUnitImpl;
 
 @Service
 public class DeleteResourceService {
@@ -34,6 +35,13 @@ public class DeleteResourceService {
                     .forEach((scenarioResources) -> {
                         scenarioResourceRepository.delete(scenarioResources);
                     });
+                if (resource.getVarRes()) {
+                    try {
+                        VARWorkUnitImpl.delete(resource.getName());
+                    } catch (Exception e) {
+                        throw new RuntimeException("Something went wrong when deleting resource named " + resource.getName());
+                    }
+                }
                 resourceRepository.deleteById(resourceId);
             });
     }
