@@ -21,6 +21,9 @@ import { EditScenarioComponent } from './edit-scenario/edit-scenario.component';
 import { MainAnalysisComponent } from './main-analysis/main-analysis.component';
 import { SubScenariosComponent } from './sub-scenarios/sub-scenarios.component';
 import { ScenariosComponent } from './scenarios/scenarios.component';
+import { SubScenariosSortingComponent } from './sub-scenarios-sorting/sub-scenarios-sorting.component';
+import { CriteriaMatrixComponent } from './criteria-matrix/criteria-matrix.component';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +41,8 @@ import { ScenariosComponent } from './scenarios/scenarios.component';
     MainAnalysisComponent,
     SubScenariosComponent,
     ScenariosComponent,
+    SubScenariosSortingComponent,
+    CriteriaMatrixComponent,
   ],
   imports: [
     BrowserModule,

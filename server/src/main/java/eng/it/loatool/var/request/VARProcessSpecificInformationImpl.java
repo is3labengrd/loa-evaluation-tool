@@ -2,6 +2,11 @@ package eng.it.loatool.var.request;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eng.it.util.PropertyManager;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
@@ -36,13 +41,43 @@ public class VARProcessSpecificInformationImpl {
 
         String instance = VARInstance.getInstance(jsonNode.get("assetName").asText());
         JsonNode checkInstance = objectMapper.readTree(instance);
-
-        if (checkInstance.get(0) == null)
-            VARInstance.createInstance(ProcessSpecificInformationTemplate(json));
-        else
+        try
+        {
             VARInstance.updateInstance(ProcessSpecificInformationTemplate(json));
+        }
+        catch (Throwable t)
+            {
+                createAttr(json);
+            }
 
 
+
+    }
+
+    private static void createAttr(String body) throws IOException {
+        String BASE_URL = System.getenv("ENV_SAR_URL");
+        if(BASE_URL==null){
+            PropertyManager prop = new PropertyManager();
+            BASE_URL = prop.getPropValues("base.url");
+        }
+
+
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(ProcessSpecificInformationTemplate(body));
+
+        final String uri = BASE_URL + "/models/"+jsonNode.get("assetName").asText()+"/attributes/";
+
+        for (JsonNode attr: jsonNode.get("attribute") ) {
+            RestTemplate restTemplate = new RestTemplate();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<String> entity = new HttpEntity<String>(attr.toString(),headers);
+            String answer = restTemplate.postForObject(uri, entity, String.class);
+            System.out.println(answer);
+        }
 
     }
 

@@ -1,5 +1,6 @@
 package eng.it.loatool.api.v1;
 
+import eng.it.loatool.var.request.VARWorkUnitImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import eng.it.loatool.var.service.VARServiceWrapper;
 import eng.it.loatool.var.store_main_processes_from_var.StoreMainProcessesFromVarService;
 import eng.it.loatool.var.store_resources_from_var.StoreResourcesFromVarService;
+
+import java.io.IOException;
 
 @RestController
 public class VARApi {
@@ -30,6 +33,11 @@ public class VARApi {
     public void editResource (@RequestBody String json) throws Exception {
 
         VARServiceWrapper.editResource(json);
+    }
+
+    @RequestMapping(value = "/v1/var/DeleteResource/{name}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("name") String resName) throws IOException {
+        VARWorkUnitImpl.delete(resName);
     }
 
     @RequestMapping("/v1/var/SiteInfo")
