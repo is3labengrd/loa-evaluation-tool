@@ -54,11 +54,11 @@ public class VARSparqlQuery {
 				"}";
 
 		String Tool = prefix() + "SELECT * " +
-				"WHERE { ?list a b2mml:Tool ." +
+				"WHERE { ?list a var:Tool ." +
 				"}";
 
 		String Robot = prefix() + "SELECT * " +
-				"WHERE { ?list a b2mml:Robot ." +
+				"WHERE { ?list a var:Robot ." +
 				"}";
 
 		String result1 = restTemplate.postForObject(uri, WorkUnit, String.class);
