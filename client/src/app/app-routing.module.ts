@@ -14,12 +14,9 @@ import { SubScenariosComponent } from './sub-scenarios/sub-scenarios.component';
 import { ScenariosComponent } from './scenarios/scenarios.component';
 import { AddScenarioComponent } from './add-scenario/add-scenario.component';
 import { EditScenarioComponent } from './edit-scenario/edit-scenario.component';
-<<<<<<< HEAD
 import { SubScenariosSortingComponent } from './sub-scenarios-sorting/sub-scenarios-sorting.component';
-
-=======
 import { CriteriaMatrixComponent } from './criteria-matrix/criteria-matrix.component';
->>>>>>> 473579dc8954bfc17c49baf9ffde68cda00483fe
+
 
 
 const ROUTES: Routes = [
