@@ -1,0 +1,118 @@
+<div>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/main-analysis/">Main analysis functionalities</a></li>
+      <li class="breadcrumb-item active">Cognitive criteria matrix</li>
+    </ol>
+  </nav>
+<table id="table1" >
+  <tr>
+    <td>Main process:</td>
+    <td style="border-right: 1px solid" class="shorten" data-toggle="tooltip" data-placement="top" title="{{selectedSubprocess?.mainProcessName}}">
+      {{selectedSubprocess?.mainProcessName}}
+    </td>
+    <td class="shorten" data-toggle="tooltip" data-placement="top" title="{{selectedSubprocess?.level1?.name}}">
+      Sub process level 1: {{selectedSubprocess?.level1?.name}}
+    </td>
+    <td class="shorten"  data-toggle="tooltip" data-placement="top" title="{{selectedSubprocess?.level2?.name}}">
+      Sub process level 2: {{selectedSubprocess?.level2?.name}}
+    </td>
+  </tr>
+  <tr>
+    <td>Level of sub processes:</td>
+    <td style="border-right: 1px solid" class="shorten">{{selectedSubprocess?.subLevels}}</td>
+    <td class="shorten">Sub process level 3: {{selectedSubprocess?.level3?.name}}</td>
+    <td></td>
+  </tr>
+</table>
+
+<h1 class="text-center">Criteria Matrix</h1>
+
+<table id="table2"  class="table table-bordered text-center">
+  <thead class="thead-light">
+    <th>Criteria</th>
+    <th colspan="4">Direction of increasing benefit <-------------------------------------------------------------------</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let podatak of podaci;">
+    <td> <strong>{{ podatak.criteria }}</strong> </td>
+    <td>{{ podatak.complexity1 }}</td>
+    <td>{{ podatak.complexity2 }}</td>
+    <td>{{ podatak.complexity3 }}</td>
+    <td>{{ podatak.complexity4 }}</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td colspan="4"> <strong><-------------------------------------------------------------------------------- Direction of increasing LoA </strong></td>
+  </tr>
+</tbody>
+</table><br>
+
+<form >
+  <fieldset>
+    <legend style="width: auto;">Cognitive LoA information</legend>
+    <table class="table table-borderless table-responsive">
+      <thead>
+        <th>Automation posibility</th>
+        <th>Current Physical LoA</th>
+        <th>Current Cognitive LoA</th>
+        <th colspan="2" class="text-center">Best physical LoA range</th>
+      </thead>
+      <tr>
+        <td>
+          <label class="switch">
+            <input type="checkbox" name="possibility" [(ngModel)]="loaInfoRequest.possibility">
+            <span class="slider round"></span>
+          </label>
+        </td>
+        <td>
+          <select name="physical-loa" [(ngModel)]="loaInfoRequest.fkTbAcePhyLoa" [disabled]="!loaInfoRequest.possibility" class="selectLoa">
+            <option *ngFor="let loa of physicalLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}} - {{ loa.loa }}</option>
+          </select>
+        </td>
+        <td>
+          <select name="cognitive-loa" [(ngModel)]="loaInfoRequest.fkTbAceCogLoa" [disabled]="!loaInfoRequest.possibility" class="selectLoa">
+            <option *ngFor="let loa of cognitiveLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}} - {{ loa.loa }}</option>
+          </select>
+        </td>
+        <td>
+          <input type="number" name="minBestLoa" #minLoa max="7" min="1" [(ngModel)]="loaInfoRequest.bestRangeMin"
+           [disabled]="!loaInfoRequest.possibility" oninput="this.value=(parseInt(this.value)||0)" onkeydown="return false" required>
+        </td>
+        <td>
+          <input type="number" name="maxBestLoa" #maxLoa max="7" min="1" [(ngModel)]="loaInfoRequest.bestRangeMax"
+           [disabled]="!loaInfoRequest.possibility" oninput="this.value=(parseInt(this.value)||0)" onkeydown="return false" required>
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+
+  <!-- saveModal -->
+ <div class="modal fade" id="saveModal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="saveModalLabel">
+          <p class="text-success" *ngIf="opSuc">Successful</p>
+          <p class="text-danger" *ngIf="!opSuc">Error</p>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <span *ngIf="opSuc">Operation performed.</span>
+        <span *ngIf="!opSuc">Operation failed.</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="away()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="btn-group" style="justify-content: center; width: 100%;">
+    <button class="btn btn-secondary" (click)="loaInfoRequest.possibility=false">Cancel</button>
+    <button class="btn btn-primary" (click)="saveLoaInfo(minLoa.value, maxLoa.value)"  data-toggle="modal" data-target="#saveModal" >Save</button>
+  </div>
+</form> 
+</div>
+
