@@ -34,7 +34,7 @@ const ROUTES: Routes = [
   { path: 'scenarios', component: ScenariosComponent },
   { path: 'add-scenario/:id', component: AddScenarioComponent },
   { path: 'edit-scenario/:id', component: EditScenarioComponent },
-  { path: 'sub-scenarios-sorting', component: SubScenariosSortingComponent }
+  { path: 'sub-scenarios-sorting', component: SubScenariosSortingComponent },
   { path: 'criteria-matrix', component: CriteriaMatrixComponent }
 
 ];
