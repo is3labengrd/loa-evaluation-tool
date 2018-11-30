@@ -975,7 +975,7 @@ checkMandatoryData() {
          saveVARProcessSpecificInformation = () => {
 
          var varProcessSpecificInformationObj = {
-                                      "assetName": this.getNameSubProLev(this.cookie)+"-"+this.getFkAceSubProLevId(this.cookie),
+                                      "assetName": this.getNameSubProLev(this.cookie),
                                       "NumberOfShiftsPerDay": this.procSpecInfoObj.nshiptsDay,
                                       "HoursPerShift": this.procSpecInfoObj.hoursShift,
                                       "WorkingDaysPerYear": this.procSpecInfoObj.workingDaysYear
@@ -992,8 +992,8 @@ checkMandatoryData() {
                   var varProportionalWageCostObj = {
                                                  "assetName": this.getNameSubProLev(this.cookie)+"-"+this.getFkAceSubProLevId(this.cookie),
                                                  "valueString": this.procSpecInfoObj.propWCPerHours,
-                                                 "unitOfMeasure": "l/h",
-                                                 "propertyID": 0
+                                                 "unitOfMeasure": "€/h",
+                                                 "propertyID": ""
                                            }
 
                   return this.http.put(environment.apiUrl + '/v1/var/editProportionalWageCost', varProportionalWageCostObj)
