@@ -110,7 +110,6 @@ export class ResourceListComponent implements OnInit {
         'fkTbAceSubProLev': subProcessLevelId
       }
     ).toPromise();
-
   }
 
   deassign = (resource) => {
