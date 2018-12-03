@@ -127,8 +127,15 @@ public class VARProcessSegmentImpl {
 				if (findChildren(countLowLev, procList).isEmpty()) {
 					count += 1;
 				}
-				for (String countLowLev2 : findChildren(countLowLev, procList)){
-					count += findChildren(countLowLev2, procList).size();
+				else {
+					for (String countLowLev2 : findChildren(countLowLev, procList)){
+						if (findChildren(countLowLev2, procList).isEmpty()) {
+							count += 1;
+						}
+						else {
+							count += findChildren(countLowLev2, procList).size();
+						}
+					}
 				}
 			}
 
