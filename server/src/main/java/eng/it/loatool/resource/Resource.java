@@ -43,6 +43,7 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
     private Integer ecAEleConsumSb;
     private Double ecElePrice;
     private Boolean varRes;
+    private String varClass;
     private Date createDate;
     private Date updateDate;
 
@@ -254,6 +255,15 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
                 this.varRes = false;
             }
         }
+    }
+
+    @Column(name = "VAR_CLASS", length = 500)
+    public String getVarClass() {
+        return this.varClass;
+    }
+
+    public void setVarClass(String varClass) {
+        this.varClass = varClass;
     }
 
     @CreationTimestamp
