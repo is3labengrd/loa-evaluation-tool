@@ -39,7 +39,8 @@ export class EditResourceComponent implements OnInit {
     'icInterRate': null,
     'ecAEleConsumFun': null,
     'ecAEleConsumSb': null,
-    'ecElePrice': null
+    'ecElePrice': null,
+    'varClass':null
   };
 
   resourceInitialState;
@@ -92,6 +93,7 @@ export class EditResourceComponent implements OnInit {
   editVAR = () => {
     var varResObj = {
       "assetName": this.resource.name,
+      "className": this.resource.varClass,
       "loAPhysical": this.resource.loaPhysical,
       "loACognitive": this.resource.loaCognitive,
       "numberOfOperators": this.resource.lcNOperMachine,
@@ -125,6 +127,7 @@ export class EditResourceComponent implements OnInit {
 saveVAR = () => {
   var varResObj = {
     "assetName": this.resource.name,
+    "className": this.resource.varClass,
     "loAPhysical": this.resource.loaPhysical,
     "loACognitive": this.resource.loaCognitive,
     "numberOfOperators": this.resource.lcNOperMachine,
