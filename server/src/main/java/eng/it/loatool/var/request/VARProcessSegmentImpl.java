@@ -93,21 +93,19 @@ public class VARProcessSegmentImpl {
 		return processSegmentId;
 	}
 
-	private static List<String> countLowerLevel(List<String> children, String procList, int counter) throws IOException {
+	private static int countLowerLevel(List<String> children, String procList, int counter) throws IOException {
 
-		List<String> subList = new ArrayList<String>();
 
 		if (children.isEmpty()){
-			return subList;
+			return counter;
 		}
 
 		for(String child : children){
-			counter+=1;
-			subList.add(stringParser(child));
+			counter+= findChildren(child, procList).size();
 			countLowerLevel(findChildren(child, procList),procList,counter);
 		}
 
-		return subList;
+		return counter;
 	}
 
 
@@ -126,8 +124,12 @@ public class VARProcessSegmentImpl {
 			List<SubProcesses> subList = loop(findChildren(father, procList),procList,0);
 
 			for (String countLowLev : findChildren(father, procList)){
-				count += countLowerLevel(findChildren(countLowLev, procList), procList,0).size();
-
+				if (findChildren(countLowLev, procList).isEmpty()) {
+					count += 1;
+				}
+				for (String countLowLev2 : findChildren(countLowLev, procList)){
+					count += findChildren(countLowLev2, procList).size();
+				}
 			}
 
 			mainP.setSubProcLowerLevel(count);
