@@ -15,7 +15,7 @@ export class SubScenariosSortingComponent implements OnInit {
         private cookieService: CookieService
       ) {}
   cookie = this.cookieService.getCookie("selectedSubprocess");
-  minimalTotalSatisfaction: number;
+
 
   barChart: any;
   subScenario1: any;
@@ -24,6 +24,8 @@ export class SubScenariosSortingComponent implements OnInit {
   labelsXAxes: Array<any> = [];
   dataPhysical: Array<any> = [];
   dataCognitive: Array<any> = [];
+  minimalTotalSatisfaction: number;
+
 
   ngOnInit() {
     var promise1 = this.subScenarioGET();
@@ -74,7 +76,7 @@ export class SubScenariosSortingComponent implements OnInit {
         datasets: [
           {
             label: "Minimal total satisfaction",
-            data: [7, 7, 7],
+            data: [this.minimalTotalSatisfaction, this.minimalTotalSatisfaction, this.minimalTotalSatisfaction],
             backgroundColor: "#FF0000",
             type: "line",
             fill: false,
