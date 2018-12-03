@@ -55,7 +55,7 @@
       </th>
     </thead>
     <tbody>
-      <tr *ngFor="let resource of resources">
+      <tr *ngFor="let resource of resources; let i = index">
         <td>
           <a
             routerLink="/edit-resource/{{resource.resourceId}}"
@@ -80,7 +80,7 @@
                   Assign
                 </button>
               </ng-template>
-              <button data-toggle="modal" data-target="#deleteModal" class="dropdown-item">
+              <button data-toggle="modal" [attr.data-target]="'#deleteModal'+i" class="dropdown-item">
                 Delete
               </button>
             </div>
@@ -106,7 +106,7 @@
           </div>
 
           <!-- deleteModal -->
-          <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"  aria-hidden="true">
+          <div class="modal fade" [attr.id]="'deleteModal'+i" tabindex="-1" role="dialog"  aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
