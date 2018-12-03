@@ -49,7 +49,7 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
     public Resource() {}
 
-    public Resource(String name, Integer loaPhysical, Integer loaCognitive, Double lcNOperMachine, Double mcAMaintCosts, Float mcAMaintCostsPerc, Double rcInstSurface, Double rcCostsMMonth, Double idMacPurhValue, Double idMacSalesValue, Integer idEcoUsefullLife, Float icInterRate, Integer ecAEleConsumFun, Integer ecAEleConsumSb, Double ecElePrice, Boolean varRes, Date createDate, Date updateDate) {
+    public Resource(String name, Integer loaPhysical, Integer loaCognitive, Double lcNOperMachine, Double mcAMaintCosts, Float mcAMaintCostsPerc, Double rcInstSurface, Double rcCostsMMonth, Double idMacPurhValue, Double idMacSalesValue, Integer idEcoUsefullLife, Float icInterRate, Integer ecAEleConsumFun, Integer ecAEleConsumSb, Double ecElePrice, Boolean varRes, String varClass, Date createDate, Date updateDate) {
         this.name = name;
         this.loaPhysical = loaPhysical;
         this.loaCognitive = loaCognitive;
@@ -66,6 +66,7 @@ public class Resource implements java.io.Serializable, PkTbPrimaryKeyOwner {
         this.ecAEleConsumSb = ecAEleConsumSb;
         this.ecElePrice = ecElePrice;
         this.varRes = varRes;
+        this.varClass = varClass;
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
