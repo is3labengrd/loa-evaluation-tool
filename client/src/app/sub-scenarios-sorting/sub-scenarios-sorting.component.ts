@@ -25,43 +25,49 @@ export class SubScenariosSortingComponent implements OnInit {
   dataPhysical: Array<any> = [];
   dataCognitive: Array<any> = [];
   minimalTotalSatisfaction: number;
+  minimalTotalSatisfactionID: number;
 
 
   ngOnInit() {
-    var promise1 = this.subScenarioGET();
-     promise1.then((x) => {
-        if(this.subScenario1!=null){
-            this.labelsXAxes.push("Scenario 1 ["+this.subScenario1.assemblyCostPerPiece+"€/piece]");
-            this.dataPhysical.push(this.subScenario1.resource.loaPhysical);
-            this.dataCognitive.push(this.subScenario1.resource.loaCognitive);
-        }else{
-            this.labelsXAxes.push("Scenario 1");
-            this.dataPhysical.push(0);
-            this.dataCognitive.push(0);
-        }
+    var promise1 = this.minimalTotalSatisfactionGET();
+    promise1.then((x) => {
+        var promise2 = this.subScenarioGET();
 
-        if(this.subScenario2!=null){
-           this.labelsXAxes.push("Scenario 2 ["+this.subScenario2.assemblyCostPerPiece+"€/piece]");
-           this.dataPhysical.push(this.subScenario2.resource.loaPhysical);
-           this.dataCognitive.push(this.subScenario2.resource.loaCognitive);
-        }else{
-           this.labelsXAxes.push("Scenario 2");
-           this.dataPhysical.push(0);
-           this.dataCognitive.push(0);
-        }
+         promise2.then((x) => {
+          if(this.subScenario1!=null){
+                    this.labelsXAxes.push("Scenario 1 ["+this.subScenario1.assemblyCostPerPiece+"€/piece]");
+                    this.dataPhysical.push(this.subScenario1.resource.loaPhysical);
+                    this.dataCognitive.push(this.subScenario1.resource.loaCognitive);
+                }else{
+                    this.labelsXAxes.push("Scenario 1");
+                    this.dataPhysical.push(0);
+                    this.dataCognitive.push(0);
+                }
 
-        if(this.subScenario3!=null){
-         this.labelsXAxes.push("Scenario 3 ["+this.subScenario3.assemblyCostPerPiece+"€/piece]");
-         this.dataPhysical.push(this.subScenario3.resource.loaPhysical);
-         this.dataCognitive.push(this.subScenario3.resource.loaCognitive);
-        }else{
-         this.labelsXAxes.push("Scenario 3");
-         this.dataPhysical.push(0);
-         this.dataCognitive.push(0);
-       }
+                if(this.subScenario2!=null){
+                   this.labelsXAxes.push("Scenario 2 ["+this.subScenario2.assemblyCostPerPiece+"€/piece]");
+                   this.dataPhysical.push(this.subScenario2.resource.loaPhysical);
+                   this.dataCognitive.push(this.subScenario2.resource.loaCognitive);
+                }else{
+                   this.labelsXAxes.push("Scenario 2");
+                   this.dataPhysical.push(0);
+                   this.dataCognitive.push(0);
+                }
 
-         this.createBarChart();
-     });
+                if(this.subScenario3!=null){
+                 this.labelsXAxes.push("Scenario 3 ["+this.subScenario3.assemblyCostPerPiece+"€/piece]");
+                 this.dataPhysical.push(this.subScenario3.resource.loaPhysical);
+                 this.dataCognitive.push(this.subScenario3.resource.loaCognitive);
+                }else{
+                 this.labelsXAxes.push("Scenario 3");
+                 this.dataPhysical.push(0);
+                 this.dataCognitive.push(0);
+               }
+
+                 this.createBarChart();
+             });
+    });
+
 
   }
 
@@ -176,4 +182,93 @@ export class SubScenariosSortingComponent implements OnInit {
           }
 
       }
+  updateSubScenarios(){
+      if(this.subScenario1!=null && this.minimalTotalSatisfaction!=null) {
+          if((this.subScenario1.resource.loaPhysical+ this.subScenario1.resource.loaCognitive)>=this.minimalTotalSatisfaction){
+          this.subScenario1.resSorting=true;
+          }else{
+          this.subScenario1.resSorting=false;
+          }
+          this.http.put(environment.apiUrl + '/v1/subscenarios/'+this.subScenario1.pkTbId, this.subScenario1)
+              .toPromise().then((res:any) => {});
+      }
+
+      if(this.subScenario2!=null && this.minimalTotalSatisfaction!=null){
+          if((this.subScenario2.resource.loaPhysical+ this.subScenario2.resource.loaCognitive)>=this.minimalTotalSatisfaction){
+          this.subScenario2.resSorting=true;
+          }else{
+          this.subScenario2.resSorting=false;
+          }
+          this.http.put(environment.apiUrl + '/v1/subscenarios/'+this.subScenario2.pkTbId, this.subScenario2)
+              .toPromise().then((res:any) => {});
+      }
+
+      if(this.subScenario3!=null && this.minimalTotalSatisfaction!=null){
+          if((this.subScenario3.resource.loaPhysical+ this.subScenario3.resource.loaCognitive)>=this.minimalTotalSatisfaction){
+          this.subScenario3.resSorting=true;
+          }else{
+          this.subScenario3.resSorting=false;
+          }
+          this.http.put(environment.apiUrl + '/v1/subscenarios/'+this.subScenario3.pkTbId, this.subScenario3)
+              .toPromise().then((res:any) => {});
+      }
+  }
+
+   enableSaveButton(): boolean {
+        var enable = false;
+        if(this.minimalTotalSatisfaction==null){
+            return false;
+        }else{
+          if(this.subScenario1!=null && (this.subScenario1.resource.loaPhysical+ this.subScenario1.resource.loaCognitive)>=this.minimalTotalSatisfaction){
+             enable=true;
+          }
+          if(this.subScenario2!=null && (this.subScenario2.resource.loaPhysical+ this.subScenario2.resource.loaCognitive)>=this.minimalTotalSatisfaction){
+             enable=true;
+          }
+          if(this.subScenario3!=null && (this.subScenario3.resource.loaPhysical+ this.subScenario3.resource.loaCognitive)>=this.minimalTotalSatisfaction){
+             enable=true;
+          }
+
+        }
+      return enable;
+    }
+
+    minimalTotalSatisfactionGET() {
+              return this.http
+                .get(environment.apiUrl + '/v1/minimal-satisfactions-by-process-id/'+this.cookie.mainProcessId)
+                .toPromise()
+                .then(
+                (result:any) => {
+                     this.minimalTotalSatisfaction=result.minTotalSat;
+                     this.minimalTotalSatisfactionID=result.pkTbId;
+                 },
+                 err => {
+                    this.minimalTotalSatisfactionID=null;
+                 })
+    }
+
+
+    minimalTotalSatisfactionUpdate(): void {
+        var minimalTotalSatisfactionObj = {
+                                  minTotalSat: {},
+                                  fkTbAceProSeq: {}
+                            };
+        minimalTotalSatisfactionObj.minTotalSat = this.minimalTotalSatisfaction;
+        minimalTotalSatisfactionObj.fkTbAceProSeq = this.cookie.mainProcessId;
+
+
+        if (this.minimalTotalSatisfactionID == null) {
+         this.http.post(environment.apiUrl + '/v1/minimal-satisfactions', minimalTotalSatisfactionObj)
+                            .toPromise().then((res:any) => {
+                              this.minimalTotalSatisfactionID=res.pkTbId;
+                            });
+          this.createBarChart();
+         }else{
+           this.http.put(environment.apiUrl + '/v1/minimal-satisfactions/'+this.minimalTotalSatisfactionID, minimalTotalSatisfactionObj)
+                    .subscribe(res => console.log('Done put'));
+          this.createBarChart();
+        }
+
+     }
+
 }

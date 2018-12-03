@@ -47,9 +47,9 @@
   <canvas id="barChart"></canvas>
  </div>
 </fieldset>
-<div *ngIf="minimalTotalSatisfaction!=null">
+<div *ngIf="enableSaveButton()">
   <span class="btn-group d-flex justify-content-center">
-      <button class="btn btn-primary"  data-toggle="modal" data-target="#saveModal" >Save</button>
+      <button class="btn btn-primary"  data-toggle="modal" (click)="updateSubScenarios()" data-target="#saveModal" >Save</button>
    </span>
 </div>
 
@@ -70,7 +70,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"  data-dismiss="modal" (click)="createBarChart()" [disabled]="minimalTotalSatisfaction==null || !(minimalTotalSatisfaction>0 && minimalTotalSatisfaction<15)">Save</button>
+        <button type="button" class="btn btn-primary"  data-dismiss="modal" (click)="minimalTotalSatisfactionUpdate()" [disabled]="minimalTotalSatisfaction==null || !(minimalTotalSatisfaction>0 && minimalTotalSatisfaction<15)">Save</button>
       </div>
     </div>
   </div>
