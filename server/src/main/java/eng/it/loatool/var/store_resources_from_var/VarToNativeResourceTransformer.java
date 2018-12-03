@@ -29,6 +29,7 @@ public class VarToNativeResourceTransformer {
             zeroIfInvalidInteger(() -> Integer.valueOf(propertyValues.get("annualElectricityConsumptionStandBy"))),
             zeroIfInvalidDouble(() -> Double.valueOf(propertyValues.get("electricityPrice"))),
             true,
+            individual.getClassName(),
             null,
             null
         );
