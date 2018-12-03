@@ -22,7 +22,7 @@ public class VARWorkUnitImpl {
 
         String workUnitTemplate = "{" +
                 "\"assetName\": " + jsonNode.get("assetName") + "," +
-                "\"className\":\"WorkUnit\"," +
+                "\"className\": " + jsonNode.get("className") + "," +
                 "\"domainName\":\"\"," +
                 "\"orionConfigId\": \"\"," +
                 "\"attribute\":" +
@@ -125,16 +125,19 @@ public class VARWorkUnitImpl {
 
     }
 
-    private static List<String> getIndividuals () throws IOException {
+    private static List<Attrs> getIndividuals () throws IOException {
 
 
-        List<String> individuals = new ArrayList<String>();
+        List<Attrs> individuals = new ArrayList<Attrs>();
         ObjectMapper objectMapper = new ObjectMapper();
-        for(String cl : VARSparqlQuery.getWorkUnitList()){
-        JsonNode jsonNode = objectMapper.readTree(cl);
+        for(Attrs cl : VARSparqlQuery.getWorkUnitList()){
+        JsonNode jsonNode = objectMapper.readTree(cl.getValue());
 
             for(JsonNode name : jsonNode.get("results").get("bindings")){
-                individuals.add(stringParser(name.get("list").get("value").asText()));
+            	Attrs ind = new Attrs();
+            	ind.setName(cl.getName());
+            	ind.setValue(stringParser(name.get("list").get("value").asText()));
+                individuals.add(ind);
             }
         }
         return individuals;
@@ -168,11 +171,12 @@ public class VARWorkUnitImpl {
 
         List<Individual> resourceList = new ArrayList<Individual>();
 
-        for (String name : getIndividuals ()){
+        for (Attrs name : getIndividuals() ){
             Individual res = new Individual();
-            res.setName(name);
+            res.setName(name.getValue());
+            res.setClassName(name.getName());
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode jsonNode = objectMapper.readTree(findAttributes(name));
+            JsonNode jsonNode = objectMapper.readTree(findAttributes(name.getValue()));
             List<Attrs> attributes = new ArrayList<Attrs>();
 
             if(!jsonNode.isNull()) {
@@ -187,8 +191,8 @@ public class VARWorkUnitImpl {
             resourceList.add(res);
 
         }
+        
         return resourceList;
-
     }
 
     public static void delete(String name) throws IOException {

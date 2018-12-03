@@ -5,6 +5,7 @@ import java.util.List;
 public class Individual {
 	private String name;
 	private List<Attrs> attr;
+	private String className;
 
 	public String getName() {
 		return name;
@@ -20,7 +21,14 @@ public class Individual {
 		this.attr = attr;
 	}
 
-    @Override
+    public String getClassName() {
+		return className;
+	}
+	public void setClassName(String className) {
+		this.className = className;
+	}
+	
+	@Override
     public String toString() {
         return "Individual [name=" + name + ", attr=" + attr + "]";
     }

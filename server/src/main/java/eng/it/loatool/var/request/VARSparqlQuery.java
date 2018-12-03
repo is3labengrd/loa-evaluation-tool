@@ -1,6 +1,7 @@
 package eng.it.loatool.var.request;
 
 
+import eng.it.loatool.var.bean.Attrs;
 import eng.it.util.PropertyManager;
 
 import org.springframework.web.client.RestTemplate;
@@ -37,9 +38,9 @@ public class VARSparqlQuery {
 	    return result;
 	}
 
-	public static List<String> getWorkUnitList() throws IOException {
+	public static List<Attrs> getWorkUnitList() throws IOException {
 
-		List<String> wu = new ArrayList<String>();
+		List<Attrs> wu = new ArrayList<Attrs>();
 
 		String BASE_URL = System.getenv("ENV_SAR_URL");
 		if(BASE_URL==null){
@@ -61,13 +62,24 @@ public class VARSparqlQuery {
 				"WHERE { ?list a var:Robot ." +
 				"}";
 
+		Attrs WU = new Attrs();
 		String result1 = restTemplate.postForObject(uri, WorkUnit, String.class);
+		WU.setName("WorkUnit");
+		WU.setValue(result1);
+		
+		Attrs T = new Attrs();
 		String result2 = restTemplate.postForObject(uri, Tool, String.class);
+		T.setName("Tool");
+		T.setValue(result2);
+		
+		Attrs R = new Attrs();
 		String result3 = restTemplate.postForObject(uri, Robot, String.class);
-
-		wu.add(result1);
-		wu.add(result2);
-		wu.add(result3);
+		R.setName("Robot");
+		R.setValue(result3);
+		
+		wu.add(WU);
+		wu.add(T);
+		wu.add(R);
 
 		return wu;
 	}

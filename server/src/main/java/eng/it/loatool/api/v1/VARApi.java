@@ -22,7 +22,7 @@ public class VARApi {
     public Object getVarProcessSegmentList() throws Exception {
         return VARServiceWrapper.getProcessesSegmentList();
     }
-
+    
     @RequestMapping(value = "/v1/var/addResource", method = RequestMethod.POST)
     public void addResource (@RequestBody String json) throws Exception {
 
