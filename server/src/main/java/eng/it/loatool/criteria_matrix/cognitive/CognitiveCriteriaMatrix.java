@@ -13,6 +13,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import eng.it.loatool.PkTbPrimaryKeyOwner;
@@ -462,8 +465,9 @@ public class CognitiveCriteriaMatrix implements java.io.Serializable, PkTbPrimar
         this.usOf = usOf;
     }
 
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "CREATE_DATE", nullable = false, length = 19)
+    @Column(name = "CREATE_DATE", updatable = false, nullable = false, length = 19)
     public Date getCreateDate() {
         return this.createDate;
     }
@@ -472,6 +476,7 @@ public class CognitiveCriteriaMatrix implements java.io.Serializable, PkTbPrimar
         this.createDate = createDate;
     }
 
+    @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "UPDATE_DATE", nullable = false, length = 19)
     public Date getUpdateDate() {

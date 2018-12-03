@@ -13,6 +13,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import eng.it.loatool.PkTbPrimaryKeyOwner;
@@ -71,8 +74,9 @@ public class MinimalSatisfaction implements java.io.Serializable, PkTbPrimaryKey
         this.minTotalSat = minTotalSat;
     }
 
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "CREATE_DATE", nullable = false, length = 19)
+    @Column(name = "CREATE_DATE", updatable = false, nullable = false, length = 19)
     public Date getCreateDate() {
         return this.createDate;
     }
@@ -81,6 +85,7 @@ public class MinimalSatisfaction implements java.io.Serializable, PkTbPrimaryKey
         this.createDate = createDate;
     }
 
+    @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "UPDATE_DATE", nullable = false, length = 19)
     public Date getUpdateDate() {
