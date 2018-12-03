@@ -73,7 +73,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="actions">
               <ng-template [ngIf]="resource.assigned" [ngIfElse]="assignBlock">
-                <button  data-toggle="modal" data-target="#deassignModal" class="dropdown-item">De-assign</button>
+                <button  data-toggle="modal" [attr.data-target]="'#deassignModal'+i" class="dropdown-item">De-assign</button>
               </ng-template>
               <ng-template #assignBlock>
                 <button (click)="assign(resource).then(updateResourceList);" data-toggle="modal" data-target="#assignModal" class="dropdown-item">
@@ -87,7 +87,7 @@
           </div>
 
           <!-- deassignModal -->
-          <div class="modal fade" id="deassignModal" tabindex="-1" role="dialog"  aria-hidden="true">
+          <div class="modal fade" [attr.id]="'deassignModal'+i" tabindex="-1" role="dialog"  aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
