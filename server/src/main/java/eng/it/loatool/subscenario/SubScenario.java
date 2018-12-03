@@ -61,6 +61,7 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
     private Double varCostTotal;
     private Double fixedCostTotal;
     private Boolean resRecal;
+    private Boolean resSorting;
     private Date createDate;
     private Date updateDate;
 
@@ -323,6 +324,15 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
     public void setResRecal(Boolean resRecal) {
         this.resRecal = resRecal;
+    }
+
+    @Column(name = "RES_SORTING")
+    public Boolean getResSorting() {
+        return this.resSorting;
+    }
+
+    public void setResSorting(Boolean resSorting) {
+        this.resSorting = resSorting;
     }
 
     @CreationTimestamp

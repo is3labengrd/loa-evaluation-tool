@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `loa_evaluation_tool`.`TB_ACE_PRO_LOA_INF` (
   `FK_TB_ACE_COG_LOA` INT NOT NULL,
   `POSSIBILITY` TINYINT(1) NOT NULL,
   `BEST_RANGE` VARCHAR(45) NOT NULL,
+  `LOA_TYPE` ENUM('P','C') NOT NULL,
   `CREATE_DATE` DATETIME NOT NULL,
   `UPDATE_DATE` DATETIME NOT NULL,
   `FK_TB_ACE_SUB_PRO_LEV` INT(11) NOT NULL,
@@ -264,6 +265,7 @@ CREATE TABLE IF NOT EXISTS `loa_evaluation_tool`.`TB_ACE_SUB_SCENARIOS` (
   `VAR_COST_TOTAL` DOUBLE NULL,
   `FIXED_COST_TOTAL` DOUBLE NULL,
   `RES_RECAL` BOOLEAN NULL,
+  `RES_SORTING` TINYINT(1) NULL,
   `CREATE_DATE` DATETIME NOT NULL,
   `UPDATE_DATE` DATETIME NOT NULL,
   PRIMARY KEY (`PK_TB_ID`))
@@ -321,6 +323,54 @@ CREATE TABLE IF NOT EXISTS `loa_evaluation_tool`.`TB_ACE_SCENARIO_RES` (
   PRIMARY KEY (`PK_TB_ID`))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `loa_evaluation_tool`.`TB_ACE_LOA_CRI_MAT_C`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `loa_evaluation_tool`.`TB_ACE_LOA_CRI_MAT_C` ;
+
+CREATE TABLE IF NOT EXISTS `loa_evaluation_tool`.`TB_ACE_LOA_CRI_MAT_C` (
+  `PK_TB_ID` INT NOT NULL AUTO_INCREMENT,
+  `FK_TB_ACE_SUB_PRO_LEV` INT NOT NULL,
+  `TC_H` INT NULL,
+  `TC_M` INT NULL,
+  `TC_L` INT NULL,
+  `TC_N` INT NULL,
+  `RE_N` INT NULL,
+  `RE_L` INT NULL,
+  `RE_M` INT NULL,
+  `RE_H` INT NULL,
+  `FC_H` INT NULL,
+  `FC_M` INT NULL,
+  `FC_L` INT NULL,
+  `FC_N` INT NULL,
+  `LV_H` INT NULL,
+  `LV_M` INT NULL,
+  `LV_L` INT NULL,
+  `LV_N` INT NULL,
+  `RD_H` INT NULL,
+  `RD_M` INT NULL,
+  `RD_L` INT NULL,
+  `RD_N` INT NULL,
+  `AD_L` INT NULL,
+  `AD_A` INT NULL,
+  `AD_S` INT NULL,
+  `AD_N` INT NULL,
+  `AS_L` INT NULL,
+  `AS_A` INT NULL,
+  `AS_S` INT NULL,
+  `AS_N` INT NULL,
+  `RM_N` INT NULL,
+  `RM_S` INT NULL,
+  `RM_M` INT NULL,
+  `RM_L` INT NULL,
+  `US_N` INT NULL,
+  `US_OC` INT NULL,
+  `US_R` INT NULL,
+  `US_OF` INT NULL,
+  `CREATE_DATE` DATETIME NOT NULL,
+  `UPDATE_DATE` DATETIME NOT NULL,
+  PRIMARY KEY (`PK_TB_ID`))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `loa_evaluation_tool`.`TB_ACE_SUB_PRO_LEV_RES`
@@ -355,6 +405,19 @@ CREATE TABLE IF NOT EXISTS `loa_evaluation_tool`.`TB_ACE_PRO_SEC_ORDERED` (
   PRIMARY KEY (`PK_TB_ID`))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `loa_evaluation_tool`.`TB_ACE_MIN_SAT`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `loa_evaluation_tool`.`TB_ACE_MIN_SAT` ;
+
+CREATE TABLE IF NOT EXISTS `loa_evaluation_tool`.`TB_ACE_MIN_SAT` (
+  `PK_TB_ID` INT NOT NULL AUTO_INCREMENT,
+  `FK_TB_ACE_PRO_SEQ` INT NOT NULL,
+  `MIN_TOTAL_SAT` INT NOT NULL,
+  `CREATE_DATE` DATETIME NOT NULL,
+  `UPDATE_DATE` DATETIME NOT NULL,
+  PRIMARY KEY (`PK_TB_ID`))
+ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -383,4 +446,3 @@ INSERT INTO `loa_evaluation_tool`.`TB_ACE_COG_LOA` (`PK_TB_ID`, `CODE`, `LOA`) V
 INSERT INTO `loa_evaluation_tool`.`TB_ACE_COG_LOA` (`PK_TB_ID`, `CODE`, `LOA`) VALUES ('5', '2005', 'Technology monitors, analyze and provide decision, operator makes final decision and action');
 INSERT INTO `loa_evaluation_tool`.`TB_ACE_COG_LOA` (`PK_TB_ID`, `CODE`, `LOA`) VALUES ('6', '2006', 'Technology responsible for majority of tasks, both technology and operator can set action but technology override');
 INSERT INTO `loa_evaluation_tool`.`TB_ACE_COG_LOA` (`PK_TB_ID`, `CODE`, `LOA`) VALUES ('7', '2007', 'System handles all information and control, and communicates among another');
-

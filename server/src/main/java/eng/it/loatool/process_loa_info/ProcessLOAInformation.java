@@ -36,6 +36,7 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
     private int fkTbAceCogLoa;
     private boolean possibility;
     private String bestRange;
+    private String loaType;
     private Date createDate;
     private Date updateDate;
     @JsonProperty(access = Access.WRITE_ONLY) private int fkTbAceSubProLev;
@@ -43,7 +44,7 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
 
     public ProcessLOAInformation() {}
 
-    public ProcessLOAInformation(int fkTbAcePhyLoa, int fkTbAceCogLoa, boolean possibility, String bestRange, Date createDate, Date updateDate, SubProcessLevel subProcessLevel) {
+    public ProcessLOAInformation(int fkTbAcePhyLoa, int fkTbAceCogLoa, boolean possibility, String bestRange, String loaType, Date createDate, Date updateDate, SubProcessLevel subProcessLevel) {
         this.fkTbAcePhyLoa = fkTbAcePhyLoa;
         this.fkTbAceCogLoa = fkTbAceCogLoa;
         this.possibility = possibility;
@@ -93,6 +94,15 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
 
     public void setBestRange(String bestRange) {
         this.bestRange = bestRange;
+    }
+
+    @Column(name = "LOA_TYPE", nullable = false, length = 2)
+    public String getLoaType() {
+        return this.loaType;
+    }
+
+    public void setLoaType(String loaType) {
+        this.loaType = loaType;
     }
 
     @CreationTimestamp
