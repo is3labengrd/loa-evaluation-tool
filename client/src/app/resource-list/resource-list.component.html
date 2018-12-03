@@ -73,22 +73,14 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="actions">
               <ng-template [ngIf]="resource.assigned" [ngIfElse]="assignBlock">
-                <button  data-toggle="modal" data-target="#deassignModal" class="btn btn-link" class="btn btn-link">De-assign</button>
+                <button  data-toggle="modal" data-target="#deassignModal" class="dropdown-item">De-assign</button>
               </ng-template>
               <ng-template #assignBlock>
-                <button
-                  (click)="assign(resource).then(updateResourceList);"
-                  data-toggle="modal"
-                  data-target="#assignModal"
-                  class="btn btn-link"
-                >
+                <button (click)="assign(resource).then(updateResourceList);" data-toggle="modal" data-target="#assignModal" class="dropdown-item">
                   Assign
                 </button>
               </ng-template>
-              <button
-                (click)="delete(resource).then(populateResources).then(updateResourceList);"
-                class="btn btn-link"
-              >
+              <button data-toggle="modal" data-target="#deleteModal" class="dropdown-item">
                 Delete
               </button>
             </div>
@@ -99,7 +91,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="addModalLabel"><p class="text-warning">Warning</p></h5>
+                  <h5 class="modal-title"><p class="text-warning">Warning</p></h5>
                 </div>
                 <div class="modal-body">
                   You are about to disassociate a Resource to a Process Segment,
@@ -113,6 +105,25 @@
             </div>
           </div>
 
+          <!-- deleteModal -->
+          <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"><p class="text-warning">Warning</p></h5>
+                </div>
+                <div class="modal-body">
+                  You are about to Delete a Resource,
+                  this will result in data loss if the Resource is used in the Scenario calculation: sure you want to continue?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="delete(resource).then(populateResources).then(updateResourceList);">Yes</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
         </td>
       </tr>
     </tbody>
