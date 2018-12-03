@@ -74,7 +74,6 @@ export class EditResourceComponent implements OnInit {
   }
 
   save = () => {
-    this.editVAR();
 
     return this.http
     .put(
@@ -84,6 +83,7 @@ export class EditResourceComponent implements OnInit {
     .toPromise()
     .then(
       () => {
+        this.editVAR();
       },
       (err) => {}
     );
@@ -143,7 +143,7 @@ saveVAR = () => {
   };
 
 
-  this.http
+  return this.http
   .post(
     `${environment.apiUrl}/v1/var/addResource`,
     varResObj
