@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.api.ResponseEntityTransformer;
+import eng.it.loatool.minimal_satisfaction.CreateMinimalSatisfactionService;
 import eng.it.loatool.minimal_satisfaction.GetMinimalSatisfactionService;
 import eng.it.loatool.minimal_satisfaction.MinimalSatisfaction;
 import eng.it.loatool.minimal_satisfaction.MinimalSatisfactionRepository;
@@ -44,7 +45,7 @@ public class MinimalSatisfactionsApi {
     @PostMapping("/v1/minimal-satisfactions")
     public ResponseEntity<?> createMinimalSatisfaction(@RequestBody MinimalSatisfaction body) {
         return ResponseEntityTransformer.transform(
-            generalCRUDService.create(minimalSatisfactionRepository, body)
+            createMinimalSatisfactionService.create(body)
         );
     }
 
@@ -58,6 +59,7 @@ public class MinimalSatisfactionsApi {
         );
     }
 
+    @Autowired private CreateMinimalSatisfactionService createMinimalSatisfactionService;
     @Autowired private GetMinimalSatisfactionService getMinimalSatisfactionService;
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private MinimalSatisfactionRepository minimalSatisfactionRepository;
