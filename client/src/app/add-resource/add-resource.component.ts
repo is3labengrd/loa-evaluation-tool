@@ -89,6 +89,7 @@ export class AddResourceComponent implements OnInit {
   saveVAR = () => {
     var varResObj = {
       "assetName": this.resource.name,
+      "className": "WorkUnit",
       "loAPhysical": this.resource.loaPhysical,
       "loACognitive": this.resource.loaCognitive,
       "numberOfOperators": this.resource.lcNOperMachine,
