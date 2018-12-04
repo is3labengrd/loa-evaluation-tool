@@ -501,7 +501,7 @@
     </tr>
 </tbody>
 </table><br>
-
+<button type="button" class="btn btn-secondary" (click)="resetMatrix()">Clear</button>
   <form >
   <fieldset>
     <legend style="width: auto;">Cognitive LoA information</legend>
@@ -556,7 +556,7 @@
         <span *ngIf="!opSuc">Operation failed.</span>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="away()">OK</button>
       </div>
     </div>
   </div>

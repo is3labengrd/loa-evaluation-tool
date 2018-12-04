@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-criteria-matrix',
@@ -13,7 +14,8 @@ export class CriteriaMatrixComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) { }
 
   selectedSubprocess = this.cookieService
@@ -185,6 +187,10 @@ export class CriteriaMatrixComponent implements OnInit {
       );
   }
 
+  away() {
+    this.router.navigate(['main-analysis']);
+  }
+
   opSuc: boolean;
   saveLoaInfo(min, max) {
     this.http
@@ -200,6 +206,52 @@ export class CriteriaMatrixComponent implements OnInit {
         this.opSuc = false;
         console.log(err);
       });
+  }
+
+  resetMatrix = () => {
+    Object.assign(
+      this.criteriaMatrixBody,
+      {
+        fkTbAceSubProLev: this.subprocessId,
+        tcH: 0,
+        tcM: 0,
+        tcL: 0,
+        tcN: 0,
+        reN: 0,
+        reL: 0,
+        reM: 0,
+        reH: 0,
+        fcH: 0,
+        fcM: 0,
+        fcL: 0,
+        fcN: 0,
+        lvH: 0,
+        lvM: 0,
+        lvL: 0,
+        lvN: 0,
+        rdH: 0,
+        rdM: 0,
+        rdL: 0,
+        rdN: 0,
+        adL: 0,
+        adA: 0,
+        adS: 0,
+        adN: 0,
+        asL: 0,
+        asA: 0,
+        asS: 0,
+        asN: 0,
+        rmN: 0,
+        rmS: 0,
+        rmM: 0,
+        rmL: 0,
+        usN: 0,
+        usOc: 0,
+        usR: 0,
+        usOf: 0
+      }
+    );
+    this.updateMatrix();
   }
 
 }
