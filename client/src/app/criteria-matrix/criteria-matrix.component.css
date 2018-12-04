@@ -123,7 +123,3 @@ input[type=number] {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-.on {
-  background-color: red;
-}
