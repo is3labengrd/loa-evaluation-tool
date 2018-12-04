@@ -35,17 +35,434 @@
     <th colspan="4">Direction of increasing benefit <-------------------------------------------------------------------</th>
   </thead>
   <tbody>
-  <tr *ngFor="let podatak of podaci;">
-    <td> <strong>{{ podatak.criteria }}</strong> </td>
-    <td>{{ podatak.complexity1 }}</td>
-    <td>{{ podatak.complexity2 }}</td>
-    <td>{{ podatak.complexity3 }}</td>
-    <td>{{ podatak.complexity4 }}</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td colspan="4"> <strong><-------------------------------------------------------------------------------- Direction of increasing LoA </strong></td>
-  </tr>
+    <tr>
+      <td> <strong>Task complexity</strong> </td>
+      <td
+        [class.on]="criteriaMatrixBody.tcH"
+        (click)="
+          criteriaMatrixBody.tcH = 1;
+          criteriaMatrixBody.tcM = 0;
+          criteriaMatrixBody.tcL = 0;
+          criteriaMatrixBody.tcN = 0;
+        "
+      >
+        high
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.tcM"
+        (click)="
+          criteriaMatrixBody.tcH = 0;
+          criteriaMatrixBody.tcM = 1;
+          criteriaMatrixBody.tcL = 0;
+          criteriaMatrixBody.tcN = 0;
+        "
+      >
+        medium
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.tcL"
+        (click)="
+          criteriaMatrixBody.tcH = 0;
+          criteriaMatrixBody.tcM = 0;
+          criteriaMatrixBody.tcL = 1;
+          criteriaMatrixBody.tcN = 0;
+        "
+      >
+        low
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.tcN"
+        (click)="
+          criteriaMatrixBody.tcH = 0;
+          criteriaMatrixBody.tcM = 0;
+          criteriaMatrixBody.tcL = 0;
+          criteriaMatrixBody.tcN = 1;
+        "
+      >
+        none
+      </td>
+    </tr>
+    <tr>
+      <td> <strong>Regularity of exercise</strong> </td>
+      <td
+        [class.on]="criteriaMatrixBody.reN"
+        (click)="
+          criteriaMatrixBody.reN = 1;
+          criteriaMatrixBody.reL = 0;
+          criteriaMatrixBody.reM = 0;
+          criteriaMatrixBody.reH = 0;
+        "
+      >
+        none
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.reL"
+        (click)="
+          criteriaMatrixBody.reN = 0;
+          criteriaMatrixBody.reL = 1;
+          criteriaMatrixBody.reM = 0;
+          criteriaMatrixBody.reH = 0;
+        "
+      >
+        low
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.reM"
+        (click)="
+          criteriaMatrixBody.reN = 0;
+          criteriaMatrixBody.reL = 0;
+          criteriaMatrixBody.reM = 1;
+          criteriaMatrixBody.reH = 0;
+        "
+      >
+        medium
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.reH"
+        (click)="
+          criteriaMatrixBody.reN = 0;
+          criteriaMatrixBody.reL = 0;
+          criteriaMatrixBody.reM = 0;
+          criteriaMatrixBody.reH = 1;
+        "
+      >
+        high
+      </td>
+    </tr>
+    <tr>
+      <td> <strong>Frequency of task change</strong> </td>
+      <td
+        [class.on]="criteriaMatrixBody.fcH"
+        (click)="
+          criteriaMatrixBody.fcH = 1;
+          criteriaMatrixBody.fcM = 0;
+          criteriaMatrixBody.fcL = 0;
+          criteriaMatrixBody.fcN = 0;
+        "
+      >
+        high
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.fcM"
+        (click)="
+          criteriaMatrixBody.fcH = 0;
+          criteriaMatrixBody.fcM = 1;
+          criteriaMatrixBody.fcL = 0;
+          criteriaMatrixBody.fcN = 0;
+        "
+      >
+        medium
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.fcL"
+        (click)="
+          criteriaMatrixBody.fcH = 0;
+          criteriaMatrixBody.fcM = 0;
+          criteriaMatrixBody.fcL = 1;
+          criteriaMatrixBody.fcN = 0;
+        "
+      >
+        low
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.fcN"
+        (click)="
+          criteriaMatrixBody.fcH = 0;
+          criteriaMatrixBody.fcM = 0;
+          criteriaMatrixBody.fcL = 0;
+          criteriaMatrixBody.fcN = 1;
+        "
+      >
+        none
+      </td>
+    </tr>
+    <tr>
+      <td> <strong>Level of product variant</strong> </td>
+      <td
+        [class.on]="criteriaMatrixBody.lvH"
+        (click)="
+          criteriaMatrixBody.lvH = 1;
+          criteriaMatrixBody.lvM = 0;
+          criteriaMatrixBody.lvL = 0;
+          criteriaMatrixBody.lvN = 0;
+        "
+      >
+        high
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.lvM"
+        (click)="
+          criteriaMatrixBody.lvH = 0;
+          criteriaMatrixBody.lvM = 1;
+          criteriaMatrixBody.lvL = 0;
+          criteriaMatrixBody.lvN = 0;
+        "
+      >
+        medium
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.lvL"
+        (click)="
+          criteriaMatrixBody.lvH = 0;
+          criteriaMatrixBody.lvM = 0;
+          criteriaMatrixBody.lvL = 1;
+          criteriaMatrixBody.lvN = 0;
+        "
+      >
+        low
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.lvN"
+        (click)="
+          criteriaMatrixBody.lvH = 0;
+          criteriaMatrixBody.lvM = 0;
+          criteriaMatrixBody.lvL = 0;
+          criteriaMatrixBody.lvN = 1;
+        "
+      >
+        none
+      </td>
+    </tr>
+    <tr>
+      <td> <strong>Re-utilization of data</strong> </td>
+      <td
+        [class.on]="criteriaMatrixBody.rdH"
+        (click)="
+          criteriaMatrixBody.rdH = 1;
+          criteriaMatrixBody.rdM = 0;
+          criteriaMatrixBody.rdL = 0;
+          criteriaMatrixBody.rdN = 0;
+        "
+      >
+        high
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.rdM"
+        (click)="
+          criteriaMatrixBody.rdH = 0;
+          criteriaMatrixBody.rdM = 1;
+          criteriaMatrixBody.rdL = 0;
+          criteriaMatrixBody.rdN = 0;
+        "
+      >
+        medium
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.rdL"
+        (click)="
+          criteriaMatrixBody.rdH = 0;
+          criteriaMatrixBody.rdM = 0;
+          criteriaMatrixBody.rdL = 1;
+          criteriaMatrixBody.rdN = 0;
+        "
+      >
+        low
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.rdN"
+        (click)="
+          criteriaMatrixBody.rdH = 0;
+          criteriaMatrixBody.rdM = 0;
+          criteriaMatrixBody.rdL = 0;
+          criteriaMatrixBody.rdN = 1;
+        "
+      >
+        none
+      </td>
+    </tr>
+    <tr>
+      <td> <strong>Amount of process data</strong> </td>
+      <td
+        [class.on]="criteriaMatrixBody.adL"
+        (click)="
+          criteriaMatrixBody.adL = 1;
+          criteriaMatrixBody.adA = 0;
+          criteriaMatrixBody.adS = 0;
+          criteriaMatrixBody.adN = 0;
+        "
+      >
+        large
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.adA"
+        (click)="
+          criteriaMatrixBody.adL = 0;
+          criteriaMatrixBody.adA = 1;
+          criteriaMatrixBody.adS = 0;
+          criteriaMatrixBody.adN = 0;
+        "
+      >
+        average
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.adS"
+        (click)="
+          criteriaMatrixBody.adL = 0;
+          criteriaMatrixBody.adA = 0;
+          criteriaMatrixBody.adS = 1;
+          criteriaMatrixBody.adN = 0;
+        "
+      >
+        small
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.adN"
+        (click)="
+          criteriaMatrixBody.adL = 0;
+          criteriaMatrixBody.adA = 0;
+          criteriaMatrixBody.adS = 0;
+          criteriaMatrixBody.adN = 1;
+        "
+      >
+        none
+      </td>
+    </tr>
+    <tr>
+      <td> <strong>Amount of input source</strong> </td>
+      <td
+        [class.on]="criteriaMatrixBody.asL"
+        (click)="
+          criteriaMatrixBody.asL = 1;
+          criteriaMatrixBody.asA = 0;
+          criteriaMatrixBody.asS = 0;
+          criteriaMatrixBody.asN = 0;
+        "
+      >
+        large
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.asA"
+        (click)="
+          criteriaMatrixBody.asL = 0;
+          criteriaMatrixBody.asA = 1;
+          criteriaMatrixBody.asS = 0;
+          criteriaMatrixBody.asN = 0;
+        "
+      >
+        average
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.asS"
+        (click)="
+          criteriaMatrixBody.asL = 0;
+          criteriaMatrixBody.asA = 0;
+          criteriaMatrixBody.asS = 1;
+          criteriaMatrixBody.asN = 0;
+        "
+      >
+        small
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.asN"
+        (click)="
+          criteriaMatrixBody.asL = 0;
+          criteriaMatrixBody.asA = 0;
+          criteriaMatrixBody.asS = 0;
+          criteriaMatrixBody.asN = 1;
+        "
+      >
+        none
+      </td>
+    </tr>
+    <tr>
+      <td> <strong>Reaction/Decision Macking time</strong> </td>
+      <td
+        [class.on]="criteriaMatrixBody.rmN"
+        (click)="
+          criteriaMatrixBody.rmN = 1;
+          criteriaMatrixBody.rmS = 0;
+          criteriaMatrixBody.rmM = 0;
+          criteriaMatrixBody.rmL = 0;
+        "
+      >
+        none
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.rmS"
+        (click)="
+          criteriaMatrixBody.rmN = 0;
+          criteriaMatrixBody.rmS = 1;
+          criteriaMatrixBody.rmM = 0;
+          criteriaMatrixBody.rmL = 0;
+        "
+      >
+        short
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.rmM"
+        (click)="
+          criteriaMatrixBody.rmN = 0;
+          criteriaMatrixBody.rmS = 0;
+          criteriaMatrixBody.rmM = 1;
+          criteriaMatrixBody.rmL = 0;
+        "
+      >
+        medium
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.rmL"
+        (click)="
+          criteriaMatrixBody.rmN = 0;
+          criteriaMatrixBody.rmS = 0;
+          criteriaMatrixBody.rmM = 0;
+          criteriaMatrixBody.rmL = 1;
+        "
+      >
+        long
+      </td>
+    </tr>
+    <tr>
+      <td> <strong>Unforeseen situation</strong> </td>
+      <td
+        [class.on]="criteriaMatrixBody.usN"
+        (click)="
+          criteriaMatrixBody.usN = 1;
+          criteriaMatrixBody.usOc = 0;
+          criteriaMatrixBody.usR = 0;
+          criteriaMatrixBody.usOf = 0;
+        "
+      >
+        Never
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.usOc"
+        (click)="
+          criteriaMatrixBody.usN = 0;
+          criteriaMatrixBody.usOc = 1;
+          criteriaMatrixBody.usR = 0;
+          criteriaMatrixBody.usOf = 0;
+        "
+      >
+        Ocassionally
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.usR"
+        (click)="
+          criteriaMatrixBody.usN = 0;
+          criteriaMatrixBody.usOc = 0;
+          criteriaMatrixBody.usR = 1;
+          criteriaMatrixBody.usOf = 0;
+        "
+      >
+        Rarely
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.usOf"
+        (click)="
+          criteriaMatrixBody.usN = 0;
+          criteriaMatrixBody.usOc = 0;
+          criteriaMatrixBody.usR = 0;
+          criteriaMatrixBody.usOf = 1;
+        "
+      >
+        Often
+      </td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td colspan="4"> <strong><-------------------------------------------------------------------------------- Direction of increasing LoA </strong></td>
+    </tr>
 </tbody>
 </table><br>
 
