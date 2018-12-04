@@ -102,7 +102,8 @@ export class HTAAnalysisComponent implements OnInit {
     'fkTbAceCogLoa': '1',
     'possibility': false,
     'bestRange': '1-1',
-    'fkTbAceSubProLev': this.subprocessId
+    'fkTbAceSubProLev': this.subprocessId,
+    'loaType': 'p'
   };
 
   loaInfoRequest: any = new Proxy(
@@ -228,7 +229,6 @@ export class HTAAnalysisComponent implements OnInit {
   opSuc: boolean;
 
   saveLoaInfo(min, max) {
-
       this.http
       .put(
         environment.apiUrl + '/v1/process-loa-info/' + this.infoId,
