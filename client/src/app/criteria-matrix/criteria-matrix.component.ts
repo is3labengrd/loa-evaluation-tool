@@ -1,4 +1,8 @@
+import { CookieService } from './../cookie.service';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-criteria-matrix',
@@ -7,8 +11,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CriteriaMatrixComponent implements OnInit {
 
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) { }
+
+  selectedSubprocess = this.cookieService
+    .getCookie('selectedSubprocess');
+  subprocessId = this.selectedSubprocess[
+    'level' + this.selectedSubprocess.maxDepth
+  ].id;
+
+  matrixId;
+
   criteriaMatrixBody = {
-    fkTbAceSubProLev: undefined,
+    fkTbAceSubProLev: this.subprocessId,
     tcH: 0,
     tcM: 0,
     tcL: 0,
@@ -47,9 +64,34 @@ export class CriteriaMatrixComponent implements OnInit {
     usOf: 0
   }
 
-  constructor() { }
-
   ngOnInit() {
+    this.http
+      .get(environment.apiUrl + '/v1/cognitive-criteria-matrices-by-subprocess-id/' + this.subprocessId)
+      .toPromise()
+      .catch(
+        () => this.http
+          .post(environment.apiUrl + '/v1/cognitive-criteria-matrices', this.criteriaMatrixBody)
+          .toPromise()
+      )
+      .then(
+        (matrix: any) => {
+          this.matrixId = matrix.pkTbId;
+          this.criteriaMatrixBody = matrix;
+        }
+      );
+  }
+
+  updateMatrix() {
+    const subscription: Subscription = this.http
+      .put(
+        `${environment.apiUrl}/v1/cognitive-criteria-matrices/${this.matrixId}`,
+        this.criteriaMatrixBody
+      )
+      .subscribe(
+        () => {
+          subscription.unsubscribe();
+        }
+      );
   }
 
 }
