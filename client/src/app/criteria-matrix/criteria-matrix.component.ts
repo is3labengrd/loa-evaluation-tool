@@ -200,7 +200,6 @@ export class CriteriaMatrixComponent implements OnInit {
         this.opSuc = false;
         console.log(err);
       });
-    }
   }
 
 }
