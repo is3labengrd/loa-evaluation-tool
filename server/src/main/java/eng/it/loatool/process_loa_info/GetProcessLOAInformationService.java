@@ -15,8 +15,13 @@ public class GetProcessLOAInformationService {
     }
 
     @Transactional
-    public Optional<ProcessLOAInformation> getInformationBySubprocessId(Integer subprocessId) {
-        return processLOAInformationRepository.getProcessLOAInformationBySubprocessId(subprocessId);
+    public Optional<ProcessLOAInformation> getPhysicalProcessLOAInformationBySubprocessId(Integer subprocessId) {
+        return processLOAInformationRepository.getPhysicalProcessLOAInformationBySubprocessId(subprocessId);
+    }
+
+    @Transactional
+    public Optional<ProcessLOAInformation> getCognitiveProcessLOAInformationBySubprocessId(Integer subprocessId) {
+        return processLOAInformationRepository.getCognitiveProcessLOAInformationBySubprocessId(subprocessId);
     }
 
     @Transactional

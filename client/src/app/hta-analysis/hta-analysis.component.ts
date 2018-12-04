@@ -172,7 +172,7 @@ export class HTAAnalysisComponent implements OnInit {
         }
       );
     this.http
-      .get(environment.apiUrl + '/v1/process-loa-info-by-subprocess-id/' + this.subprocessId)
+      .get(environment.apiUrl + '/v1/physical-process-loa-info-by-subprocess-id/' + this.subprocessId)
       .toPromise()
       .catch(
         () => this.http
@@ -229,19 +229,19 @@ export class HTAAnalysisComponent implements OnInit {
   opSuc: boolean;
 
   saveLoaInfo(min, max) {
-      this.http
+    this.http
       .put(
         environment.apiUrl + '/v1/process-loa-info/' + this.infoId,
         this.actualLoaInfoRequest
-        )
-        .toPromise()
-        .then(() => {
-          this.opSuc = true;
-        })
-        .catch((err) => {
-          this.opSuc = false;
-          console.log(err);
-        });
-      }
+      )
+      .toPromise()
+      .then(() => {
+        this.opSuc = true;
+      })
+      .catch((err) => {
+        this.opSuc = false;
+        console.log(err);
+      });
     }
+  }
 

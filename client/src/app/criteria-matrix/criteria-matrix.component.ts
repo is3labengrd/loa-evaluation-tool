@@ -23,6 +23,9 @@ export class CriteriaMatrixComponent implements OnInit {
   ].id;
 
   matrixId;
+  infoId;
+  cognitiveLoaArray;
+  physicalLoaArray;
 
   criteriaMatrixBody = {
     fkTbAceSubProLev: this.subprocessId,
@@ -64,6 +67,60 @@ export class CriteriaMatrixComponent implements OnInit {
     usOf: 0
   }
 
+  actualLoaInfoRequest = {
+    'fkTbAcePhyLoa': '1',
+    'fkTbAceCogLoa': '1',
+    'possibility': false,
+    'bestRange': '1-1',
+    'fkTbAceSubProLev': this.subprocessId,
+    'loaType': 'c'
+  };
+
+  loaInfoRequest: any = new Proxy(
+    this.actualLoaInfoRequest,
+    {
+      set: function (obj, prop, value) {
+        switch (prop) {
+          case 'bestRangeMin':
+            if (Number.isNaN(Number(value))) {
+              // tslint:disable-next-line:no-string-throw
+              throw 'Invalid parameter';
+            }
+            obj.bestRange = obj.bestRange
+              .replace(/^(\d+)/, Number(value).toString());
+            return value;
+          case 'bestRangeMax':
+            if (Number.isNaN(Number(value))) {
+              // tslint:disable-next-line:no-string-throw
+              throw 'Invalid parameter';
+            }
+            obj.bestRange = obj.bestRange
+              .replace(/(\d+)$/, Number(value).toString());
+            return value;
+          case 'bestRange':
+            if (/^(\d+)-(\d+)$/.test(value)) {
+              obj.bestRange = obj.bestRange;
+            } else {
+              obj.bestRange = '1-1';
+            }
+            return value;
+          default:
+            return Reflect.set(obj, prop, value);
+        }
+      },
+      get: function (obj, prop) {
+        switch (prop) {
+          case 'bestRangeMin':
+            return /^(\d+)/.exec(obj.bestRange)[0].toString();
+          case 'bestRangeMax':
+            return /(\d+)$/.exec(obj.bestRange)[0].toString();
+          default:
+            return Reflect.get(obj, prop);
+        }
+      }
+    }
+  );
+
   ngOnInit() {
     this.http
       .get(environment.apiUrl + '/v1/cognitive-criteria-matrices-by-subprocess-id/' + this.subprocessId)
@@ -79,6 +136,40 @@ export class CriteriaMatrixComponent implements OnInit {
           this.criteriaMatrixBody = matrix;
         }
       );
+    this.http
+      .get(environment.apiUrl + '/v1/cognitive-process-loa-info-by-subprocess-id/' + this.subprocessId)
+      .toPromise()
+      .catch(
+        () => this.http
+          .post(environment.apiUrl + '/v1/process-loa-info', this.actualLoaInfoRequest)
+          .toPromise()
+      )
+      .then(
+        (info: any) => {
+          this.infoId = info.pkTbId;
+          this.loaInfoRequest.possibility = info.possibility;
+          this.loaInfoRequest.fkTbAcePhyLoa = info.fkTbAcePhyLoa;
+          this.loaInfoRequest.fkTbAceCogLoa = info.fkTbAceCogLoa;
+          this.loaInfoRequest.bestRangeMin = /^(\d+)/.exec(info.bestRange)[0];
+          this.loaInfoRequest.bestRangeMax = /(\d+)$/.exec(info.bestRange)[0];
+        }
+      );
+    const cognitiveLoaSubscription: Subscription = this.http
+      .get(`${environment.apiUrl}/v1/cognitive-loa`)
+      .subscribe(
+        (cognitiveLoaArray: Array<any>) => {
+          this.cognitiveLoaArray = cognitiveLoaArray;
+          cognitiveLoaSubscription.unsubscribe();
+        }
+      );
+    const physicalLoaSubscription: Subscription = this.http
+      .get(`${environment.apiUrl}/v1/physical-loa`)
+      .subscribe(
+        (physicalLoaArray: Array<any>) => {
+          this.physicalLoaArray = physicalLoaArray;
+          physicalLoaSubscription.unsubscribe();
+        }
+      );
   }
 
   updateMatrix() {
@@ -92,6 +183,24 @@ export class CriteriaMatrixComponent implements OnInit {
           subscription.unsubscribe();
         }
       );
+  }
+
+  opSuc: boolean;
+  saveLoaInfo(min, max) {
+    this.http
+      .put(
+        environment.apiUrl + '/v1/process-loa-info/' + this.infoId,
+        this.actualLoaInfoRequest
+      )
+      .toPromise()
+      .then(() => {
+        this.opSuc = true;
+      })
+      .catch((err) => {
+        this.opSuc = false;
+        console.log(err);
+      });
+    }
   }
 
 }

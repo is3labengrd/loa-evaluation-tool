@@ -19,40 +19,54 @@ import eng.it.loatool.process_loa_info.UpdateProcessLOAInformationService;
 public class ProcessLOAInformationApi {
 
     @GetMapping("/v1/process-loa-info")
-    public ResponseEntity<?> getProcesses() {
+    public ResponseEntity<?> getAllInfo() {
         return ResponseEntityTransformer.transformOk(
             getProcessLOAInformationService.getAllInformation()
         );
     }
 
     @GetMapping("/v1/process-loa-info/{processId}")
-    public ResponseEntity<?> getProcess(@PathVariable("processId") Integer processId) {
+    public ResponseEntity<?> getInfo(@PathVariable("id") Integer id) {
         return ResponseEntityTransformer.transform(
-            getProcessLOAInformationService.getInformation(processId)
+            getProcessLOAInformationService.getInformation(id)
         );
     }
 
     @GetMapping("/v1/process-loa-info-by-subprocess-id/{subprocessId}")
-    public ResponseEntity<?> getProcessBySubprocessId(@PathVariable("subprocessId") Integer subprocessId) {
+    public ResponseEntity<?> getInfoBySubprocessId(@PathVariable("subprocessId") Integer subprocessId) {
         return ResponseEntityTransformer.transform(
-            getProcessLOAInformationService.getInformationBySubprocessId(subprocessId)
+            getProcessLOAInformationService.getPhysicalProcessLOAInformationBySubprocessId(subprocessId)
+        );
+    }
+
+    @GetMapping("/v1/physical-process-loa-info-by-subprocess-id/{subprocessId}")
+    public ResponseEntity<?> getPhysicalInfoBySubprocessId(@PathVariable("subprocessId") Integer subprocessId) {
+        return ResponseEntityTransformer.transform(
+            getProcessLOAInformationService.getPhysicalProcessLOAInformationBySubprocessId(subprocessId)
+        );
+    }
+
+    @GetMapping("/v1/cognitive-process-loa-info-by-subprocess-id/{subprocessId}")
+    public ResponseEntity<?> getCognitiveInfoBySubprocessId(@PathVariable("subprocessId") Integer subprocessId) {
+        return ResponseEntityTransformer.transform(
+            getProcessLOAInformationService.getCognitiveProcessLOAInformationBySubprocessId(subprocessId)
         );
     }
 
     @PostMapping("/v1/process-loa-info")
-    public ResponseEntity<?> createProcess(@RequestBody ProcessLOAInformation body) {
+    public ResponseEntity<?> createInfo(@RequestBody ProcessLOAInformation body) {
         return ResponseEntityTransformer.transform(
             createProcessLOAInformationService.createInformation(body)
         );
     }
 
-    @PutMapping("/v1/process-loa-info/{processId}")
-    public ResponseEntity<?> updateProcess(
-        @PathVariable("processId") Integer processId,
+    @PutMapping("/v1/process-loa-info/{id}")
+    public ResponseEntity<?> updateInfo(
+        @PathVariable("id") Integer id,
         @RequestBody ProcessLOAInformation body
     ) {
         return ResponseEntityTransformer.transform(
-            updateProcessLOAInformationService.updateInformation(processId, body)
+            updateProcessLOAInformationService.updateInformation(id, body)
         );
     }
 
