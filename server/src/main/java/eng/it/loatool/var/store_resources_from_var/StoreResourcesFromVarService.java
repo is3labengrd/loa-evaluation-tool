@@ -18,9 +18,15 @@ public class StoreResourcesFromVarService {
 
     @Transactional
     public void execute() throws Exception {
-        JsonNode siteInfo = objectMapper.readTree(VARServiceWrapper.getSite());
-        Double electricityPrice = siteInfo.get(0).get("propertyValue").asDouble();
-        Float interestRate = (float)siteInfo.get(1).get("propertyValue").asDouble();
+        final Double electricityPrice[] = new Double[1];
+        final Float interestRate[] = new Float[1];
+        try {
+            JsonNode siteInfo = objectMapper.readTree(VARServiceWrapper.getSite());
+            electricityPrice[0] = siteInfo.get(0).get("propertyValue").asDouble();
+            interestRate[0] = (float)siteInfo.get(1).get("propertyValue").asDouble();
+        } catch (Exception e) {
+            logger.error("An error happened while processing siteInfo", e);
+        }
         VARServiceWrapper.getResources().forEach((individual) -> {
             resourceRepository
                 .getResourceByName(individual.getName())
@@ -29,8 +35,10 @@ public class StoreResourcesFromVarService {
                         Resource newResource = (new VarToNativeResourceTransformer())
                             .transform(individual);
                         resource.assimilateVarInstance(newResource);
-                        resource.setEcElePrice(electricityPrice);
-                        resource.setIcInterRate(interestRate);
+                        if (electricityPrice[0] != null && interestRate[0] != null) {
+                            newResource.setEcElePrice(electricityPrice[0]);
+                            resource.setIcInterRate(interestRate[0]);
+                        }
                         return resourceRepository.save(resource);
                     } catch (Throwable t) {
                         logger.error("Couldn't handle VAR resource.", t);
@@ -42,8 +50,10 @@ public class StoreResourcesFromVarService {
                         try {
                             Resource newResource = (new VarToNativeResourceTransformer())
                                 .transform(individual);
-                            newResource.setEcElePrice(electricityPrice);
-                            newResource.setIcInterRate(interestRate);
+                            if (electricityPrice[0] != null && interestRate[0] != null) {
+                                newResource.setEcElePrice(electricityPrice[0]);
+                                newResource.setIcInterRate(interestRate[0]);
+                            }
                             return resourceRepository.save(newResource);
                         } catch (Throwable t) {
                             logger.error("Couldn't handle VAR resource", t);
