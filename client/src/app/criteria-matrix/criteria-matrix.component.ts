@@ -7,6 +7,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CriteriaMatrixComponent implements OnInit {
 
+  criteriaMatrixBody = {
+    fkTbAceSubProLev: undefined,
+    tcH: undefined,
+    tcM: undefined,
+    tcL: undefined,
+    tcN: undefined,
+    reN: undefined,
+    reL: undefined,
+    reM: undefined,
+    reH: undefined,
+    fcH: undefined,
+    fcM: undefined,
+    fcL: undefined,
+    fcN: undefined,
+    lvH: undefined,
+    lvM: undefined,
+    lvL: undefined,
+    lvN: undefined,
+    rdH: undefined,
+    rdM: undefined,
+    rdL: undefined,
+    rdN: undefined,
+    adL: undefined,
+    adA: undefined,
+    adS: undefined,
+    adN: undefined,
+    asL: undefined,
+    asA: undefined,
+    asS: undefined,
+    asN: undefined,
+    rmN: undefined,
+    rmS: undefined,
+    rmM: undefined,
+    rmL: undefined,
+    usN: undefined,
+    usOc: undefined,
+    usR: undefined,
+    usOf: undefined
+  }
+
   podaci = [
     {
       'criteria': 'Task complexity',
