@@ -317,5 +317,13 @@ export class HTAAnalysisComponent implements OnInit {
     this.updateMatrix();
   }
 
+  canNext = () => {
+    for (var property in this.matrixRequest) {
+      if ("fkTbAceSubProLev" == property) continue;
+      if (this.matrixRequest[property] != 0) return true;
+    }
+    return false;
+  }
+
 }
 

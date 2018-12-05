@@ -189,7 +189,7 @@
     <div class="btn-group" style="justify-content: center; width: 100%;">
       <button class="btn btn-secondary" (click)="loaInfoRequest.possibility=false">Cancel</button>
       <button class="btn btn-primary" (click)="saveLoaInfo(minLoa.value, maxLoa.value)"  data-toggle="modal" data-target="#saveModal" >Save</button>
-      <a class="btn btn-outline-primary" routerLink="/criteria-matrix">Next</a>
+      <button class="btn btn-outline-primary" routerLink="/criteria-matrix" [disabled]="!canNext()">Next</button>
     </div>
   </form>
 
