@@ -246,6 +246,7 @@ addSubProcessL2(pkTbId) {
     this._values2 = this.subProcessL2(this.mainProcess[0].name, obj[val].name);
     this.lvl1selection = obj[val];
 
+    this.lvl2selection = null;
     this._values3 = [];
     this.lvl3selection = null;
   }
@@ -334,8 +335,13 @@ addSubProcessL2(pkTbId) {
   }
 
   disableSaveSubProcess(){
+
       if(this.lvl1selection!=null && this._values2.length==0 && this._values3.length==0){
             return false;
+      }
+
+      if(this.lvl1selection!=null && this.lvl2selection=="undefined" && this._values3.length==0){
+           true;
       }
       if(this.lvl1selection!=null && this.lvl2selection!=null && this._values3.length==0){
             return false;
