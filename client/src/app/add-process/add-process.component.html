@@ -14,7 +14,7 @@
   <span class="col-sm-6 text-left">{{ cookie.mainProcessName }}</span>
 </div>
 <div class="row">
-  <span class="col-sm-6 text-center">Level of Subprocesses: </span>
+  <span class="col-sm-6 text-center">Lower levels of sub-processes: </span>
   <span class="col-sm-6 text-left">{{ cookie.subLevels }}</span>
 </div>
 <br>
@@ -29,16 +29,16 @@
       <td>Level 1:</td>
       <td>
         <select (change)="firstDropDownChanged($event.target.selectedIndex -1)" style="width: 280px;">
-        <option>Select</option>
+        <option selected disabled hidden>Select</option>
         <option *ngFor="let v of _values1[0]" value="{{v.name}}" >{{ v.name }}</option>
       </select>
       </td>
     </tr>
     <tr>
       <td>Level 2:</td>
-      <td>
+      <td >
         <select *ngIf="(_values2.length > 0)" (change)="secondDropDownChanged($event.target.selectedIndex -1)" style="width: 280px;">
-          <option>Select</option>
+          <option >Select</option>
           <option *ngFor='let v of _values2'>{{ v.name }}</option>
         </select>
       </td>
@@ -47,7 +47,7 @@
       <td>Level 3:</td>
       <td>
         <select *ngIf="(_values3.length > 0)"(change)="thirdDropDownChanged($event.target.selectedIndex -1)" style="width: 280px;">
-          <option>Select</option>
+          <option selected disabled hidden>Select</option>
           <option *ngFor='let v of _values3'>{{ v.name }}</option>
         </select>
       </td>
