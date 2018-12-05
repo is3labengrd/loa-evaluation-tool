@@ -100,7 +100,32 @@
     </tr>
   </tbody>
   </table><br>
-  <button type="button" class="btn btn-secondary" (click)="resetMatrix()">Clear</button>
+
+  <div class="mx-auto" style="width: 100px;">
+    <button type="button" class="btn btn-secondary"  data-toggle="modal" data-target="#resetModal" >Clear</button>
+  </div>
+  
+  <!-- resetModal -->
+  <div class="modal fade" id="resetModal" tabindex="-1" role="dialog"  aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="resetModalLabel">
+              <p class="text-warning" >Attention</p>
+            </h5>
+          </div>
+          <div class="modal-body">
+            Matrix choices will be restet. Continue?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetMatrix()">Yes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"  >No</button>
+          </div>
+        </div>
+      </div>
+    </div><br>
+
+  <!-- loa info box -->
   <form >
     <fieldset>
       <legend style="width: auto;">Physical LoA information</legend>
@@ -155,7 +180,7 @@
           <span *ngIf="!opSuc">Operation failed.</span>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="away()">OK</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" >OK</button>
         </div>
       </div>
     </div>
