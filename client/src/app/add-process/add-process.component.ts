@@ -245,11 +245,15 @@ addSubProcessL2(pkTbId) {
     if (!obj) { return; }
     this._values2 = this.subProcessL2(this.mainProcess[0].name, obj[val].name);
     this.lvl1selection = obj[val];
+
+    this._values3 = [];
+    this.lvl3selection = null;
   }
 
   secondDropDownChanged(val2: any) {
     const obj2 = this._values2;
     if (!obj2) { return; }
+    this.lvl3selection = null;
     this._values3 = this.subProcessL3(this.mainProcess[0].name, this.lvl1selection.name, obj2[val2].name);
     this.lvl2selection = obj2[val2];
   }
@@ -327,5 +331,19 @@ addSubProcessL2(pkTbId) {
         this.processAdded.push(res);
       }
     );
+  }
+
+  disableSaveSubProcess(){
+      if(this.lvl1selection!=null && this._values2.length==0 && this._values3.length==0){
+            return false;
+      }
+      if(this.lvl1selection!=null && this.lvl2selection!=null && this._values3.length==0){
+            return false;
+      }
+      if(this.lvl1selection!=null && this.lvl2selection!=null && this.lvl3selection!=null){
+            return false;
+      }
+
+      return true;
   }
 }

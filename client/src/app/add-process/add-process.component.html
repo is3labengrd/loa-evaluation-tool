@@ -63,7 +63,7 @@
 
 <div class="btn-group" role="group" >
   <button type="button" class="btn btn-secondary"  (click)="refresh()">Cancel</button>
-  <button type="button" class="btn btn-primary" (click)="addProcess()" data-toggle="modal" data-target="#addModal" >Save</button>
+  <button type="button" class="btn btn-primary" (click)="addProcess()" data-toggle="modal" data-target="#addModal" [disabled]="disableSaveSubProcess()" >Save</button>
 </div>
 
 <!-- addModal -->

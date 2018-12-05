@@ -26,6 +26,8 @@ public class StoreResourcesFromVarService {
             interestRate[0] = (float)siteInfo.get(1).get("propertyValue").asDouble();
         } catch (Exception e) {
             logger.error("An error happened while processing siteInfo", e);
+            electricityPrice[0] = 0d;
+            interestRate[0] = 0f;
         }
         VARServiceWrapper.getResources().forEach((individual) -> {
             resourceRepository
@@ -35,10 +37,8 @@ public class StoreResourcesFromVarService {
                         Resource newResource = (new VarToNativeResourceTransformer())
                             .transform(individual);
                         resource.assimilateVarInstance(newResource);
-                        if (electricityPrice[0] != null && interestRate[0] != null) {
-                            newResource.setEcElePrice(electricityPrice[0]);
-                            resource.setIcInterRate(interestRate[0]);
-                        }
+                        newResource.setEcElePrice(electricityPrice[0]);
+                        resource.setIcInterRate(interestRate[0]);
                         return resourceRepository.save(resource);
                     } catch (Throwable t) {
                         logger.error("Couldn't handle VAR resource.", t);
@@ -50,10 +50,8 @@ public class StoreResourcesFromVarService {
                         try {
                             Resource newResource = (new VarToNativeResourceTransformer())
                                 .transform(individual);
-                            if (electricityPrice[0] != null && interestRate[0] != null) {
-                                newResource.setEcElePrice(electricityPrice[0]);
-                                newResource.setIcInterRate(interestRate[0]);
-                            }
+                            newResource.setEcElePrice(electricityPrice[0]);
+                            newResource.setIcInterRate(interestRate[0]);
                             return resourceRepository.save(newResource);
                         } catch (Throwable t) {
                             logger.error("Couldn't handle VAR resource", t);

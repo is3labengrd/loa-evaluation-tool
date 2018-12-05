@@ -11,11 +11,24 @@ public class GetSubProcessLevelsService {
     @Transactional
     public Iterable<SubProcessLevel> getSubProcessLevels(int page, int size) {
         if (page < 0 || size < 1) {
-            return tbAceSubProLevRepository.findAll();
+            return addInfoToSubprocessLevels(tbAceSubProLevRepository.findAll());
         }
-        return tbAceSubProLevRepository.findAll(PageRequest.of(page, size));
+        return addInfoToSubprocessLevels(
+            tbAceSubProLevRepository.findAll(PageRequest.of(page, size))
+        );
+    }
+
+    @Transactional
+    public Iterable<SubProcessLevel> addInfoToSubprocessLevels(
+        Iterable<SubProcessLevel> subprocessLevels
+    ) {
+        subprocessLevels.forEach((subprocessLevel) -> {
+            getSubProcessLevelService.addInfoToSubprocessLevel(subprocessLevel);
+        });
+        return subprocessLevels;
     }
 
     @Autowired private SubProcessLevelRepository tbAceSubProLevRepository;
+    @Autowired private GetSubProcessLevelService getSubProcessLevelService;
 
 }
