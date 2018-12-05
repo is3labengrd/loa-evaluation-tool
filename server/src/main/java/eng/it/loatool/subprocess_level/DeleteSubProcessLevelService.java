@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.criteria_matrix.CriteriaMatrixRepository;
+import eng.it.loatool.criteria_matrix.cognitive.CognitiveCriteriaMatrixRepository;
 import eng.it.loatool.process_specific_info.ProcessSpecificInfoRepository;
 import eng.it.loatool.scenario_resource.ScenarioResourceRepository;
 import eng.it.loatool.subprocess_level_resource.SubProcessLevelResourceRepository;
@@ -46,6 +47,12 @@ public class DeleteSubProcessLevelService {
                 subProcessLevelResourceRepository
                     .delete(subprocessResource);
             });
+        cognitiveCriteriaMatrixRepository
+            .getBySubprocessLevel(id)
+            .ifPresent((matrix) -> {
+                cognitiveCriteriaMatrixRepository
+                    .delete(matrix);
+            });
         return generalCRUDService.delete(subProcessLevelRepository, id);
     }
 
@@ -55,5 +62,6 @@ public class DeleteSubProcessLevelService {
     @Autowired private ProcessSpecificInfoRepository processSpecificInfoRepository;
     @Autowired private ScenarioResourceRepository scenarioResourceRepository;
     @Autowired private SubProcessLevelResourceRepository subProcessLevelResourceRepository;
+    @Autowired private CognitiveCriteriaMatrixRepository cognitiveCriteriaMatrixRepository;
 
 }

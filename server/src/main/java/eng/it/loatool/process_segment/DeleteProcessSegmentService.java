@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import eng.it.loatool.GeneralCRUDService;
+import eng.it.loatool.minimal_satisfaction.MinimalSatisfactionRepository;
 import eng.it.loatool.process_segment_list_element.DeleteProcessSegmentListElementService;
 import eng.it.loatool.process_segment_list_element.ProcessSegmentListElement;
 import eng.it.loatool.process_segment_list_element.ProcessSegmentListElementRepository;
@@ -40,6 +41,11 @@ public class DeleteProcessSegmentService {
                         .deleteProcessSegmentListElement(element.getPkTbId());
                 }
                 processSegmentRepository.delete(processSegment);
+                minimalSatisfactionRepository
+                    .getByProcessId(id)
+                    .ifPresent((minSat) -> {
+                        minimalSatisfactionRepository.delete(minSat);
+                    });
                 processSegment.setSubprocessLevels(null);
             });
         return maybeProcessSegment;
@@ -52,5 +58,6 @@ public class DeleteProcessSegmentService {
     @Autowired private ScenarioRepository scenarioRepository;
     @Autowired private GetProductPlanningByProcessSegmentId getProductPlanningByProcessSegmentId;
     @Autowired private ProductPlanningRepository productPlanningRepository;
+    @Autowired private MinimalSatisfactionRepository minimalSatisfactionRepository;
 
 }
