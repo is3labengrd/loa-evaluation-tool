@@ -328,4 +328,18 @@ addSubProcessL2(pkTbId) {
       }
     );
   }
+
+  disableSaveSubProcess(){
+      if(this.lvl1selection!=null && this._values2.length==0 && this._values3.length==0){
+            return false;
+      }
+      if(this.lvl1selection!=null && this.lvl2selection!=null && this._values3.length==0){
+            return false;
+      }
+      if(this.lvl1selection!=null && this.lvl2selection!=null && this.lvl3selection!=null){
+            return false;
+      }
+
+      return true;
+  }
 }
