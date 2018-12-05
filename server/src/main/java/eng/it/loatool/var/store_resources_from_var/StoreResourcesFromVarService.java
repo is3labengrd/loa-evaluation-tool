@@ -26,6 +26,8 @@ public class StoreResourcesFromVarService {
             interestRate[0] = (float)siteInfo.get(1).get("propertyValue").asDouble();
         } catch (Exception e) {
             logger.error("An error happened while processing siteInfo", e);
+            electricityPrice[0] = 0d;
+            interestRate[0] = 0f;
         }
         VARServiceWrapper.getResources().forEach((individual) -> {
             resourceRepository
