@@ -81,6 +81,11 @@ export class AddResourceComponent implements OnInit {
     .toPromise()
     .then(() => {
       this.opSuc = true;
+
+      setTimeout(() => {
+        this.syncingWithVAR = false;
+        
+      }, 2000);
     })
     .catch((err) => {
       this.opSuc = false;
@@ -120,7 +125,7 @@ export class AddResourceComponent implements OnInit {
     .toPromise()
     .then(() => {
       this.syncingWithVAR = false;
-    })
+    });
   }
 
 }
