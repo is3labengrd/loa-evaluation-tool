@@ -363,7 +363,9 @@ export class EditProcessComponent implements OnInit {
             if (!obj) return;
 
             this._values2 = [];
+            this.lvl2selection=null;
             this._values3 = [];
+            this.lvl3selection=null;
             this._values2 = this.subProcessL2(this.mainProcess[0].name,this.selectedModule1);
             this.lvl1selection = this.findObj(obj,this.selectedModule1);
           }
@@ -371,6 +373,7 @@ export class EditProcessComponent implements OnInit {
 
           secondDropDownChanged(val2: any) {
             this._values3 = [];
+            this.lvl3selection=null;
             const obj2 = this._values2;
             if (!obj2) return;
             this._values3 = this.subProcessL3(this.mainProcess[0].name,this.selectedModule1,this.selectedModule2);
@@ -449,4 +452,23 @@ export class EditProcessComponent implements OnInit {
               }
             );
           }
+
+           disableSaveSubProcess(){
+
+                 if(this.lvl1selection!=null && this._values2.length==0 && this._values3.length==0){
+                       return false;
+                 }
+
+                 if(this.lvl1selection!=null && this.lvl2selection=="undefined" && this._values3.length==0){
+                      true;
+                 }
+                 if(this.lvl1selection!=null && this.lvl2selection!=null && this._values3.length==0){
+                       return false;
+                 }
+                 if(this.lvl1selection!=null && this.lvl2selection!=null && this.lvl3selection!=null){
+                       return false;
+                 }
+
+                 return true;
+             }
         }

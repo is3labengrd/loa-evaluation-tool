@@ -40,7 +40,8 @@
         <td>Level 2:</td>
         <td *ngIf="!disable">
           <select *ngIf="(_values2.length > 0)" [(ngModel)]="selectedModule2" (ngModelChange)="secondDropDownChanged($event)" style="width: 280px;">
-              <option *ngFor="let module2 of _values2" [value]="module2.name">{{module2.name}}</option>
+            <option selected>Select</option>
+            <option *ngFor="let module2 of _values2" [value]="module2.name">{{module2.name}}</option>
             </select>
         </td>
         <td *ngIf="disable">
@@ -51,7 +52,8 @@
         <td>Level 3:</td>
         <td *ngIf="!disable">
           <select *ngIf="(_values3.length > 0)" [(ngModel)]="selectedModule3" (ngModelChange)="thirdDropDownChanged($event)" style="width: 280px;">
-             <option *ngFor="let module3 of _values3" [value]="module3.name">{{module3.name}}</option>
+            <option selected>Select</option>
+            <option *ngFor="let module3 of _values3" [value]="module3.name">{{module3.name}}</option>
             </select>
         </td>
         <td *ngIf="disable">
@@ -70,7 +72,7 @@
 
   <div *ngIf="!disable" class="btn-group"  role="group" >
       <button type="button" class="btn btn-secondary" (click)="refresh()">Cancel</button>
-      <button type="button" class="btn btn-primary" (click)="save()" data-toggle="modal" data-target="#editModal">Save</button>
+      <button type="button" class="btn btn-primary" (click)="save()" data-toggle="modal" data-target="#editModal" [disabled]="disableSaveSubProcess()" >Save</button>
   </div>
 
    <!-- editModal -->
