@@ -350,7 +350,18 @@ export class EditScenarioComponent implements OnInit {
         }
         this.TotalCost = (optCost).toFixed(2);
         this.totalProcessTime = (procTime).toFixed(2);
-        this.enableSave = true;
+
+
+        for (let n in this.showedList){
+          if (this.showedList[n].cog != "-" && this.showedList[n].fkTbAceRes != "-" && this.showedList[n].fkTbAceSubProLev != "-" && this.showedList[n].numberSelected != "-" && this.showedList[n].optC != "-" && this.showedList[n].poundCog != "-" && this.showedList[n].poundPhy != "-"){
+            this.enableSave = true;
+            break;
+          }
+          else{
+            this.enableSave = false;
+          }
+
+        }
 
       }
 
