@@ -131,10 +131,10 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="saveModalLabel"><p class="text-success">Successful</p></h5>
+            <h5 class="modal-title" id="saveModalLabel"><p class="text-warning">Warning</p></h5>
         </div>
         <div class="modal-body">
-          Operation has been performed.
+          Please wait until the ok button appears, operation in progress...
         </div>
         <div class="modal-footer">
           <button *ngIf="!syncingWithVAR" type="button" class="btn btn-secondary" data-dismiss="modal" (click)="away();">OK</button>
