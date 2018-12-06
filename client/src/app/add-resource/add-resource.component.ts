@@ -36,14 +36,17 @@ export class AddResourceComponent implements OnInit {
     'icInterRate': null,
     'ecAEleConsumFun': null,
     'ecAEleConsumSb': null,
-    'ecElePrice': null
+    'ecElePrice': null,
+    'varClass':'WorkUnit'
   };
 
   resource = Object.seal(
     Object.assign({}, this.resourceInitialState)
   );
 
+  syncingWithVAR = false;
   ngOnInit() {
+    this.syncingWithVAR = true;
   }
 
   cancel() {
@@ -116,7 +119,8 @@ export class AddResourceComponent implements OnInit {
     )
     .toPromise()
     .then(() => {
-    })
+      this.syncingWithVAR = false;
+    });
   }
 
 }

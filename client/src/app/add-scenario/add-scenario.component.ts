@@ -64,23 +64,24 @@ export class AddScenarioComponent implements OnInit {
     creteTable(){
       for(let i in this.resSubSceList[0]){
         this.objlist= {};
-        if(this.resSubSceList[0][i].fkTbAceProSeq === this.cookie.mainProcessId){
-          for(let j in this.resSubSceList[0]){
-            if(this.resSubSceList[0][i].subprocessLevel.pkTbId === this.resSubSceList[0][j].subprocessLevel.pkTbId){
-              if(this.resSubSceList[0][j].scenarioNumber === 1){
-                this.objlist['scenNumber1'] = this.resSubSceList[0][j];
-              }
-              if(this.resSubSceList[0][j].scenarioNumber === 2){
-                this.objlist['scenNumber2'] = this.resSubSceList[0][j];
-              }
-              if(this.resSubSceList[0][j].scenarioNumber === 3){
-                this.objlist['scenNumber3'] = this.resSubSceList[0][j];
+          if(this.resSubSceList[0][i].fkTbAceProSeq === this.cookie.mainProcessId){
+            for(let j in this.resSubSceList[0]){
+
+              if(this.resSubSceList[0][i].subprocessLevel.pkTbId === this.resSubSceList[0][j].subprocessLevel.pkTbId){
+                if(this.resSubSceList[0][j].scenarioNumber === 1 &&  this.resSubSceList[0][j].resSorting){
+                  this.objlist['scenNumber1'] = this.resSubSceList[0][j];
+                }
+                if(this.resSubSceList[0][j].scenarioNumber === 2 &&  this.resSubSceList[0][j].resSorting){
+                  this.objlist['scenNumber2'] = this.resSubSceList[0][j];
+                }
+                if(this.resSubSceList[0][j].scenarioNumber === 3 &&  this.resSubSceList[0][j].resSorting){
+                  this.objlist['scenNumber3'] = this.resSubSceList[0][j];
+                }
               }
             }
+            this.subProc = {"subProc": this.resSubSceList[0][i], "objList": this.objlist};
+            this.subSceList.push(this.subProc);
           }
-          this.subProc = {"subProc": this.resSubSceList[0][i], "objList": this.objlist};
-          this.subSceList.push(this.subProc);
-        }
       }
     }
 
