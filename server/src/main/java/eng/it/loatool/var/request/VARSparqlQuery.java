@@ -6,6 +6,9 @@ import eng.it.util.PropertyManager;
 
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -138,5 +141,65 @@ public class VARSparqlQuery {
 		String result = restTemplate.getForObject(uri, String.class);
 
 		return result;
+	}
+	
+	public static String postWorkUnitModel(String json) throws IOException {
+		String BASE_URL = System.getenv("ENV_SAR_URL");
+		if(BASE_URL==null){
+			PropertyManager prop = new PropertyManager();
+			BASE_URL = prop.getPropValues("base.url");
+		}
+	    final String uri = BASE_URL + "/SPARQLUpdate";
+	     
+	    RestTemplate restTemplate = new RestTemplate();
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    JsonNode jsonNode = objectMapper.readTree(json);
+	    String request = prefix() + 
+	    		"DELETE DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:loAPhysical \"1\" };\r\n" + 
+	    		"INSERT DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:loAPhysical "+jsonNode.get("loAPhysical").asText()+" };\r\n" + 
+	    		"\r\n" + 
+	    		"DELETE DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:loACognitive \"1\" };\r\n" + 
+	    		"INSERT DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:loACognitive "+jsonNode.get("loACognitive").asText()+" };\r\n" + 
+	    		"\r\n" + 
+	    		"DELETE DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:numberOfOperators \"1\" };\r\n" + 
+	    		"INSERT DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:numberOfOperators "+jsonNode.get("numberOfOperators").asText()+" };\r\n" + 
+	    		"\r\n" + 
+	    		"DELETE DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:annualMaintenanceCost \"1\" };\r\n" + 
+	    		"INSERT DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:annualMaintenanceCost "+jsonNode.get("annualMaintenanceCost").asText()+" };\r\n" + 
+	    		"						 \r\n" + 
+	    		"DELETE DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:installationSurface \"1\" };\r\n" + 
+	    		"INSERT DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:installationSurface "+jsonNode.get("installationSurface").asText()+" };\r\n" + 
+	    		"\r\n" + 
+	    		"DELETE DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:machinePurchaseValue \"1\" };\r\n" + 
+	    		"INSERT DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:machinePurchaseValue "+jsonNode.get("machinePurchaseValue").asText()+" };\r\n" + 
+	    		"\r\n" + 
+	    		"DELETE DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:economicUsefulLife \"1\" };\r\n" + 
+	    		"INSERT DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:economicUsefulLife "+jsonNode.get("economicUsefulLife").asText()+" };\r\n" + 
+	    		"\r\n" + 
+	    		"DELETE DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:annualElectricityConsumption \"1\" };\r\n" + 
+	    		"INSERT DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:annualElectricityConsumption "+jsonNode.get("annualElectricityConsumption").asText()+" };\r\n" + 
+	    		"						 \r\n" + 
+	    		"DELETE DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:costPerSurfacePerMonth \"1\" };\r\n" + 
+	    		"INSERT DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:costPerSurfacePerMonth "+jsonNode.get("costPerSurfacePerMonth").asText()+" };						 \r\n" + 
+	    		"		\r\n" + 
+	    		"DELETE DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:machineSalesValue \"1\" };\r\n" + 
+	    		"INSERT DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:machineSalesValue "+jsonNode.get("machineSalesValue").asText()+" };	\r\n" + 
+	    		"\r\n" + 
+	    		"DELETE DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:annualElectricityConsumptionWhileWorking \"1\" };\r\n" + 
+	    		"INSERT DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:annualElectricityConsumptionWhileWorking "+jsonNode.get("annualElectricityConsumptionWhileWorking").asText()+" };\r\n" + 
+	    		"\r\n" + 
+	    		"DELETE DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:annualElectricityConsumptionStandBy \"1\" };\r\n" + 
+	    		"INSERT DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:annualElectricityConsumptionStandBy "+jsonNode.get("annualElectricityConsumptionStandBy").asText()+" };						 \r\n" + 
+	    		"\r\n" + 
+	    		"DELETE DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:equipmentId \"1\" };\r\n" + 
+	    		"INSERT DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:equipmentId "+jsonNode.get("equipmentId").asText()+" };	\r\n" + 
+	    		"						 \r\n" + 
+	    		"DELETE DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:equipmentLevel \"1\" };\r\n" + 
+	    		"INSERT DATA { <http://a4blue/ontologies/var-tekniker.owl#"+jsonNode.get("assetName").asText()+"> var:equipmentLevel "+jsonNode.get("equipmentLevel").asText()+" };		\r\n" + 
+	    		"";
+	    
+	    String result = restTemplate.postForObject(uri, request, String.class);
+	     
+	    return result;
 	}
 }

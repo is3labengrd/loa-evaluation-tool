@@ -43,7 +43,9 @@ export class AddResourceComponent implements OnInit {
     Object.assign({}, this.resourceInitialState)
   );
 
+  syncingWithVAR = false;
   ngOnInit() {
+    this.syncingWithVAR = true;
   }
 
   cancel() {
@@ -116,6 +118,7 @@ export class AddResourceComponent implements OnInit {
     )
     .toPromise()
     .then(() => {
+      this.syncingWithVAR = false;
     })
   }
 

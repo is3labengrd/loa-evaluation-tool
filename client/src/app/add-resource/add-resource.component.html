@@ -23,7 +23,7 @@
           </span>
         <span class="col-3 text-right">
             LoA Cognitive:
-            <input type="number" name="loaCognitive" [(ngModel)]="resource.loaCognitive" min="1" max="7" onkeydown="return false" required> 
+            <input type="number" name="loaCognitive" [(ngModel)]="resource.loaCognitive" min="1" max="7" onkeydown="return false" required>
           </span>
       </div>
     </fieldset>
@@ -135,11 +135,11 @@
           </h5>
         </div>
         <div class="modal-body">
-          <span *ngIf="opSuc">Operation has been performed.</span> 
+          <span *ngIf="opSuc">Operation has been performed.</span>
           <span *ngIf="!opSuc">Operation has failed.</span>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="away();">OK</button>
+          <button *ngIf="!syncingWithVAR" type="button" class="btn btn-secondary" data-dismiss="modal" (click)="away();">OK</button>
         </div>
       </div>
     </div>

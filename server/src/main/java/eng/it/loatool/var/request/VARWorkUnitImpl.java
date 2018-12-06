@@ -5,11 +5,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import eng.it.loatool.var.bean.Attrs;
 import eng.it.loatool.var.bean.Individual;
 import eng.it.util.PropertyManager;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 public class VARWorkUnitImpl {
@@ -74,38 +79,66 @@ public class VARWorkUnitImpl {
 
         String workUnitTemplate = workUnitTemplate(json);
         String siteTemplate = siteTemplate(json);
+        JsonNode jsonNode = objectMapper.readTree(json);
 
         String instance = VARInstance.getInstance("RWTH");
         JsonNode checkInstance = objectMapper.readTree(instance);
-
-        VARInstance.createInstance(workUnitTemplate);
+        String instance2 = VARInstance.getInstance(jsonNode.get("assetName").asText());
+        JsonNode checkInstance2 = objectMapper.readTree(instance2);
+        
         if (checkInstance.get(0) == null)
             VARInstance.createInstance(siteTemplate);
         else
             VARInstance.updateInstance(siteTemplate);
-
-
-
+        
+        if (checkInstance2.get(0) == null)
+        	VARInstance.createInstance(workUnitTemplate);
+        else{
+        	try
+            {
+        		 VARInstance.updateInstance(workUnitTemplate);
+            }
+            catch (Throwable t)
+                {
+            		createAttr(json);
+                }
+        }
+        
+       
+      
     }
 
     public static void updateBody(String json) throws IOException {
 
-        ObjectMapper objectMapper = new ObjectMapper();
+    	ObjectMapper objectMapper = new ObjectMapper();
 
         String workUnitTemplate = workUnitTemplate(json);
         String siteTemplate = siteTemplate(json);
+        JsonNode jsonNode = objectMapper.readTree(json);
 
         String instance = VARInstance.getInstance("RWTH");
         JsonNode checkInstance = objectMapper.readTree(instance);
-
-        VARInstance.updateInstance(workUnitTemplate);
+        String instance2 = VARInstance.getInstance(jsonNode.get("assetName").asText());
+        JsonNode checkInstance2 = objectMapper.readTree(instance2);
+        
         if (checkInstance.get(0) == null)
             VARInstance.createInstance(siteTemplate);
         else
             VARInstance.updateInstance(siteTemplate);
-
-
-
+        
+        if (checkInstance2.get(0) == null)
+        	VARInstance.createInstance(workUnitTemplate);
+        else {
+        	try
+            {	
+        		VARInstance.updateInstance(workUnitTemplate);
+            }
+            catch (Throwable t)
+                {
+            		createAttr(json);
+                }
+        }
+         
     }
 
     public static String getSiteIntance () throws IOException {
@@ -204,6 +237,50 @@ public class VARWorkUnitImpl {
         final String uri = BASE_URL + "/assets/"+name;
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(uri);
+    }
+    
+    public static void createAttr(String body) throws IOException {
+        String BASE_URL = System.getenv("ENV_SAR_URL");
+        if(BASE_URL==null){
+            PropertyManager prop = new PropertyManager();
+            BASE_URL = prop.getPropValues("base.url");
+        }
+
+
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(workUnitTemplate(body));
+
+        final String uri = BASE_URL + "/models/"+jsonNode.get("assetName").asText()+"/attributes/";
+
+        for (JsonNode attr: jsonNode.get("attribute") ) {
+            RestTemplate restTemplate = new RestTemplate();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<String> entity = new HttpEntity<String>(attr.toString(),headers);
+            try
+            {
+            	String answer = restTemplate.postForObject(uri, entity, String.class);
+            	System.out.println(answer);
+            }
+            catch (Throwable t)
+                {
+            	
+                }
+            
+        }
+        
+        try
+        {
+    		 VARInstance.updateInstance(workUnitTemplate(body));
+        }
+        catch (Throwable t)
+            {
+        		
+            }
+
     }
 
 

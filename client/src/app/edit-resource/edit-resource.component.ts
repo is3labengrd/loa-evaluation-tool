@@ -19,6 +19,7 @@ export class EditResourceComponent implements OnInit {
   ) { }
 
   resourceId = this.route.snapshot.params['resourceId'];
+  syncingWithVAR = false;
 
   selectedSubprocess = this
   .cookieService
@@ -46,6 +47,9 @@ export class EditResourceComponent implements OnInit {
   resourceInitialState;
 
   ngOnInit() {
+
+    this.syncingWithVAR = true;
+
     this.http
     .get(`${environment.apiUrl}/v1/resources/${this.resourceId}`)
     .toPromise()
@@ -75,7 +79,7 @@ export class EditResourceComponent implements OnInit {
   }
 
   save = () => {
-
+    this.editVAR();
     return this.http
     .put(
       `${environment.apiUrl}/v1/resources/${this.resourceId}`,
@@ -84,7 +88,6 @@ export class EditResourceComponent implements OnInit {
     .toPromise()
     .then(
       () => {
-        this.editVAR();
       },
       (err) => {}
     );
@@ -118,43 +121,10 @@ export class EditResourceComponent implements OnInit {
       varResObj
     )
     .toPromise()
-    .then(() => {
+    .then(() => {this.syncingWithVAR = false;
     },
-    (err) => {this.saveVAR()}
+    (err) => {}
   );
-}
-
-saveVAR = () => {
-  var varResObj = {
-    "assetName": this.resource.name,
-    "className": this.resource.varClass,
-    "loAPhysical": this.resource.loaPhysical,
-    "loACognitive": this.resource.loaCognitive,
-    "numberOfOperators": this.resource.lcNOperMachine,
-    "annualMaintenanceCost": this.resource.mcAMaintCosts,
-    "installationSurface": this.resource.rcInstSurface,
-    "costPerSurfacePerMonth": this.resource.rcCostsMMonth,
-    "machinePurchaseValue": this.resource.idMacPurhValue,
-    "machineSalesValue": this.resource.idMacSalesValue,
-    "economicUsefulLife": this.resource.idEcoUsefullLife,
-    "annualElectricityConsumptionWhileWorking" : this.resource.ecAEleConsumFun,
-    "annualElectricityConsumptionStandBy" : this.resource.ecAEleConsumSb,
-    "equipmentId": Math.random().toString(36).substring(2).slice(-2).toUpperCase() + Math.floor(Math.random() * 99),
-    "equipmentLevel": "",
-    "interestRate": this.resource.icInterRate,
-    "electricityPrice": this.resource.ecElePrice
-  };
-
-
-  return this.http
-  .post(
-    `${environment.apiUrl}/v1/var/addResource`,
-    varResObj
-  )
-  .toPromise()
-  .then(() => {
-  },
-  (err) => {});
 }
 
 }

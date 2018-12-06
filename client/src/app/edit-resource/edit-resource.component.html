@@ -137,10 +137,12 @@
           Operation has been performed.
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="away();">OK</button>
+          <button *ngIf="!syncingWithVAR" type="button" class="btn btn-secondary" data-dismiss="modal" (click)="away();">OK</button>
         </div>
       </div>
     </div>
   </div>
+
+
 
 </div>

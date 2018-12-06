@@ -75,8 +75,25 @@ public class VARProcessSpecificInformationImpl {
             headers.setContentType(MediaType.APPLICATION_JSON);
 
             HttpEntity<String> entity = new HttpEntity<String>(attr.toString(),headers);
-            String answer = restTemplate.postForObject(uri, entity, String.class);
-            System.out.println(answer);
+            try
+            {
+            	String answer = restTemplate.postForObject(uri, entity, String.class);
+            	System.out.println(answer);
+            }
+            catch (Throwable t)
+                {
+            		continue;
+                }
+            try
+            {
+        		 VARInstance.updateInstance(ProcessSpecificInformationTemplate(body));
+            }
+            catch (Throwable t)
+                {
+            		createAttr(body);
+                }
+            
+            
         }
 
     }

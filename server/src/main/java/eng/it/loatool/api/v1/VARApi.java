@@ -30,9 +30,10 @@ public class VARApi {
     }
 
     @RequestMapping(value = "/v1/var/editResource", method = RequestMethod.PUT)
-    public void editResource (@RequestBody String json) throws Exception {
+    public String editResource (@RequestBody String json) throws Exception {
 
         VARServiceWrapper.editResource(json);
+        return null;
     }
 
     @RequestMapping(value = "/v1/var/DeleteResource/{name}", method = RequestMethod.DELETE)
