@@ -252,6 +252,10 @@ addSubProcessL2(pkTbId) {
   }
 
   secondDropDownChanged(val2: any) {
+    if(val2 == -1){
+      this.lvl2selection=null;
+      return;
+    }
     const obj2 = this._values2;
     if (!obj2) { return; }
     this.lvl3selection = null;
@@ -260,6 +264,10 @@ addSubProcessL2(pkTbId) {
   }
 
   thirdDropDownChanged(val3: any) {
+    if(val3 == -1){
+      this.lvl3selection=null;
+      return;
+    }
     const obj3 = this._values3;
     if (!obj3) { return; }
     this.lvl3selection = obj3[val3];
