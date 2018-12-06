@@ -36,7 +36,8 @@ export class AddResourceComponent implements OnInit {
     'icInterRate': null,
     'ecAEleConsumFun': null,
     'ecAEleConsumSb': null,
-    'ecElePrice': null
+    'ecElePrice': null,
+    'varClass':'WorkUnit'
   };
 
   resource = Object.seal(
