@@ -215,24 +215,15 @@ export class SubScenariosSortingComponent implements OnInit {
   }
 
    enableSaveButton(): boolean {
-        var enable = false;
         if(this.minimalTotalSatisfaction==null){
             return false;
         }else{
-          if(this.subScenario1!=null && (this.subScenario1.resource.loaPhysical+ this.subScenario1.resource.loaCognitive)>=this.minimalTotalSatisfaction){
-             enable=true;
-          }
-          if(this.subScenario2!=null && (this.subScenario2.resource.loaPhysical+ this.subScenario2.resource.loaCognitive)>=this.minimalTotalSatisfaction){
-             enable=true;
-          }
-          if(this.subScenario3!=null && (this.subScenario3.resource.loaPhysical+ this.subScenario3.resource.loaCognitive)>=this.minimalTotalSatisfaction){
-             enable=true;
-          }
-
+          if(this.subScenario1==null && this.subScenario2==null && this.subScenario3==null){
+            return false;
+         }
+         return true;
         }
-      return enable;
     }
-
     minimalTotalSatisfactionGET() {
               return this.http
                 .get(environment.apiUrl + '/v1/minimal-satisfactions-by-process-id/'+this.cookie.mainProcessId)
