@@ -67,7 +67,10 @@ export class EditResourceComponent implements OnInit {
 
   resourceIsIncomplete = () => {
     return Object.entries(this.resource).some(
-      (keyValuePair) => (keyValuePair[1] == null)
+      (keyValuePair) => {
+        if (keyValuePair[0] == "varClass") return false;
+        return keyValuePair[1] == null;
+      }
     );
   }
 
