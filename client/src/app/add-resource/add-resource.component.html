@@ -140,10 +140,13 @@
         </div>
         <div class="modal-footer">
           <button *ngIf="!syncingWithVAR" type="button" class="btn btn-secondary" data-dismiss="modal" (click)="away();">OK</button>
+          <ng-template [ngIf]="syncingWithVAR">
+              <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+              <br>
+            </ng-template>
         </div>
       </div>
     </div>
   </div>
-
-
+                  
 </div>
