@@ -43,6 +43,8 @@ export class EditProcessComponent implements OnInit {
   processAdded: Array<any> = [];
   syncingWithVAR = false;
 
+  segmentListUPDATE: any ={fkTbAceProSeq: null , fkTbAceSubProLev1: null, fkTbAceSubProLev2: null, fkTbAceSubProLev3: null};
+
 
   constructor(private http: HttpClient, public router: Router, private route:ActivatedRoute,private _processListService: CookieService) {}
 
@@ -142,7 +144,7 @@ export class EditProcessComponent implements OnInit {
     addProSecOrdered() {
 
       const addProSecOrderedUrl = environment.apiUrl + '/v1/process-segment-list-elements/'+this.id;
-      this.http.put(addProSecOrderedUrl, {"fkTbAceProSeq": this.SegmentList[0].mainProcess.pkTbId ,"fkTbAceSubProLev1": this.pks[0], "fkTbAceSubProLev2": this.pks[1],"fkTbAceSubProLev3": this.pks[2]})
+      this.http.put(addProSecOrderedUrl, this.segmentListUPDATE)
       .toPromise()
       .then((res:any) => {
         if (res.pkTbId != null) {
@@ -282,13 +284,14 @@ export class EditProcessComponent implements OnInit {
           }
 
           if(!enablePost){
+
+            this.segmentListUPDATE.fkTbAceProSeq=this.SegmentList[0].mainProcess.pkTbId;
+
             for(let i in this.subProcessesList){
-              this.deleteSubProccess((this.subProcessesList[i].pkTbId).toString());
+                this.deleteSubProccess((this.subProcessesList[i].pkTbId).toString());
             }
 
             this.addSubProcessL1(this.SegmentList[0].mainProcess.pkTbId);
-            //this.router.navigate(['process-list']);
-            // alert("Process edited successfully");
             this.opSuc = true;
           }
         });
@@ -301,6 +304,12 @@ export class EditProcessComponent implements OnInit {
     this.http.delete(subProcUrl).subscribe();
   }
 
+  deleteSubProcessSegmentList(pkTbId:string){
+  const subProcUrl = environment.apiUrl + '/v1/process-segment-list-elements/'+pkTbId;
+  console.log(subProcUrl);
+  return this.http.delete(subProcUrl).subscribe();
+  }
+
   addSubProcessL1(pkTbId) {
 
     const subProcUrl = environment.apiUrl + '/v1/subprocess-levels';
@@ -309,6 +318,7 @@ export class EditProcessComponent implements OnInit {
     .then((res:any) => {
       if (res.pkTbId != null) {
         this.pks.push(res.pkTbId);
+        this.segmentListUPDATE.fkTbAceSubProLev1=res.pkTbId;
         this.addSubProcessL2(res.pkTbId);}
       },
       (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);});
@@ -324,11 +334,14 @@ export class EditProcessComponent implements OnInit {
         .then((res:any) => {
           if (res.pkTbId != null) {
             this.pks.push(res.pkTbId);
+            this.segmentListUPDATE.fkTbAceSubProLev2=res.pkTbId;
             this.addSubProcessL3(res.pkTbId);}
           },
 
           (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);})
         } else{
+          this.segmentListUPDATE.fkTbAceSubProLev2=null;
+          this.segmentListUPDATE.fkTbAceSubProLev3=null;
           this.addProSecOrdered();
         }
       }
@@ -339,12 +352,15 @@ export class EditProcessComponent implements OnInit {
           this.http.post(subProcUrl, {"fkTbAceProSeq": this.cookie.mainProcessId,"name": this.lvl3selection.name,"varProSeqId": this.lvl3selection.processSegmentId, "proLevel": this.lvl3selection.level})
           .toPromise()
           .then((res:any) => {
-            this.pks.push(res.pkTbId);
             if (res.pkTbId != null) {
+            this.pks.push(res.pkTbId);
+            this.segmentListUPDATE.fkTbAceSubProLev3=res.pkTbId;
+             this.addProSecOrdered();
             }},
             (err) => {alert('Something went wrong. \nStatus: ' +  err.error.status);})}
             else{
-              this.addProSecOrdered();
+             this.segmentListUPDATE.fkTbAceSubProLev3=null;
+             this.addProSecOrdered();
             }
 
           }

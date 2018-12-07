@@ -47,7 +47,7 @@
       <td>Level 3:</td>
       <td>
         <select *ngIf="(_values3.length > 0)"(change)="thirdDropDownChanged($event.target.selectedIndex -1)" style="width: 280px;">
-          <option selectedn>Select</option>
+          <option selected>Select</option>
           <option *ngFor='let v of _values3'>{{ v.name }}</option>
         </select>
       </td>
