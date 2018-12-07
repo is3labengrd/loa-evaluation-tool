@@ -89,7 +89,7 @@
 
   <div class="btn-group d-flex justify-content-center border-top" style="padding-top: 15px; margin-bottom: 20px;">
     <button class="btn btn-primary" (click)="cancel()"> Cancel </button>
-    <button cancel="btn btn-secondary" (click)="calculate()"> Calculate </button>
+    <button cancel="btn btn-secondary" (click)="calculate()" data-toggle="modal" data-target="#calcModal"> Calculate </button>
     <ng-container *ngIf="enableSave">  <button cancel="btn btn-secondary" (click)="save()" data-toggle="modal" data-target="#addModal"> Save </button></ng-container>
   </div>
   <!-- addModal -->
@@ -112,3 +112,23 @@
         </div>
       </div>
     </div>
+
+    <div class="modal fade" id="calcModal" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="calcModalLabel">
+                  <p class="text-success" *ngIf="enableSave">Successful</p>
+                  <p class="text-danger" *ngIf="!enableSave">Error</p>
+              </h5>
+            </div>
+            <div class="modal-body">
+                <span *ngIf="enableSave">Scenarios calculated.</span>
+                <span *ngIf="!enableSave">You have to select at least one sub-scenario to enable the calculate</span>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" >OK</button>
+            </div>
+          </div>
+        </div>
+      </div>

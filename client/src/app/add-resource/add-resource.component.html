@@ -130,12 +130,12 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="saveModalLabel">
-            <p *ngIf="opSuc" class="text-success">Successful</p>
+            <p *ngIf="opSuc" class="text-warning">Warning</p>
             <p *ngIf="!opSuc" class="text-danger">Error</p>
           </h5>
         </div>
         <div class="modal-body">
-          <span *ngIf="opSuc">Operation has been performed.</span>
+          <span *ngIf="opSuc">Please wait until the ok button appears, operation in progress...</span>
           <span *ngIf="!opSuc">Operation has failed.</span>
         </div>
         <div class="modal-footer">

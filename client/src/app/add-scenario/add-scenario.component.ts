@@ -320,6 +320,8 @@ export class AddScenarioComponent implements OnInit {
 
         this.showedList = calculatedList;
 
+
+
         if(optCost != 0){
           this.phyLoaTotal = Math.round(poundphyLoa/procTime);
         }else{
@@ -340,7 +342,16 @@ export class AddScenarioComponent implements OnInit {
         this.TotalCost = (optCost).toFixed(2);
         this.totalProcessTime = (procTime).toFixed(2);
 
-        this.enableSave = true;
+        for (let n in this.showedList){
+          if (this.showedList[n].cog != "-" && this.showedList[n].fkTbAceRes != "-" && this.showedList[n].fkTbAceSubProLev != "-" && this.showedList[n].numberSelected != "-" && this.showedList[n].optC != "-" && this.showedList[n].poundCog != "-" && this.showedList[n].poundPhy != "-"){
+            this.enableSave = true;
+            break;
+          }
+          else{
+            this.enableSave = false;
+          }
+
+        }
       }
 
     cancel(){
@@ -448,6 +459,7 @@ export class AddScenarioComponent implements OnInit {
 
         var bodyPostScenRes = {};
         var tmp = 0;
+
         for(let i in this.showedList){
           bodyPostScenRes = {};
           bodyPostScenRes['fkTbAceSubProLev'] = this.showedList[i].fkTbAceSubProLev;
