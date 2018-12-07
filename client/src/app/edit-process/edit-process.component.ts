@@ -232,18 +232,8 @@ export class EditProcessComponent implements OnInit {
     if (this.lvl3selection != null)
     this.subProcessesListToEdit.push(this.lvl3selection);
 
-    if (this.subProcessesList.length === this.subProcessesListToEdit.length){
-      for(let i in this.subProcessesList){
-        this.checkEdit1.push(this.subProcessesList[i].name);
-        this.checkEdit2.push(this.subProcessesListToEdit[i].name);
-      }
-
-      if (this.checkEdit1.toString() === this.checkEdit2.toString()){
-        alert("Nothing to modify");
-      }else{
-
         promise.then((x) => {
-          for(let i in this.processAdded[0]){
+        for(let i in this.processAdded[0]){
             if(this.processAdded[0][i].mainProcess.pkTbId === this.cookie.mainProcessId){
               if(this.lvl3selection === undefined || this.lvl3selection === null){
                 if(this.lvl2selection === undefined || this.lvl2selection === null){
@@ -295,8 +285,6 @@ export class EditProcessComponent implements OnInit {
             this.opSuc = true;
           }
         });
-      }
-    }
   }
 
   deleteSubProccess (pkTbId:string){
