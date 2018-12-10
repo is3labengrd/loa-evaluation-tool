@@ -21,14 +21,12 @@ public class StoreResourcesFromVarService {
         final Double electricityPrice[] = new Double[1];
         final Float interestRate[] = new Float[1];
         try {
-            
-          if(!VARServiceWrapper.getSite().equals("[]")) {
-        	  JsonNode siteInfo = objectMapper.readTree(VARServiceWrapper.getSite());
-	            electricityPrice[0] = siteInfo.get(0).get("propertyValue").asDouble();
-	            interestRate[0] = (float)siteInfo.get(1).get("propertyValue").asDouble();
-            }
-            else {
-            	electricityPrice[0] = 0d;
+            if (!VARServiceWrapper.getSite().equals("[]")) {
+                JsonNode siteInfo = objectMapper.readTree(VARServiceWrapper.getSite());
+                electricityPrice[0] = siteInfo.get(0).get("propertyValue").asDouble();
+                interestRate[0] = (float)siteInfo.get(1).get("propertyValue").asDouble();
+            } else {
+                electricityPrice[0] = 0d;
                 interestRate[0] = 0f;
             }
         } catch (Exception e) {
@@ -44,7 +42,7 @@ public class StoreResourcesFromVarService {
                         Resource newResource = (new VarToNativeResourceTransformer())
                             .transform(individual);
                         resource.assimilateVarInstance(newResource);
-                        newResource.setEcElePrice(electricityPrice[0]);
+                        resource.setEcElePrice(electricityPrice[0]);
                         resource.setIcInterRate(interestRate[0]);
                         return resourceRepository.save(resource);
                     } catch (Throwable t) {
