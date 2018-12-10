@@ -530,26 +530,26 @@ checkMandatoryData() {
   updateVariableCostsTotal(): void {
 
     if(this.isSubScenario1Present==true)
-    this.subscenario1.varCostTotal = this.roundValue(this.subscenario1.labourCost * this.subscenario1.energyCost);
+    this.subscenario1.varCostTotal = this.roundValue(this.subscenario1.labourCost + this.subscenario1.energyCost);
 
     if(this.isSubScenario2Present==true)
-    this.subscenario2.varCostTotal = this.roundValue(this.subscenario2.labourCost * this.subscenario2.energyCost);
+    this.subscenario2.varCostTotal = this.roundValue(this.subscenario2.labourCost + this.subscenario2.energyCost);
 
     if(this.isSubScenario3Present==true)
-    this.subscenario3.varCostTotal = this.roundValue(this.subscenario3.labourCost * this.subscenario3.energyCost);
+    this.subscenario3.varCostTotal = this.roundValue(this.subscenario3.labourCost + this.subscenario3.energyCost);
 
    }
 
   updateFixedCostsTotal(): void {
 
     if(this.isSubScenario1Present==true)
-    this.subscenario1.fixedCostTotal = this.roundValue((this.subscenario1.maintCost + this.subscenario1.annualSpaceCost + this.subscenario1.inputedDepreciation + this.subscenario1.inputedDepreciation) / this.subscenario1.nprodPieces);
+    this.subscenario1.fixedCostTotal = this.roundValue((this.subscenario1.maintCost + this.subscenario1.annualSpaceCost + this.subscenario1.inputedDepreciation + this.subscenario1.accruedIntCosts) / this.subscenario1.nprodPieces);
 
     if(this.isSubScenario2Present==true)
-    this.subscenario2.fixedCostTotal = this.roundValue((this.subscenario2.maintCost + this.subscenario2.annualSpaceCost + this.subscenario2.inputedDepreciation + this.subscenario2.inputedDepreciation) / this.subscenario2.nprodPieces);
+    this.subscenario2.fixedCostTotal = this.roundValue((this.subscenario2.maintCost + this.subscenario2.annualSpaceCost + this.subscenario2.inputedDepreciation + this.subscenario2.accruedIntCosts) / this.subscenario2.nprodPieces);
 
     if(this.isSubScenario3Present==true)
-    this.subscenario3.fixedCostTotal = this.roundValue((this.subscenario3.maintCost + this.subscenario3.annualSpaceCost + this.subscenario3.inputedDepreciation + this.subscenario3.inputedDepreciation) / this.subscenario3.nprodPieces);
+    this.subscenario3.fixedCostTotal = this.roundValue((this.subscenario3.maintCost + this.subscenario3.annualSpaceCost + this.subscenario3.inputedDepreciation + this.subscenario3.accruedIntCosts) / this.subscenario3.nprodPieces);
   }
 
   updateAssemblyCostsPerPiece(): void {
