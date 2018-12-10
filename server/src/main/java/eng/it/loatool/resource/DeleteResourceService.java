@@ -7,7 +7,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import eng.it.loatool.scenario_resource.ScenarioResourceRepository;
+import eng.it.loatool.scenario_resource.DeleteScenarioResourceService;
 import eng.it.loatool.subprocess_level_resource.SubProcessLevelResourceRepository;
 import eng.it.loatool.subscenario.SubScenario;
 import eng.it.loatool.subscenario.SubScenarioRepository;
@@ -30,11 +30,8 @@ public class DeleteResourceService {
                     .forEach((subScenario) -> {
                         subScenarioRepository.delete(subScenario);
                     });
-                scenarioResourceRepository
-                    .getScenarioResourcesbyResourceId(resourceId)
-                    .forEach((scenarioResources) -> {
-                        scenarioResourceRepository.delete(scenarioResources);
-                    });
+                deleteScenarioResourceService
+                    .deleteByResourceId(resourceId);
                 if (!resource.getVarRes()) {
                     try {
                         VARWorkUnitImpl.delete(resource.getName());
@@ -57,8 +54,8 @@ public class DeleteResourceService {
     }
 
     @Autowired private ResourceRepository resourceRepository;
-    @Autowired private ScenarioResourceRepository scenarioResourceRepository;
     @Autowired private SubScenarioRepository subScenarioRepository;
+    @Autowired private DeleteScenarioResourceService deleteScenarioResourceService;
     @Autowired private SubProcessLevelResourceRepository subProcessLevelResourceRepository;
 
 }
