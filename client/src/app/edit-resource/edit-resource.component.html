@@ -16,7 +16,7 @@
       <div class="row data">
         <span class="col-6">
           Resource name:
-          <input type="text" class="float-right" name="name" [(ngModel)]="resource.name" required (keydown.space)="$event.preventDefault()">
+          <span class="float-right hacked-width">{{resource.name}}</span>
         </span>
         <span class="col-3 text-right">
           LoA Physical:
