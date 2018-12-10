@@ -104,6 +104,7 @@ export class EditResourceComponent implements OnInit {
       "loACognitive": this.resource.loaCognitive,
       "numberOfOperators": this.resource.lcNOperMachine,
       "annualMaintenanceCost": this.resource.mcAMaintCosts,
+      "annualMaintenanceCostPercent": this.resource.mcAMaintCostsPerc,
       "installationSurface": this.resource.rcInstSurface,
       "costPerSurfacePerMonth": this.resource.rcCostsMMonth,
       "machinePurchaseValue": this.resource.idMacPurhValue,
