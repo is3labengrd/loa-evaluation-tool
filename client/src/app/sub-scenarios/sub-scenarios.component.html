@@ -496,16 +496,16 @@
         €/units
       </td>
       <td>
-        {{subscenario1?.varCostTotal}}<br>
-        {{subscenario1?.fixedCostTotal}}
+        {{(subscenario1?.varCostTotal)?.toFixed(2)}}<br>
+        {{(subscenario1?.fixedCostTotal)?.toFixed(2)}}
       </td>
       <td>
-        {{subscenario2?.varCostTotal}}<br>
-        {{subscenario2?.fixedCostTotal}}
+        {{(subscenario2?.varCostTotal)?.toFixed(2)}}<br>
+        {{(subscenario2?.fixedCostTotal)?.toFixed(2)}}
       </td>
       <td>
-        {{subscenario3?.varCostTotal}} <br>
-        {{subscenario3?.fixedCostTotal}}
+        {{(subscenario3?.varCostTotal)?.toFixed(2)}} <br>
+        {{(subscenario3?.fixedCostTotal)?.toFixed(2)}}
       </td>
     </tr>
     <tr>
@@ -518,16 +518,16 @@
         €/year
       </td>
       <td>
-        {{subscenario1?.assemblyCostPerPiece}} <br>
-        {{subscenario1?.assemblyCosts}}
+        {{(subscenario1?.assemblyCostPerPiece)?.toFixed(2)}} <br>
+        {{(subscenario1?.assemblyCosts)?.toFixed(2)}}
       </td>
       <td>
-        {{subscenario2?.assemblyCostPerPiece}}<br>
-        {{subscenario2?.assemblyCosts}}
+        {{(subscenario2?.assemblyCostPerPiece)?.toFixed(2)}}<br>
+        {{(subscenario2?.assemblyCosts)?.toFixed(2)}}
       </td>
       <td>
-        {{subscenario3?.assemblyCostPerPiece}}<br>
-        {{subscenario3?.assemblyCosts}}
+        {{(subscenario3?.assemblyCostPerPiece)?.toFixed(2)}}<br>
+        {{(subscenario3?.assemblyCosts)?.toFixed(2)}}
       </td>
     </tr>
     </tbody>
