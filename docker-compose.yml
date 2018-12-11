@@ -1,19 +1,52 @@
-version: "2"
-
+version: "2.3"
 services:
+  a4bluesar:
+      hostname: a4bluesar
+      image: a4blue/a4bluesargv:latest
+      networks:
+          default:
+              aliases:
+                  - sar
+      volumes:
+          - a4bluesar_data:/opt/data
+      environment:
+          - EXTERNAL_SAR_SERVER_URL=${PUBLIC_SAR_URL:-http://<your_public_ip_addr>:8083}
+          - EXTERNAL_HORIZON_SERVER_URL=${PUBLIC_HORIZON_URL:-http://<your_public_ip_addr>:8003}
+          - EXTERNAL_KEYSTONE_SERVER_URL=${PUBLIC_KEYSTONE_URL:-http://<your_public_ip_addr>:5003}
+      ports:
+          - ${LOCAL_SAR_PORT:-8083}:8080
+      depends_on:
+          - idmysql
 
-  mysql:
-    image: mysql/mysql-server:5.5
-    ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=idm
-      - MYSQL_ROOT_HOST=%
+  idmysql:
+      hostname: idmysql
+      image: a4blue/idmysqlfwgv:latest
+      networks:
+          default:
+              aliases:
+                  - keystoneserver
+      volumes:
+          - idmysql_keystone:/keystone
+          - idmysql_horizon:/horizon
+          - idmysql_datamysql:/data/mysql
+      ports:
+          - ${LOCAL_HORIZON_PORT:-8003}:8000
+          - ${LOCAL_KEYSTONE_PORT:-5003}:5000
 
-  fiware-idm:
-    image: fiware/idm:v5.4.0
-    ports:
-      - "8000:8000"
-      - "5000:5000"
-    environment:
-      - DATABASE_HOST=mysql
+  acewebtool:
+      hostname: a4blueacetool
+      image: a4blue/acewebtool:latest
+      ports:
+         - "8080:8080"
+         - "3308:3306"
+      environment:
+         - ENV_SAR_URL=http://<your_public_ip_addr>:8083/CAMService
+      volumes:
+         - acewebtool_data:/opt/data
+
+volumes:
+    a4bluesar_data:
+    idmysql_keystone:
+    idmysql_horizon:
+    idmysql_datamysql:
+    acewebtool_data:
