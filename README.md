@@ -35,8 +35,9 @@ This procedure assumes that you have installed [Docker](https://docs.docker.com/
 • Install and execute docker compose file:
 
 	**A.** Copy the file to a file system directory (make sure the user has full rights to run the file)
- 	**B.** Go under the directory and run the following command: # docker-compose up &
+ 	**B.** Go under the directory and run the following command: # docker-compose --project-name a4blue up -d
  	**C.** Wait for the services to start. 
+	**D.** To stop the container use this command: # docker-compose --project-name a4blue down.
  
 | Service       | Value                                         | 
 | ------------- |:---------------------------------------------:| 
