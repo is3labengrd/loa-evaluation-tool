@@ -28,6 +28,7 @@ import eng.it.loatool.PkTbPrimaryKeyOwner;
 public class MinimalSatisfaction implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
     @JsonProperty private Integer pkTbId;
+    private int fkTbAceSubProLev;
     private int fkTbAceProSeq;
     private int minTotalSat;
     private Date createDate;
@@ -46,7 +47,7 @@ public class MinimalSatisfaction implements java.io.Serializable, PkTbPrimaryKey
     @Id
     @GeneratedValue(strategy = IDENTITY)
 
-    @Column(name = "PK_TB_ID", unique = true, nullable = false)
+    @Column(name = "PK_TB_ID", nullable = false)
     public Integer getPkTbId() {
         return this.pkTbId;
     }
@@ -54,6 +55,15 @@ public class MinimalSatisfaction implements java.io.Serializable, PkTbPrimaryKey
     @Override
     public void setPkTbId(Integer pkTbId) {
         this.pkTbId = pkTbId;
+    }
+
+    @Column(name = "FK_TB_ACE_SUB_PRO_LEV", nullable = false)
+    public int getFkTbAceSubProLev() {
+        return fkTbAceSubProLev;
+    }
+
+    public void setFkTbAceSubProLev(int fkTbAceSubProLev) {
+        this.fkTbAceSubProLev = fkTbAceSubProLev;
     }
 
     @Column(name = "FK_TB_ACE_PRO_SEQ", nullable = false)

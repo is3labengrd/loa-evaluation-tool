@@ -42,10 +42,20 @@ public class MinimalSatisfactionsApi {
         );
     }
 
+    @GetMapping("/v1/minimal-satisfactions-by-subprocess-level-id/{id}")
+    public ResponseEntity<?> getSingleMinimalSatisfactionBySubProcessLevelId(
+        @PathVariable("id") Integer subprocessId
+    ) {
+        return ResponseEntityTransformer.transform(
+            getMinimalSatisfactionService.getBySubProcessLevelId(subprocessId)
+        );
+    }
+
     @PostMapping("/v1/minimal-satisfactions")
     public ResponseEntity<?> createMinimalSatisfaction(@RequestBody MinimalSatisfaction body) {
         return ResponseEntityTransformer.transform(
-            createMinimalSatisfactionService.create(body)
+            createMinimalSatisfactionService.create(body),
+            badRequest
         );
     }
 
@@ -63,5 +73,6 @@ public class MinimalSatisfactionsApi {
     @Autowired private GetMinimalSatisfactionService getMinimalSatisfactionService;
     @Autowired private GeneralCRUDService generalCRUDService;
     @Autowired private MinimalSatisfactionRepository minimalSatisfactionRepository;
+    private ResponseEntity badRequest = ResponseEntity.badRequest().build();
 
 }

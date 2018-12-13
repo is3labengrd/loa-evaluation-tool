@@ -13,4 +13,7 @@ public interface MinimalSatisfactionRepository extends JpaRepository<MinimalSati
     @Query("from MinimalSatisfaction where fkTbAceProSeq=:processId")
     public Optional<MinimalSatisfaction> getByProcessId(@Param("processId") Integer processId);
 
+    @Query("from MinimalSatisfaction where fkTbAceSubProLev=:subprocessId")
+    public Optional<MinimalSatisfaction> getBySubProcessLevelId(@Param("subprocessId") Integer subprocessId);
+
 }

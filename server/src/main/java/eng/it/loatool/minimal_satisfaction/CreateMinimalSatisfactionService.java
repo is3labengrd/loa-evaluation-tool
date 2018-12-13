@@ -17,7 +17,7 @@ public class CreateMinimalSatisfactionService {
     ) {
         if (
             getMinimalSatisfactionService
-                .getByProcessId(minimalSatisfaction.getFkTbAceProSeq())
+                .getBySubProcessLevelId(minimalSatisfaction.getFkTbAceSubProLev())
                 .isPresent()
         ) {
             return Optional.empty();

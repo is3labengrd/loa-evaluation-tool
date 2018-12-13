@@ -12,6 +12,10 @@ public class GetMinimalSatisfactionService {
         return minimalSatisfactionRepository.getByProcessId(processId);
     }
 
+    public Optional<MinimalSatisfaction> getBySubProcessLevelId(Integer subprocessId) {
+        return minimalSatisfactionRepository.getBySubProcessLevelId(subprocessId);
+    }
+
     @Autowired private MinimalSatisfactionRepository minimalSatisfactionRepository;
 
 }
