@@ -3,7 +3,7 @@ import { DataSet } from './data-set';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Chart } from '../../../node_modules/chart.js/dist/Chart.min.js';
+import { Chart } from '../../../node_modules/chart.js/dist/Chart.bundle.js';
 import { SubprocessSequence } from './subprocess-sequence';
 import { LoaInfo } from './loa-info';
 
