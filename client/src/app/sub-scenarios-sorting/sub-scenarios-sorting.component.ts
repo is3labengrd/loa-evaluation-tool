@@ -15,6 +15,7 @@ export class SubScenariosSortingComponent implements OnInit {
         private cookieService: CookieService
       ) {}
   cookie = this.cookieService.getCookie("selectedSubprocess");
+  subProLevId: any = this.getFkAceSubProLevId(this.cookie);
 
 
   barChart: any;
@@ -226,7 +227,7 @@ export class SubScenariosSortingComponent implements OnInit {
     }
     minimalTotalSatisfactionGET() {
               return this.http
-                .get(environment.apiUrl + '/v1/minimal-satisfactions-by-process-id/'+this.cookie.mainProcessId)
+                .get(environment.apiUrl + '/v1/minimal-satisfactions-by-subprocess-level-id/'+this.subProLevId)
                 .toPromise()
                 .then(
                 (result:any) => {
@@ -242,11 +243,12 @@ export class SubScenariosSortingComponent implements OnInit {
     minimalTotalSatisfactionUpdate(): void {
         var minimalTotalSatisfactionObj = {
                                   minTotalSat: {},
+                                  fkTbAceSubProLev: {},
                                   fkTbAceProSeq: {}
                             };
         minimalTotalSatisfactionObj.minTotalSat = this.minimalTotalSatisfaction;
         minimalTotalSatisfactionObj.fkTbAceProSeq = this.cookie.mainProcessId;
-
+        minimalTotalSatisfactionObj.fkTbAceSubProLev = this.subProLevId;
 
         if (this.minimalTotalSatisfactionID == null) {
          this.http.post(environment.apiUrl + '/v1/minimal-satisfactions', minimalTotalSatisfactionObj)
