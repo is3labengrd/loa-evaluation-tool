@@ -126,8 +126,12 @@ export class ScenariosComponent implements OnInit {
     }
 
     for (let j in camList){
-      this.allProcessSegmentCAM.push(camList[j].name);
-      this.loop(camList[j].subProcesses);
+      if(camList[j].subProcesses.length === 0 ){
+        this.allProcessSegmentCAM.push(camList[j].name);
+      }
+      else{
+        this.loop(camList[j].subProcesses);
+      }
     }
   }
 
