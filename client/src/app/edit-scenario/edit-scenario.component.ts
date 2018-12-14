@@ -78,13 +78,13 @@ export class EditScenarioComponent implements OnInit {
         if(this.resSubSceList[0][i].fkTbAceProSeq === this.cookie.mainProcessId){
           for(let j in this.resSubSceList[0]){
             if(this.resSubSceList[0][i].subprocessLevel.pkTbId === this.resSubSceList[0][j].subprocessLevel.pkTbId){
-              if(this.resSubSceList[0][j].scenarioNumber === 1 &&  this.resSubSceList[0][j].resSorting){
+              if(this.resSubSceList[0][j].scenarioNumber === 1 /*&&  this.resSubSceList[0][j].resSorting*/){
                 this.objlist['scenNumber1'] = this.resSubSceList[0][j];
               }
-              if(this.resSubSceList[0][j].scenarioNumber === 2 &&  this.resSubSceList[0][j].resSorting){
+              if(this.resSubSceList[0][j].scenarioNumber === 2 /*&&  this.resSubSceList[0][j].resSorting*/){
                 this.objlist['scenNumber2'] = this.resSubSceList[0][j];
               }
-              if(this.resSubSceList[0][j].scenarioNumber === 3 &&  this.resSubSceList[0][j].resSorting){
+              if(this.resSubSceList[0][j].scenarioNumber === 3 /*&&  this.resSubSceList[0][j].resSorting*/){
                 this.objlist['scenNumber3'] = this.resSubSceList[0][j];
               }
             }
@@ -404,8 +404,12 @@ export class EditScenarioComponent implements OnInit {
       }
 
       for (let j in camList){
-        this.allProcessSegmentCAM.push(camList[j].name);
-        this.loop(camList[j].subProcesses);
+        if(camList[j].subProcesses.length === 0 ){
+          this.allProcessSegmentCAM.push(camList[j].name);
+        }
+        else{
+          this.loop(camList[j].subProcesses);
+        }
       }
     }
 
