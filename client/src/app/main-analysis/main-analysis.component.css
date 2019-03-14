@@ -12,3 +12,8 @@ fieldset legend {
 fieldset button {
   margin-right: 15px;
 }
+
+.two-line-btn {
+  padding: 0.13rem .75rem;
+  line-height: 1;
+}
