@@ -119,7 +119,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetMatrix()">Yes</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal"  >No</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
           </div>
         </div>
       </div>
@@ -131,10 +131,10 @@
       <legend style="width: auto;">Physical LoA information</legend>
       <table class="table table-borderless table-responsive">
         <thead>
-          <th>Automation posibility</th>
-          <th>Current Physical LoA</th>
-          <th>Current Cognitive LoA</th>
-          <th colspan="2" class="text-center">Best physical LoA range</th>
+          <th class="align-middle">Possibility of<br>manual execution</th>
+          <th class="align-middle">Current physical LoA</th>
+          <th class="align-middle">Current cognitive LoA</th>
+          <th class="align-middle" colspan="2">Optimal physical LoA range</th>
         </thead>
         <tr>
           <td>
@@ -166,7 +166,7 @@
     </fieldset>
 
     <!-- saveModal -->
-   <div class="modal fade" id="saveModal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal fade" id="saveModal" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -188,7 +188,7 @@
 
     <div class="btn-group" style="justify-content: center; width: 100%;">
       <button class="btn btn-secondary" (click)="loaInfoRequest.possibility=false">Cancel</button>
-      <button class="btn btn-primary" (click)="saveLoaInfo(minLoa.value, maxLoa.value)"  data-toggle="modal" data-target="#saveModal" >Save</button>
+      <button class="btn btn-primary" (click)="saveLoaInfo(minLoa.value, maxLoa.value)"  data-toggle="modal" data-target="#saveModal">Save</button>
       <button class="btn btn-outline-primary" routerLink="/criteria-matrix" [disabled]="!canNext()">Next</button>
     </div>
   </form>
