@@ -545,22 +545,22 @@
           </label>
         </td>
         <td>
-          <select name="physical-loa" [(ngModel)]="loaInfoRequest.fkTbAcePhyLoa" [disabled]="!loaInfoRequest.possibility" class="selectLoa">
+          <select name="physical-loa" [(ngModel)]="loaInfoRequest.fkTbAcePhyLoa" class="selectLoa">
             <option *ngFor="let loa of physicalLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}} - {{ loa.loa }}</option>
           </select>
         </td>
         <td>
-          <select name="cognitive-loa" [(ngModel)]="loaInfoRequest.fkTbAceCogLoa" [disabled]="!loaInfoRequest.possibility" class="selectLoa">
+          <select name="cognitive-loa" [(ngModel)]="loaInfoRequest.fkTbAceCogLoa" class="selectLoa">
             <option *ngFor="let loa of cognitiveLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}} - {{ loa.loa }}</option>
           </select>
         </td>
         <td>
           <input type="number" name="minBestLoa" #minLoa max="7" min="1" [(ngModel)]="loaInfoRequest.bestRangeMin"
-           [disabled]="!loaInfoRequest.possibility" oninput="this.value=(parseInt(this.value)||0)" onkeydown="return false" required>
+            oninput="this.value=(parseInt(this.value)||0)" onkeydown="return false" required>
         </td>
         <td>
           <input type="number" name="maxBestLoa" #maxLoa max="7" min="1" [(ngModel)]="loaInfoRequest.bestRangeMax"
-           [disabled]="!loaInfoRequest.possibility" oninput="this.value=(parseInt(this.value)||0)" onkeydown="return false" required>
+            oninput="this.value=(parseInt(this.value)||0)" onkeydown="return false" required>
         </td>
       </tr>
     </table>
