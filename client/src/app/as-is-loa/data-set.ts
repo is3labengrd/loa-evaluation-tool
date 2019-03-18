@@ -54,4 +54,12 @@ export class DataSet {
         this.data[0].y = loaInfo.cognitiveLoa;
     }
 
+    public static resetSeed = () => {
+        DataSet.colorIterator = makeColorGradient(
+            2.4, 2.4, 2.4,
+            0, 2, 4,
+            128, 127, 50
+        );
+    }
+
 }

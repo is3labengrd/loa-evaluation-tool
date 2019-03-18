@@ -99,6 +99,7 @@ export class AsIsLOAComponent implements OnInit {
   }
 
   ngOnInit() {
+    DataSet.resetSeed();
     const data = this.data;
     this.bubbleChart = new Chart('bubbleChart', {
       type: 'bubble',
