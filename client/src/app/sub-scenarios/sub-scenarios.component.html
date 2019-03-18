@@ -542,42 +542,36 @@
 
   <!-- User satisfaction -->
   <fieldset>
-    <legend>User Satisfaction Information</legend>
+    <legend>Resources Information</legend>
     <div class="d-flex align-items-center">
-      <span>LoA Information</span>
       <table class="table table-bordered table-striped">
         <thead class="thead-light">
         <th>Name</th>
-        <th>Unit</th>
-        <th>Scenario 1</th>
-        <th>Scenario 2</th>
-        <th>Scenario 3</th>
+        <th>Resource 1</th>
+        <th>Resource 2</th>
+        <th>Resource 3</th>
         </thead>
         <tbody>
         <tr>
-          <td>Resource name</td>
-          <td>-</td>
+          <td>Resource's name</td>
           <td>{{resourceInfo1?.name}}</td>
           <td>{{resourceInfo2?.name}}</td>
           <td>{{resourceInfo3?.name}}</td>
         </tr>
         <tr>
-          <td>LoA physical</td>
-          <td>-</td>
+          <td>Physical LoA</td>
           <td>{{resourceInfo1?.loaPhysical}}</td>
           <td>{{resourceInfo2?.loaPhysical}}</td>
           <td>{{resourceInfo3?.loaPhysical}}</td>
         </tr>
         <tr>
-          <td>LoA cognitive</td>
-          <td>-</td>
+          <td>Cognitive LoA</td>
           <td>{{resourceInfo1?.loaCognitive}}</td>
           <td>{{resourceInfo2?.loaCognitive}}</td>
           <td>{{resourceInfo3?.loaCognitive}}</td>
         </tr>
         <tr>
-          <td>Best LoA physical</td>
-          <td>-</td>
+          <td>Physical worker satisfaction</td>
           <td>
             <input *ngIf="resourceInfo1!=null" type="number" [(ngModel)]="subscenario1.usPhysicalLoa" name="bestP1" min="1" max="7"
               value={{subscenario1?.usPhysicalLoa}} onkeydown="return false">
@@ -592,8 +586,7 @@
           </td>
         </tr>
         <tr>
-          <td>Best LoA cognitive</td>
-          <td>-</td>
+          <td>Cognitive worker satisfaction</td>
           <td>
             <input *ngIf="resourceInfo1!=null" type="number" [(ngModel)]="subscenario1.usCognitiveLoa" name="bestC1" min="1" max="7"
               value={{subscenario1?.usCognitiveLoa}} onkeydown="return false">
@@ -612,7 +605,7 @@
     </div>
     <span *ngIf="disableButton" class="btn-group d-flex justify-content-center">
       <button class="btn btn-primary" (click)="cancelUserSatisfaction()">Cancel</button>
-      <button class="btn btn-secondary" (click)="saveSubscenarios()" data-toggle="modal" data-target="#saveModal">Save LoA</button>
+      <button class="btn btn-secondary" (click)="saveSubscenarios()" data-toggle="modal" data-target="#saveModal">Save</button>
     </span>
   </fieldset>
 </div>
