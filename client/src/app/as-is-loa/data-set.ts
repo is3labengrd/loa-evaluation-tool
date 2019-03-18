@@ -31,11 +31,13 @@ function *makeColorGradient(
 
 export class DataSet {
 
-    private static colorIterator = makeColorGradient(
+    private static createColorSequence = () => makeColorGradient(
         2.4, 2.4, 2.4,
         0, 2, 4,
         128, 127, 50
     );
+
+    private static colorIterator = DataSet.createColorSequence();
 
     label;
     backgroundColor;
@@ -55,11 +57,7 @@ export class DataSet {
     }
 
     public static resetSeed = () => {
-        DataSet.colorIterator = makeColorGradient(
-            2.4, 2.4, 2.4,
-            0, 2, 4,
-            128, 127, 50
-        );
+        DataSet.colorIterator = DataSet.createColorSequence();
     }
 
 }
