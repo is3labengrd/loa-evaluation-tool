@@ -32,7 +32,7 @@ function *makeColorGradient(
 export class DataSet {
 
     private static createColorSequence = () => makeColorGradient(
-        2.4, 2.4, 2.4,
+        2.4, 2.4, 2.25,
         0, 2, 4,
         128, 127, 50
     );
