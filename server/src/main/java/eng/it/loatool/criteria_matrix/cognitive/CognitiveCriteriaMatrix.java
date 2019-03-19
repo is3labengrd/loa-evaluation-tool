@@ -65,6 +65,10 @@ public class CognitiveCriteriaMatrix implements java.io.Serializable, PkTbPrimar
     private Integer usOc;
     private Integer usR;
     private Integer usOf;
+    private Integer scH;
+    private Integer scM;
+    private Integer scL;
+    private Integer scN;
     private Date createDate;
     private Date updateDate;
 
@@ -463,6 +467,42 @@ public class CognitiveCriteriaMatrix implements java.io.Serializable, PkTbPrimar
 
     public void setUsOf(Integer usOf) {
         this.usOf = usOf;
+    }
+
+    @Column(name = "SC_H")
+    public Integer getScH() {
+        return this.scH;
+    }
+
+    public void setScH(Integer scH) {
+        this.scH = scH;
+    }
+
+    @Column(name = "SC_M")
+    public Integer getScM() {
+        return this.scM;
+    }
+
+    public void setScM(Integer scM) {
+        this.scM = scM;
+    }
+
+    @Column(name = "SC_L")
+    public Integer getScL() {
+        return this.scL;
+    }
+
+    public void setScL(Integer scL) {
+        this.scL = scL;
+    }
+
+    @Column(name = "SC_N")
+    public Integer getScN() {
+        return this.scN;
+    }
+
+    public void setScN(Integer scN) {
+        this.scN = scN;
     }
 
     @CreationTimestamp
