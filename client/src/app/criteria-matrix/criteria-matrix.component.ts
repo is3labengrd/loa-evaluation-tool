@@ -66,7 +66,11 @@ export class CriteriaMatrixComponent implements OnInit {
     usN: 0,
     usOc: 0,
     usR: 0,
-    usOf: 0
+    usOf: 0,
+    scH: 0,
+    scM: 0,
+    scL: 0,
+    scN: 0
   }
 
   actualLoaInfoRequest = {
@@ -248,7 +252,11 @@ export class CriteriaMatrixComponent implements OnInit {
         usN: 0,
         usOc: 0,
         usR: 0,
-        usOf: 0
+        usOf: 0,
+        scH: 0,
+        scM: 0,
+        scL: 0,
+        scN: 0
       }
     );
     this.updateMatrix();

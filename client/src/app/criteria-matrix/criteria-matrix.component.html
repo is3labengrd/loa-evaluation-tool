@@ -494,7 +494,57 @@
         Often
       </td>
     </tr>
-
+    <tr>
+      <td> <strong>System complexity</strong> </td>
+      <td
+        [class.on]="criteriaMatrixBody.scH"
+        (click)="
+          criteriaMatrixBody.scH = 1;
+          criteriaMatrixBody.scM = 0;
+          criteriaMatrixBody.scL = 0;
+          criteriaMatrixBody.scN = 0;
+          updateMatrix();
+        "
+      >
+        high
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.scM"
+        (click)="
+          criteriaMatrixBody.scH = 0;
+          criteriaMatrixBody.scM = 1;
+          criteriaMatrixBody.scL = 0;
+          criteriaMatrixBody.scN = 0;
+          updateMatrix();
+        "
+      >
+        medium
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.scL"
+        (click)="
+          criteriaMatrixBody.scH = 0;
+          criteriaMatrixBody.scM = 0;
+          criteriaMatrixBody.scL = 1;
+          criteriaMatrixBody.scN = 0;
+          updateMatrix();
+        "
+      >
+        low
+      </td>
+      <td
+        [class.on]="criteriaMatrixBody.scN"
+        (click)="
+          criteriaMatrixBody.scH = 0;
+          criteriaMatrixBody.scM = 0;
+          criteriaMatrixBody.scL = 0;
+          criteriaMatrixBody.scN = 1;
+          updateMatrix();
+        "
+      >
+        none
+      </td>
+    </tr>
     <tr>
       <td></td>
       <td colspan="4"> <strong><-------------------------------------------------------------------------------- Direction of increasing LoA </strong></td>
