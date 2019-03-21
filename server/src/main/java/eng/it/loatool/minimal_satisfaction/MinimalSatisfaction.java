@@ -30,15 +30,17 @@ public class MinimalSatisfaction implements java.io.Serializable, PkTbPrimaryKey
     @JsonProperty private Integer pkTbId;
     private int fkTbAceSubProLev;
     private int fkTbAceProSeq;
-    private int minTotalSat;
+    private int minPhySat;
+    private int minCogSat;
     private Date createDate;
     private Date updateDate;
 
     public MinimalSatisfaction() {}
 
-    public MinimalSatisfaction(int fkTbAceProSeq, int minTotalSat, Date createDate, Date updateDate) {
+    public MinimalSatisfaction(int fkTbAceProSeq, int minPhySat, int minCogSat, Date createDate, Date updateDate) {
         this.fkTbAceProSeq = fkTbAceProSeq;
-        this.minTotalSat = minTotalSat;
+        this.minPhySat = minPhySat;
+        this.minCogSat = minCogSat;
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
@@ -75,13 +77,22 @@ public class MinimalSatisfaction implements java.io.Serializable, PkTbPrimaryKey
         this.fkTbAceProSeq = fkTbAceProSeq;
     }
 
-    @Column(name = "MIN_TOTAL_SAT", nullable = false)
-    public int getMinTotalSat() {
-        return this.minTotalSat;
+    @Column(name = "MIN_PHY_SAT", nullable = false)
+    public int getMinPhySat() {
+        return this.minPhySat;
     }
 
-    public void setMinTotalSat(int minTotalSat) {
-        this.minTotalSat = minTotalSat;
+    public void setMinPhySat(int minPhySat) {
+        this.minPhySat = minPhySat;
+    }
+
+    @Column(name = "MIN_COG_SAT", nullable = false)
+    public int getMinCogSat() {
+        return this.minCogSat;
+    }
+
+    public void setMinCogSat(int minCogSat) {
+        this.minCogSat = minCogSat;
     }
 
     @CreationTimestamp
