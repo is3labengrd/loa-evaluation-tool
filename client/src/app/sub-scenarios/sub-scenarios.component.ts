@@ -412,13 +412,13 @@ checkMandatoryData() {
   updateLabourCost(): void {
 
     if(this.isSubScenario1Present==true)
-    this.subscenario1.labourCost = this.roundValue(this.procSpecInfoObj.propWCPerHours * this.resourceInfo1.lcNOperMachine * this.subscenario1.rateOfPart / this.procSpecInfoObj.workingDaysYear);
+    this.subscenario1.labourCost = this.roundValue(this.procSpecInfoObj.propWCPerHours * this.resourceInfo1.lcNOperMachine * this.subscenario1.rateOfPart / this.nprodPiecePerHours);
 
     if(this.isSubScenario2Present==true)
-    this.subscenario2.labourCost = this.roundValue(this.procSpecInfoObj.propWCPerHours * this.resourceInfo2.lcNOperMachine * this.subscenario2.rateOfPart / this.procSpecInfoObj.workingDaysYear);
+    this.subscenario2.labourCost = this.roundValue(this.procSpecInfoObj.propWCPerHours * this.resourceInfo2.lcNOperMachine * this.subscenario2.rateOfPart / this.nprodPiecePerHours);
 
     if(this.isSubScenario3Present==true)
-    this.subscenario3.labourCost = this.roundValue(this.procSpecInfoObj.propWCPerHours * this.resourceInfo3.lcNOperMachine * this.subscenario3.rateOfPart / this.procSpecInfoObj.workingDaysYear);
+    this.subscenario3.labourCost = this.roundValue(this.procSpecInfoObj.propWCPerHours * this.resourceInfo3.lcNOperMachine * this.subscenario3.rateOfPart / this.nprodPiecePerHours);
 
   }
 
@@ -518,13 +518,13 @@ checkMandatoryData() {
   updateAccruedInterestCosts(): void {
 
     if(this.isSubScenario1Present==true)
-    this.subscenario1.accruedIntCosts = this.roundValue(((this.resourceInfo1.idMacPurhValue + this.resourceInfo1.idMacSalesValue) / 2) * this.resourceInfo1.icInterRate);
+    this.subscenario1.accruedIntCosts = this.roundValue(((this.resourceInfo1.idMacPurhValue + this.resourceInfo1.idMacSalesValue) / 2) * (this.resourceInfo1.icInterRate/100));
 
     if(this.isSubScenario2Present==true)
-    this.subscenario2.accruedIntCosts = this.roundValue(((this.resourceInfo2.idMacPurhValue + this.resourceInfo2.idMacSalesValue) / 2) * this.resourceInfo2.icInterRate);
+    this.subscenario2.accruedIntCosts = this.roundValue(((this.resourceInfo2.idMacPurhValue + this.resourceInfo2.idMacSalesValue) / 2) * (this.resourceInfo2.icInterRate/100));
 
     if(this.isSubScenario3Present==true)
-    this.subscenario3.accruedIntCosts = this.roundValue(((this.resourceInfo3.idMacPurhValue + this.resourceInfo3.idMacSalesValue) / 2) * this.resourceInfo3.icInterRate);
+    this.subscenario3.accruedIntCosts = this.roundValue(((this.resourceInfo3.idMacPurhValue + this.resourceInfo3.idMacSalesValue) / 2) * (this.resourceInfo3.icInterRate/100));
  }
 
   updateVariableCostsTotal(): void {
