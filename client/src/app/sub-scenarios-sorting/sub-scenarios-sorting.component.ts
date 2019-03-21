@@ -25,7 +25,7 @@ export class SubScenariosSortingComponent implements OnInit {
   labelsXAxes: Array<any> = [];
   dataPhysical: Array<any> = [];
   dataCognitive: Array<any> = [];
-  minimalTotalSatisfaction: number;
+  minimalTotalSatisfaction: any = {minPhySat: null, minCogSat: null, fkTbAceSubProLev: null, fkTbAceProSeq: null };
   minimalTotalSatisfactionID: number;
 
 
@@ -36,7 +36,7 @@ export class SubScenariosSortingComponent implements OnInit {
 
          promise2.then((x) => {
           if(this.subScenario1!=null){
-                    this.labelsXAxes.push("Scenario 1 ["+this.subScenario1.assemblyCostPerPiece+"€/piece]");
+                    this.labelsXAxes.push(this.subScenario1.resource.name);
                     this.dataPhysical.push(this.subScenario1.resource.loaPhysical);
                     this.dataCognitive.push(this.subScenario1.resource.loaCognitive);
                 }else{
@@ -46,7 +46,7 @@ export class SubScenariosSortingComponent implements OnInit {
                 }
 
                 if(this.subScenario2!=null){
-                   this.labelsXAxes.push("Scenario 2 ["+this.subScenario2.assemblyCostPerPiece+"€/piece]");
+                   this.labelsXAxes.push(this.subScenario2.resource.name);
                    this.dataPhysical.push(this.subScenario2.resource.loaPhysical);
                    this.dataCognitive.push(this.subScenario2.resource.loaCognitive);
                 }else{
@@ -56,7 +56,7 @@ export class SubScenariosSortingComponent implements OnInit {
                 }
 
                 if(this.subScenario3!=null){
-                 this.labelsXAxes.push("Scenario 3 ["+this.subScenario3.assemblyCostPerPiece+"€/piece]");
+                 this.labelsXAxes.push(this.subScenario3.resource.name);
                  this.dataPhysical.push(this.subScenario3.resource.loaPhysical);
                  this.dataCognitive.push(this.subScenario3.resource.loaCognitive);
                 }else{
@@ -81,13 +81,21 @@ export class SubScenariosSortingComponent implements OnInit {
         // data[0] = labels[0] (data for first bar - 'Standing costs') | data[1] = labels[1] (data for second bar - 'Running costs')
         // put 0, if there is no data for the particular bar
         datasets: [
-          {
-            label: "Minimal total satisfaction",
-            data: [this.minimalTotalSatisfaction, this.minimalTotalSatisfaction, this.minimalTotalSatisfaction],
-            backgroundColor: "#FF0000",
+         {
+            label: "Minimal physical worker satisfaction",
+            data: [this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat],
+            backgroundColor: "#ffd700",
             type: "line",
             fill: false,
-            borderColor: "red"
+            borderColor: "gold"
+          },
+           {
+            label: "Minimal cognitive worker satisfaction",
+            data: [this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat],
+            backgroundColor: "#daa520",
+            type: "line",
+            fill: false,
+            borderColor: "goldenrod"
           },
           {
             label: "Physical",
@@ -104,7 +112,7 @@ export class SubScenariosSortingComponent implements OnInit {
       options: {
         responsive: false,
         legend: {
-          position: "right", // place legend on the right side of
+          position: "bottom", // place legend on the right side of
           labels: {
             padding: 30
           }
@@ -112,21 +120,25 @@ export class SubScenariosSortingComponent implements OnInit {
         scales: {
           xAxes: [
             {
-              stacked: true, // this should be set to make the bars stacked
-              barPercentage: 0.7
+              stacked: false, // this should be set to make the bars stacked
+               scaleLabel: {
+                   display: true,
+                   labelString: "Suitable resources"
+                },
+              barPercentage: 0.55
             }
           ],
           yAxes: [
             {
-              stacked: true, // this also..
+              stacked: false, // this also..
               scaleLabel: {
                 display: true,
-                labelString: "Satisfaction"
+                labelString: "Values of worker satisfaction"
               },
               ticks: {
                 beginAtZero: true,
                 stepSize: 1,
-                suggestedMax: 14
+                suggestedMax: 7
               }
             }
           ]
@@ -184,39 +196,39 @@ export class SubScenariosSortingComponent implements OnInit {
 
       }
   updateSubScenarios(){
-      if(this.subScenario1!=null && this.minimalTotalSatisfaction!=null) {
-          if((this.subScenario1.resource.loaPhysical+ this.subScenario1.resource.loaCognitive)>=this.minimalTotalSatisfaction){
-          this.subScenario1.resSorting=true;
+      if(this.subScenario1!=null && this.minimalTotalSatisfaction.minPhySat!=null && this.minimalTotalSatisfaction.minCogSat) {
+          if(this.subScenario1.resource.loaPhysical >= this.minimalTotalSatisfaction.minPhySat && this.subScenario1.resource.loaCognitive >= this.minimalTotalSatisfaction.minCogSat){
+            this.subScenario1.resSorting=true;
           }else{
-          this.subScenario1.resSorting=false;
+            this.subScenario1.resSorting=false;
           }
-          this.http.put(environment.apiUrl + '/v1/subscenarios/'+this.subScenario1.pkTbId, this.subScenario1)
+            this.http.put(environment.apiUrl + '/v1/subscenarios/'+this.subScenario1.pkTbId, this.subScenario1)
               .toPromise().then((res:any) => {});
       }
 
-      if(this.subScenario2!=null && this.minimalTotalSatisfaction!=null){
-          if((this.subScenario2.resource.loaPhysical+ this.subScenario2.resource.loaCognitive)>=this.minimalTotalSatisfaction){
-          this.subScenario2.resSorting=true;
+      if(this.subScenario2!=null && this.minimalTotalSatisfaction.minPhySat!=null && this.minimalTotalSatisfaction.minCogSat){
+          if(this.subScenario2.resource.loaPhysical >= this.minimalTotalSatisfaction.minPhySat && this.subScenario2.resource.loaCognitive >= this.minimalTotalSatisfaction.minCogSat){
+            this.subScenario2.resSorting=true;
           }else{
-          this.subScenario2.resSorting=false;
+            this.subScenario2.resSorting=false;
           }
-          this.http.put(environment.apiUrl + '/v1/subscenarios/'+this.subScenario2.pkTbId, this.subScenario2)
+            this.http.put(environment.apiUrl + '/v1/subscenarios/'+this.subScenario2.pkTbId, this.subScenario2)
               .toPromise().then((res:any) => {});
       }
 
-      if(this.subScenario3!=null && this.minimalTotalSatisfaction!=null){
-          if((this.subScenario3.resource.loaPhysical+ this.subScenario3.resource.loaCognitive)>=this.minimalTotalSatisfaction){
-          this.subScenario3.resSorting=true;
+      if(this.subScenario3!=null && this.minimalTotalSatisfaction.minPhySat!=null && this.minimalTotalSatisfaction.minCogSat){
+          if(this.subScenario3.resource.loaPhysical >= this.minimalTotalSatisfaction.minPhySat && this.subScenario3.resource.loaCognitive >= this.minimalTotalSatisfaction.minCogSat){
+            this.subScenario3.resSorting=true;
           }else{
-          this.subScenario3.resSorting=false;
+            this.subScenario3.resSorting=false;
           }
-          this.http.put(environment.apiUrl + '/v1/subscenarios/'+this.subScenario3.pkTbId, this.subScenario3)
+            this.http.put(environment.apiUrl + '/v1/subscenarios/'+this.subScenario3.pkTbId, this.subScenario3)
               .toPromise().then((res:any) => {});
       }
   }
 
    enableSaveButton(): boolean {
-        if(this.minimalTotalSatisfaction==null){
+        if(this.minimalTotalSatisfaction.minPhySat==null || this.minimalTotalSatisfaction.minCogSat==null ){
             return false;
         }else{
           if(this.subScenario1==null && this.subScenario2==null && this.subScenario3==null){
@@ -231,7 +243,8 @@ export class SubScenariosSortingComponent implements OnInit {
                 .toPromise()
                 .then(
                 (result:any) => {
-                     this.minimalTotalSatisfaction=result.minTotalSat;
+                     this.minimalTotalSatisfaction.minPhySat=result.minPhySat;
+                     this.minimalTotalSatisfaction.minCogSat=result.minCogSat;
                      this.minimalTotalSatisfactionID=result.pkTbId;
                  },
                  err => {
@@ -242,11 +255,13 @@ export class SubScenariosSortingComponent implements OnInit {
 
     minimalTotalSatisfactionUpdate(): void {
         var minimalTotalSatisfactionObj = {
-                                  minTotalSat: {},
+                                  minPhySat: {},
+                                  minCogSat: {},
                                   fkTbAceSubProLev: {},
                                   fkTbAceProSeq: {}
                             };
-        minimalTotalSatisfactionObj.minTotalSat = this.minimalTotalSatisfaction;
+        minimalTotalSatisfactionObj.minPhySat = this.minimalTotalSatisfaction.minPhySat;
+        minimalTotalSatisfactionObj.minCogSat = this.minimalTotalSatisfaction.minCogSat;
         minimalTotalSatisfactionObj.fkTbAceProSeq = this.cookie.mainProcessId;
         minimalTotalSatisfactionObj.fkTbAceSubProLev = this.subProLevId;
 

@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/process-list"> Process list </a></li>
       <li class="breadcrumb-item"><a routerLink="/main-analysis"> Main analysis </a></li>
-      <li class="breadcrumb-item active" aria-current="page"> Sub-scenarios resource sorting</li>
+      <li class="breadcrumb-item active" aria-current="page"> Exclusion of resources</li>
     </ol>
   </nav>
 </div>
@@ -36,16 +36,13 @@
 
 <div class="row linkovi text-center">
     <span class="col-12">
-     <a href="#"  role="button" class="btn btn-primary"   data-toggle="modal" data-target="#minTotalSatisfaction">Minimal total satisfaction</a>
+     <a href="#"  role="button" class="btn btn-primary"   data-toggle="modal" data-target="#minTotalSatisfaction">Add values of minimal worker<br />satisfaction</a>
     </span>
 </div>
 
-<h1 class="text-center">Sub-scenarios resource sorting</h1>
+<h1 class="text-center">Exclusion of resources</h1>
 <fieldset>
-  <legend >
-    Remaining scenarios information
-  </legend>
-<div style ="text-align:center">
+ <div style ="text-align:center">
   <!--<canvas id="barChart" width="850"></canvas>-->
   <canvas id="barChart"></canvas>
  </div>
@@ -64,16 +61,22 @@
         <h5 class="modal-title">Minimal Total Satisfaction</h5>
       </div>
       <div class="modal-body">
-        <div>Minimal Total Satisfaction
-          <input type="number" name="loaPhysical" [(ngModel)]="minimalTotalSatisfaction" style="width: 100px;"
+        <div>Minimal physical worker satisfaction &nbsp;
+          <input type="number" name="physicalSat" [(ngModel)]="minimalTotalSatisfaction.minPhySat" style="width: 100px;"
                  oninput="this.value=(parseInt(this.value)||0)"
-                 value="minimalTotalSatisfaction" min="1" max="14" required>
+                 value="minimalTotalSatisfaction?.minPhySat" required>
+        </div>
+        <br>
+        <div>Minimal cognitive worker satisfaction
+          <input type="number" name="cognitiveSat" [(ngModel)]="minimalTotalSatisfaction.minCogSat" style="width: 100px;"
+                 oninput="this.value=(parseInt(this.value)||0)"
+                 value="minimalTotalSatisfaction?.minCogSat" required>
         </div>
         <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"  data-dismiss="modal" (click)="minimalTotalSatisfactionUpdate()" [disabled]="minimalTotalSatisfaction==null || !(minimalTotalSatisfaction>0 && minimalTotalSatisfaction<15)">Save</button>
+        <button type="button" class="btn btn-primary"  data-dismiss="modal" (click)="minimalTotalSatisfactionUpdate()" [disabled]="minimalTotalSatisfaction.minPhySat==null || minimalTotalSatisfaction.minCogSat==null">Save</button>
       </div>
     </div>
   </div>
