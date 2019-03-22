@@ -82,6 +82,22 @@ export class SubScenariosSortingComponent implements OnInit {
         // put 0, if there is no data for the particular bar
         datasets: [
           {
+             label: "Minimal physical worker satisfaction",
+             data: [this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat],
+             backgroundColor: "#ffd700",
+             type: "line",
+             fill: false,
+             borderColor: "gold"
+           },
+            {
+             label: "Minimal cognitive worker satisfaction",
+             data: [this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat],
+             backgroundColor: "#daa520",
+             type: "line",
+             fill: false,
+             borderColor: "goldenrod"
+           },
+          {
             label: "Physical worker satisfaction",
             data: this.dataPhysical,
             backgroundColor: "#3366cc"
@@ -96,9 +112,15 @@ export class SubScenariosSortingComponent implements OnInit {
       options: {
         responsive: false,
         legend: {
-          position: "bottom", // place legend on the right side of
+          position: "bottom",
           labels: {
-            padding: 30
+            padding: 30,
+            filter: function(legendItem, chartData) {
+              return (
+                legendItem.text != "Minimal physical worker satisfaction" &&
+                legendItem.text != "Minimal cognitive worker satisfaction"
+              )
+            }
           }
         },
         scales: {
