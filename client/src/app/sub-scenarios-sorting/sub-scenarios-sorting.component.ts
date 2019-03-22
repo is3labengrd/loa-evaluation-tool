@@ -83,19 +83,21 @@ export class SubScenariosSortingComponent implements OnInit {
         datasets: [
           {
              label: "Minimal physical worker satisfaction",
-             data: [this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat],
+             data: [this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat],
              backgroundColor: "#ffd700",
              type: "line",
              fill: false,
-             borderColor: "gold"
+             borderColor: "gold",
+             pointRadius: 0
            },
             {
              label: "Minimal cognitive worker satisfaction",
-             data: [this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat],
+             data: [this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat],
              backgroundColor: "#daa520",
              type: "line",
              fill: false,
-             borderColor: "goldenrod"
+             borderColor: "goldenrod",
+             pointRadius: 0
            },
           {
             label: "Physical worker satisfaction",
@@ -131,7 +133,8 @@ export class SubScenariosSortingComponent implements OnInit {
                    display: true,
                    labelString: "Suitable resources"
                 },
-              barPercentage: 0.55
+              barPercentage: 0.55,
+              beginAtZero: true
             }
           ],
           yAxes: [
