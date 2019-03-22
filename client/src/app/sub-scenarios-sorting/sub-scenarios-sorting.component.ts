@@ -81,29 +81,13 @@ export class SubScenariosSortingComponent implements OnInit {
         // data[0] = labels[0] (data for first bar - 'Standing costs') | data[1] = labels[1] (data for second bar - 'Running costs')
         // put 0, if there is no data for the particular bar
         datasets: [
-         {
-            label: "Minimal physical worker satisfaction",
-            data: [this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat],
-            backgroundColor: "#ffd700",
-            type: "line",
-            fill: false,
-            borderColor: "gold"
-          },
-           {
-            label: "Minimal cognitive worker satisfaction",
-            data: [this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat],
-            backgroundColor: "#daa520",
-            type: "line",
-            fill: false,
-            borderColor: "goldenrod"
-          },
           {
-            label: "Physical",
+            label: "Physical worker satisfaction",
             data: this.dataPhysical,
             backgroundColor: "#3366cc"
           },
           {
-            label: "Cognitive",
+            label: "Cognitive worker satisfaction",
             data: this.dataCognitive,
             backgroundColor: "#abbcff"
           }

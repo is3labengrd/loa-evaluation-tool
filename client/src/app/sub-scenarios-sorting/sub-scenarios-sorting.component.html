@@ -42,9 +42,17 @@
 
 <h1 class="text-center">Exclusion of resources</h1>
 <fieldset>
- <div style ="text-align:center">
+ <div style ="text-align:center;position:relative">
   <!--<canvas id="barChart" width="850"></canvas>-->
   <canvas id="barChart"></canvas>
+  <div id="legend-column">
+    <div>
+      <div id="legend-column-physical"></div> Minimal physical worker satisfaction<br>
+    </div>
+    <div>
+      <div id="legend-column-cognitive"></div> Minimal cognitive worker satisfaction
+    </div>
+  </div>
  </div>
 </fieldset>
 <div *ngIf="enableSaveButton()">
