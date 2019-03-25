@@ -1,5 +1,6 @@
 package eng.it.loatool.minimal_satisfaction;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GetMinimalSatisfactionService {
 
-    public Optional<MinimalSatisfaction> getByProcessId(Integer processId) {
+    public Collection<MinimalSatisfaction> getByProcessId(Integer processId) {
         return minimalSatisfactionRepository.getByProcessId(processId);
     }
 

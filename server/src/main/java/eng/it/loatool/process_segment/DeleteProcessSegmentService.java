@@ -43,7 +43,7 @@ public class DeleteProcessSegmentService {
                 processSegmentRepository.delete(processSegment);
                 minimalSatisfactionRepository
                     .getByProcessId(id)
-                    .ifPresent((minSat) -> {
+                    .forEach((minSat) -> {
                         minimalSatisfactionRepository.delete(minSat);
                     });
                 processSegment.setSubprocessLevels(null);
