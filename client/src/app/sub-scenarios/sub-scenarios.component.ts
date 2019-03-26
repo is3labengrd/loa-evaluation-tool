@@ -96,6 +96,8 @@ export class SubScenariosComponent implements OnInit {
   isSubScenario2Present: boolean = false;
   isSubScenario3Present: boolean = false;
 
+  physicalProcessLoaInfo = {};
+  cognitiveProcessLoaInfo = {};
 
   constructor(private http: HttpClient, private _processListService: CookieService) { }
 
@@ -109,6 +111,25 @@ export class SubScenariosComponent implements OnInit {
 
 
     this.cookie = this._processListService.getCookie("selectedSubprocess");
+    var subprocessId = this.cookie[
+      'level' + this.cookie.maxDepth
+    ].id;
+
+    this
+      .http
+      .get(environment.apiUrl + '/v1/process-loa-info-by-subprocess-id/' + subprocessId)
+      .toPromise()
+      .then((physicalLoa) => {
+        this.physicalProcessLoaInfo = physicalLoa;
+      });
+
+    this
+      .http
+      .get(environment.apiUrl + '/v1/cognitive-process-loa-info-by-subprocess-id/' + subprocessId)
+      .toPromise()
+      .then((cognitiveLoa) => {
+        this.cognitiveProcessLoaInfo = cognitiveLoa;
+      });
 
     var promise1 = this.productPlanningGET();
     promise1.then((x) => {
