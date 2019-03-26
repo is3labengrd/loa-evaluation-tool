@@ -25,6 +25,7 @@ export class AddScenarioComponent implements OnInit {
     subProc:any;
     scenNumber:any;
     stepResult:Array<any> = [];
+    allAlreadyConsideredOnce: Array<any> = [];
     processSegmentList: Array<any> = [];
     allProcessSegmentCAM: Array<any> = [];
     showedList:Array<any> = [];
@@ -110,6 +111,7 @@ export class AddScenarioComponent implements OnInit {
         var procTime = 0;
         var optCost = 0;
         var totAssemblyCostPerPiece = 0;
+        this.allAlreadyConsideredOnce = [];
 
         for (var i=0; i<this.stepResult.length; i++){
           if (!(i in this.stepResult)){
@@ -127,10 +129,21 @@ export class AddScenarioComponent implements OnInit {
               objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.assemblyCosts;
               objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber1.hoursPerYears);
               objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.labourCost;
-              objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.maintCost;
-              objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.annualSpaceCost;
-              objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.inputedDepreciation;
-              objlist['accruedInterestCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.accruedIntCosts;
+              const alreadyConsideredOnce = document.getElementById(this.subSceList[parseInt(fields[1])].objList.scenNumber1.subprocessLevel.name+"-"+this.subSceList[parseInt(fields[1])].objList.scenNumber1.subprocessLevel.pkTbId) as HTMLInputElement;
+              if (alreadyConsideredOnce.checked) {
+                console.log("already considered once CHECKED resource 1");
+                this.allAlreadyConsideredOnce.push(this.subSceList[parseInt(fields[1])].objList.scenNumber1.subprocessLevel.name+"-"+this.subSceList[parseInt(fields[1])].objList.scenNumber1.subprocessLevel.pkTbId)
+                alreadyConsideredOnce.checked = false;
+                objlist['maintCost'] = 0;
+                objlist['annualSpaceCost'] = 0;
+                objlist['inputedDepreciation'] = 0;
+                objlist['accruedInterestCost'] = 0;
+              }else{
+                objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.maintCost;
+                objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.annualSpaceCost;
+                objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.inputedDepreciation;
+                objlist['accruedInterestCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.accruedIntCosts;
+              }
               objlist['energyCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.energyCost;
               objlist['varCostsPerUnit'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.varCostTotal;
               objlist['macCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.mcAMaintCosts;
@@ -154,10 +167,20 @@ export class AddScenarioComponent implements OnInit {
               objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.assemblyCosts;
               objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber2.hoursPerYears);
               objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.labourCost;
+              const alreadyConsideredOnce = document.getElementById(this.subSceList[parseInt(fields[1])].objList.scenNumber2.subprocessLevel.name+"-"+this.subSceList[parseInt(fields[1])].objList.scenNumber2.subprocessLevel.pkTbId) as HTMLInputElement;
+              if (alreadyConsideredOnce.checked) {
+              console.log("already considered once CHECKED resource 2");
+              this.allAlreadyConsideredOnce.push(this.subSceList[parseInt(fields[1])].objList.scenNumber2.subprocessLevel.name+"-"+this.subSceList[parseInt(fields[1])].objList.scenNumber2.subprocessLevel.pkTbId);
+              objlist['maintCost'] = 0;
+              objlist['annualSpaceCost'] = 0;
+              objlist['inputedDepreciation'] = 0;
+              objlist['accruedInterestCost'] = 0;
+              }else{
               objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.maintCost;
               objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.annualSpaceCost;
               objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.inputedDepreciation;
               objlist['accruedInterestCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.accruedIntCosts;
+              }
               objlist['energyCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.energyCost;
               objlist['varCostsPerUnit'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.varCostTotal;
               objlist['macCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.mcAMaintCosts;
@@ -180,10 +203,20 @@ export class AddScenarioComponent implements OnInit {
               objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCosts;
               objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber3.hoursPerYears);
               objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.labourCost;
+              const alreadyConsideredOnce = document.getElementById(this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.name+"-"+this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.pkTbId) as HTMLInputElement;
+              if (alreadyConsideredOnce.checked) {
+              console.log("already considered once CHECKED resource 3");
+              this.allAlreadyConsideredOnce.push(this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.name+"-"+this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.pkTbId)
+              objlist['maintCost'] = 0;
+              objlist['annualSpaceCost'] = 0;
+              objlist['inputedDepreciation'] = 0;
+              objlist['accruedInterestCost'] = 0;
+              }else{
               objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.maintCost;
               objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.annualSpaceCost;
               objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.inputedDepreciation;
               objlist['accruedInterestCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.accruedIntCosts;
+              }
               objlist['energyCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.energyCost;
               objlist['varCostsPerUnit'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.varCostTotal;
               objlist['macCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.mcAMaintCosts;
@@ -362,6 +395,10 @@ export class AddScenarioComponent implements OnInit {
       this.TotalCost = 0;
       this.CostperPiece = 0;
       this.bodyPost = {};
+      this.allAlreadyConsideredOnce.forEach(function(element) {
+        const alreadyConsideredOnce = document.getElementById(element) as HTMLInputElement;
+        alreadyConsideredOnce.checked = false;
+      });
     }
 
     fetchFromCAM() {
