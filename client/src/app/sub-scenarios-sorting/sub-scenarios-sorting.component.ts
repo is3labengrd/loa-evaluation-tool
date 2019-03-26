@@ -40,7 +40,7 @@ export class SubScenariosSortingComponent implements OnInit {
                     this.dataPhysical.push(this.subScenario1.resource.loaPhysical);
                     this.dataCognitive.push(this.subScenario1.resource.loaCognitive);
                 }else{
-                    this.labelsXAxes.push("Scenario 1");
+                    this.labelsXAxes.push("");
                     this.dataPhysical.push(0);
                     this.dataCognitive.push(0);
                 }
@@ -50,7 +50,7 @@ export class SubScenariosSortingComponent implements OnInit {
                    this.dataPhysical.push(this.subScenario2.resource.loaPhysical);
                    this.dataCognitive.push(this.subScenario2.resource.loaCognitive);
                 }else{
-                   this.labelsXAxes.push("Scenario 2");
+                   this.labelsXAxes.push("");
                    this.dataPhysical.push(0);
                    this.dataCognitive.push(0);
                 }
@@ -60,7 +60,7 @@ export class SubScenariosSortingComponent implements OnInit {
                  this.dataPhysical.push(this.subScenario3.resource.loaPhysical);
                  this.dataCognitive.push(this.subScenario3.resource.loaCognitive);
                 }else{
-                 this.labelsXAxes.push("Scenario 3");
+                 this.labelsXAxes.push("");
                  this.dataPhysical.push(0);
                  this.dataCognitive.push(0);
                }
