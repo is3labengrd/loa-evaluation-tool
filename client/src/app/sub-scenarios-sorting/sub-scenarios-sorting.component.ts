@@ -37,8 +37,8 @@ export class SubScenariosSortingComponent implements OnInit {
          promise2.then((x) => {
           if(this.subScenario1!=null){
                     this.labelsXAxes.push(this.subScenario1.resource.name);
-                    this.dataPhysical.push(this.subScenario1.resource.loaPhysical);
-                    this.dataCognitive.push(this.subScenario1.resource.loaCognitive);
+                    this.dataPhysical.push(this.subScenario1.usPhysicalLoa);
+                    this.dataCognitive.push(this.subScenario1.usCognitiveLoa);
                 }else{
                     this.labelsXAxes.push("");
                     this.dataPhysical.push(0);
@@ -47,8 +47,8 @@ export class SubScenariosSortingComponent implements OnInit {
 
                 if(this.subScenario2!=null){
                    this.labelsXAxes.push(this.subScenario2.resource.name);
-                   this.dataPhysical.push(this.subScenario2.resource.loaPhysical);
-                   this.dataCognitive.push(this.subScenario2.resource.loaCognitive);
+                   this.dataPhysical.push(this.subScenario2.usPhysicalLoa);
+                   this.dataCognitive.push(this.subScenario2.usCognitiveLoa);
                 }else{
                    this.labelsXAxes.push("");
                    this.dataPhysical.push(0);
@@ -57,8 +57,8 @@ export class SubScenariosSortingComponent implements OnInit {
 
                 if(this.subScenario3!=null){
                  this.labelsXAxes.push(this.subScenario3.resource.name);
-                 this.dataPhysical.push(this.subScenario3.resource.loaPhysical);
-                 this.dataCognitive.push(this.subScenario3.resource.loaCognitive);
+                 this.dataPhysical.push(this.subScenario3.usPhysicalLoa);
+                 this.dataCognitive.push(this.subScenario3.usCognitiveLoa);
                 }else{
                  this.labelsXAxes.push("");
                  this.dataPhysical.push(0);
@@ -203,7 +203,7 @@ export class SubScenariosSortingComponent implements OnInit {
       }
   updateSubScenarios(){
       if(this.subScenario1!=null && this.minimalTotalSatisfaction.minPhySat!=null && this.minimalTotalSatisfaction.minCogSat) {
-          if(this.subScenario1.resource.loaPhysical >= this.minimalTotalSatisfaction.minPhySat && this.subScenario1.resource.loaCognitive >= this.minimalTotalSatisfaction.minCogSat){
+          if(this.subScenario1.usPhysicalLoa >= this.minimalTotalSatisfaction.minPhySat && this.subScenario1.usCognitiveLoa >= this.minimalTotalSatisfaction.minCogSat){
             this.subScenario1.resSorting=true;
           }else{
             this.subScenario1.resSorting=false;
@@ -213,7 +213,7 @@ export class SubScenariosSortingComponent implements OnInit {
       }
 
       if(this.subScenario2!=null && this.minimalTotalSatisfaction.minPhySat!=null && this.minimalTotalSatisfaction.minCogSat){
-          if(this.subScenario2.resource.loaPhysical >= this.minimalTotalSatisfaction.minPhySat && this.subScenario2.resource.loaCognitive >= this.minimalTotalSatisfaction.minCogSat){
+          if(this.subScenario2.usPhysicalLoa >= this.minimalTotalSatisfaction.minPhySat && this.subScenario2.usCognitiveLoa >= this.minimalTotalSatisfaction.minCogSat){
             this.subScenario2.resSorting=true;
           }else{
             this.subScenario2.resSorting=false;
@@ -223,7 +223,7 @@ export class SubScenariosSortingComponent implements OnInit {
       }
 
       if(this.subScenario3!=null && this.minimalTotalSatisfaction.minPhySat!=null && this.minimalTotalSatisfaction.minCogSat){
-          if(this.subScenario3.resource.loaPhysical >= this.minimalTotalSatisfaction.minPhySat && this.subScenario3.resource.loaCognitive >= this.minimalTotalSatisfaction.minCogSat){
+          if(this.subScenario3.usPhysicalLoa >= this.minimalTotalSatisfaction.minPhySat && this.subScenario3.usCognitiveLoa >= this.minimalTotalSatisfaction.minCogSat){
             this.subScenario3.resSorting=true;
           }else{
             this.subScenario3.resSorting=false;
