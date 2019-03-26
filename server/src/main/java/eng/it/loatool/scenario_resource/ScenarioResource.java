@@ -43,6 +43,7 @@ public class ScenarioResource implements java.io.Serializable, PkTbPrimaryKeyOwn
     private Double weightedPhysicalLoa;
     private Double weightedCognitiveLoa;
     private Integer numberSelected;
+    private Boolean fixedCost;
     private Date createDate;
     private Date updateDate;
 
@@ -152,6 +153,15 @@ public class ScenarioResource implements java.io.Serializable, PkTbPrimaryKeyOwn
 
     public void setNumberSelected(Integer numberSelected) {
         this.numberSelected = numberSelected;
+    }
+
+    @Column(name = "FIXED_COST")
+    public Boolean getFixedCost() {
+	return this.fixedCost;
+    }
+
+    public void setFixedCost(Boolean fixedCost) {
+	this.fixedCost = fixedCost;
     }
 
     @CreationTimestamp
