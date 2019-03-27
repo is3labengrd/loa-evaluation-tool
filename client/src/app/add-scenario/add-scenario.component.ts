@@ -111,7 +111,7 @@ export class AddScenarioComponent implements OnInit {
         var procTime = 0;
         var optCost = 0;
         var totAssemblyCostPerPiece = 0;
-        this.allAlreadyConsideredOnce = [];
+
 
         for (var i=0; i<this.stepResult.length; i++){
           if (!(i in this.stepResult)){
@@ -134,11 +134,13 @@ export class AddScenarioComponent implements OnInit {
                 console.log("already considered once CHECKED resource 1");
                 this.allAlreadyConsideredOnce.push(this.subSceList[parseInt(fields[1])].objList.scenNumber1.subprocessLevel.name+"-"+this.subSceList[parseInt(fields[1])].objList.scenNumber1.subprocessLevel.pkTbId)
                 alreadyConsideredOnce.checked = false;
+                objlist['alreadyConsideredOnce']=true;
                 objlist['maintCost'] = 0;
                 objlist['annualSpaceCost'] = 0;
                 objlist['inputedDepreciation'] = 0;
                 objlist['accruedInterestCost'] = 0;
               }else{
+               objlist['alreadyConsideredOnce']=false;
                 objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.maintCost;
                 objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.annualSpaceCost;
                 objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.inputedDepreciation;
@@ -171,11 +173,13 @@ export class AddScenarioComponent implements OnInit {
               if (alreadyConsideredOnce.checked) {
               console.log("already considered once CHECKED resource 2");
               this.allAlreadyConsideredOnce.push(this.subSceList[parseInt(fields[1])].objList.scenNumber2.subprocessLevel.name+"-"+this.subSceList[parseInt(fields[1])].objList.scenNumber2.subprocessLevel.pkTbId);
+              objlist['alreadyConsideredOnce']=true;
               objlist['maintCost'] = 0;
               objlist['annualSpaceCost'] = 0;
               objlist['inputedDepreciation'] = 0;
               objlist['accruedInterestCost'] = 0;
               }else{
+              objlist['alreadyConsideredOnce']=false;
               objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.maintCost;
               objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.annualSpaceCost;
               objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.inputedDepreciation;
@@ -207,11 +211,13 @@ export class AddScenarioComponent implements OnInit {
               if (alreadyConsideredOnce.checked) {
               console.log("already considered once CHECKED resource 3");
               this.allAlreadyConsideredOnce.push(this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.name+"-"+this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.pkTbId)
+              objlist['alreadyConsideredOnce']=false;
               objlist['maintCost'] = 0;
               objlist['annualSpaceCost'] = 0;
               objlist['inputedDepreciation'] = 0;
               objlist['accruedInterestCost'] = 0;
               }else{
+              objlist['alreadyConsideredOnce']=false;
               objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.maintCost;
               objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.annualSpaceCost;
               objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.inputedDepreciation;
@@ -337,6 +343,7 @@ export class AddScenarioComponent implements OnInit {
             objlist['fkTbAceRes'] = valueList[j].fkTbAceRes;
             objlist['fkTbAceSubProLev'] = valueList[j].fkTbAceSubProLev;
             objlist['numberSelected'] = valueList[j].numberSelected;
+            objlist['alreadyConsideredOnce'] = valueList[j].alreadyConsideredOnce;
           }else{
             objlist['optC'] = "-";
             objlist['phy'] = "-";
@@ -481,6 +488,7 @@ export class AddScenarioComponent implements OnInit {
       this.bodyPost['totalAssCosts'] = (parseFloat(this.tmpPost.totalAssCosts)).toFixed(2);
       this.bodyPost['numberSelected'] = parseInt(this.tmpPost.numberSelected);
 
+
     }
 
     // tslint:disable-next-line:member-ordering
@@ -510,6 +518,7 @@ export class AddScenarioComponent implements OnInit {
           bodyPostScenRes['weightedPhysicalLoa'] = this.showedList[i].phy;
           bodyPostScenRes['weightedCognitiveLoa'] = this.showedList[i].cog;
           bodyPostScenRes['numberSelected'] = this.showedList[i].numberSelected;
+          bodyPostScenRes['fixedCost'] = this.showedList[i].alreadyConsideredOnce;
           tmp+=1;
           if(tmp.toString() === this.showedList.length.toString()){
             this.saveScenRes(bodyPostScenRes,true);
