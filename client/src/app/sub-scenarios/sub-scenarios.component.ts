@@ -74,6 +74,13 @@ export class SubScenariosComponent implements OnInit {
   selRes2ProcTimeGUI: number = null;
   selRes3ProcTimeGUI: number = null;
 
+  resource1PhysicalTime: number = null;
+  resource2PhysicalTime: number = null;
+  resource3PhysicalTime: number = null;
+
+  resource1CognitiveTime: number = null;
+  resource2CognitiveTime: number = null;
+  resource3CognitiveTime: number = null;
 
   disableButton: boolean;
   resources: Array<any> = [];
@@ -267,16 +274,22 @@ checkMandatoryData() {
     if(this.isSubScenario1Present==true){
       this.selRes1ProcTime=this.selRes1ProcTimeGUI;
       this.subscenario1.processTime=this.selRes1ProcTime;
+      this.subscenario1.physicalTime = this.resource1PhysicalTime;
+      this.subscenario1.cognitiveTime = this.resource1CognitiveTime;
     }
 
     if(this.isSubScenario2Present==true){
       this.selRes2ProcTime=this.selRes2ProcTimeGUI;
       this.subscenario2.processTime=this.selRes2ProcTime;
+      this.subscenario2.physicalTime = this.resource2PhysicalTime;
+      this.subscenario2.cognitiveTime = this.resource2CognitiveTime;
     }
 
     if(this.isSubScenario3Present==true){
       this.selRes3ProcTime=this.selRes3ProcTimeGUI;
       this.subscenario3.processTime=this.selRes3ProcTime;
+      this.subscenario3.physicalTime = this.resource3PhysicalTime;
+      this.subscenario3.cognitiveTime = this.resource3CognitiveTime;
     }
 
     if(this.isSubScenario1Present==true)
@@ -809,6 +822,8 @@ checkMandatoryData() {
                         this.firstDropDownChanged(element.resource.name);
                         this.subScenarioID1=element.pkTbId;
                         this.selRes1ProcTimeGUI=element.processTime;
+                        this.resource1PhysicalTime = element.physicalTime
+                        this.resource1CognitiveTime = element.cognitiveTime;
                         fkTbAceResID = element.resource.pkTbId;
                         fkTbAceSubProLevID = element.subprocessLevel.pkTbId;
                         delete element['resource'];
@@ -832,6 +847,8 @@ checkMandatoryData() {
                        this.secondDropDownChanged(element.resource.name);
                        this.subScenarioID2=element.pkTbId
                        this.selRes2ProcTimeGUI=element.processTime;
+                       this.resource2PhysicalTime = element.physicalTime
+                       this.resource2CognitiveTime = element.cognitiveTime;
                        fkTbAceResID = element.resource.pkTbId;
                        fkTbAceSubProLevID = element.subprocessLevel.pkTbId;
                        delete element['resource'];
@@ -854,6 +871,8 @@ checkMandatoryData() {
                        this.thirdDropDownChanged(element.resource.name);
                        this.subScenarioID3=element.pkTbId
                        this.selRes3ProcTimeGUI=element.processTime;
+                       this.resource3PhysicalTime = element.physicalTime
+                       this.resource3CognitiveTime = element.cognitiveTime;
                        fkTbAceResID = element.resource.pkTbId;
                        fkTbAceSubProLevID = element.subprocessLevel.pkTbId;
                        delete element['resource'];
@@ -938,17 +957,19 @@ checkMandatoryData() {
         }
 
        createSubScenariosIsIncomplete = () => {
-
           var retDisabled = true;
 
           if(this.firstdropdown == null && this.seconddropdown==null && this.thirddropdown==null){
                 return retDisabled;
           }
 
-         if((this.firstdropdown!=null && this.selRes1ProcTimeGUI==null) || this.seconddropdown!=null && this.selRes2ProcTimeGUI==null
-           || this.thirddropdown!=null && this.selRes3ProcTimeGUI==null ){
-             retDisabled=false;
-           }
+          if (
+           this.firstdropdown!=null && (this.selRes1ProcTimeGUI == null || this.resource1PhysicalTime == null || this.resource1CognitiveTime == null)  ||
+           this.seconddropdown!=null && (this.selRes2ProcTimeGUI == null || this.resource2PhysicalTime == null || this.resource2CognitiveTime == null)  ||
+           this.thirddropdown!=null && (this.selRes3ProcTimeGUI ==null || this.resource3PhysicalTime == null || this.resource3CognitiveTime == null)
+          ) {
+            retDisabled=false;
+          }
 
           return !retDisabled;
         }
