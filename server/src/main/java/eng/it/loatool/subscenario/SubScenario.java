@@ -62,6 +62,8 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
     private Double fixedCostTotal;
     private Boolean resRecal;
     private Boolean resSorting;
+    private Integer cognitiveTime;
+    private Integer physicalTime;
     private Date createDate;
     private Date updateDate;
 
@@ -333,6 +335,24 @@ public class SubScenario implements java.io.Serializable, PkTbPrimaryKeyOwner {
 
     public void setResSorting(Boolean resSorting) {
         this.resSorting = resSorting;
+    }
+
+    @Column(name = "COGNITIVE_TIME", nullable = false)
+    public Integer getCognitiveTime() {
+	return this.cognitiveTime;
+    }
+
+    public void setCognitiveTime(Integer cognitiveTime) {
+	this.cognitiveTime = cognitiveTime;
+    }
+
+    @Column(name = "PHYSICAL_TIME", nullable = false)
+    public Integer getPhysicalTime() {
+	return this.physicalTime;
+    }
+
+    public void setPhysicalTime(Integer physicalTime) {
+	this.physicalTime = physicalTime;
     }
 
     @CreationTimestamp
