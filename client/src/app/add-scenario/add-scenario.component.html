@@ -41,7 +41,7 @@
         R3 <input *ngIf="subScen?.objList?.scenNumber3?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber3?.resource.name+i}} id={{subScen?.objList?.scenNumber3?.resource.name+i}} value="{{subScen?.objList?.scenNumber3?.assemblyCosts}}-{{i}}-2"><span style="display:inline-block; width: 15px;"></span>{{subScen?.objList?.scenNumber3?.resource.name}}<br>
       </td>
       <td align="center">
-        <input type="radio" id="{{subScen?.subProc?.subprocessLevel.name}}-{{subScen?.subProc?.subprocessLevel.pkTbId}}" name="{{subScen?.subProc?.subprocessLevel.name}}-{{subScen?.subProc?.subprocessLevel.pkTbId}}" value="{{subScen?.subProc?.subprocessLevel.name}}-{{subScen?.subProc?.subprocessLevel.pkTbId}}"> <span style="display:inline-block; width: 15px;"></span>Already considered <br> once
+        <input type="checkbox" id="{{subScen?.subProc?.subprocessLevel.name}}-{{subScen?.subProc?.subprocessLevel.pkTbId}}" name="{{subScen?.subProc?.subprocessLevel.name}}-{{subScen?.subProc?.subprocessLevel.pkTbId}}" (change)="isFixedCostChecked($event, subScen)" > <span style="display:inline-block; width: 15px;"></span>Already considered <br> once
       </td>
       <td align="center">
         <br>
