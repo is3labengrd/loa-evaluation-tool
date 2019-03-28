@@ -66,16 +66,19 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="width: 900px;">
     <div class="modal-content" style="width: 900px;">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Create sub-scenario</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">Add resources</h5>
       </div>
       <div class="modal-body">
+        <label>Physical manual execution possible: {{physicalProcessLoaInfo.possibility?'yes':'no'}}</label><br>
+        <label>Cognitive manual execution possible: {{cognitiveProcessLoaInfo.possibility?'yes':'no'}}</label><br>
+        <label>Optimal physical LoA range {{physicalProcessLoaInfo.bestRange}}</label><br>
+        <label>Optimal cognitive LoA range {{cognitiveProcessLoaInfo.bestRange}}</label><br>
         <table class="table table-striped">
-          <caption style="caption-side: top;">Best physical LoA range 4-5</caption>
           <thead>
           <th></th>
-          <th>Scenario 1</th>
-          <th>Scenario 2</th>
-          <th>Scenario 3</th>
+          <th>Resource 1</th>
+          <th>Resource 2</th>
+          <th>Resource 3</th>
           </thead>
           <tbody>
           <tr>
@@ -119,6 +122,36 @@
             </td>
             <td>
               <input type="number" [(ngModel)]="selRes3ProcTimeGUI" id="selRes3ProcTimeGUI"
+               oninput="this.value=(parseInt(this.value)||1)" style="width: 100px;" required>
+            </td>
+          </tr>
+          <tr>
+            <td>Physical time</td>
+            <td>
+              <input type="number" [(ngModel)]="resource1PhysicalTime" id="resource1PhysicalTime"
+               oninput="this.value=(parseInt(this.value)||1)" style="width: 100px;" required>
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="resource2PhysicalTime" id="resource2PhysicalTime"
+               oninput="this.value=(parseInt(this.value)||1)" style="width: 100px;" required>
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="resource3PhysicalTime" id="resource3PhysicalTime"
+               oninput="this.value=(parseInt(this.value)||1)" style="width: 100px;" required>
+            </td>
+          </tr>
+          <tr>
+            <td>Cognitive time</td>
+            <td>
+              <input type="number" [(ngModel)]="resource1CognitiveTime" id="resource1CognitiveTime"
+               oninput="this.value=(parseInt(this.value)||1)" style="width: 100px;" required>
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="resource2CognitiveTime" id="resource2CognitiveTime"
+               oninput="this.value=(parseInt(this.value)||1)" style="width: 100px;" required>
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="resource3CognitiveTime" id="resource3CognitiveTime"
                oninput="this.value=(parseInt(this.value)||1)" style="width: 100px;" required>
             </td>
           </tr>
