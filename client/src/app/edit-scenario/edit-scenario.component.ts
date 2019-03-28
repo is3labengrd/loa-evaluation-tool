@@ -43,6 +43,10 @@ export class EditScenarioComponent implements OnInit {
     resToBeRemoved: Array<any> = [];
     enableSave:boolean;
     syncingWithVAR = false;
+    allAlreadySelectedOnce = new Map<string, boolean>();
+
+
+
 
     ngOnInit() {
       this.enableSave = false;
@@ -66,11 +70,13 @@ export class EditScenarioComponent implements OnInit {
           waitScenarioList.then((x)=>{
             this.creteTable();
             this.deleteDupicate();
+
           });
         });
       });
 
     }
+
 
     creteTable(){
       for(let i in this.resSubSceList[0]){
@@ -90,6 +96,7 @@ export class EditScenarioComponent implements OnInit {
             }
           }
           this.subProc = {"subProc": this.resSubSceList[0][i], "objList": this.objlist};
+          //console.log(this.subProc);
           this.subSceList.push(this.subProc);
         }
       }
@@ -138,10 +145,20 @@ export class EditScenarioComponent implements OnInit {
               objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.assemblyCosts;
               objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber1.hoursPerYears);
               objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.labourCost;
+              let keySubProcessFixedCost1: string = this.subSceList[parseInt(fields[1])].objList.scenNumber1.subprocessLevel.name+"-"+this.subSceList[parseInt(fields[1])].objList.scenNumber1.subprocessLevel.pkTbId;
+              if(this.allAlreadySelectedOnce.has(keySubProcessFixedCost1) && this.allAlreadySelectedOnce.get(keySubProcessFixedCost1)){
+              objlist['fixedCost'] = true;
+              objlist['maintCost'] = 0;
+              objlist['annualSpaceCost'] = 0;
+              objlist['inputedDepreciation'] = 0;
+              objlist['accruedInterestCost'] = 0;
+              }else{
+              objlist['fixedCost'] = false;
               objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.maintCost;
               objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.annualSpaceCost;
               objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.inputedDepreciation;
               objlist['accruedInterestCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.accruedIntCosts;
+              }
               objlist['energyCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.energyCost;
               objlist['varCostsPerUnit'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.varCostTotal;
               objlist['macCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.mcAMaintCosts;
@@ -165,10 +182,20 @@ export class EditScenarioComponent implements OnInit {
               objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.assemblyCosts;
               objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber2.hoursPerYears);
               objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.labourCost;
+              let keySubProcessFixedCost2: string = this.subSceList[parseInt(fields[1])].objList.scenNumber2.subprocessLevel.name+"-"+this.subSceList[parseInt(fields[1])].objList.scenNumber2.subprocessLevel.pkTbId;
+              if(this.allAlreadySelectedOnce.has(keySubProcessFixedCost2) && this.allAlreadySelectedOnce.get(keySubProcessFixedCost2)){
+              objlist['fixedCost'] = true;
+              objlist['maintCost'] = 0;
+              objlist['annualSpaceCost'] = 0;
+              objlist['inputedDepreciation'] = 0;
+              objlist['accruedInterestCost'] = 0;
+              }else{
+              objlist['fixedCost'] = false;
               objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.maintCost;
               objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.annualSpaceCost;
               objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.inputedDepreciation;
               objlist['accruedInterestCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.accruedIntCosts;
+              }
               objlist['energyCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.energyCost;
               objlist['varCostsPerUnit'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.varCostTotal;
               objlist['macCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.mcAMaintCosts;
@@ -191,10 +218,20 @@ export class EditScenarioComponent implements OnInit {
               objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCosts;
               objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber3.hoursPerYears);
               objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.labourCost;
+              let keySubProcessFixedCost3: string = this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLeve3.name+"-"+this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.pkTbId;
+              if(this.allAlreadySelectedOnce.has(keySubProcessFixedCost3) && this.allAlreadySelectedOnce.get(keySubProcessFixedCost3)){
+              objlist['fixedCost'] = true;
+              objlist['maintCost'] = 0;
+              objlist['annualSpaceCost'] = 0;
+              objlist['inputedDepreciation'] = 0;
+              objlist['accruedInterestCost'] = 0;
+              }else{
+              objlist['fixedCost'] = false;
               objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.maintCost;
               objlist['annualSpaceCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.annualSpaceCost;
               objlist['inputedDepreciation'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.inputedDepreciation;
               objlist['accruedInterestCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.accruedIntCosts;
+              }
               objlist['energyCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.energyCost;
               objlist['varCostsPerUnit'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.varCostTotal;
               objlist['macCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.mcAMaintCosts;
@@ -315,6 +352,7 @@ export class EditScenarioComponent implements OnInit {
             objlist['fkTbAceRes'] = valueList[j].fkTbAceRes;
             objlist['fkTbAceSubProLev'] = valueList[j].fkTbAceSubProLev;
             objlist['numberSelected'] = valueList[j].numberSelected;
+            objlist['fixedCost'] = valueList[j].fixedCost;
           }else{
             objlist['optC'] = "-";
             objlist['phy'] = "-";
@@ -373,6 +411,7 @@ export class EditScenarioComponent implements OnInit {
       this.TotalCost = 0;
       this.CostperPiece = 0;
       this.bodyPost = {};
+      this.allAlreadySelectedOnce.clear();
     }
 
     fetchFromCAM() {
@@ -486,6 +525,7 @@ export class EditScenarioComponent implements OnInit {
           bodyPostScenRes['weightedPhysicalLoa'] = this.showedList[i].phy;
           bodyPostScenRes['weightedCognitiveLoa'] = this.showedList[i].cog;
           bodyPostScenRes['numberSelected'] = this.showedList[i].numberSelected;
+          bodyPostScenRes['fixedCost'] = this.showedList[i].fixedCost;
           tmp+=1;
           if(tmp.toString() === this.showedList.length.toString()){
             this.saveScenRes(bodyPostScenRes,true);
@@ -549,11 +589,15 @@ export class EditScenarioComponent implements OnInit {
           this.resToBeRemoved = [];
 
           for (let i in this.scenResList[0]){
+
             if(this.scenResList[0][i].fkTbAceScenarios === this.scenarios.scen.pkTbId){
-              this.resToBeRemoved.push(this.scenResList[0][i])
+              this.resToBeRemoved.push(this.scenResList[0][i]);
+              if(this.scenResList[0][i].fixedCost==true){
+               this.allAlreadySelectedOnce.set(this.scenResList[0][i].subprocessLevel.name+"-"+this.scenResList[0][i].subprocessLevel.pkTbId, true);
+              }
             }
           }
-
+          //console.log(this.scenResList);
           for (let k in this.subSceList){
             for (let j in this.resToBeRemoved){
               if(this.resToBeRemoved[j].subprocessLevel.name === this.subSceList[k].subProc.subprocessLevel.name){
@@ -592,4 +636,25 @@ export class EditScenarioComponent implements OnInit {
             this.router.navigate(['scenarios']);
           }
         }
+
+       checkedFixedCost(temp:Object){
+        let objlist:any= temp;
+        let key: string = objlist.subProc.subprocessLevel.name+"-"+objlist.subProc.subprocessLevel.pkTbId;
+        if(this.allAlreadySelectedOnce.has(key)){
+             return this.allAlreadySelectedOnce.get(key);
+         }else{
+           return false;
+         }
+        }
+
+        isFixedCostChecked(event:any, obj:any){
+            let key: string = obj.subProc.subprocessLevel.name+"-"+obj.subProc.subprocessLevel.pkTbId;
+            if(event.target.checked){
+             this.allAlreadySelectedOnce.set(key, true);
+            }else{
+             this.allAlreadySelectedOnce.delete(key);
+            }
+
+        }
+
       }
