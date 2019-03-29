@@ -17,6 +17,8 @@ export class ScenariosComponent implements OnInit {
   resSubSceList:Array<any> = [];
   subSceList:Array<any> = [];
   cookie: any;
+  penultimateLevel: any;
+  penultimateSubprocess: any;
   processSegmentList:Array<any> = [];
   allProcessSegmentCAM:Array<any> = [];
   scenarios:any={};
@@ -29,6 +31,8 @@ export class ScenariosComponent implements OnInit {
 
   ngOnInit() {
     this.cookie = this._processListService.getCookie("selectedSubprocess");
+    this.penultimateLevel = this.cookie.maxDepth-1;
+    this.penultimateSubprocess = this.cookie['level' + this.penultimateLevel];
     this.syncingWithVAR = true;
 
     var waitCAMProcTree = this.fetchFromCAM();
@@ -97,16 +101,21 @@ export class ScenariosComponent implements OnInit {
     for(let i in this.processSegmentList[0]){
       if (this.processSegmentList[0][i].name === this.cookie.mainProcessName){
         for (let j in this.processSegmentList[0][i].subProcesses){
-          this.loop(this.processSegmentList[0][i].subProcesses[j].subProcesses);
+          if (
+            this.processSegmentList[0][i].subProcesses[j].name == this.penultimateSubprocess.name
+          ) {
+            this.loop(this.processSegmentList[0][i].subProcesses[j].subProcesses);
+          }
         }
       }
     }
     var obj = {}
     for (let k in this.allProcessSegmentCAM){
       obj = {"name": this.allProcessSegmentCAM[k],
-      "res1": this.findRes(this.scenario1, this.allProcessSegmentCAM[k]),
-      "res2": this.findRes(this.scenario2, this.allProcessSegmentCAM[k]),
-      "res3": this.findRes(this.scenario3, this.allProcessSegmentCAM[k])}
+        "res1": this.findRes(this.scenario1, this.allProcessSegmentCAM[k]),
+        "res2": this.findRes(this.scenario2, this.allProcessSegmentCAM[k]),
+        "res3": this.findRes(this.scenario3, this.allProcessSegmentCAM[k])
+      };
       this.resourceTable.push(obj);
       obj = {};
     }
