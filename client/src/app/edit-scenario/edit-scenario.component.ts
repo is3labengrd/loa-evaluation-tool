@@ -44,7 +44,7 @@ export class EditScenarioComponent implements OnInit {
     enableSave:boolean;
     syncingWithVAR = false;
     allAlreadySelectedOnce = new Map<string, boolean>();
-
+    penultimateSubprocess: any;
 
 
 
@@ -52,6 +52,8 @@ export class EditScenarioComponent implements OnInit {
       this.enableSave = false;
 
       this.cookie = this._processListService.getCookie("selectedSubprocess");
+      var penultimateLevel = this.cookie.maxDepth-1;
+      this.penultimateSubprocess = this.cookie['level' + penultimateLevel];
       this.id  = this.route.snapshot.params['id'];
       this.syncingWithVAR = true;
 
@@ -102,12 +104,23 @@ export class EditScenarioComponent implements OnInit {
       }
     }
 
-    deleteDupicate(){
+    deleteDupicate() {
+      var filteredResult = [];
       var result = this.subSceList.filter(function (a) {
         return !this[a.subProc.subprocessLevel.pkTbId] && (this[a.subProc.subprocessLevel.pkTbId] = true);
       }, Object.create(null));
-      this.subSceList = result;
-      this.findSelection();
+      result.forEach((element) => {
+        var parentSubprocessId = element.subProc.subprocessLevel.pkTbId-1;
+        this.http
+          .get(environment.apiUrl + '/v1/subprocess-levels/'+parentSubprocessId)
+          .toPromise()
+          .then((parentSubprocess:any) => {
+            if (parentSubprocess.name == this.penultimateSubprocess.name) {
+              filteredResult.push(element);
+            }
+            this.subSceList = filteredResult;
+          })
+      })
     }
 
     getScenariosList() {
@@ -450,7 +463,11 @@ export class EditScenarioComponent implements OnInit {
       for(let i in this.processSegmentList[0]){
         if (this.processSegmentList[0][i].name === this.cookie.mainProcessName){
           for (let j in this.processSegmentList[0][i].subProcesses){
-            this.loop(this.processSegmentList[0][i].subProcesses[j].subProcesses);
+            if (
+              this.processSegmentList[0][i].subProcesses[j].name == this.penultimateSubprocess.name
+            ) {
+              this.loop(this.processSegmentList[0][i].subProcesses[j].subProcesses);
+            }
           }
         }
       }
