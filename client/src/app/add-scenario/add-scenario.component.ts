@@ -155,6 +155,9 @@ export class AddScenarioComponent implements OnInit {
               objlist['numberSelected'] = 1;
               objlist['usCognitiveLoa'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.usCognitiveLoa;
               objlist['usPhysicalLoa'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.usPhysicalLoa;
+              objlist['physicalTime'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.physicalTime;
+              objlist['cognitiveTime'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.cognitiveTime;
+
 
 
             }
@@ -193,6 +196,8 @@ export class AddScenarioComponent implements OnInit {
               objlist['numberSelected'] = 2;
               objlist['usCognitiveLoa'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.usCognitiveLoa;
               objlist['usPhysicalLoa'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.usPhysicalLoa;
+              objlist['physicalTime'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.physicalTime;
+              objlist['cognitiveTime'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.cognitiveTime;
 
             }
             if(this.subSceList[parseInt(fields[1])].objList.scenNumber3 != undefined && parseInt(fields[2]) === 2){
@@ -230,6 +235,8 @@ export class AddScenarioComponent implements OnInit {
               objlist['numberSelected'] = 3;
               objlist['usCognitiveLoa'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.usCognitiveLoa;
               objlist['usPhysicalLoa'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.usPhysicalLoa;
+              objlist['physicalTime'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.physicalTime;
+              objlist['cognitiveTime'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.cognitiveTime;
 
             }
             objlist['procTime'] = this.subSceList[parseInt(fields[1])].subProc.processTime;
@@ -267,6 +274,8 @@ export class AddScenarioComponent implements OnInit {
         var cog = 0;
         var poundphyLoa = 0;
         var poundcogLoa = 0;
+        var physicalTimeTotal=0;
+        var cognitiveTimeTotal=0;
 
         objlist = {};
 
@@ -302,8 +311,24 @@ export class AddScenarioComponent implements OnInit {
             procTime += valueList[k].procTime;
             optCost += valueList[k].optC;
             totAssemblyCostPerPiece += valueList[k].costPerPiece;
+
+            physicalTimeTotal += valueList[k].physicalTime;
+            cognitiveTimeTotal += valueList[k].cognitiveTime;
+
           }
         }
+
+         this.avgPhy=0;
+         this.avgCog=0;
+         for (var k=0; k<valueList.length; k++){
+           if(valueList[k] != ""){
+              this.avgPhy += (valueList[k].physicalTime/physicalTimeTotal) * valueList[k].phy;
+              this.avgCog += (valueList[k].cognitiveTime/cognitiveTimeTotal) * valueList[k].cog;
+           }
+         }
+
+        Math.round(this.avgPhy);
+        Math.round(this.avgCog);
 
         objlist['phy'] = phy/countAvg;
         objlist['cog'] = cog/countAvg;
@@ -325,8 +350,7 @@ export class AddScenarioComponent implements OnInit {
         objlist['totalAssCosts'] = totalAssCosts/countAvg;
 
         this.tmpPost = objlist;
-        this.avgPhy = phyLoa/countAvg;
-        this.avgCog = cogLoa/countAvg;
+
 
         for (var j=0; j<valueList.length; j++){
           objlist= {};
