@@ -47,6 +47,7 @@ export class EditScenarioComponent implements OnInit {
     penultimateSubprocess: any;
 
 
+
     ngOnInit() {
       this.enableSave = false;
 
@@ -118,11 +119,6 @@ export class EditScenarioComponent implements OnInit {
               filteredResult.push(element);
             }
             this.subSceList = filteredResult;
-            this.subSceList.sort((a: any, b: any) => {
-              var aName:string = a.subProc.subprocessLevel.name;
-              var bName:string = b.subProc.subprocessLevel.name;
-              return aName.localeCompare(bName);
-            });
           })
       })
     }
@@ -308,7 +304,7 @@ export class EditScenarioComponent implements OnInit {
         objlist = {};
 
         for (var k=0; k<valueList.length; k++){
-          if (valueList[k] != "") {
+          if(valueList[k] != ""){
             countAvg+=1;
 
             phy += valueList[k].phy;

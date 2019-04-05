@@ -104,11 +104,6 @@ export class AddScenarioComponent implements OnInit {
               filteredResult.push(element);
             }
             this.subSceList = filteredResult;
-            this.subSceList.sort((a: any, b: any) => {
-              var aName:string = a.subProc.subprocessLevel.name;
-              var bName:string = b.subProc.subprocessLevel.name;
-              return aName.localeCompare(bName);
-            });
           })
       })
     }
