@@ -94,18 +94,7 @@ export class AddScenarioComponent implements OnInit {
       var result = this.subSceList.filter(function (a) {
         return !this[a.subProc.subprocessLevel.pkTbId] && (this[a.subProc.subprocessLevel.pkTbId] = true);
       }, Object.create(null));
-      result.forEach((element) => {
-        var parentSubprocessId = element.subProc.subprocessLevel.pkTbId-1;
-        this.http
-          .get(environment.apiUrl + '/v1/subprocess-levels/'+parentSubprocessId)
-          .toPromise()
-          .then((parentSubprocess:any) => {
-            if (parentSubprocess.name == this.penultimateSubprocess.name) {
-              filteredResult.push(element);
-            }
-            this.subSceList = filteredResult;
-          })
-      })
+      this.subSceList = result;
     }
 
     getScenariosList() {
