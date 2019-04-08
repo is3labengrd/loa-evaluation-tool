@@ -6,10 +6,10 @@
         <h5 class="modal-title">Product planing</h5>
       </div>
       <div class="modal-body">
-        <div>Number of produced pieces per hour: 
+        <div>Number of produced pieces per hour:
           <input type="number" id="nprodPiecePerHours"
             [(ngModel)]="nprodPiecePerHours" min="1"
-            style="width: 100px;" 
+            style="width: 100px;"
             oninput="this.value=(parseInt(this.value)||1)"
             value="nprodPiecePerHours" required>
         </div>
@@ -237,7 +237,7 @@
     </thead>
     <tbody>
     <tr>
-      <td class="roto  align-middle"></td>
+      <td class="  align-middle"></td>
       <td><strong>Resource name</strong></td>
       <td>-</td>
       <td>{{resourceInfo1?.name}}</td>
@@ -245,7 +245,7 @@
       <td>{{resourceInfo3?.name}}</td>
     </tr>
     <tr>
-      <td class="roto  align-middle"><b>Process</b> <br> <b>variables</b></td>
+      <td class="  align-middle"><span class="roto"><b>Process</b> <br> <b>variables</b></span></td>
       <td>
         LoA physical <br>
         LoA cognitive <br>
@@ -273,7 +273,7 @@
       </td>
     </tr>
     <tr>
-      <td class="roto  align-middle" rowspan="2"><b>Working</b> <br> <b>hours</b></td>
+      <td class="  align-middle" rowspan="2"><span class="roto"><b>Working</b> <br> <b>hours</b></span></td>
       <td>
         Number of shifts per day <br>
         Hours per shift <br>
@@ -308,7 +308,7 @@
       <td>{{subscenario3?.hoursPerYears}}</td>
     </tr>
     <tr>
-      <td class="roto  align-middle" rowspan="2"><b>Prod.</b></td>
+      <td class="  align-middle" rowspan="2"><span class="roto"><b>Prod.</b></span></td>
       <td>Number of produced pieces</td>
       <td>units/h</td>
       <td>{{nprodPiecePerHoursGUI1}}</td>
@@ -323,7 +323,7 @@
       <td>{{subscenario3?.nprodPieces}}</td>
     </tr>
     <tr>
-      <td class="roto  align-middle" rowspan="6"><b>Variable costs</b></td>
+      <td class="  align-middle" rowspan="6"><span class="roto"><b>Variable costs</b></span></td>
       <td>
         Proportional wage costs per hour <br>
         Number of operations per machine <br>
@@ -421,7 +421,7 @@
       <td>{{subscenario3?.maintCost}}</td>
     </tr>
     <tr>
-      <td rowspan="6" class="roto align-middle"><b>Fixed Costs</b></td>
+      <td rowspan="6" class=" align-middle"><span class="roto"><b>Fixed Costs</b></span></td>
       <td>
         Installation surface <br>
         Costs per m<sup>2</sup> per month
