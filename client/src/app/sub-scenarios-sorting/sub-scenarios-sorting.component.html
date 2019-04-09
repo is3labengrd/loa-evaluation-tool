@@ -71,13 +71,13 @@
       <div class="modal-body">
         <div>Minimal physical worker satisfaction &nbsp;
           <input type="number" name="physicalSat" [(ngModel)]="minimalTotalSatisfaction.minPhySat" style="width: 100px;"
-                 oninput="this.value=(parseInt(this.value)||0)"
+                 oninput="this.value=(parseFloat(this.value)||0)"
                  value="minimalTotalSatisfaction?.minPhySat" required>
         </div>
         <br>
         <div>Minimal cognitive worker satisfaction
           <input type="number" name="cognitiveSat" [(ngModel)]="minimalTotalSatisfaction.minCogSat" style="width: 100px;"
-                 oninput="this.value=(parseInt(this.value)||0)"
+                 oninput="this.value=(parseFloat(this.value)||0)"
                  value="minimalTotalSatisfaction?.minCogSat" required>
         </div>
         <br>
