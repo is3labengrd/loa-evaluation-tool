@@ -29,6 +29,7 @@ fieldset legend {
 }
 
 .roto {
+  display: block;
   transform: rotate(-90deg);
 }
 
