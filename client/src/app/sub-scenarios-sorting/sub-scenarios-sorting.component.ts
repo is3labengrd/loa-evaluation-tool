@@ -275,12 +275,11 @@ export class SubScenariosSortingComponent implements OnInit {
       this.http.post(environment.apiUrl + '/v1/minimal-satisfactions', minimalTotalSatisfactionObj)
         .toPromise().then((res: any) => {
           this.minimalTotalSatisfactionID = res.pkTbId;
+          this.createBarChart();
         });
-      this.createBarChart();
     } else {
       this.http.put(environment.apiUrl + '/v1/minimal-satisfactions/' + this.minimalTotalSatisfactionID, minimalTotalSatisfactionObj)
-        .subscribe(res => console.log('Done put'));
-      this.createBarChart();
+        .subscribe(res => this.createBarChart());
     }
 
   }
