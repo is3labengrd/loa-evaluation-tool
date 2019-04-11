@@ -33,7 +33,7 @@
     <th> Cognitive LoA: </th>
   </thead>
   <tbody>
-    <tr *ngFor="let subScen of subSceList; let i = index">
+    <tr *ngFor="let subScen of subSceList; let i = index" [hidden]="subScen.hidden">
       <td>{{subScen?.subProc?.subprocessLevel.name}}</td>
       <td>
         R1 <input *ngIf="subScen?.objList?.scenNumber1?.resource.name" type="radio" [(ngModel)]="stepResult[i]" name={{subScen?.objList?.scenNumber1?.resource.name+i}} id={{subScen?.objList?.scenNumber1?.resource.name+i}} value="{{subScen?.objList?.scenNumber1?.assemblyCosts}}-{{i}}-0"><span style="display:inline-block; width: 15px;"></span>{{subScen?.objList?.scenNumber1?.resource.name}}<br>
