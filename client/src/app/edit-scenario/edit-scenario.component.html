@@ -22,15 +22,17 @@
       </tr>
     </table>
 
-    <table class="table">
+    <table class="table" id="sortable">
       <caption style="caption-side: top; text-align: center; font-size: 30px; color:black;"><h1>Edit Scenario</h1></caption>
       <thead>
-        <th> Sub Process Name: </th>
-        <th> Resources: </th>
-        <th> Fixed Costs: </th>
-        <th> Optional Cost: </th>
-        <th> Physical LoA: </th>
-        <th> Cognitive LoA: </th>
+        <tr>
+          <th> Sub Process Name: </th>
+          <th> Resources: </th>
+          <th> Fixed Costs: </th>
+          <th> Optional Cost: </th>
+          <th> Physical LoA: </th>
+          <th> Cognitive LoA: </th>
+        </tr>
       </thead>
       <tbody>
         <tr *ngFor="let subScen of subSceList; let i = index" [hidden]="subScen.hidden">
@@ -71,22 +73,23 @@
           <td align="center"> <br> 0 <br> </td>
           <td align="center"> <br> 0 <br> </td>
         </tr>
-
-       <tr>
-          <td></td>
-          <td align="center"> Total Cost: </td>
-          <td align="center"> {{TotalCost}} </td>
-          <td align="center"> Physical LoA: </td>
-          <td align="center"> {{phyLoaTotal}} </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td align="center"> Cost per Piece: </td>
-          <td align="center"> {{CostperPiece}} </td>
-          <td align="center"> Cognitive LoA: </td>
-          <td align="center"> {{cogLoaTotal}} </td>
-        </tr>
       </tbody>
+      <tfoot>
+        <tr>
+            <td></td>
+            <td align="center"> Total Cost: </td>
+            <td align="center"> {{TotalCost}} </td>
+            <td align="center"> Physical LoA: </td>
+            <td align="center"> {{phyLoaTotal}} </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="center"> Cost per Piece: </td>
+            <td align="center"> {{CostperPiece}} </td>
+            <td align="center"> Cognitive LoA: </td>
+            <td align="center"> {{cogLoaTotal}} </td>
+          </tr>
+      </tfoot>
     </table>
 
     <ng-template [ngIf]="syncingWithVAR">
