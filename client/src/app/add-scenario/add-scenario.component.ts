@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CookieService } from '../cookie.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -466,6 +465,14 @@ export class AddScenarioComponent implements OnInit {
         }
       }
     }
+    setTimeout(() => {
+      // @ts-ignore
+      tsorter.create('sortable', 0);
+      // @ts-ignore
+      jQuery('#sort-trigger').click();
+      // @ts-ignore
+      jQuery('#sort-trigger').click();
+    }, 0)
   }
 
   loop(camList: any) {
