@@ -237,7 +237,7 @@ export class EditScenarioComponent implements OnInit {
           objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCosts;
           objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber3.hoursPerYears);
           objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.labourCost;
-          let keySubProcessFixedCost3: string = this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLeve3.name + "-" + this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.pkTbId;
+          let keySubProcessFixedCost3: string = this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.name + "-" + this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.pkTbId;
           if (this.allAlreadySelectedOnce.has(keySubProcessFixedCost3) && this.allAlreadySelectedOnce.get(keySubProcessFixedCost3)) {
             objlist['fixedCost'] = true;
             objlist['maintCost'] = 0;
