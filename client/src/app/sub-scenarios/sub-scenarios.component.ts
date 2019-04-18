@@ -128,7 +128,9 @@ export class SubScenariosComponent implements OnInit {
       .toPromise()
       .then((physicalLoa) => {
         this.physicalProcessLoaInfo = physicalLoa;
-      });
+      },
+      err => {}
+      );
 
     this
       .http
