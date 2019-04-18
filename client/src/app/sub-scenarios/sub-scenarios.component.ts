@@ -136,7 +136,9 @@ export class SubScenariosComponent implements OnInit {
       .toPromise()
       .then((cognitiveLoa) => {
         this.cognitiveProcessLoaInfo = cognitiveLoa;
-      });
+      },
+        err => {}
+      );
 
     var promise1 = this.productPlanningGET();
     promise1.then((x) => {
@@ -1039,7 +1041,9 @@ checkMandatoryData() {
                                            }
 
                   return this.http.put(environment.apiUrl + '/v1/var/editProportionalWageCost', varProportionalWageCostObj)
-                               .toPromise().then((res:any) => { });
+                               .toPromise().then((res:any) => { },
+                               err => {}
+                               );
                   }
 
 
