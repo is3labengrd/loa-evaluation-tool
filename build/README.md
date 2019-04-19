@@ -11,4 +11,7 @@ To deploy and run the whole project please refer to the following [instructions]
 This folder contains a fake version of LoA Evaluation Tool. There is not any comunication between the client (LoAEvaluationTool.war) and server (LoAService.war) components.
 
 ### v1.0
-This forder contains the version 1.0 of LoA Evaluation Tool. An environment variable **ENV_SAR_URL** containing the url of the CAMService (e.g. *http://[host]:[port]/CAMService*) must be set before deploy and run the application.
+This folder contains the version 1.0 of LoA Evaluation Tool. An environment variable **ENV_SAR_URL** containing the url of the CAMService (e.g. *http://[host]:[port]/CAMService*) must be set before deploy and run the application.
+
+### v2.0
+This folder contains the version 2.0 of LoA Evaluation Tool. An environment variable **ENV_SAR_URL** containing the url of the CAMService (e.g. *http://[host]:[port]/CAMService*) must be set before deploy and run the application.
