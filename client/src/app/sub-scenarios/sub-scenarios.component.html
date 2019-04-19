@@ -48,7 +48,7 @@
         <br>
         <div>Proportional wage costs per hour:
           <input type="number" step="0.01" [(ngModel)]="procSpecInfoObj.propWCPerHours" name="propWCPerHours" style="width: 100px;"
-           class="float-right" min="0.01" value="procSpecInfoObj?.propWCPerHours" oninput="this.value=(parseFloat(this.value)||0.01)" required>
+           class="float-right" min="0.01" value="procSpecInfoObj?.propWCPerHours" oninput="this.value=(parseFloat(this.value))" required>
           </div>
         <br>
       </div>
