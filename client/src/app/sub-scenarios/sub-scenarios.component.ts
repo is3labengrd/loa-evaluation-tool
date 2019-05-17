@@ -606,13 +606,13 @@ checkMandatoryData() {
   updateAssemblyCostsTotal(): void {
 
     if(this.isSubScenario1Present==true)
-    this.subscenario1.assemblyCosts = this.roundValue(this.subscenario1.assemblyCostPerPiece + this.subscenario1.nprodPieces);
+    this.subscenario1.assemblyCosts = this.roundValue(this.subscenario1.assemblyCostPerPiece * this.subscenario1.nprodPieces);
 
     if(this.isSubScenario2Present==true)
-    this.subscenario2.assemblyCosts = this.roundValue(this.subscenario2.assemblyCostPerPiece + this.subscenario2.nprodPieces);
+    this.subscenario2.assemblyCosts = this.roundValue(this.subscenario2.assemblyCostPerPiece * this.subscenario2.nprodPieces);
 
     if(this.isSubScenario3Present==true)
-    this.subscenario3.assemblyCosts = this.roundValue(this.subscenario3.assemblyCostPerPiece + this.subscenario3.nprodPieces);
+    this.subscenario3.assemblyCosts = this.roundValue(this.subscenario3.assemblyCostPerPiece * this.subscenario3.nprodPieces);
    }
 
 
