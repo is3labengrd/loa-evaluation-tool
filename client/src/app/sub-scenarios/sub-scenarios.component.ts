@@ -613,6 +613,7 @@ checkMandatoryData() {
 
     if(this.isSubScenario3Present==true)
     this.subscenario3.assemblyCosts = this.roundValue(this.subscenario3.assemblyCostPerPiece * this.subscenario3.nprodPieces);
+
    }
 
 
