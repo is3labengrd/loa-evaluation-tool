@@ -73,3 +73,12 @@ canvas {
   height: 12px;
   background-color: #daa520;
 }
+
+#legend-column-both {
+  float: left;
+  margin-top: 17px;
+  margin-bottom: 40px;
+  width: 36px;
+  height: 12px;
+  background-color: red;
+}
