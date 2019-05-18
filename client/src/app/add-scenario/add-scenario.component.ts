@@ -368,12 +368,13 @@ export class AddScenarioComponent implements OnInit {
     this.tmpPost = objlist;
 
 
+
     for (var j = 0; j < valueList.length; j++) {
       objlist = {};
       if (valueList[j] != "") {
         objlist['optC'] = (valueList[j].optC).toFixed(2);
-        objlist['phy'] = valueList[j].usPhysicalLoa;
-        objlist['cog'] = valueList[j].usCognitiveLoa;
+        objlist['phy'] = valueList[j].phy;
+        objlist['cog'] = valueList[j].cog;
         objlist['poundPhy'] = valueList[j].phy * valueList[j].procTime;
         objlist['poundCog'] = valueList[j].cog * valueList[j].procTime;
         objlist['fkTbAceRes'] = valueList[j].fkTbAceRes;
