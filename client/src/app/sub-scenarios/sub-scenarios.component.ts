@@ -438,25 +438,25 @@ checkMandatoryData() {
   updateRateParticipationPerHour(): void {
 
     if(this.isSubScenario1Present==true)
-    this.subscenario1.rateOfPart = this.roundValue((this.nprodPiecePerHours * this.selRes1ProcTime) / 3600);
+    this.subscenario1.rateOfPart = (this.nprodPiecePerHours * this.selRes1ProcTime) / 3600;
 
     if(this.isSubScenario2Present==true)
-    this.subscenario2.rateOfPart = this.roundValue((this.nprodPiecePerHours * this.selRes2ProcTime) / 3600);
+    this.subscenario2.rateOfPart = (this.nprodPiecePerHours * this.selRes2ProcTime) / 3600;
 
     if(this.isSubScenario3Present==true)
-    this.subscenario3.rateOfPart = this.roundValue((this.nprodPiecePerHours * this.selRes3ProcTime) / 3600);
+    this.subscenario3.rateOfPart = (this.nprodPiecePerHours * this.selRes3ProcTime) / 3600;
   }
 
   updateLabourCost(): void {
 
     if(this.isSubScenario1Present==true)
-    this.subscenario1.labourCost = this.roundValue(this.procSpecInfoObj.propWCPerHours * this.resourceInfo1.lcNOperMachine * this.subscenario1.rateOfPart / this.nprodPiecePerHours);
+    this.subscenario1.labourCost = this.procSpecInfoObj.propWCPerHours * this.resourceInfo1.lcNOperMachine * this.subscenario1.rateOfPart / this.nprodPiecePerHours;
 
     if(this.isSubScenario2Present==true)
-    this.subscenario2.labourCost = this.roundValue(this.procSpecInfoObj.propWCPerHours * this.resourceInfo2.lcNOperMachine * this.subscenario2.rateOfPart / this.nprodPiecePerHours);
+    this.subscenario2.labourCost = this.procSpecInfoObj.propWCPerHours * this.resourceInfo2.lcNOperMachine * this.subscenario2.rateOfPart / this.nprodPiecePerHours;
 
     if(this.isSubScenario3Present==true)
-    this.subscenario3.labourCost = this.roundValue(this.procSpecInfoObj.propWCPerHours * this.resourceInfo3.lcNOperMachine * this.subscenario3.rateOfPart / this.nprodPiecePerHours);
+    this.subscenario3.labourCost = this.procSpecInfoObj.propWCPerHours * this.resourceInfo3.lcNOperMachine * this.subscenario3.rateOfPart / this.nprodPiecePerHours;
 
   }
 

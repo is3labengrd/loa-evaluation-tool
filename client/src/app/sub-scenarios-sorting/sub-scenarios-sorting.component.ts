@@ -84,18 +84,34 @@ export class SubScenariosSortingComponent implements OnInit {
           {
             label: "Minimal physical worker satisfaction",
             data: [this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat],
-            backgroundColor: "#ffd700",
+            backgroundColor: 
+              this.minimalTotalSatisfaction.minPhySat === this.minimalTotalSatisfaction.minCogSat?
+                "red"
+              :
+                "#ffd700",
             type: "line",
             fill: false,
-            borderColor: "gold"
+            borderColor:
+              this.minimalTotalSatisfaction.minPhySat === this.minimalTotalSatisfaction.minCogSat?
+                "red"
+              :
+                "gold"
           },
           {
             label: "Minimal cognitive worker satisfaction",
             data: [this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat],
-            backgroundColor: "#daa520",
+            backgroundColor:
+              this.minimalTotalSatisfaction.minPhySat === this.minimalTotalSatisfaction.minCogSat?
+                "red"
+              :
+                "#daa520",
             type: "line",
             fill: false,
-            borderColor: "goldenrod"
+            borderColor: 
+              this.minimalTotalSatisfaction.minPhySat === this.minimalTotalSatisfaction.minCogSat?
+                "red"
+              :
+                "goldenrod"
           },
           {
             label: "Physical worker satisfaction",
