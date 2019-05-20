@@ -366,10 +366,12 @@ export class EditScenarioComponent implements OnInit {
     objlist['accruedInterestCost'] = accruedInterestCost;
     objlist['energyCost'] = energyCost;
     objlist['varCostsPerUnit'] = varCostsPerUnit ;
-    objlist['macCost'] = macCost / countAvg;
+    // objlist['macCost'] = macCost / countAvg;
+    objlist['macCost'] = macCost;
     objlist['prodUnitsPerYears'] = prodUnitsPerYears ;
     objlist['assCostsPerUnits'] = assCostsPerUnits ;
-    objlist['totalAssCosts'] = totalAssCosts ;
+    // objlist['totalAssCosts'] = totalAssCosts ;
+    objlist['totalAssCosts'] = (prodUnitsPerYears * assCostsPerUnits).toFixed(5);
 
     this.tmpPost = objlist;
     //this.avgPhy = phyLoa/countAvg;

@@ -358,12 +358,15 @@ export class AddScenarioComponent implements OnInit {
     objlist['annualSpaceCost'] = annualSpaceCost ;
     objlist['inputedDepreciation'] = inputedDepreciation ;
     objlist['accruedInterestCost'] = accruedInterestCost ;
-    objlist['energyCost'] = energyCost / countAvg;
+    //objlist['energyCost'] = energyCost / countAvg;
+    objlist['energyCost'] = energyCost;
     objlist['varCostsPerUnit'] = varCostsPerUnit ;
-    objlist['macCost'] = macCost / countAvg;
+    objlist['macCost'] = macCost;
+    //objlist['macCost'] = macCost / countAvg;
     objlist['prodUnitsPerYears'] = prodUnitsPerYears ;
     objlist['assCostsPerUnits'] = assCostsPerUnits ;
-    objlist['totalAssCosts'] = totalAssCosts ;
+    //objlist['totalAssCosts'] = totalAssCosts ;
+    objlist['totalAssCosts'] = (prodUnitsPerYears * assCostsPerUnits).toFixed(5);
 
     this.tmpPost = objlist;
 
