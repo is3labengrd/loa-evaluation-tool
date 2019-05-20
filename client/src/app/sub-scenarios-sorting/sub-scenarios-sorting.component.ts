@@ -73,6 +73,8 @@ export class SubScenariosSortingComponent implements OnInit {
   }
 
   createBarChart() {
+    let minPhysicalSatisfaction = this.minimalTotalSatisfaction.minPhySat;
+    let minCognitiveSatisfaction = this.minimalTotalSatisfaction.minCogSat;
     this.barChart = new Chart("barChart", {
       type: "bar",
       data: {
@@ -87,7 +89,8 @@ export class SubScenariosSortingComponent implements OnInit {
             backgroundColor: "#ffd700",
             type: "line",
             fill: false,
-            borderColor: "gold"
+            borderColor: "gold",
+            borderDash: (minPhysicalSatisfaction === minCognitiveSatisfaction)?[50,50]:0
           },
           {
             label: "Minimal cognitive worker satisfaction",
@@ -95,7 +98,9 @@ export class SubScenariosSortingComponent implements OnInit {
             backgroundColor: "#daa520",
             type: "line",
             fill: false,
-            borderColor: "goldenrod"
+            borderColor: "goldenrod",
+            borderDash: (minPhysicalSatisfaction === minCognitiveSatisfaction)?[50,50]:0,
+            borderDashOffset: (minPhysicalSatisfaction === minCognitiveSatisfaction)?50:0
           },
           {
             label: "Physical worker satisfaction",
