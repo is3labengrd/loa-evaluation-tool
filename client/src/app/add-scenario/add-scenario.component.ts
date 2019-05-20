@@ -139,7 +139,7 @@ export class AddScenarioComponent implements OnInit {
         if (this.subSceList[parseInt(fields[1])].objList.scenNumber1 != undefined && parseInt(fields[2]) === 0) {
           objlist['phy'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.loaPhysical;
           objlist['cog'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.resource.loaCognitive;
-          objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.assemblyCostPerPiece;
+          objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.fixedCostTotal;
           objlist['fkTbAceProSeq'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.fkTbAceProSeq;
           objlist['scenarioNumber'] = parseInt(this.id);
           objlist['optionCost'] = this.subSceList[(fields[1])].objList.scenNumber1.assemblyCosts;
@@ -180,7 +180,7 @@ export class AddScenarioComponent implements OnInit {
         if (this.subSceList[parseInt(fields[1])].objList.scenNumber2 != undefined && parseInt(fields[2]) === 1) {
           objlist['phy'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.loaPhysical;
           objlist['cog'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.resource.loaCognitive;
-          objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.assemblyCostPerPiece;
+          objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.fixedCostTotal;
           objlist['fkTbAceProSeq'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.fkTbAceProSeq;
           objlist['scenarioNumber'] = parseInt(this.id);
           objlist['optionCost'] = this.subSceList[(fields[1])].objList.scenNumber2.assemblyCosts;
@@ -219,7 +219,7 @@ export class AddScenarioComponent implements OnInit {
         if (this.subSceList[parseInt(fields[1])].objList.scenNumber3 != undefined && parseInt(fields[2]) === 2) {
           objlist['phy'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.loaPhysical;
           objlist['cog'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.resource.loaCognitive;
-          objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCostPerPiece;
+          objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.fixedCostTotal;
           objlist['fkTbAceProSeq'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.fkTbAceProSeq;
           objlist['scenarioNumber'] = parseInt(this.id);
           objlist['optionCost'] = this.subSceList[(fields[1])].objList.scenNumber3.assemblyCosts;
