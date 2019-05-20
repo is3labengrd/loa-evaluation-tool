@@ -7,6 +7,7 @@ public class ResourceListItem {
     private Integer loaPhysical;
     private Integer loaCognitive;
     private Boolean assigned;
+    private Boolean varRes;
     private Integer assignmentId;
 
     public ResourceListItem(Resource item, Boolean assigned, Integer assignmentId) {
@@ -22,6 +23,7 @@ public class ResourceListItem {
         this.name = item.getName();
         this.loaPhysical = item.getLoaPhysical();
         this.loaCognitive = item.getLoaCognitive();
+        this.varRes = item.getVarRes();
         this.assigned = assigned;
     }
 
@@ -43,6 +45,10 @@ public class ResourceListItem {
 
     public Boolean getAssigned() {
         return assigned;
+    }
+
+    public Boolean getVarRes() {
+        return varRes;
     }
 
     public Integer getAssignmentId() {
