@@ -618,7 +618,9 @@ checkMandatoryData() {
 
 
   roundValue(number): number {
-    return Math.round(number * 100) / 100;
+    return Number(number.toFixed(5)) ;
+    //return parseFloat(number.toFixed(5));
+    //return Math.round(number * 100) / 100;
   }
 
   setAll = (obj, val) => Object.keys(obj).forEach(k => obj[k] = val);
