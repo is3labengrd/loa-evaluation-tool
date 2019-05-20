@@ -142,7 +142,7 @@ export class AddScenarioComponent implements OnInit {
           objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.assemblyCostPerPiece;
           objlist['fkTbAceProSeq'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.fkTbAceProSeq;
           objlist['scenarioNumber'] = parseInt(this.id);
-          objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.assemblyCosts;
+          objlist['optionCost'] = this.subSceList[(fields[1])].objList.scenNumber1.assemblyCosts;
           objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber1.hoursPerYears);
           objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.labourCost;
           let keySubProcessFixedCost1: string = this.subSceList[parseInt(fields[1])].objList.scenNumber1.subprocessLevel.name + "-" + this.subSceList[parseInt(fields[1])].objList.scenNumber1.subprocessLevel.pkTbId;
@@ -183,7 +183,7 @@ export class AddScenarioComponent implements OnInit {
           objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.assemblyCostPerPiece;
           objlist['fkTbAceProSeq'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.fkTbAceProSeq;
           objlist['scenarioNumber'] = parseInt(this.id);
-          objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.assemblyCosts;
+          objlist['optionCost'] = this.subSceList[(fields[1])].objList.scenNumber2.assemblyCosts;
           objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber2.hoursPerYears);
           objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.labourCost;
           let keySubProcessFixedCost2: string = this.subSceList[parseInt(fields[1])].objList.scenNumber2.subprocessLevel.name + "-" + this.subSceList[parseInt(fields[1])].objList.scenNumber2.subprocessLevel.pkTbId;
@@ -222,7 +222,7 @@ export class AddScenarioComponent implements OnInit {
           objlist['costPerPiece'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCostPerPiece;
           objlist['fkTbAceProSeq'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.fkTbAceProSeq;
           objlist['scenarioNumber'] = parseInt(this.id);
-          objlist['optionCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.assemblyCosts;
+          objlist['optionCost'] = this.subSceList[(fields[1])].objList.scenNumber3.assemblyCosts;
           objlist['hoursYear'] = parseInt(this.subSceList[parseInt(fields[1])].objList.scenNumber3.hoursPerYears);
           objlist['labourCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.labourCost;
           let keySubProcessFixedCost3: string = this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.name + "-" + this.subSceList[parseInt(fields[1])].objList.scenNumber3.subprocessLevel.pkTbId;
@@ -325,7 +325,7 @@ export class AddScenarioComponent implements OnInit {
         poundcogLoa += valueList[k].cog * valueList[k].procTime;
 
         procTime += valueList[k].procTime;
-        optCost += valueList[k].optC;
+        optCost += valueList[k].optionCost;
         totAssemblyCostPerPiece += valueList[k].costPerPiece;
 
         physicalTimeTotal += valueList[k].physicalTime;
