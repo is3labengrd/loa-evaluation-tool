@@ -90,7 +90,7 @@ export class SubScenariosSortingComponent implements OnInit {
             type: "line",
             fill: false,
             borderColor: "gold",
-            borderDash: (minPhysicalSatisfaction === minCognitiveSatisfaction)?[50,50]:0
+            borderDash: (minPhysicalSatisfaction === minCognitiveSatisfaction)?[285,285]:0
           },
           {
             label: "Minimal cognitive worker satisfaction",
@@ -99,8 +99,8 @@ export class SubScenariosSortingComponent implements OnInit {
             type: "line",
             fill: false,
             borderColor: "goldenrod",
-            borderDash: (minPhysicalSatisfaction === minCognitiveSatisfaction)?[50,50]:0,
-            borderDashOffset: (minPhysicalSatisfaction === minCognitiveSatisfaction)?50:0
+            borderDash: (minPhysicalSatisfaction === minCognitiveSatisfaction)?[285,285]:0,
+            borderDashOffset: (minPhysicalSatisfaction === minCognitiveSatisfaction)?285:0
           },
           {
             label: "Physical worker satisfaction",
