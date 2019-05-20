@@ -373,6 +373,7 @@ export class AddScenarioComponent implements OnInit {
       objlist = {};
       if (valueList[j] != "") {
         objlist['optC'] = (valueList[j].optC).toFixed(5);
+        objlist['optionCost'] = (valueList[j].optionCost).toFixed(5);
         objlist['phy'] = valueList[j].phy;
         objlist['cog'] = valueList[j].cog;
         objlist['poundPhy'] = valueList[j].phy * valueList[j].procTime;
