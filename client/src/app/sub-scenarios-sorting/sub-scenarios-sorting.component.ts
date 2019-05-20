@@ -73,6 +73,8 @@ export class SubScenariosSortingComponent implements OnInit {
   }
 
   createBarChart() {
+    let minPhysicalSatisfaction = this.minimalTotalSatisfaction.minPhySat;
+    let minCognitiveSatisfaction = this.minimalTotalSatisfaction.minCogSat;
     this.barChart = new Chart("barChart", {
       type: "bar",
       data: {
@@ -84,34 +86,21 @@ export class SubScenariosSortingComponent implements OnInit {
           {
             label: "Minimal physical worker satisfaction",
             data: [this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat, this.minimalTotalSatisfaction.minPhySat],
-            backgroundColor: 
-              this.minimalTotalSatisfaction.minPhySat === this.minimalTotalSatisfaction.minCogSat?
-                "red"
-              :
-                "#ffd700",
+            backgroundColor: "#ffd700",
             type: "line",
             fill: false,
-            borderColor:
-              this.minimalTotalSatisfaction.minPhySat === this.minimalTotalSatisfaction.minCogSat?
-                "red"
-              :
-                "gold"
+            borderColor: "gold",
+            borderDash: (minPhysicalSatisfaction === minCognitiveSatisfaction)?[50,50]:0
           },
           {
             label: "Minimal cognitive worker satisfaction",
             data: [this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat, this.minimalTotalSatisfaction.minCogSat],
-            backgroundColor:
-              this.minimalTotalSatisfaction.minPhySat === this.minimalTotalSatisfaction.minCogSat?
-                "red"
-              :
-                "#daa520",
+            backgroundColor: "#daa520",
             type: "line",
             fill: false,
-            borderColor: 
-              this.minimalTotalSatisfaction.minPhySat === this.minimalTotalSatisfaction.minCogSat?
-                "red"
-              :
-                "goldenrod"
+            borderColor: "goldenrod",
+            borderDash: (minPhysicalSatisfaction === minCognitiveSatisfaction)?[50,50]:0,
+            borderDashOffset: (minPhysicalSatisfaction === minCognitiveSatisfaction)?50:0
           },
           {
             label: "Physical worker satisfaction",
