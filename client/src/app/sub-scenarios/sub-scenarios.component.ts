@@ -589,9 +589,6 @@ checkMandatoryData() {
     if(this.isSubScenario3Present==true)
     this.subscenario3.fixedCostTotal = this.roundValue((this.subscenario3.maintCost + this.subscenario3.annualSpaceCost + this.subscenario3.inputedDepreciation + this.subscenario3.accruedIntCosts) / this.subscenario3.nprodPieces);
 
-     console.log(this.subscenario1.fixedCostTotal);
-     console.log(this.subscenario2.fixedCostTotal)
-
   }
 
   updateAssemblyCostsPerPiece(): void {
