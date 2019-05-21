@@ -207,17 +207,18 @@ export class SubScenariosSortingComponent implements OnInit {
 
   }
   updateSubScenarios() {
-    if (this.subScenario1 != null && this.minimalTotalSatisfaction.minPhySat != null && this.minimalTotalSatisfaction.minCogSat) {
-      if (this.subScenario1.usPhysicalLoa >= this.minimalTotalSatisfaction.minPhySat && this.subScenario1.usCognitiveLoa >= this.minimalTotalSatisfaction.minCogSat) {
+     if (this.subScenario1 != null && this.minimalTotalSatisfaction.minPhySat != null && this.minimalTotalSatisfaction.minCogSat != null) {
+        if (this.subScenario1.usPhysicalLoa >= this.minimalTotalSatisfaction.minPhySat && this.subScenario1.usCognitiveLoa >= this.minimalTotalSatisfaction.minCogSat) {
         this.subScenario1.resSorting = true;
       } else {
         this.subScenario1.resSorting = false;
       }
       this.http.put(environment.apiUrl + '/v1/subscenarios/' + this.subScenario1.pkTbId, this.subScenario1)
         .toPromise().then((res: any) => { });
+        console.log("update subscenario");
     }
 
-    if (this.subScenario2 != null && this.minimalTotalSatisfaction.minPhySat != null && this.minimalTotalSatisfaction.minCogSat) {
+    if (this.subScenario2 != null && this.minimalTotalSatisfaction.minPhySat != null && this.minimalTotalSatisfaction.minCogSat != null) {
       if (this.subScenario2.usPhysicalLoa >= this.minimalTotalSatisfaction.minPhySat && this.subScenario2.usCognitiveLoa >= this.minimalTotalSatisfaction.minCogSat) {
         this.subScenario2.resSorting = true;
       } else {
@@ -227,7 +228,7 @@ export class SubScenariosSortingComponent implements OnInit {
         .toPromise().then((res: any) => { });
     }
 
-    if (this.subScenario3 != null && this.minimalTotalSatisfaction.minPhySat != null && this.minimalTotalSatisfaction.minCogSat) {
+    if (this.subScenario3 != null && this.minimalTotalSatisfaction.minPhySat != null && this.minimalTotalSatisfaction.minCogSat != null) {
       if (this.subScenario3.usPhysicalLoa >= this.minimalTotalSatisfaction.minPhySat && this.subScenario3.usCognitiveLoa >= this.minimalTotalSatisfaction.minCogSat) {
         this.subScenario3.resSorting = true;
       } else {
