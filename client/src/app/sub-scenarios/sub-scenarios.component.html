@@ -3,14 +3,14 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Product planing</h5>
+        <h5 class="modal-title">Product planning</h5>
       </div>
       <div class="modal-body">
         <div>Number of produced pieces per hour:
           <input type="number" id="nprodPiecePerHours"
-            [(ngModel)]="nprodPiecePerHours" min="1"
-            style="width: 100px;"
-            oninput="this.value=(parseInt(this.value)||1)"
+            [(ngModel)]="nprodPiecePerHours"
+            style="width: 100px;" step="0.01"
+            oninput="handleFloatWithMinimum(this, 1)"
             value="nprodPiecePerHours" required>
         </div>
         <br>

@@ -1064,3 +1064,8 @@ function ProdutsPiece() { }
 
 function PostObj(){}
 
+function handleFloatWithMinimum(floatHolder, minimum) {
+  let x = floatHolder.value;
+  floatHolder.value=Math.max(floatHolder.value, 1);
+  (floatHolder.value < minimum)? 'cool' : floatHolder.value=x;
+}
