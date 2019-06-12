@@ -28,13 +28,13 @@ public class ProductPlanning implements java.io.Serializable, PkTbPrimaryKeyOwne
 
     @JsonProperty private Integer pkTbId;
     private int fkTbAceProSeq;
-    private int NProdPiecePerHours;
+    private float NProdPiecePerHours;
     private Date createDate;
     private Date updateDate;
 
     public ProductPlanning() {}
 
-    public ProductPlanning(int fkTbAceProSeq, int NProdPiecePerHours, Date createDate, Date updateDate) {
+    public ProductPlanning(int fkTbAceProSeq, float NProdPiecePerHours, Date createDate, Date updateDate) {
         this.fkTbAceProSeq = fkTbAceProSeq;
         this.NProdPiecePerHours = NProdPiecePerHours;
         this.createDate = createDate;
@@ -61,11 +61,11 @@ public class ProductPlanning implements java.io.Serializable, PkTbPrimaryKeyOwne
         this.fkTbAceProSeq = fkTbAceProSeq;
     }
 
-    @Column(name = "N_PROD_PIECE_PER_HOURS", nullable = false) public int getNProdPiecePerHours() {
+    @Column(name = "N_PROD_PIECE_PER_HOURS", nullable = false) public float getNProdPiecePerHours() {
         return this.NProdPiecePerHours;
     }
 
-    public void setNProdPiecePerHours(int NProdPiecePerHours) {
+    public void setNProdPiecePerHours(float NProdPiecePerHours) {
         this.NProdPiecePerHours = NProdPiecePerHours;
     }
 
