@@ -404,13 +404,13 @@ export class AddScenarioComponent implements OnInit {
 
 
     if (optCost != 0) {
-      this.phyLoaTotal = Math.round(poundphyLoa / procTime);
+      this.phyLoaTotal = poundphyLoa / procTime;
     } else {
       this.phyLoaTotal = 0;
     }
 
     if (optCost != 0) {
-      this.cogLoaTotal = Math.round(poundcogLoa / procTime);
+      this.cogLoaTotal = poundcogLoa / procTime;
     } else {
       this.cogLoaTotal = 0;
     }
