@@ -37,6 +37,8 @@ import eng.it.loatool.subscenario.SubScenario;
     private Integer proLevel;
     private String varProSeqId;
     private ProcessLOAInformation loaInfo;
+    private ProcessLOAInformation loaInfoCognitive;
+
     @JsonIgnore private Set<SubScenario> subscenarios;
     private Date createDate;
     private Date udpateDate;
@@ -102,6 +104,15 @@ import eng.it.loatool.subscenario.SubScenario;
 
     public void setLoaInfo(ProcessLOAInformation loaInfo) {
         this.loaInfo = loaInfo;
+    }
+
+    @Transient
+    public ProcessLOAInformation getLoaInfoCognitive() {
+        return loaInfoCognitive;
+    }
+
+    public void setLoaInfoCognitive(ProcessLOAInformation loaInfoCognitive) {
+        this.loaInfoCognitive = loaInfoCognitive;
     }
 
     @OneToMany(mappedBy="subprocessLevel", cascade=CascadeType.REMOVE)

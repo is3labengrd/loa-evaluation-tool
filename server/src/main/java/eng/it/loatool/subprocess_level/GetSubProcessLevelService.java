@@ -21,6 +21,11 @@ public class GetSubProcessLevelService {
                     .ifPresent((info) -> {
                         subprocessLevel.setLoaInfo(info);
                     });
+                processLOAInformationRepository
+                    .getCognitiveProcessLOAInformationBySubprocessId(subprocessId)
+                    .ifPresent((info) -> {
+                        subprocessLevel.setLoaInfoCognitive(info);
+                    });
             });
         return maybeSubprocessLevel;
     }
@@ -32,6 +37,11 @@ public class GetSubProcessLevelService {
             .getPhysicalProcessLOAInformationBySubprocessId(subprocessId)
             .ifPresent((info) -> {
                 subprocessLevel.setLoaInfo(info);
+            });
+        processLOAInformationRepository
+            .getCognitiveProcessLOAInformationBySubprocessId(subprocessId)
+            .ifPresent((info) -> {
+                subprocessLevel.setLoaInfoCognitive(info);
             });
     }
 

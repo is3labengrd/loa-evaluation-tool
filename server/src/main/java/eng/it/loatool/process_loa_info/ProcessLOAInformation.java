@@ -32,8 +32,8 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
 ) public class ProcessLOAInformation implements java.io.Serializable {
 
     private Integer pkTbId;
-    private int fkTbAcePhyLoa;
-    private int fkTbAceCogLoa;
+    private Integer fkTbAcePhyLoa;
+    private Integer fkTbAceCogLoa;
     private boolean possibility;
     private String bestRange;
     private String loaType;
@@ -44,7 +44,7 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
 
     public ProcessLOAInformation() {}
 
-    public ProcessLOAInformation(int fkTbAcePhyLoa, int fkTbAceCogLoa, boolean possibility, String bestRange, String loaType, Date createDate, Date updateDate, SubProcessLevel subProcessLevel) {
+    public ProcessLOAInformation(Integer fkTbAcePhyLoa, Integer fkTbAceCogLoa, boolean possibility, String bestRange, String loaType, Date createDate, Date updateDate, SubProcessLevel subProcessLevel) {
         this.fkTbAcePhyLoa = fkTbAcePhyLoa;
         this.fkTbAceCogLoa = fkTbAceCogLoa;
         this.possibility = possibility;
@@ -64,19 +64,19 @@ import eng.it.loatool.subprocess_level.SubProcessLevel;
         this.pkTbId = pkTbId;
     }
 
-    @Column(name = "FK_TB_ACE_PHY_LOA", nullable = false) public int getFkTbAcePhyLoa() {
+    @Column(name = "FK_TB_ACE_PHY_LOA", nullable = false) public Integer getFkTbAcePhyLoa() {
         return this.fkTbAcePhyLoa;
     }
 
-    public void setFkTbAcePhyLoa(int fkTbAcePhyLoa) {
+    public void setFkTbAcePhyLoa(Integer fkTbAcePhyLoa) {
         this.fkTbAcePhyLoa = fkTbAcePhyLoa;
     }
 
-    @Column(name = "FK_TB_ACE_COG_LOA", nullable = false) public int getFkTbAceCogLoa() {
+    @Column(name = "FK_TB_ACE_COG_LOA", nullable = false) public Integer getFkTbAceCogLoa() {
         return this.fkTbAceCogLoa;
     }
 
-    public void setFkTbAceCogLoa(int fkTbAceCogLoa) {
+    public void setFkTbAceCogLoa(Integer fkTbAceCogLoa) {
         this.fkTbAceCogLoa = fkTbAceCogLoa;
     }
 
