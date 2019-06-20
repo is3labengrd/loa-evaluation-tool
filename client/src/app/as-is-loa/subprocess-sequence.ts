@@ -4,6 +4,7 @@ export class SubprocessSequence {
 
     public subprocessArray;
     public loaInfo;
+    public loaInfoCognitive;
 
     public constructor(
         subprocessArray: Array<any>
@@ -14,7 +15,8 @@ export class SubprocessSequence {
         while (index--) {
             if (subprocessArray[index].loaInfo) {
                 this.loaInfo = new LoaInfo(
-                    subprocessArray[index].loaInfo
+                    subprocessArray[index].loaInfo,
+                    subprocessArray[index].loaInfoCognitive
                 );
                 break;
             }

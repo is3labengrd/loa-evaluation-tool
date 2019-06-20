@@ -4,10 +4,16 @@ export class LoaInfo {
     private _physicalLoa;
 
     public constructor(
-        rawLoaInfo: any
+        rawLoaInfo: any,
+        rawLoaInfoCognitive: any
     ) {
-        this._cognitiveLoa = rawLoaInfo.fkTbAceCogLoa;
-        this._physicalLoa = rawLoaInfo.fkTbAcePhyLoa;
+        if (rawLoaInfoCognitive == null) {
+            this._cognitiveLoa = rawLoaInfo.fkTbAceCogLoa;
+            this._physicalLoa = rawLoaInfo.fkTbAcePhyLoa;
+        } else {
+            this._cognitiveLoa = rawLoaInfoCognitive.fkTbAceCogLoa;
+            this._physicalLoa = rawLoaInfo.fkTbAcePhyLoa;
+        }
     }
 
     get cognitiveLoa() {
@@ -26,7 +32,7 @@ export class LoaInfo {
         return new LoaInfo({
             fkTbAceCogLoa: primitive.charAt(0),
             fkTbAcePhyLoa: primitive.charAt(1)
-        });
+        }, null);
     }
 
 }
