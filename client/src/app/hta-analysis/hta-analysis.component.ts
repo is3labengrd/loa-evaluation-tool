@@ -99,7 +99,7 @@ export class HTAAnalysisComponent implements OnInit {
 
   actualLoaInfoRequest = {
     'fkTbAcePhyLoa': '1',
-    'fkTbAceCogLoa': '1',
+    'fkTbAceCogLoa': null,
     'possibility': false,
     'bestRange': '1-1',
     'fkTbAceSubProLev': this.subprocessId,

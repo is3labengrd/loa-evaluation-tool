@@ -74,7 +74,7 @@ export class CriteriaMatrixComponent implements OnInit {
   }
 
   actualLoaInfoRequest = {
-    'fkTbAcePhyLoa': '1',
+    'fkTbAcePhyLoa': null,
     'fkTbAceCogLoa': '1',
     'possibility': false,
     'bestRange': '1-1',

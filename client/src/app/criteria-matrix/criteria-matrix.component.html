@@ -583,7 +583,6 @@
     <table class="table table-borderless table-responsive">
       <thead>
         <th class="align-middle">Possibility of<br>manual execution</th>
-        <th class="align-middle">Current physical LoA</th>
         <th class="align-middle">Current cognitive LoA</th>
         <th class="align-middle" colspan="2">Optimal cognitive LoA range</th>
       </thead>
@@ -593,11 +592,6 @@
             <input type="checkbox" name="possibility" [(ngModel)]="loaInfoRequest.possibility">
             <span class="slider round"></span>
           </label>
-        </td>
-        <td>
-          <select name="physical-loa" [(ngModel)]="loaInfoRequest.fkTbAcePhyLoa" class="selectLoa">
-            <option *ngFor="let loa of physicalLoaArray" value="{{loa.pkTbId}}">LoA {{loa.pkTbId}} - {{ loa.loa }}</option>
-          </select>
         </td>
         <td>
           <select name="cognitive-loa" [(ngModel)]="loaInfoRequest.fkTbAceCogLoa" class="selectLoa">
