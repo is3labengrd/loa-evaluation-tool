@@ -36,7 +36,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let criteria of matrix; let i=index">
-      <td> <strong>{{ criteria.strong }}</strong> </td>
+      <td matTooltip="{{criteria.description}}"> <strong>{{ criteria.strong }}</strong> </td>
       <td
         (click)="column1.click()"
         [class.on]="matrix[i].value==0"

@@ -16,6 +16,7 @@ export function initializeMatrix(matrixRequestReference) {
   return [
     {
       strong: 'Dimensional stabilty',
+      description: 'The rules for assembly-compliant component design indicate that non-stable components are to be avoided because they have poor properties for both handling and joining. The effort for implementing an automated solution increases with decreasing stability.',
       criteria1: 'Stable',
       criteria2: 'Reduced stability',
       criteria3: 'Hardly stable',
@@ -37,6 +38,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'Sensitivity',
+      description: 'Components are classified as insensitive if even high forces (greater than twice the weight force) can be applied without visible or function-relevant damage. Hardly sensitive components are those for which slight visible damage is tolerable since the function of the component remains intact. Components are classified as sensitive if either the optical impression of the components is relevant, such as components lying in the visible area with a painted surface, or components that are damaged in function. In the case of very sensitive components, external forces can easily cause damage which could lead to the destruction of the component (e.g. components with surface coatings or filter membranes)',
       criteria1: 'Insensitive',
       criteria2: 'Handly sensitive',
       criteria3: 'Sensitive',
@@ -58,6 +60,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'Grip',
+      description: 'If the joining component can be gripped from the outside with a two- or three-finger gripper and the existing gripping surfaces are sufficiently large, the handling of the component can be realised with a simple gripper. These components are assigned to the external grip surfaces. If the gripping surfaces are located inside the component, have an irregular contour, are difficult to access or must be produced in at least one direction form-fit, the components are assigned to the internal grip surfaces. Insofar as the component requires the use of vacuum or magnetic grippers, they are classified as magnetic grippers. If the component has to be handled and joined using a material-closed or non-contact gripping method, it is assigned to the type of gripper with fabric closure (e. g. cryogenic gripper).',
       criteria1: 'External grip surfaces',
       criteria2: 'Internal grip surfaces',
       criteria3: 'Magnetic grip surfaces',
@@ -79,6 +82,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'No. of variants',
+      description: 'The number of process-relevant variants of the joining component influences the required flexibility of the system. However, every flexibility is associated with additional effort in planning and implementing an assembly process. Information on the number of process-relevant variants of the joining component is taken from the bills of material created by the product design department.',
       criteria1: 'No futher variants',
       criteria2: 'One further variant',
       criteria3: 'Two further variants',
@@ -100,6 +104,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'Stable positions',
+      description: 'The assignment to the displayed characteristics can be done by analysing the components or construction drawings. Theoretical methods for the determination of stable component layers from the ratio of moments of inertia around the spatial axes can be taken from Boothroyd, for example.',
       criteria1: 'Up until four',
       criteria2: 'More than four',
       criteria3: 'Stable and unstable',
@@ -121,6 +126,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'Symmetry',
+      description: 'The criterion has the specifications shown in the figure below. An assignment to the respective characteristics is made by analysing the components or their construction drawings.',
       criteria1: 'Rotationally symmetrical',
       criteria2: 'Areal symmetry',
       criteria3: 'Markedly asymmetrical',
@@ -142,6 +148,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'Hook up or adhesion',
+      description: 'The tendency of components to catch, clamp and overlap due to their geometric shape influences the complexity and execution of the separation process. The ability to hook is described as a combination of geometric and center-of-mass related features. They are derived from internal contours and other geometric relations related to the center of gravity.',
       criteria1: 'None',
       criteria2: 'Sticking or jamming possible',
       criteria3: 'Component penetration possible',
@@ -163,6 +170,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'Faulty joining',
+      description: 'The quality level of the joining components can be determined in different ways. One possibility is the percentage of still tolerable faulty components (AQL = acceptable quality level) or the specification of the tolerable number of faulty components in fpm (faults per million). Another possibility is to place the defective parts in relation to the functioning parts. For components that have passed a 100% check, for example, the AQL value is 0% and therefore cannot be assigned to the specification. The exact values for the assignment in the other specifications depending on the company and the components under consideration.',
       criteria1: 'Never',
       criteria2: 'Occasionaly',
       criteria3: 'Rarely',
@@ -184,6 +192,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'Accessibility',
+      description: 'The accessibility “Qₚ” of the positioning range is defined as the ratio of the available to the required range of motion. Provided that the available space for movement is considerably larger than required, accessibility is very good. The closer the ratio approaches the value 1, the worse the accessibility to the positioning range becomes. For values smaller than 1, the positioning range is not accessible and the joining component cannot be mounted without structural changes to the product. The specification Qₚ < 1 is therefore not considered.',
       criteria1: 'Very good',
       criteria2: 'Good',
       criteria3: 'Satisfactory',
@@ -205,6 +214,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'Orienation',
+      description: 'The more axes required for orientation of the joining piece before joining, the more freedom an automated system must have and the greater the effort required for the safe realisation of an automated solution.',
       criteria1: 'No axis',
       criteria2: 'One axis',
       criteria3: 'Two axis',
@@ -226,6 +236,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'Joining mov.',
+      description: 'With the increasing complexity of the joining movement, more axes are necessary for an automated realisation.',
       criteria1: 'Linear',
       criteria2: 'Rotation',
       criteria3: 'Linear-rotatory',
@@ -247,6 +258,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'Joining force',
+      description: 'The force or torque required for the joining process has an influence on the necessary operating resources and thus a direct influence on the expenditure for automated assembly. The joining force or torque is specified by the product designer. For manual assembly, the maximum possible forces and torques can be taken from the standard DIN 33411 parts 1 to 5. If the forces or torques are higher than those specified in the standard, a mechanised or automated station must be provided for the execution of the process. [16] If only the weight force of the joining component is effective during a joining process, such as placing on, the characteristic “none” or “low” can be used. During insertion, the forces are in the range between “low”, “medium” and “high”. The exact range of values for the assignment to the specifications depends on the product range produced.',
       criteria1: 'None',
       criteria2: 'Low',
       criteria3: 'Medium',
@@ -268,6 +280,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'Joining aid',
+      description: 'Joining aids reduce the required accuracy of positioning and orientation and thus also the effort for the function carriers to be used. The assignment of the components to their characteristics is done by analysing the components or the technical drawings.',
       criteria1: 'Joining and basic component',
       criteria2: 'Joining component',
       criteria3: 'Basic component',
@@ -289,6 +302,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'Number of basic components',
+      description: 'The greater the number of basic components into which a joining component is to be joined, the greater the effort required to make the connection. Different tolerances add up and therefore a higher positioning accuracy for the joining component is necessary. As a result, the cost of implementing an automated assembly is also increased. The assignment is made by analysing the product structure.',
       criteria1: 'One basic component',
       criteria2: 'Two basic components',
       criteria3: 'Three basic components',
@@ -310,6 +324,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'Joining security',
+      description: 'The less secure a component is, the greater the necessary additional security and thus the automation expenditure increases.',
       criteria1: 'Secured in all directions',
       criteria2: 'Gravity and form fit',
       criteria3: 'Gravity and rubbing',
@@ -331,6 +346,7 @@ export function initializeMatrix(matrixRequestReference) {
     },
     {
       strong: 'Special operations',
+      description: 'If “special operations” such as adjustment, cleaning, greasing or marking have to be integrated into an automated assembly process, an additional effort is to be expected during the realisation and thus a worse economic efficiency.',
       criteria1: 'None',
       criteria2: 'One',
       criteria3: 'Two',

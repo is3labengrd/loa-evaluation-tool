@@ -5,7 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AppComponent } from './app.component';
 import { ProcessListComponent } from './process-list/process-list.component';
@@ -46,9 +48,11 @@ import { CriteriaMatrixComponent } from './criteria-matrix/criteria-matrix.compo
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ChartsModule,
     MatProgressBarModule,
+    MatTooltipModule,
     HttpClientModule,
     FormsModule,
     HttpModule
