@@ -10,6 +10,10 @@
   margin-bottom: 50px;
 }
 
+.optimal-ranges {
+  margin-right: 20px;
+}
+
 .assign {
   background-color: greenyellow;
   color: black;

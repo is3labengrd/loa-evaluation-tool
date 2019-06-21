@@ -116,6 +116,7 @@ export class ResourceListComponent implements OnInit {
     this.http.get(url)
       .subscribe((resources: any) => {
         this.resources = resources.content;
+        this.resources.forEach((resource) => resource.show=true);
         this.pagination.lastPage = resources.totalPages - 1;
         this.pagination.totalPages = Array(this.pagination.lastPage + 1)
           .fill(0).map((x, y) => x + y);
@@ -149,6 +150,21 @@ export class ResourceListComponent implements OnInit {
       .delete(
         `${environment.apiUrl}/v1/resources/${resource.resourceId}`
       ).toPromise();
+  }
+
+  filterOnOptionalLoARanges = () => {
+    var [physicalMin, dump, physicalMax] = this.physicalProcessLoaInfo.bestRange;
+    var [cognitiveMin, dump, cognitiveMax] = this.cognitiveProcessLoaInfo.bestRange;
+    this.resources.forEach((resource) => {
+      if (
+        !(resource.loaPhysical >= physicalMin) ||
+        !(resource.loaPhysical <= physicalMax) ||
+        !(resource.loaCognitive >= cognitiveMin) ||
+        !(resource.loaCognitive <= cognitiveMax)
+      ) {
+        resource.show = false;
+      }
+    });
   }
 
 }

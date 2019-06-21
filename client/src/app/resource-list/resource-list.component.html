@@ -56,6 +56,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let resource of resources; let i = index">
+        <ng-container *ngIf="resource.show">
         <td>
           <a
             routerLink="/edit-resource/{{resource.resourceId}}"
@@ -125,6 +126,7 @@
           </div>
           
         </td>
+        </ng-container>
       </tr>
     </tbody>
   </table>
@@ -161,10 +163,11 @@
 
   </div>
   <div class="buttons">
-    <div class="float-left">
-      <label>Optimal physical LoA range {{physicalProcessLoaInfo.bestRange}}</label><br>
-      <label>Optimal cognitive LoA range {{cognitiveProcessLoaInfo.bestRange}}</label><br>
+    <div class="float-left optimal-ranges">
+      <label>Optimal physical LoA range {{physicalProcessLoaInfo?.bestRange}}</label><br>
+      <label>Optimal cognitive LoA range {{cognitiveProcessLoaInfo?.bestRange}}</label><br>
     </div>
+    <button class="btn btn-primary float-left" (click)="filterOnOptionalLoARanges()">Filter on optimal<br>LoA Ranges</button>
     <a class="btn btn-primary float-right" routerLink="/add-resource">Add Resource</a>
   </div>
 </div>
