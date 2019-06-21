@@ -13,6 +13,9 @@ import { CookieService } from '../cookie.service';
 })
 export class ResourceListComponent implements OnInit {
 
+  physicalProcessLoaInfo;
+  cognitiveProcessLoaInfo;
+
   pagination = {
     size: 12,
     page: 0,
@@ -47,6 +50,28 @@ export class ResourceListComponent implements OnInit {
 
   ngOnInit() {
     this.selectedSubprocess = this._processListService.getCookie('selectedSubprocess');
+    var subprocessId = this.selectedSubprocess[
+      'level' + this.selectedSubprocess.maxDepth
+    ].id;
+    this
+      .http
+      .get(environment.apiUrl + '/v1/process-loa-info-by-subprocess-id/' + subprocessId)
+      .toPromise()
+      .then((physicalLoa) => {
+        this.physicalProcessLoaInfo = physicalLoa;
+      },
+      err => {}
+      );
+
+    this
+      .http
+      .get(environment.apiUrl + '/v1/cognitive-process-loa-info-by-subprocess-id/' + subprocessId)
+      .toPromise()
+      .then((cognitiveLoa) => {
+        this.cognitiveProcessLoaInfo = cognitiveLoa;
+      },
+        err => {}
+      );
     this.updateResourceList();
     this.populateResources()
       .then(
