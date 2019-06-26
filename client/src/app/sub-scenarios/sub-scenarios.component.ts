@@ -21,7 +21,7 @@ export class SubScenariosComponent implements OnInit {
 
   resRecal: boolean = false;
 
-  nprodPiecePerHours: number;
+  nprodPiecePerHours;
   nprodPiecePerHoursGUI1: number;
   nprodPiecePerHoursGUI2: number;
   nprodPiecePerHoursGUI3: number;
