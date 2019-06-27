@@ -80,14 +80,14 @@
             <td align="center"> Total Cost: </td>
             <td align="center"> {{TotalCost}} </td>
             <td align="center"> Physical LoA: </td>
-            <td align="center"> {{phyLoaTotal}} </td>
+            <td align="center"> {{phyLoaTotal | number: '1.2-5'}} </td>
           </tr>
           <tr>
             <td></td>
             <td align="center"> Cost per Piece: </td>
             <td align="center"> {{CostperPiece}} </td>
             <td align="center"> Cognitive LoA: </td>
-            <td align="center"> {{cogLoaTotal}} </td>
+            <td align="center"> {{cogLoaTotal | number: '1.2-5'}} </td>
           </tr>
       </tfoot>
     </table>
