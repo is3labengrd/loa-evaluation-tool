@@ -142,14 +142,21 @@ export class ResourceListComponent implements OnInit {
     return this.http
       .delete(
         `${environment.apiUrl}/v1/subprocess-level-resources/${resource.assignmentId}`
-      ).toPromise();
+      )
+      .toPromise()
   }
 
   delete = (resource) => {
     return this.http
       .delete(
         `${environment.apiUrl}/v1/resources/${resource.resourceId}`
-      ).toPromise();
+      ).toPromise()
+      .catch(
+        () => {
+          let camErrorTrigger: any = document.querySelector('#camErrorTrigger');
+          camErrorTrigger.click();
+        }
+      );
   }
 
   filterOnOptionalLoARanges = () => {

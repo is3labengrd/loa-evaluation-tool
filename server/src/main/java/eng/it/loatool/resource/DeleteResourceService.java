@@ -30,8 +30,10 @@ public class DeleteResourceService {
                     .forEach((subScenario) -> {
                         subScenarioRepository.delete(subScenario);
                     });
-                deleteScenarioResourceService
-                    .deleteByResourceId(resourceId);
+                try {
+                    deleteScenarioResourceService
+                        .deleteByResourceId(resourceId);
+                } catch (Throwable t) {}
                 if (!resource.getVarRes()) {
                     try {
                         VARWorkUnitImpl.delete(resource.getName());
