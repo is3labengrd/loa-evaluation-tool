@@ -2,10 +2,11 @@ package eng.it.loatool.subprocess_level_resource;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import eng.it.loatool.GeneralCRUDService;
 import eng.it.loatool.resource.Resource;
@@ -19,7 +20,6 @@ import eng.it.loatool.subscenario.SubScenarioRepository;
 @Service
 public class DeleteSubProcessLevelResourceService {
 
-    @Transactional
     public Optional<SubProcessLevelResource> delete(Integer id) {
         Optional<SubProcessLevelResource> optional = generalCRUDService.delete(subProcessLevelResourceRepository, id);
         optional.ifPresent((subprocessLevelResource) -> {
@@ -27,7 +27,11 @@ public class DeleteSubProcessLevelResourceService {
             scenarioResourceRepository
                 .findAll(scenarioResourceCriteria)
                 .forEach((innerScenarioResource) -> {
-                    scenarioRepository.deleteById(innerScenarioResource.getFkTbAceScenarios());
+                    try {
+                	scenarioRepository.deleteById(innerScenarioResource.getFkTbAceScenarios());
+                    } catch (Throwable t) {
+                	logger.info("Scenario with id " + innerScenarioResource.getFkTbAceScenarios() + " was not found.");
+                    }
                     scenarioResourceRepository.delete(innerScenarioResource);
                 });
             Example<SubScenario> subScenarioCriteria = buildSubScenarioSearchCritera(subprocessLevelResource);
@@ -69,5 +73,6 @@ public class DeleteSubProcessLevelResourceService {
     @Autowired private ScenarioResourceRepository scenarioResourceRepository;
     @Autowired private SubScenarioRepository subScenarioRepository;
     @Autowired private ScenarioRepository scenarioRepository;
+    Logger logger = LoggerFactory.getLogger(DeleteSubProcessLevelResourceService.class);
 
 }
