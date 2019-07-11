@@ -213,7 +213,7 @@ export function initializeMatrix(matrixRequestReference) {
       }
     },
     {
-      strong: 'Orienation',
+      strong: 'Orientation',
       description: 'The more axes required for orientation of the joining piece before joining, the more freedom an automated system must have and the greater the effort required for the safe realisation of an automated solution.',
       criteria1: 'No axis',
       criteria2: 'One axis',
