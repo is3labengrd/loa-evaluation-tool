@@ -762,10 +762,6 @@ checkMandatoryData() {
           });
      }
      }
-
-    this.saveVARProductPlanning();
-    this.saveVARProcessSpecificInformation();
-    this.saveVARProportionalWageCost();
     }
 
 
