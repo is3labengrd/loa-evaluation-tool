@@ -10,7 +10,7 @@
           <input type="number" id="nprodPiecePerHours"
             [(ngModel)]="nprodPiecePerHours"
             style="width: 100px;" step="0.01"
-            oninput="handleFloatWithMinimum(this, 1)"
+            oninput="handleFloatWithMinimum(this, 0.00001)"
             value="nprodPiecePerHours" required>
         </div>
         <br>
