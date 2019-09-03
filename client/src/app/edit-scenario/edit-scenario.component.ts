@@ -167,7 +167,6 @@ export class EditScenarioComponent implements OnInit {
             objlist['annualSpaceCost'] = 0;
             objlist['inputedDepreciation'] = 0;
             objlist['accruedInterestCost'] = 0;
-            objlist['optionCost'] = 0;
           } else {
             objlist['fixedCost'] = false;
             objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber1.maintCost;
@@ -207,7 +206,6 @@ export class EditScenarioComponent implements OnInit {
             objlist['annualSpaceCost'] = 0;
             objlist['inputedDepreciation'] = 0;
             objlist['accruedInterestCost'] = 0;
-            objlist['optionCost'] = 0;
           } else {
             objlist['fixedCost'] = false;
             objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber2.maintCost;
@@ -246,7 +244,6 @@ export class EditScenarioComponent implements OnInit {
             objlist['annualSpaceCost'] = 0;
             objlist['inputedDepreciation'] = 0;
             objlist['accruedInterestCost'] = 0;
-            objlist['optionCost'] = 0;
           } else {
             objlist['fixedCost'] = false;
             objlist['maintCost'] = this.subSceList[parseInt(fields[1])].objList.scenNumber3.maintCost;
