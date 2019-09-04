@@ -30,6 +30,7 @@ export class EditScenarioComponent implements OnInit {
   phyLoaTotal: any;
   cogLoaTotal: any;
   TotalCost: any;
+  TotalAssemblyCost: any;
   CostperPiece: any;
   bodyPost: any = {};
   avgPhy: any;
@@ -437,6 +438,7 @@ export class EditScenarioComponent implements OnInit {
       }
 
     }
+    this.createScenarioBody();
 
   }
 
@@ -541,7 +543,7 @@ export class EditScenarioComponent implements OnInit {
     this.bodyPost['prodUnitsPerYears'] = parseInt(this.tmpPost.prodUnitsPerYears);
     this.bodyPost['assCostsPerUnits'] = (parseFloat(this.tmpPost.assCostsPerUnits)).toFixed(5);
     this.bodyPost['totalAssCosts'] = (parseFloat(this.tmpPost.totalAssCosts)).toFixed(5);
-
+    this.TotalAssemblyCost = this.bodyPost['totalAssCosts'];
   }
 
   // tslint:disable-next-line:member-ordering

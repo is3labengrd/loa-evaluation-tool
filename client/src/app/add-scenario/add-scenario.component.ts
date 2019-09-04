@@ -30,6 +30,7 @@ export class AddScenarioComponent implements OnInit {
   phyLoaTotal: any;
   cogLoaTotal: any;
   TotalCost: any;
+  TotalAssemblyCost: any;
   CostperPiece: any;
   bodyPost: any = {};
   avgPhy: any;
@@ -433,6 +434,8 @@ export class AddScenarioComponent implements OnInit {
       }
 
     }
+    
+    this.createScenarioBody();
   }
 
   cancel() {
@@ -536,7 +539,7 @@ export class AddScenarioComponent implements OnInit {
     this.bodyPost['assCostsPerUnits'] = (parseFloat(this.tmpPost.assCostsPerUnits)).toFixed(5);
     this.bodyPost['totalAssCosts'] = (parseFloat(this.tmpPost.totalAssCosts)).toFixed(5);
     this.bodyPost['numberSelected'] = parseInt(this.tmpPost.numberSelected);
-
+    this.TotalAssemblyCost = this.bodyPost['totalAssCosts'];
 
   }
 
