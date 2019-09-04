@@ -32,6 +32,7 @@ export class EditScenarioComponent implements OnInit {
   TotalCost: any;
   TotalAssemblyCost: any;
   CostperPiece: any;
+  AssemblyCostPerPiece: any;
   bodyPost: any = {};
   avgPhy: any;
   avgCog: any;
@@ -544,6 +545,7 @@ export class EditScenarioComponent implements OnInit {
     this.bodyPost['assCostsPerUnits'] = (parseFloat(this.tmpPost.assCostsPerUnits)).toFixed(5);
     this.bodyPost['totalAssCosts'] = (parseFloat(this.tmpPost.totalAssCosts)).toFixed(5);
     this.TotalAssemblyCost = this.bodyPost['totalAssCosts'];
+    this.AssemblyCostPerPiece = this.bodyPost['assCostsPerUnits'];
   }
 
   // tslint:disable-next-line:member-ordering
