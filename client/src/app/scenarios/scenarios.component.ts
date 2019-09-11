@@ -28,6 +28,8 @@ export class ScenariosComponent implements OnInit {
   scenario3: Array<any> = [];
   resourceTable: Array<any> = [];
   syncingWithVAR = false;
+  hoursPerYear: any;
+  ProducedunitsPerYear: any;
 
   ngOnInit() {
     this.cookie = this._processListService.getCookie("selectedSubprocess");
@@ -35,6 +37,7 @@ export class ScenariosComponent implements OnInit {
     this.penultimateSubprocess = this.cookie['level' + this.penultimateLevel];
     this.syncingWithVAR = true;
 
+    this.getAdditionalData();
     var waitCAMProcTree = this.fetchFromCAM();
     var waitScenarioList = this.getScenariosList();
     var waitScen = this.getScenarios();
@@ -185,6 +188,24 @@ export class ScenariosComponent implements OnInit {
           }
 
         });
+  }
+
+  getAdditionalData() {
+    var maxDepth = this.penultimateLevel + 1;
+    var searchJSONQuery = {
+      "subprocessLevel": {
+        "name": this.cookie['level' + maxDepth].name
+      }
+    }
+    this
+      .http
+      .post(environment.apiUrl + '/v1/subscenarios/search', searchJSONQuery)
+      .toPromise()
+      .then((subscenarioSingleElementList) => {
+        var subscenario = subscenarioSingleElementList[0];
+        this.hoursPerYear = subscenario.hoursPerYears;
+        this.ProducedunitsPerYear = subscenario.nprodPieces;
+      });
   }
 
 }

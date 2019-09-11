@@ -73,15 +73,15 @@
       </tr>
       <tr>
         <td>Hours per year</td>
-        <td> {{scenarios?.scen1?.hoursYear.toString().replace(".", ",")}} </td>
-        <td> {{scenarios?.scen2?.hoursYear.toString().replace(".", ",")}} </td>
-        <td> {{scenarios?.scen3?.hoursYear.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen1 ? hoursPerYear : null}} </td>
+        <td> {{scenarios?.scen2 ? hoursPerYear : null}} </td>
+        <td> {{scenarios?.scen3 ? hoursPerYear : null}} </td>
       </tr>
       <tr>
         <td>Produced units per year</td>
-        <td> {{scenarios?.scen1?.prodUnitsPerYears.toString().replace(".", ",")}} </td>
-        <td> {{scenarios?.scen2?.prodUnitsPerYears.toString().replace(".", ",")}} </td>
-        <td> {{scenarios?.scen3?.prodUnitsPerYears.toString().replace(".", ",")}} </td>
+        <td> {{scenarios?.scen1 ? ProducedunitsPerYear : null}} </td>
+        <td> {{scenarios?.scen2 ? ProducedunitsPerYear : null}} </td>
+        <td> {{scenarios?.scen3 ? ProducedunitsPerYear : null}} </td>
       </tr>
       <tr>
         <td>Labour costs</td>
