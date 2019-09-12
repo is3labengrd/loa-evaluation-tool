@@ -38,7 +38,6 @@ import eng.it.loatool.subscenario.SubScenario;
     private String varProSeqId;
     private ProcessLOAInformation loaInfo;
     private ProcessLOAInformation loaInfoCognitive;
-
     @JsonIgnore private Set<SubScenario> subscenarios;
     private Date createDate;
     private Date udpateDate;

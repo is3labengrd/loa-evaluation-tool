@@ -32,29 +32,29 @@
       </div>
       <div class="modal-body">
         <div>Number of shifts per day:
-          <input type="number" [(ngModel)]="procSpecInfoObj.nshiptsDay" name="nshiptsDay" style="width: 100px;"
+          <input type="number" [disabled]="processSpecificInformationExists" [(ngModel)]="procSpecInfoObj.nshiptsDay" name="nshiptsDay" style="width: 100px;"
            class="float-right" min="1" value="procSpecInfoObj?.nshiptsDay" oninput="this.value=(parseInt(this.value)||1)" required>
         </div>
         <br>
         <div>Hours per shift:
-          <input type="number" [(ngModel)]="procSpecInfoObj.hoursShift" name="hoursShift"  style="width: 100px;"
+          <input type="number" [disabled]="processSpecificInformationExists" [(ngModel)]="procSpecInfoObj.hoursShift" name="hoursShift"  style="width: 100px;"
             class="float-right" min="1" value="procSpecInfoObj?.hoursShift" oninput="this.value=(parseInt(this.value)||1)" required>
         </div>
         <br>
         <div>Working days per year:
-          <input type="number" [(ngModel)]="procSpecInfoObj.workingDaysYear" name="workingDaysYear"  style="width: 100px;"
+          <input type="number" [disabled]="processSpecificInformationExists" [(ngModel)]="procSpecInfoObj.workingDaysYear" name="workingDaysYear"  style="width: 100px;"
            class="float-right" min="1" value="procSpecInfoObj?.workingDaysYear" oninput="this.value=(parseInt(this.value)||1)" required>
         </div>
         <br>
         <div>Proportional wage costs per hour:
-          <input type="number" step="0.01" [(ngModel)]="procSpecInfoObj.propWCPerHours" name="propWCPerHours" style="width: 100px;"
+          <input type="number" step="0.01" [disabled]="processSpecificInformationExists" [(ngModel)]="procSpecInfoObj.propWCPerHours" name="propWCPerHours" style="width: 100px;"
            class="float-right" min="0.01" value="procSpecInfoObj?.propWCPerHours" oninput="this.value=(parseFloat(this.value))" required>
           </div>
         <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="procSpecInfoGET()">Close</button>
-        <button type="button" class="btn btn-primary" (click)="procSpecInfo()" [disabled]="procSpecInfoIsIncomplete()" data-dismiss="modal">Save changes
+        <button type="button" class="btn btn-primary" (click)="procSpecInfo()" [hidden]="processSpecificInformationExists" [disabled]="procSpecInfoIsIncomplete()" data-dismiss="modal">Save changes
         </button>
       </div>
     </div>
@@ -684,3 +684,4 @@
   </div>
 </div>
 
+{{processSpecificInformationExists}}

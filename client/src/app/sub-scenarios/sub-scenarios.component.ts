@@ -15,7 +15,7 @@ declare var $:any;
 })
 export class SubScenariosComponent implements OnInit {
 
-
+  processSpecificInformationExists: boolean;
 
   enableProductAndProcessInfo: boolean;
 
@@ -782,19 +782,45 @@ checkMandatoryData() {
              })
       }
 
-      procSpecInfoGET(){
-         return this.http
-                .get(environment.apiUrl + '/v1/process-specific-info-by-subprocess-id/'+this.getFkAceSubProLevId(this.cookie))
-                .toPromise()
-                .then(
-                (result:any) => {
-                     this.procSpecInfoObj=result;
-                     this.procSpecInfoID=result.pkTbId;
-                     this.checkMandatoryData();
-                }, (err) => {
-                 this.procSpecInfoID=null;
-                });
-            }
+  procSpecInfoGET() {
+    var infoByIdPath = environment.apiUrl +
+      '/v1/process-specific-info-by-subprocess-id/' +
+      this.getFkAceSubProLevId(this.cookie);
+    var allinfoByIdPath = environment.apiUrl +
+      '/v1/all-process-specific-info-by-subprocess-id/' +
+      this.getFkAceSubProLevId(this.cookie);
+    return this.http
+      .get(infoByIdPath)
+      .toPromise()
+      .then(
+        (result: any) => {
+          this.processSpecificInformationExists = true;
+          this.procSpecInfoObj = result;
+          this.procSpecInfoID = result.pkTbId;
+          this.checkMandatoryData();
+        },
+        (err) => {
+          this.http
+            .get(allinfoByIdPath)
+            .toPromise()
+            .then(
+              (infoArray) => {
+                this.processSpecificInformationExists = true;
+                var result = infoArray[0]
+                this.procSpecInfoObj = result;
+                this.procSpecInfoID = result.pkTbId;
+                this.checkMandatoryData();
+              }
+            )
+            .catch(
+              (err) => {
+                this.processSpecificInformationExists = false;
+                this.procSpecInfoID = null;
+              }
+            )
+        }
+      );
+  }
 
 
 

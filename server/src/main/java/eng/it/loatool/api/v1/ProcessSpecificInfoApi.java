@@ -34,6 +34,11 @@ public class ProcessSpecificInfoApi {
 		return ResponseEntityTransformer.transform(getProcessSpecificInfoBySubProcessId.getOne(id));
 	}
 
+	@GetMapping("/v1/all-process-specific-info-by-subprocess-id/{id}")
+	public ResponseEntity<?> getAllProcessSpecificInfoBySubProcessId(@PathVariable("id") Integer id) {
+		return ResponseEntityTransformer.transform(getProcessSpecificInfoBySubProcessId.getAll(id));
+	}
+
 	@PostMapping("/v1/process-specific-info")
 	public ResponseEntity<?> createProcessSpecificInfo(@RequestBody ProcessesSpecificInformation body) {
 		return ResponseEntityTransformer.transform(processSpecificInfoService.create(body));
