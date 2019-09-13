@@ -82,7 +82,6 @@ export class EditResourceComponent implements OnInit {
   }
 
   save = () => {
-    this.editVAR();
     return this.http
     .put(
       `${environment.apiUrl}/v1/resources/${this.resourceId}`,
@@ -95,40 +94,5 @@ export class EditResourceComponent implements OnInit {
       (err) => {}
     );
   }
-
-  editVAR = () => {
-    var varResObj = {
-      "assetName": this.resource.name,
-      "className": this.resource.varClass,
-      "loAPhysical": this.resource.loaPhysical,
-      "loACognitive": this.resource.loaCognitive,
-      "numberOfOperators": this.resource.lcNOperMachine,
-      "annualMaintenanceCost": this.resource.mcAMaintCosts,
-      "annualMaintenanceCostPercent": this.resource.mcAMaintCostsPerc,
-      "installationSurface": this.resource.rcInstSurface,
-      "costPerSurfacePerMonth": this.resource.rcCostsMMonth,
-      "machinePurchaseValue": this.resource.idMacPurhValue,
-      "machineSalesValue": this.resource.idMacSalesValue,
-      "economicUsefulLife": this.resource.idEcoUsefullLife,
-      "annualElectricityConsumptionWhileWorking" : this.resource.ecAEleConsumFun,
-      "annualElectricityConsumptionStandBy" : this.resource.ecAEleConsumSb,
-      "equipmentId": Math.random().toString(36).substring(2).slice(-2).toUpperCase() + Math.floor(Math.random() * 99),
-      "equipmentLevel": "",
-      "interestRate": this.resource.icInterRate,
-      "electricityPrice": this.resource.ecElePrice
-    };
-
-
-    return this.http
-    .put(
-      `${environment.apiUrl}/v1/var/editResource`,
-      varResObj
-    )
-    .toPromise()
-    .then(() => {this.syncingWithVAR = false;
-    },
-    (err) => {}
-  );
-}
 
 }
