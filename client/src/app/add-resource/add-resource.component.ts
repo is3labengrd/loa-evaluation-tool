@@ -78,6 +78,7 @@ export class AddResourceComponent implements OnInit {
     )
     .toPromise()
     .then(() => {
+      this.syncingWithVAR = false;
       this.opSuc = true;
     })
     .catch((err) => {

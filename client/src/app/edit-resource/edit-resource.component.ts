@@ -89,9 +89,7 @@ export class EditResourceComponent implements OnInit {
     )
     .toPromise()
     .then(
-      () => {
-      },
-      (err) => {}
+      () => { this.syncingWithVAR = false; },
     );
   }
 
