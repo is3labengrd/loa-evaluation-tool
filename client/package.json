@@ -25,7 +25,7 @@
     "angular-chartjs": "0.0.5",
     "angular2-chartjs": "^0.5.1",
     "bootstrap": "^4.1.3",
-    "chart.js": "^2.7.2",
+    "chart.js": "^2.9.4",
     "core-js": "^2.5.4",
     "jquery": "^3.3.1",
     "ng2-charts": "^1.6.0",
